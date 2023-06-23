@@ -1,11 +1,12 @@
 import axiosInstance from "../AxiosInstances/axiosInstance"
+import axiosInstanceWithToken from "../AxiosInstances/axiosInstanceWithToken"
 
 // POST 
 // CREATE USER - Working!
 
 
 export const createUser = async (userData = {
-    email: "test@example.com",
+    email: "test1@example.com",
     password: "password1"
 }) => {
     console.log(userData)
@@ -26,7 +27,7 @@ export const createUser = async (userData = {
 // LOG IN - Working!
 
 export const logIn = async (logInData = {
-    email: "test@example.com",
+    email: "test1@example.com",
     password: "password1"
 }) => {
     if (!logInData) {
@@ -46,7 +47,7 @@ export const logIn = async (logInData = {
 
 
 //   GET REQUESTS
-// Current User
+//   CURRENT USER - WORKING!
 
 export const currentUser = async () => {
     const token = window.localStorage.getItem("token");
@@ -60,4 +61,24 @@ export const currentUser = async () => {
     return userID;
   };
 
-  console.log("Current User: ", currentUser())
+//   console.log("Current User: ", currentUser())
+
+// DELETE REQUESTS
+// LOG OUT
+
+export const logOut = async () => {
+    try {
+    const response = await axiosInstanceWithToken.delete(
+      `/logout`
+    );
+    console.log("Successful Log Out");
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("userID");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+  };
+
+console.log("LogOut : ", logOut())
