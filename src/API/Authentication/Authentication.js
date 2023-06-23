@@ -23,7 +23,7 @@ export const createUser = async (userData = {
 //  console.log("CU: ", createUser()) 
 
 
-// LOG IN
+// LOG IN - Working!
 
 export const logIn = async (logInData = {
     email: "test@example.com",
@@ -42,4 +42,22 @@ export const logIn = async (logInData = {
     }
   };
 
-  console.log("LI: ", logIn())
+//   console.log("LI: ", logIn())
+
+
+//   GET REQUESTS
+// Current User
+
+export const currentUser = async () => {
+    const token = window.localStorage.getItem("token");
+    const response = await axiosInstance.get("/current_user", {
+      headers: {
+        Authorization: token,
+      },
+    });
+    const userID = window.localStorage.getItem("userID");
+    console.log("USERID: ", userID);
+    return userID;
+  };
+
+  console.log("Current User: ", currentUser())
