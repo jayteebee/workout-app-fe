@@ -29,3 +29,14 @@ export const createExercise = async (exerciseData = {name: "Vertical Leg Press"}
 };
 
 // console.log(createExercise());
+
+
+// PUT REQUESTS
+
+// EDIT EXERCISE BY ID - Working!
+export const editExerciseByID = async (exerciseID, exerciseData = {name: "90 Degree Leg Press"}) => {
+    const r = await axiosInstanceWithToken.put(`/exercises/${exerciseID}`, exerciseData);
+    return r.data;
+};
+
+// console.log(editExerciseByID(130));
