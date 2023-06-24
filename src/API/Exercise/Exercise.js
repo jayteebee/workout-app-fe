@@ -18,3 +18,14 @@ export const getExerciseById = async (exerciseID) => {
 }
 
 // console.log(getExerciseById(1))
+
+
+// POST REQUESTS
+
+// CREATE EXERCISE - Working! (probably won't use this)
+export const createExercise = async (exerciseData = {name: "Vertical Leg Press"}) => {
+    const r = await axiosInstanceWithToken.post(`/exercises`, exerciseData);
+    return r.data;
+};
+
+// console.log(createExercise());
