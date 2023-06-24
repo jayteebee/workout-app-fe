@@ -7,4 +7,12 @@ export const getAllRoutines = async () => {
     return r.data;
 }
 
-// console.log(getAllRoutines());
+// console.log(getAllRoutines()); 
+
+// GET ROUTINE BY ID - WORKING!
+export const getRoutineById = async (routineID) => {
+    const r = await axiosInstanceWithToken.get(`/routines/${routineID}`);
+    return r.data;
+}
+
+// console.log(getRoutineById(3))
