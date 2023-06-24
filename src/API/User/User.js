@@ -27,3 +27,12 @@ export const updateUser = async (userID, userData = {weight: 200}) => {
 }
 
 // console.log(updateUser(1))
+
+// DELETE REQUESTS
+// DELETE USER BY ID - WORKING!
+export const deleteUser = async (userID) => {
+    const r = await axiosInstance.delete(`/users/${userID}`);
+    return r.data;
+}
+
+// console.log(deleteUser(2))
