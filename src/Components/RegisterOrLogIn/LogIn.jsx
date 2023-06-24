@@ -8,6 +8,7 @@ import {
   } from 'mdb-react-ui-kit';
 
 const LogIn = ({setShowRegister}) => {
+    
 const showRegister = (e) => {
     e.preventDefault()
     setShowRegister(true)

@@ -6,7 +6,12 @@ import {
     MDBBtn
   } from 'mdb-react-ui-kit';
   
-const Register = () => {
+const Register = ({setShowRegister}) => {
+
+    const showRegister = (e) => {
+        e.preventDefault()
+        setShowRegister(false)
+    }
 
   return (
     <div>
@@ -23,7 +28,7 @@ const Register = () => {
       <MDBInput className='mb-4' type='password' id='form3Example4' label='Password' />
 
 
-      <MDBBtn type='submit' className='mb-4' block>
+      <MDBBtn type='submit' className='mb-4' block onClick={showRegister}>
         Sign Up!
       </MDBBtn>
 
