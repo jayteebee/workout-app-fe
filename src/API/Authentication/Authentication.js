@@ -1,12 +1,13 @@
 import axiosInstance from "../AxiosInstances/axiosInstance"
 import axiosInstanceWithToken from "../AxiosInstances/axiosInstanceWithToken"
+import { parseJwt } from "./parseJwt";
 
 // POST 
 // CREATE USER - Working!
 
 
 export const createUser = async (userData = {
-    email: "test1@example.com",
+    email: "authtest@example.com",
     password: "password1"
 }) => {
     console.log(userData)
@@ -27,7 +28,7 @@ export const createUser = async (userData = {
 // LOG IN - Working!
 
 export const logIn = async (logInData = {
-    email: "test1@example.com",
+    email: "authtest@example.com",
     password: "password1"
 }) => {
     if (!logInData) {
@@ -36,14 +37,13 @@ export const logIn = async (logInData = {
       const response = await axiosInstance.post("/login", { user: logInData });
       if (response.headers.authorization) {
         window.localStorage.setItem("token", response.headers.authorization);
-        window.localStorage.setItem("userID", response.data.data.id);
         console.log("User Logged In Successfully");
       }
       return response.data;
     }
   };
 
-//   console.log("LI: ", logIn())
+  // console.log("LI: ", logIn())
 
 
 //   GET REQUESTS
@@ -51,17 +51,17 @@ export const logIn = async (logInData = {
 
 export const currentUser = async () => {
     const token = window.localStorage.getItem("token");
-    const response = await axiosInstance.get("/current_user", {
+    const response = await axiosInstanceWithToken.get("/current_user", {
       headers: {
         Authorization: token,
       },
     });
-    const userID = window.localStorage.getItem("userID");
-    console.log("USERID: ", userID);
+    const decodedToken = parseJwt(token);
+    const userID = decodedToken.sub
     return userID;
   };
 
-//   console.log("Current User: ", currentUser())
+  // console.log("Current User: ", currentUser())
 
 // DELETE REQUESTS
 // LOG OUT
@@ -73,7 +73,6 @@ export const logOut = async () => {
     );
     console.log("Successful Log Out");
     window.localStorage.removeItem("token");
-    window.localStorage.removeItem("userID");
     return response.data;
   } catch (error) {
     console.error(error);
