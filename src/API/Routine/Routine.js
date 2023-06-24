@@ -41,7 +41,7 @@ export const createRoutine = async (routineData = {user_id:5, name: "HIT", frequ
 // PUT REQUESTS
 
 // ADD WORKOUT TO ROUTINE - WORKING!
-export const addWorkoutToRoutine = async (routineID, workoutData = {workout_id: 3, order: 2}) => {
+export const addWorkoutToRoutine = async (routineID, workoutData = {workout_id: 1, order: 0}) => {
     const r = await axiosInstanceWithToken.put(`/routines/${routineID}/workouts`, workoutData);
     return r.data;
 }
@@ -60,10 +60,17 @@ export const editRoutineByID = async (routineID, routineData = {frequency: 3}) =
 // DELETE REQUESTS
 
 // DELETE WORKOUT FROM ROUTINE - WORKING!
-
 export const deleteWorkoutFromRoutine = async (routineID, workoutID) => {
     const r = await axiosInstanceWithToken.delete(`/routines/${routineID}/workouts/${workoutID}`)
     return r.data;
 }
 
 // console.log(deleteWorkoutFromRoutine(4,1));
+
+// DELETE ROUTINE BY ID - WORKING!
+export const deleteRoutineByID = async (routineID) => {
+    const r = await axiosInstanceWithToken.delete(`/routines/${routineID}`);
+    return r.data;
+}
+
+// console.log(deleteRoutineByID(4));
