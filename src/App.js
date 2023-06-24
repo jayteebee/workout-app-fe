@@ -8,6 +8,7 @@ import { getAllExercises } from './API/Exercise/Exercise';
 import { getAllWorkoutDays } from './API/WorkoutDays/WorkoutDays';
 import {getAllWorkoutSchedules} from './API/WorkoutSchedule/WorkoutSchedule'
 import { getAllWorkoutSessions } from './API/WorkoutSession/WorkoutSession';
+import { getAllExerciseSessions } from './API/ExerciseSession/ExerciseSession';
 
 function App() {
 

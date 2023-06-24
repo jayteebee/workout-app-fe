@@ -21,7 +21,11 @@ export const getExerciseSessionById = async (exerciseSessionID) => {
 // POST REQUESTS
 
 // CREATE EXERCISE SESSION - Working!
-export const createExerciseSession = async (exerciseSessionData = {user_id:5, workout_id:5}) => {
+export const createExerciseSession = async (exerciseSessionData = {workout_session_id: 2,
+exercise_id: 9,
+sets_completed: 1,
+reps_completed: 10,
+weight_used: 90}) => {
     const r = await axiosInstanceWithToken.post(`/exercise_session`, exerciseSessionData);
     return r.data;
 };
@@ -32,12 +36,12 @@ export const createExerciseSession = async (exerciseSessionData = {user_id:5, wo
 // PUT REQUESTS
 
 // EDIT EXERCISE SESSION BY ID - Working!
-export const editExerciseSessionByID = async (exerciseSessionID, exerciseSessionData = {date: "2023-06-24T17:18:33.548Z"}) => {
+export const editExerciseSessionByID = async (exerciseSessionID, exerciseSessionData = {sets_completed: 1}) => {
     const r = await axiosInstanceWithToken.put(`/exercise_session/${exerciseSessionID}`, exerciseSessionData);
     return r.data;
 };
 
-// console.log(editExerciseSessionByID(3));
+// console.log(editExerciseSessionByID(2));
 
 // DELETE REQUESTS
 
@@ -47,4 +51,4 @@ export const deleteExerciseSessionByID = async (exerciseSessionID) => {
     return r.data;
 }
 
-// console.log(deleteExerciseSessionByID(3));
+// console.log(deleteExerciseSessionByID(2));
