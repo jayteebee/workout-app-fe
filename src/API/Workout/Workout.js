@@ -56,3 +56,11 @@ export const editWorkoutByID = async (workoutID, workoutData = {name: "Chest"}) 
 };
 
 // console.log(editWorkoutByID(4));
+
+// EDIT EXERCISE IN WORKOUT - Working!
+export const editExerciseInWorkout = async (workoutID, exerciseID, exerciseData = {sets: 3}) => {
+const r = await axiosInstanceWithToken.put(`/workouts/${workoutID}/exercises/${exerciseID}`, exerciseData);
+return r.data;
+}
+
+// console.log(editExerciseInWorkout(4, 1));
