@@ -64,3 +64,13 @@ return r.data;
 }
 
 // console.log(editExerciseInWorkout(4, 1));
+
+// DELETE REQUESTS
+
+// DELETE EXERCISE FROM WORKOUT - Working!
+export const deleteExerciseFromWorkout = async (workoutID, exerciseID) => {
+    const r = await axiosInstanceWithToken.delete(`/workouts/${workoutID}/exercises/${exerciseID}`)
+    return r.data;
+}
+
+// console.log(deleteExerciseFromWorkout(4, 1));
