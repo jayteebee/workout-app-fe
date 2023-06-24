@@ -9,8 +9,10 @@ function App() {
 
   return (
     <div className="App">
+    <div className="App-inner">
   
     <RegisterOrLogIn />
+    </div>
     </div>
   );
 }
