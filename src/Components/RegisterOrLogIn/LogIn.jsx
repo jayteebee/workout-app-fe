@@ -4,8 +4,7 @@ import {
     MDBCol,
     MDBRow,
     MDBCheckbox,
-    MDBBtn,
-    MDBIcon
+    MDBBtn
   } from 'mdb-react-ui-kit';
 
 const LogIn = () => {
