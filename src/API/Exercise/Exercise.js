@@ -40,3 +40,14 @@ export const editExerciseByID = async (exerciseID, exerciseData = {name: "90 Deg
 };
 
 // console.log(editExerciseByID(130));
+
+
+// DELETE REQUESTS
+
+// DELETE EXERCISE BY ID - working!
+export const deleteExerciseByID = async (exerciseID) => {
+    const r = await axiosInstanceWithToken.delete(`/exercises/${exerciseID}`);
+    return r.data;
+}
+
+// console.log(deleteExerciseByID(130));
