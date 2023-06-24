@@ -16,3 +16,11 @@ export const getRoutineById = async (routineID) => {
 }
 
 // console.log(getRoutineById(3))
+
+// GET WORKOUTS IN ROUTINE - WORKING!
+export const getWorkoutsInRoutine = async (routineID) => {
+    const r = await axiosInstanceWithToken.get(`/routines/${routineID}/workouts`);
+    return r.data;
+}
+
+// console.log(getWorkoutsInRoutine(3));
