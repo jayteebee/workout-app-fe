@@ -40,3 +40,14 @@ export const editWorkoutDayByID = async (workoutDayID, workoutDayData = {days_of
 };
 
 // console.log(editWorkoutDayByID(2));
+
+
+// DELETE REQUESTS
+
+// DELETE WORKOUT DAY BY ID - working!
+export const deleteWorkoutDayByID = async (workoutDayID) => {
+    const r = await axiosInstanceWithToken.delete(`/workout_days/${workoutDayID}`);
+    return r.data;
+}
+
+// console.log(deleteWorkoutDayByID(2));
