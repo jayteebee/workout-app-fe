@@ -2,7 +2,6 @@ import axiosInstance from "../AxiosInstances/axiosInstance";
 
 // GET REQUESTS
 // GET ALL USERS - WORKING!
-
 export const getAllUsers = async () => {
     const r = await axiosInstance.get(`/users`);
     return r.data;
@@ -10,8 +9,8 @@ export const getAllUsers = async () => {
 
 // console.log(getAllUsers());
 
-// GET USER BY ID - WORKING!
 
+// GET USER BY ID - WORKING!
 export const getUserById = async (userID) => {
     const r = await axiosInstance.get(`/users/${userID}`);
     return r.data;
@@ -19,3 +18,12 @@ export const getUserById = async (userID) => {
 
 // console.log(getUserById(1))
 
+
+// PUT REQUESTS
+// EDIT USER BY ID - WORKING!
+export const updateUser = async (userID, userData = {weight: 200}) => {
+    const r = await axiosInstance.put(`/users/${userID}`, userData);
+    return r.data;
+}
+
+// console.log(updateUser(1))
