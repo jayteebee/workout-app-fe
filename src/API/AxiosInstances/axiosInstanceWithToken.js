@@ -13,10 +13,8 @@ const axiosInstanceWithToken = axios.create({
 axiosInstanceWithToken.interceptors.request.use(function(config) {
     const token = window.localStorage.getItem("token");
     config.headers.Authorization =  token ? `${token}` : '';
-
     return config;
 });
-
 
 export default axiosInstanceWithToken;
 
