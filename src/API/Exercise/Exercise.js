@@ -9,3 +9,12 @@ export const getAllExercises = async () => {
 }
 
 // console.log(getAllExercises());
+
+
+// GET EXERCISE BY ID - Working!
+export const getExerciseById = async (exerciseID) => {
+    const r = await axiosInstanceWithToken.get(`/exercises/${exerciseID}`);
+    return r.data;
+}
+
+// console.log(getExerciseById(1))
