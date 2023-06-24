@@ -17,4 +17,15 @@ export const getWorkoutDayById = async (workoutDayID) => {
     return r.data;
 }
 
-console.log(getWorkoutDayById(2))
+// console.log(getWorkoutDayById(2))
+
+
+// POST REQUESTS
+
+// CREATE WORKOUT DAY - Working!
+export const createWorkoutDay = async (workoutDayData = {user_id:5, days_of_week:[1,3,5]}) => {
+    const r = await axiosInstanceWithToken.post(`/workout_days`, workoutDayData);
+    return r.data;
+};
+
+// console.log(createWorkoutDay());
