@@ -32,23 +32,6 @@ const LogIn = () => {
         <p>
           Not a member? <a href='#!'>Register</a>
         </p>
-        <p>or sign up with:</p>
-
-        <MDBBtn floating color="secondary" className='mx-1'>
-          <MDBIcon fab icon='facebook-f' />
-        </MDBBtn>
-
-        <MDBBtn floating color="secondary" className='mx-1'>
-          <MDBIcon fab icon='google' />
-        </MDBBtn>
-
-        <MDBBtn floating color="secondary" className='mx-1'>
-          <MDBIcon fab icon='twitter' />
-        </MDBBtn>
-
-        <MDBBtn floating color="secondary" className='mx-1'>
-          <MDBIcon fab icon='github' />
-        </MDBBtn>
       </div>
     </form>
     </div>
