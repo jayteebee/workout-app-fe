@@ -74,3 +74,11 @@ export const deleteExerciseFromWorkout = async (workoutID, exerciseID) => {
 }
 
 // console.log(deleteExerciseFromWorkout(4, 1));
+
+// DELETE WORKOUT BY ID - working!
+export const deleteWorkoutByID = async (workoutID) => {
+    const r = await axiosInstanceWithToken.delete(`/workouts/${workoutID}`);
+    return r.data;
+}
+
+// console.log(deleteWorkoutByID(4));
