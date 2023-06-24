@@ -29,3 +29,14 @@ export const editWorkoutScheduleByID = async (workoutScheduleID, workoutSchedule
 };
 
 // console.log(editWorkoutScheduleByID(20));
+
+
+// DELETE REQUESTS
+
+// DELETE WORKOUT SCHEDULE BY ID - working!
+export const deleteWorkoutScheduleByID = async (workoutScheduleID) => {
+    const r = await axiosInstanceWithToken.delete(`/workout_schedules/${workoutScheduleID}`);
+    return r.data;
+}
+
+// console.log(deleteWorkoutScheduleByID(20));
