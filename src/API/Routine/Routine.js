@@ -55,3 +55,15 @@ export const editRoutineByID = async (routineID, routineData = {frequency: 3}) =
 }
 
 // console.log(editRoutineByID(4));
+
+
+// DELETE REQUESTS
+
+// DELETE WORKOUT FROM ROUTINE - WORKING!
+
+export const deleteWorkoutFromRoutine = async (routineID, workoutID) => {
+    const r = await axiosInstanceWithToken.delete(`/routines/${routineID}/workouts/${workoutID}`)
+    return r.data;
+}
+
+// console.log(deleteWorkoutFromRoutine(4,1));
