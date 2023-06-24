@@ -18,3 +18,14 @@ export const getWorkoutScheduleById = async (workoutScheduleID) => {
 }
 
 // console.log(getWorkoutScheduleById(20))
+
+
+// PUT REQUESTS
+
+// EDIT WORKOUT SCHEDULE BY ID - Working!
+export const editWorkoutScheduleByID = async (workoutScheduleID, workoutScheduleData = {completed: true}) => {
+    const r = await axiosInstanceWithToken.put(`/workout_schedules/${workoutScheduleID}`, workoutScheduleData);
+    return r.data;
+};
+
+// console.log(editWorkoutScheduleByID(20));
