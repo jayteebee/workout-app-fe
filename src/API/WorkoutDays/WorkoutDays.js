@@ -9,3 +9,12 @@ export const getAllWorkoutDays = async () => {
 }
 
 // console.log(getAllWorkoutDays());
+
+// GET WORKOUT DAY BY ID - Working!
+// Still need to figure out exactly how to implement this
+export const getWorkoutDayById = async (workoutDayID) => {
+    const r = await axiosInstanceWithToken.get(`/workout_days/${workoutDayID}`);
+    return r.data;
+}
+
+console.log(getWorkoutDayById(2))
