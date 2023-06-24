@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { createUser } from './API/Authentication/Authentication';
+import { getAllUsers } from './API/User/User';
 
 function App() {
 
