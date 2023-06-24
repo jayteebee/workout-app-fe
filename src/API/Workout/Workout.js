@@ -18,3 +18,11 @@ export const getAllWorkouts = async () => {
 }
 
 // console.log(getWorkoutById(1))
+
+// GET EXERCISES IN WORKOUT - Working!
+export const getExercisesInWorkout = async (workoutID) => {
+    const r = await axiosInstanceWithToken.get(`/workouts/${workoutID}/exercises`);
+    return r.data;
+}
+
+// console.log(getExercisesInWorkout(1));
