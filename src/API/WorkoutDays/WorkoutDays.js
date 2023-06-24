@@ -29,3 +29,14 @@ export const createWorkoutDay = async (workoutDayData = {user_id:5, days_of_week
 };
 
 // console.log(createWorkoutDay());
+
+
+// PUT REQUESTS
+
+// EDIT WORKOUT DAYS BY ID - Working!
+export const editWorkoutDayByID = async (workoutDayID, workoutDayData = {days_of_week: [0,1,4]}) => {
+    const r = await axiosInstanceWithToken.put(`/workout_days/${workoutDayID}`, workoutDayData);
+    return r.data;
+};
+
+// console.log(editWorkoutDayByID(2));
