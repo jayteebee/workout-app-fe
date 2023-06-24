@@ -7,7 +7,11 @@ import {
     MDBBtn
   } from 'mdb-react-ui-kit';
 
-const LogIn = () => {
+const LogIn = ({setShowRegister}) => {
+const showRegister = (e) => {
+    e.preventDefault()
+    setShowRegister(true)
+}
   return (
     <div>
     <form>
@@ -29,7 +33,7 @@ const LogIn = () => {
 
       <div className='text-center'>
         <p>
-          Not a member? <a href='#!'>Register</a>
+          Not a member? <a href="#!" onClick={showRegister}>Register</a>
         </p>
       </div>
     </form>
