@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import RegisterOrLogIn from './Pages/RegisterOrLogIn';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 
 
 function App() {
@@ -7,10 +9,8 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-
+  
+    <RegisterOrLogIn />
     </div>
   );
 }
