@@ -44,4 +44,15 @@ export const addExerciseToWorkout = async (workoutID, exerciseData = {exercise_i
     return r.data;
 }
 
-console.log(addExerciseToWorkout(4));
+// console.log(addExerciseToWorkout(4));
+
+
+// PUT REQUESTS
+
+// EDIT WORKOUT BY ID - Working!
+export const editWorkoutByID = async (workoutID, workoutData = {name: "Chest"}) => {
+    const r = await axiosInstanceWithToken.put(`/workouts/${workoutID}`, workoutData);
+    return r.data;
+};
+
+// console.log(editWorkoutByID(4));
