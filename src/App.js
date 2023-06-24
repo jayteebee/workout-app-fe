@@ -5,6 +5,7 @@ import { getAllUsers } from './API/User/User';
 import { getAllRoutines } from './API/Routine/Routine';
 import { getAllWorkouts } from './API/Workout/Workout';
 import { getAllExercises } from './API/Exercise/Exercise';
+import { getAllWorkoutDays } from './API/WorkoutDays/WorkoutDays';
 
 function App() {
 
