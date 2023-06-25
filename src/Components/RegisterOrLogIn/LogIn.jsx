@@ -18,7 +18,7 @@ const LogIn = ({setShowRegister}) => {
     try {
       await logIn(formInput);
     } catch (err) {
-      console.error("Error Creating User: ",err);
+      console.error("Error Logging In: ",err);
     } finally {
       setFormInput({email: "", password: ""});
     }
@@ -31,6 +31,11 @@ const LogIn = ({setShowRegister}) => {
       [e.target.name]: e.target.value,
     })
   };
+
+  const showRegister = (e) => {
+    e.preventDefault();
+    setShowRegister(true)
+  }
 
   return (
     <div>
@@ -53,7 +58,7 @@ const LogIn = ({setShowRegister}) => {
 
       <div className='text-center'>
         <p>
-          Not a member? <a href="#!">Register</a>
+          Not a member? <a href="#!" onClick={showRegister}>Register</a>
         </p>
       </div>
     </form>

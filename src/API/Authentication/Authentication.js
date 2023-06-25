@@ -22,12 +22,7 @@ export const createUser = async (userData) => {
 
 // LOG IN - Working!
 
-export const logIn = async (
-  logInData = {
-    email: "authtest0@example.com",
-    password: "password1",
-  }
-) => {
+export const logIn = async (logInData) => {
   if (!logInData) {
     return "Please enter a valid username and password";
   } else {

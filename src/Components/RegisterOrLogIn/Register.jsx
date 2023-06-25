@@ -30,6 +30,11 @@ const handleSubmit = async (e) => {
       })
     };
 
+    const showRegister = (e) => {
+      e.preventDefault();
+      setShowRegister(false)
+    }
+
   return (
     <div>
     <form onSubmit={handleSubmit}>
@@ -44,7 +49,9 @@ const handleSubmit = async (e) => {
       </MDBBtn>
 
       <div className='text-center'>
-        
+      <p>
+      Already a member? <a href="#!" onClick={showRegister} >Log In</a>
+    </p>
       </div>
     </form>
     </div>
