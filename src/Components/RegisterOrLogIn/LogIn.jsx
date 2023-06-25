@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { logIn } from '../../API/Authentication/Authentication';
+
 import {
     MDBInput,
     MDBCol,
@@ -8,20 +10,37 @@ import {
   } from 'mdb-react-ui-kit';
 
 const LogIn = ({setShowRegister}) => {
-    
-const showRegister = (e) => {
-    e.preventDefault()
+  const [formInput, setFormInput] = useState({email: "", password:""})
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await logIn(formInput);
+    } catch (err) {
+      console.error("Error Creating User: ",err);
+    } finally {
+      setFormInput({email: "", password: ""});
+    }
     setShowRegister(true)
-}
+  }
+    
+  const handlechange = (e) => {
+    setFormInput({
+      ...formInput,
+      [e.target.name]: e.target.value,
+    })
+  };
+
   return (
     <div>
-    <form>
-      <MDBInput className='mb-4' type='email' id='form2Example1' label='Email address' />
-      <MDBInput className='mb-4' type='password' id='form2Example2' label='Password' />
+    <form onSubmit={handleSubmit}>
+      <MDBInput className='mb-4' type='email' label='Email address' value={formInput.email} name="email" onChange={handlechange} />
+      <MDBInput className='mb-4' type='password' label='Password' value={formInput.password} name="password" onChange={handlechange} />
 
       <MDBRow className='mb-4'>
         <MDBCol className='d-flex justify-content-center'>
-          <MDBCheckbox id='form2Example3' label='Remember me' defaultChecked />
+          <MDBCheckbox label='Remember me' defaultChecked />
         </MDBCol>
         <MDBCol>
           <a href='#!'>Forgot password?</a>
@@ -34,7 +53,7 @@ const showRegister = (e) => {
 
       <div className='text-center'>
         <p>
-          Not a member? <a href="#!" onClick={showRegister}>Register</a>
+          Not a member? <a href="#!">Register</a>
         </p>
       </div>
     </form>
