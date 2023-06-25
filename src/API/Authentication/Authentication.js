@@ -5,12 +5,7 @@ import { parseJwt } from "./parseJwt";
 // POST
 // CREATE USER - Working!
 
-export const createUser = async (
-  userData = {
-    email: "authtest@example.com",
-    password: "password1",
-  }
-) => {
+export const createUser = async (userData) => {
   console.log(userData);
   if (!userData) {
     return;
@@ -29,7 +24,7 @@ export const createUser = async (
 
 export const logIn = async (
   logInData = {
-    email: "authtest@example.com",
+    email: "authtest0@example.com",
     password: "password1",
   }
 ) => {

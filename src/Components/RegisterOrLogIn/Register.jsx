@@ -5,30 +5,41 @@ import {
     MDBRow,
     MDBBtn
   } from 'mdb-react-ui-kit';
+import { useState } from 'react';
+import { createUser } from '../../API/Authentication/Authentication';
   
 const Register = ({setShowRegister}) => {
+const [formInput, setFormInput] = useState({email: "", password:""})
 
-    const showRegister = (e) => {
-        e.preventDefault()
-        setShowRegister(false)
-    }
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    await createUser(formInput);
+  } catch (err) {
+    console.error("Error Creating User: ",err);
+  } finally {
+    setFormInput({email: "", password: ""});
+  }
+  setShowRegister(false)
+}
+
+    const handlechange = (e) => {
+      setFormInput({
+        ...formInput,
+        [e.target.name]: e.target.value,
+      })
+    };
 
   return (
     <div>
-    <form>
+    <form onSubmit={handleSubmit}>
       <MDBRow className='mb-4'>
-        <MDBCol>
-          <MDBInput id='form3Example1' label='First name' />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput id='form3Example2' label='Last name' />
-        </MDBCol>
       </MDBRow>
-      <MDBInput className='mb-4' type='email' id='form3Example3' label='Email address' />
-      <MDBInput className='mb-4' type='password' id='form3Example4' label='Password' />
+      <MDBInput className='mb-4' type='email' label='Email address' value={formInput.email} name="email" onChange={handlechange} />
+      <MDBInput className='mb-4' type='password'  label='Password' value={formInput.password} name="password" onChange={handlechange} />
 
 
-      <MDBBtn type='submit' className='mb-4' block onClick={showRegister}>
+      <MDBBtn type='submit' className='mb-4' block >
         Sign Up!
       </MDBBtn>
 
