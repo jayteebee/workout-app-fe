@@ -5,7 +5,7 @@ const PrivateRoute = () => {
     const token = window.localStorage.getItem("token");
     let auth = token 
   return (
-    auth ? <Outlet/> : <Navigate to='/login'/>
+    auth ? <Outlet/> : <Navigate to='/GettingStarted'/>
   )
 }
 

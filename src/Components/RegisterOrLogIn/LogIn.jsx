@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import { logIn } from '../../API/Authentication/Authentication';
+
 
 import {
     MDBInput,
@@ -11,7 +13,7 @@ import {
 
 const LogIn = ({setShowRegister}) => {
   const [formInput, setFormInput] = useState({email: "", password:""})
-
+const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +25,7 @@ const LogIn = ({setShowRegister}) => {
       setFormInput({email: "", password: ""});
     }
     setShowRegister(true)
+    navigate("/")
   }
     
   const handlechange = (e) => {
