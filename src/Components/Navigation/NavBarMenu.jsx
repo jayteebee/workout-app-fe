@@ -9,6 +9,9 @@ const NavBarMenu = ({ setShowMenu }) => {
 
   return (
     <div className="hamburgerMenu">
+    <Link to="/" onClick={toggleMenu}>
+        <h2>Home</h2>
+      </Link>
       <Link to="/CreateRoutine" onClick={toggleMenu}>
         <h2>Create Routine</h2>
       </Link>
