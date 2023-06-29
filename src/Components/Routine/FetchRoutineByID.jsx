@@ -8,13 +8,14 @@ const FetchRoutineByID = () => {
         getRoutineById(rID)
         .then((data) => {
             setRoutine(data)
+            console.log(data)
         })
         .catch((err) => {console.log("getRoutineByID API Call Failed",err)})
     }
-    // console.log(fetchRoutineByID(3))
   return (
     <div>
-    
+    <button onClick={() => fetchRoutineByID(3)}>fetchRoutineByID</button>
+
     </div>
   )
 }

@@ -14,7 +14,7 @@ const FetchWorkoutsInRoutine = () => {
     }
   return (
     <div>
-    <button onClick={() => fetchWorkoutsInRoutine(3)}></button>
+    <button onClick={() => fetchWorkoutsInRoutine(3)}>fetchWorkoutsInRoutine</button>
 
     </div>
   )
