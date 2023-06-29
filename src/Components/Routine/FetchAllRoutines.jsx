@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { getAllRoutines } from '../../API/Routine/Routine'
 import FetchWorkoutsInRoutine from './FetchWorkoutsInRoutine'
 
-const FetchAllRoutines = () => {
+const FetchAllRoutines = ({toggle}) => {
 
 const [allRoutines, setAllRoutines] = useState([])
 const [selectedRoutineID, setSelectedRoutineID] = useState(null)
@@ -13,7 +13,7 @@ useEffect(() => {
         setAllRoutines(data);
     })
     .catch((err) => {console.log("getAllRoutines API Call Failed",err)})
-},[] )
+},[toggle] )
 
   return (
     <div>

@@ -8,11 +8,10 @@ import {
     MDBBtn
   } from 'mdb-react-ui-kit';
 import { createRoutine } from '../../API/Routine/Routine';
-const CreateRoutine = () => {
+const CreateRoutine = ({setToggle}) => {
 
     const [formInput, setFormInput] = useState({name:"", frequency:"", user_id: ""})
   console.log(formInput)
-
 useEffect(() => {
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
@@ -28,6 +27,7 @@ useEffect(() => {
           console.error("Error:",err);
         } finally {
           setFormInput({});
+          setToggle((prevState) => !prevState);
         }
       }
         
