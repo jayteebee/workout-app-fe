@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { getAllRoutines } from '../../API/Routine/Routine'
+import FetchWorkoutsInRoutine from './FetchWorkoutsInRoutine'
 
 const FetchAllRoutines = () => {
 
 const [allRoutines, setAllRoutines] = useState([])
+const [selectedRoutineID, setSelectedRoutineID] = useState(null)
 useEffect(() => {
     getAllRoutines()
     .then((data) => {
@@ -17,10 +19,11 @@ useEffect(() => {
     <div>
     {allRoutines.map((routine) => (
         <div key={routine.id}>
-        {routine.name} &nbsp;&nbsp;
+        <button onClick={() => setSelectedRoutineID(routine.id)}>{routine.name}</button> 
         {routine.frequency}
         </div>
     ))}
+    {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />}
     </div>
   )
 }
