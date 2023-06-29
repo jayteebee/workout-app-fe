@@ -6,6 +6,8 @@ import { createUser } from "./API/Authentication/Authentication";
 import PrivateRoute from "./Utilities/PrivateRoute"
 import HomeScreen from "./Pages/HomeScreen";
 
+// brew services start redis - backend service
+
 function App() {
   return (
     <div className="App">
