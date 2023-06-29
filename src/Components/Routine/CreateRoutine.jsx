@@ -8,7 +8,7 @@ import {
     MDBBtn
   } from 'mdb-react-ui-kit';
 import { createRoutine } from '../../API/Routine/Routine';
-const CreateRoutine = ({setToggle}) => {
+const CreateRoutine = ({setRoutineToggle}) => {
 
     const [formInput, setFormInput] = useState({name:"", frequency:"", user_id: ""})
   console.log(formInput)
@@ -27,7 +27,7 @@ useEffect(() => {
           console.error("Error:",err);
         } finally {
           setFormInput({});
-          setToggle((prevState) => !prevState);
+          setRoutineToggle((prevState) => !prevState);
         }
       }
         

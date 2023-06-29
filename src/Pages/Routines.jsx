@@ -6,14 +6,14 @@ import FetchWorkoutsInRoutine from "../Components/Routine/FetchWorkoutsInRoutine
 import CreateRoutine from "../Components/Routine/CreateRoutine";
 
 const Routines = () => {
-  const [toggle, setToggle] = useState(false)
+  const [routineToggle, setRoutineToggle] = useState(false)
 
 
   return (
     <div>
       <h3>Routines</h3>
       <div className="fetchAllRoutines">
-        <FetchAllRoutines toggle={toggle}/>
+        <FetchAllRoutines toggle={routineToggle}/>
       </div>
       <div className="fetchRoutineByID">
         <FetchRoutineByID />
@@ -22,7 +22,7 @@ const Routines = () => {
         <FetchWorkoutsInRoutine />
       </div>
       <div className="createRoutine">
-        <CreateRoutine setToggle={setToggle} />
+        <CreateRoutine setToggle={setRoutineToggle} />
       </div>
     </div>
   );

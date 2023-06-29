@@ -4,7 +4,7 @@ import { getAllRoutines } from '../../API/Routine/Routine'
 import EditRoutine from './EditRoutine'
 import FetchWorkoutsInRoutine from './FetchWorkoutsInRoutine'
 
-const FetchAllRoutines = ({toggle}) => {
+const FetchAllRoutines = ({routineToggle}) => {
 
 const [allRoutines, setAllRoutines] = useState([])
 const [selectedRoutineID, setSelectedRoutineID] = useState(null)
@@ -15,7 +15,7 @@ useEffect(() => {
         setAllRoutines(data);
     })
     .catch((err) => {console.log("getAllRoutines API Call Failed",err)})
-},[toggle] )
+},[routineToggle] )
 
   return (
     <div>
