@@ -9,15 +9,18 @@ useEffect(() => {
     getAllRoutines()
     .then((data) => {
         setAllRoutines(data);
-        console.log(allRoutines)
     })
     .catch((err) => {console.log("getAllRoutines API Call Failed",err)})
 },[] )
 
-
   return (
     <div>
-    
+    {allRoutines.map((routine) => (
+        <div key={routine.id}>
+        {routine.name}
+        {routine.frequency}
+        </div>
+    ))}
     </div>
   )
 }
