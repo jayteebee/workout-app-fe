@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./Utilities/PrivateRoute"
 import HomeScreen from "./Pages/HomeScreen";
 import NavBar from "./Components/Navigation/NavBar";
+import CreateRoutine from "./Pages/CreateRoutine";
 
 // brew services start redis - backend service
 
@@ -17,7 +18,12 @@ function App() {
 
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<HomeScreen />} />
+
+          <Route path="/CreateRoutine" element={<CreateRoutine />} />
+          
         </Route>
+
+        
 
          <Route path="/GettingStarted" element={<RegisterOrLogIn />} />
       

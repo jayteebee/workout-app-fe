@@ -13,7 +13,7 @@ const toggleMenu = () => {
   return (
     <div>
     <img src={HamburgerMenu} alt="Menu" onClick={toggleMenu} /> 
-    {showMenu ? <NavBarMenu /> : null}
+    {showMenu ? <NavBarMenu setShowMenu={setShowMenu}/> : null}
     </div>
   )
 }
