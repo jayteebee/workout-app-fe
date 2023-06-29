@@ -6,6 +6,8 @@ const NavBarMenu = () => {
     <div className='hamburgerMenu'>
     <h2>Create Routine</h2>
     <h2>Create Workout</h2>
+    <h2>Knowledge</h2>
+    <h2>Personal Bests</h2>
     </div>
   )
 }
