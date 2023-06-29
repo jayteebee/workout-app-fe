@@ -6,6 +6,11 @@ import PrivateRoute from "./Utilities/PrivateRoute"
 import HomeScreen from "./Pages/HomeScreen";
 import NavBar from "./Components/Navigation/NavBar";
 import CreateRoutine from "./Pages/CreateRoutine";
+import CreateWorkout from "./Pages/CreateWorkout";
+import Knowledge from "./Pages/Knowledge";
+import PersonalBests from "./Pages/PersonalBests";
+import Logs from "./Pages/Logs";
+
 
 // brew services start redis - backend service
 
@@ -21,6 +26,14 @@ function App() {
 
           <Route path="/CreateRoutine" element={<CreateRoutine />} />
           
+          <Route path="/CreateWorkout" element={<CreateWorkout />} />
+
+          <Route path="/Knowledge" element={<Knowledge />} />
+
+          <Route path="/PersonalBests" element={<PersonalBests />} />
+
+          <Route path="/Logs" element={<Logs />} />
+
         </Route>
 
         
