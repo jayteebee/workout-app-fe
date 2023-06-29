@@ -9,13 +9,15 @@ import {
   } from 'mdb-react-ui-kit';
 import { createRoutine } from '../../API/Routine/Routine';
 const CreateRoutine = () => {
-    const [formInput, setFormInput] = useState({userID: "",name:"", frequency:""})
-  
+
+    const [formInput, setFormInput] = useState({name:"", frequency:"", user_id: ""})
+  console.log(formInput)
+
 useEffect(() => {
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
     const userID = decodedToken.sub;
-    setFormInput.userID(userID);
+    setFormInput(prevState => ({...prevState, user_id: userID}));
 },[])
 
     const handleSubmit = async (e) => {

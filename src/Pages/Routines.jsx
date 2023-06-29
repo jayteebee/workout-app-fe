@@ -3,6 +3,7 @@ import "../CSS/Routines.css";
 import FetchAllRoutines from "../Components/Routine/FetchAllRoutines";
 import FetchRoutineByID from "../Components/Routine/FetchRoutineByID";
 import FetchWorkoutsInRoutine from "../Components/Routine/FetchWorkoutsInRoutine";
+import CreateRoutine from "../Components/Routine/CreateRoutine";
 
 const Routines = () => {
   return (
@@ -14,8 +15,11 @@ const Routines = () => {
       <div className="fetchRoutineByID">
         <FetchRoutineByID />
       </div>
-      <div>
+      <div className="fetchWorkoutsInRoutine">
         <FetchWorkoutsInRoutine />
+      </div>
+      <div className="createRoutine">
+        <CreateRoutine />
       </div>
     </div>
   );

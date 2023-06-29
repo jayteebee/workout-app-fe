@@ -30,8 +30,8 @@ export const getWorkoutsInRoutine = async (routineID) => {
 // POST REQUESTS
 
 // CREATE ROUTINE - WORKING!
-export const createRoutine = async (routineData = {user_id:5, name: "HIT", frequency: 3}) => {
-    const r = await axiosInstanceWithToken.post(`/routines`, routineData);
+export const createRoutine = async (routineData) => {
+    const r = await axiosInstanceWithToken.post(`/routines`, {routine: routineData});
     return r.data;
 }
 
