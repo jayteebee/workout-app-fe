@@ -17,7 +17,7 @@ useEffect(() => {
     <div>
     {allRoutines.map((routine) => (
         <div key={routine.id}>
-        {routine.name}
+        {routine.name} &nbsp;&nbsp;
         {routine.frequency}
         </div>
     ))}
