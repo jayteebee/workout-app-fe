@@ -1,13 +1,13 @@
 import React from 'react'
 import FetchAllRoutines from '../Components/Routine/FetchAllRoutines'
 
-const CreateRoutine = () => {
+const Routines = () => {
   return (
     <div>
-   <h3>CreateRoutine</h3> 
+   <h3>Routines</h3> 
     <FetchAllRoutines />
     </div>
   )
 }
 
-export default CreateRoutine
+export default Routines
