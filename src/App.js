@@ -10,14 +10,23 @@ import CreateWorkout from "./Pages/CreateWorkout";
 import Knowledge from "./Pages/Knowledge";
 import PersonalBests from "./Pages/PersonalBests";
 import Logs from "./Pages/Logs";
+import { useEffect, useState } from "react";
 
 // brew services start redis - backend service
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  
+  useEffect(() => {
+  const token = window.localStorage.getItem("token");
+  token ? setLoggedIn(true) : setLoggedIn(false)
+}, [])
+  
+
   return (
     <div className="App">
       <div className="App-inner">
-        <NavBar />
+        { loggedIn ? <NavBar /> : null }
         <Routes>
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<HomeScreen />} />
@@ -33,7 +42,7 @@ function App() {
             <Route path="/Logs" element={<Logs />} />
           </Route>
 
-          <Route path="/GettingStarted" element={<RegisterOrLogIn />} />
+          <Route path="/GettingStarted" element={<RegisterOrLogIn setLoggedIn={setLoggedIn} />} />
         </Routes>
       </div>
     </div>

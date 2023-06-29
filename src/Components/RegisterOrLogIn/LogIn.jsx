@@ -11,7 +11,7 @@ import {
     MDBBtn
   } from 'mdb-react-ui-kit';
 
-const LogIn = ({setShowRegister}) => {
+const LogIn = ({setShowRegister, setLoggedIn}) => {
   const [formInput, setFormInput] = useState({email: "", password:""})
 const navigate = useNavigate()
 
@@ -25,6 +25,7 @@ const navigate = useNavigate()
       setFormInput({email: "", password: ""});
     }
     setShowRegister(true)
+    setLoggedIn(true)
     navigate("/")
   }
     
