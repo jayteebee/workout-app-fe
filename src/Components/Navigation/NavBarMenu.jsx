@@ -11,6 +11,7 @@ const NavBarMenu = ({setShowMenu}) => {
     <h2>Create Workout</h2>
     <h2>Knowledge</h2>
     <h2>Personal Bests</h2>
+    <h2>Logs</h2>
     </div>
   )
 }
