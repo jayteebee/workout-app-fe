@@ -31,7 +31,7 @@ export const getExercisesInWorkout = async (workoutID) => {
 // POST REQUESTS
 
 // CREATE WORKOUT - Working!
-export const createWorkout = async (workoutData = {user_id:5, name: "Upper Second"}) => {
+export const createWorkout = async (workoutData) => {
     const r = await axiosInstanceWithToken.post(`/workouts`, workoutData);
     return r.data;
 };

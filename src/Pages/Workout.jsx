@@ -1,4 +1,5 @@
 import React from 'react'
+import CreateWorkout from '../Components/Workout/CreateWorkout'
 import FetchAllWorkouts from '../Components/Workout/FetchAllWorkouts'
 import FetchExercisesInWorkout from '../Components/Workout/FetchExercisesInWorkout'
 
@@ -11,6 +12,9 @@ const Workout = () => {
     </div>
     <div className='fetchExercisesInWorkout'>
       <FetchExercisesInWorkout />
+    </div>
+    <div className='createWorkout'>
+      <CreateWorkout />
     </div>
     </div>
   )

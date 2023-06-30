@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import {
     MDBInput,
-    MDBCol,
-    MDBRow,
-    MDBCheckbox,
     MDBBtn
   } from 'mdb-react-ui-kit';
 import { createWorkout } from '../../API/Workout/Workout';
@@ -20,7 +17,7 @@ const CreateWorkout = () => {
           console.error("Error:",err);
         } finally {
           setFormInput({});
-          setRoutineToggle((prevState) => !prevState);
+          // setRoutineToggle((prevState) => !prevState);
         }
       }
         
