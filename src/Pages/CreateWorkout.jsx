@@ -2,10 +2,10 @@ import React from 'react'
 import FetchAllWorkouts from '../Components/Workout/FetchAllWorkouts'
 import FetchExercisesInWorkout from '../Components/Workout/FetchExercisesInWorkout'
 
-const CreateWorkout = () => {
+const Workout = () => {
   return (
     <div>
-    <h3>CreateWorkout</h3>
+    <h3>Workout</h3>
     <div className='fetchAllWorkouts'>
     <FetchAllWorkouts />
     </div>
@@ -16,4 +16,4 @@ const CreateWorkout = () => {
   )
 }
 
-export default CreateWorkout
+export default Workout

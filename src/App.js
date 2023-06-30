@@ -6,7 +6,7 @@ import PrivateRoute from "./Utilities/PrivateRoute";
 import HomeScreen from "./Pages/HomeScreen";
 import NavBar from "./Components/Navigation/NavBar";
 import Routines from "./Pages/Routines";
-import CreateWorkout from "./Pages/CreateWorkout";
+import Workout from "./Pages/CreateWorkout";
 import Knowledge from "./Pages/Knowledge";
 import PersonalBests from "./Pages/PersonalBests";
 import Logs from "./Pages/Logs";
@@ -35,7 +35,7 @@ function App() {
 
             <Route path="/Routines" element={<Routines />} />
 
-            <Route path="/CreateWorkout" element={<CreateWorkout />} />
+            <Route path="/Workout" element={<Workout />} />
 
             <Route path="/Knowledge" element={<Knowledge />} />
 
