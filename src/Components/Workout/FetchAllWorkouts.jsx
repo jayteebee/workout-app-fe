@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import { getAllWorkouts } from '../../API/Workout/Workout'
+import FetchExercisesInWorkout from './FetchExercisesInWorkout'
 
 const FetchAllWorkouts = () => {
     const [allWorkouts, setAllWorkouts] = useState([])
+    const [selectedExerciseID, setSelectedExerciseID] = useState(null)
 
     useEffect(() => {
         getAllWorkouts()
         .then((data) => {
             setAllWorkouts(data);
         })
-        .catch((err) => {console.log("getAllRoutines API Call Failed",err)})
+        .catch((err) => {console.log("getAllWorkouts API Call Failed",err)})
     },[] )
-console.log(allWorkouts)
+
   return (
     <div>
     {allWorkouts.map((workout) => (
         <div key={workout.id}> 
-        <button>{workout.name}</button>
+        <button onClick={() => setSelectedExerciseID(workout.id)}>{workout.name}</button>
         
         </div>
     ))}
-
+{selectedExerciseID && <FetchExercisesInWorkout selectedExerciseID={selectedExerciseID} />}
     
     </div>
   )

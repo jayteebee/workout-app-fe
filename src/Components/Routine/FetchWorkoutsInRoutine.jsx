@@ -13,6 +13,7 @@ const FetchWorkoutsInRoutine = ({rID}) => {
         })
         .catch((err) => console.log("getWorkoutsInRoutine API Call Failed",err))
     }}, [rID])
+    
   return (
     <div>
     {workoutsInRoutine.map((workouts) => (
