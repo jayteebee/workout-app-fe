@@ -1,3 +1,17 @@
 .fetchAllRoutines {
     border: black 3px solid;
 }
+
+.createRoutine {
+    width: 25vw;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    grid-column: 2;
+}
+
+.container h3 {
+    color: aqua;
+}

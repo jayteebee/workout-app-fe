@@ -1,3 +1,11 @@
 .hamburgerMenu {
     border: black solid 5px;
 }
+
+.navbar {
+    grid-column: 3;
+    display: flex;
+    justify-content: end;
+    align-items: start;
+    margin-right: 1rem;
+}

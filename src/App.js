@@ -26,7 +26,9 @@ function App() {
   return (
     <div className="App">
       <div className="App-inner">
-        { loggedIn ? <NavBar /> : null }
+  
+        { loggedIn ? <NavBar className="navbar" /> : null }
+        
         <Routes>
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<HomeScreen />} />
@@ -44,8 +46,9 @@ function App() {
 
           <Route path="/GettingStarted" element={<RegisterOrLogIn setLoggedIn={setLoggedIn} />} />
         </Routes>
+        </div>
       </div>
-    </div>
+    
   );
 }
 
