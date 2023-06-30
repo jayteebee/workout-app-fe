@@ -10,7 +10,7 @@ const Routines = () => {
 
 
   return (
-    <div>
+    <div className='scrollableDiv'>
       <h3>Routines</h3>
       <div className="fetchAllRoutines">
         <FetchAllRoutines routineToggle={routineToggle}/>
