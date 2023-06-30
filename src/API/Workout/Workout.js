@@ -50,7 +50,7 @@ export const addExerciseToWorkout = async (workoutID, exerciseData = {exercise_i
 // PUT REQUESTS
 
 // EDIT WORKOUT BY ID - Working!
-export const editWorkoutByID = async (workoutID, workoutData = {name: "Chest"}) => {
+export const editWorkoutByID = async (workoutID, workoutData) => {
     const r = await axiosInstanceWithToken.put(`/workouts/${workoutID}`, workoutData);
     return r.data;
 };
