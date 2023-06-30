@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getAllWorkouts } from '../../API/Workout/Workout'
 import FetchExercisesInWorkout from './FetchExercisesInWorkout'
 
-const FetchAllWorkouts = () => {
+const FetchAllWorkouts = ({workoutToggle}) => {
     const [allWorkouts, setAllWorkouts] = useState([])
     const [selectedExerciseID, setSelectedExerciseID] = useState(null)
 
@@ -12,7 +12,7 @@ const FetchAllWorkouts = () => {
             setAllWorkouts(data);
         })
         .catch((err) => {console.log("getAllWorkouts API Call Failed",err)})
-    },[] )
+    },[workoutToggle] )
 
   return (
     <div>
