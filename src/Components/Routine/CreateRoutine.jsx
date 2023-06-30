@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { createRoutine } from "../../API/Routine/Routine";
-const CreateRoutine = ({ setRoutineToggle }) => {
+const CreateRoutine = ({ routineToggle, setRoutineToggle }) => {
   const [formInput, setFormInput] = useState({
     name: "",
     frequency: "",
@@ -15,7 +15,7 @@ const CreateRoutine = ({ setRoutineToggle }) => {
     const decodedToken = parseJwt(token);
     const userID = decodedToken.sub;
     setFormInput((prevState) => ({ ...prevState, user_id: userID }));
-  }, []);
+  }, [routineToggle]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +24,11 @@ const CreateRoutine = ({ setRoutineToggle }) => {
     } catch (err) {
       console.error("Error:", err);
     } finally {
-      setFormInput({});
+      setFormInput({
+        name: "",
+        frequency: "",
+        user_id: ""
+      });
       setRoutineToggle((prevState) => !prevState);
     }
   };
