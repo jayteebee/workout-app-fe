@@ -3,7 +3,7 @@ import { parseJwt } from "../../API/Authentication/parseJwt";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
 
-const CreateWorkout = ({setWorkoutToggle}) => {
+const CreateWorkout = ({setWorkoutToggle, workoutToggle}) => {
   const [formInput, setFormInput] = useState({ user_id: "", name: "" });
 
   useEffect(() => {
@@ -11,7 +11,7 @@ const CreateWorkout = ({setWorkoutToggle}) => {
     const decodedToken = parseJwt(token);
     const userID = decodedToken.sub;
     setFormInput((prevState) => ({ ...prevState, user_id: userID }));
-  }, []);
+  }, [workoutToggle]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const CreateWorkout = ({setWorkoutToggle}) => {
     } catch (err) {
       console.error("Error:", err);
     } finally {
-      setFormInput({});
+      setFormInput({ user_id: "", name: "" });
       setWorkoutToggle((prevState) => !prevState);
     }
   };
@@ -45,7 +45,7 @@ const CreateWorkout = ({setWorkoutToggle}) => {
         />
 
         <MDBBtn type="submit" className="mb-4" block>
-          Create Routine
+          Create Workout
         </MDBBtn>
       </form>
     </div>

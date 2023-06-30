@@ -16,7 +16,7 @@ const Workout = () => {
       <FetchExercisesInWorkout />
     </div>
     <div className='createWorkout'>
-      <CreateWorkout setWorkoutToggle={setWorkoutToggle}/>
+      <CreateWorkout setWorkoutToggle={setWorkoutToggle} workoutToggle={workoutToggle}/>
     </div>
     </div>
   )
