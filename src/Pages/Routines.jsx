@@ -13,7 +13,7 @@ const Routines = () => {
     <div>
       <h3>Routines</h3>
       <div className="fetchAllRoutines">
-        <FetchAllRoutines toggle={routineToggle}/>
+        <FetchAllRoutines routineToggle={routineToggle}/>
       </div>
       <div className="fetchRoutineByID">
         <FetchRoutineByID />
@@ -22,7 +22,7 @@ const Routines = () => {
         <FetchWorkoutsInRoutine />
       </div>
       <div className="createRoutine">
-        <CreateRoutine setToggle={setRoutineToggle} />
+        <CreateRoutine setRoutineToggle={setRoutineToggle} />
       </div>
     </div>
   );

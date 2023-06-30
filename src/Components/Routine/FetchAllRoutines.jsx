@@ -9,13 +9,14 @@ const FetchAllRoutines = ({routineToggle}) => {
 const [allRoutines, setAllRoutines] = useState([])
 const [selectedRoutineID, setSelectedRoutineID] = useState(null)
 const [routineToEdit, setRoutineToEdit] = useState(null)
+const [editToggle, setEditToggle] = useState(false)
 useEffect(() => {
     getAllRoutines()
     .then((data) => {
         setAllRoutines(data);
     })
     .catch((err) => {console.log("getAllRoutines API Call Failed",err)})
-},[routineToggle] )
+},[routineToggle, editToggle] )
 
   return (
     <div>
@@ -27,7 +28,7 @@ useEffect(() => {
         </div>
     ))}
     {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />}
-    {routineToEdit && <EditRoutine eID={routineToEdit}/>}
+    {routineToEdit && <EditRoutine eID={routineToEdit} setEditToggle={setEditToggle}/>}
     </div>
   )
 }

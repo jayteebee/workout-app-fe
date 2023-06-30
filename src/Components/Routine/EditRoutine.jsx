@@ -9,7 +9,7 @@ import {
   } from 'mdb-react-ui-kit';
 import { editRoutineByID } from '../../API/Routine/Routine';
 
-const EditRoutine = ({eID}) => {
+const EditRoutine = ({eID, setEditToggle}) => {
     const [formInput, setFormInput] = useState({name:"", frequency:"", user_id: ""})
     console.log(formInput)
 
@@ -28,6 +28,7 @@ const EditRoutine = ({eID}) => {
             console.error("Error:",err);
           } finally {
             setFormInput({});
+            setEditToggle((prevState) => !prevState)
           }
         }
           
