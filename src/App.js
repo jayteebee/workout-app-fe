@@ -13,6 +13,8 @@ import Logs from "./Pages/Logs";
 import { useEffect, useState } from "react";
 
 // brew services start redis - backend service
+// bundle exec sidekiq
+// WorkoutScheduleRegenerationJob.perform_async
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);

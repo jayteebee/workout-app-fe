@@ -1,7 +1,6 @@
 import React from 'react'
 import {
     MDBInput,
-    MDBCol,
     MDBRow,
     MDBBtn
   } from 'mdb-react-ui-kit';

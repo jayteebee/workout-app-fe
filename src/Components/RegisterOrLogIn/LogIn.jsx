@@ -19,13 +19,13 @@ const navigate = useNavigate()
     e.preventDefault();
     try {
       await logIn(formInput);
+      setLoggedIn(true)
     } catch (err) {
       console.error("Error Logging In: ",err);
     } finally {
       setFormInput({email: "", password: ""});
     }
     setShowRegister(true)
-    setLoggedIn(true)
     navigate("/")
   }
     
