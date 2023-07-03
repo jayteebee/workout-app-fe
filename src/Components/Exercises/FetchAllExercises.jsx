@@ -15,7 +15,7 @@ useEffect(() => {
 console.log(allExercises)
 
   return (
-    <div>FetchAllExercises</div>
+    <div></div>
   )
 }
 
