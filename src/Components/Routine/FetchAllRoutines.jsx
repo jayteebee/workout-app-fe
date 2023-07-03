@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { deleteRoutineByID, getAllRoutines } from '../../API/Routine/Routine'
+import { getAllRoutines } from '../../API/Routine/Routine'
 import DeleteRoutine from './DeleteRoutine'
 import EditRoutine from './EditRoutine'
 import FetchWorkoutsInRoutine from './FetchWorkoutsInRoutine'
@@ -13,6 +13,7 @@ const [routineToEdit, setRoutineToEdit] = useState(null)
 const [editToggle, setEditToggle] = useState(false)
 const [routineToDelete, setRoutineToDelete] = useState(null)
 const [deleteToggle, setDeleteToggle] = useState(null)
+
 
 useEffect(() => {
     getAllRoutines()
@@ -34,7 +35,7 @@ useEffect(() => {
         </div>
     ))}
     {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />}
-    {routineToEdit && <EditRoutine eID={routineToEdit} setEditToggle={setEditToggle}/>}
+    {routineToEdit && <EditRoutine eID={routineToEdit} setEditToggle={setEditToggle}/> }
     {routineToDelete && <DeleteRoutine routineToDelete={routineToDelete} setRoutineToDelete={setRoutineToDelete} setDeleteToggle={setDeleteToggle} />}
     
     </div>

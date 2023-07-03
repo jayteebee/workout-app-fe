@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import {
   MDBInput,
-  MDBCol,
-  MDBRow,
-  MDBCheckbox,
   MDBBtn,
 } from "mdb-react-ui-kit";
 import { editRoutineByID } from "../../API/Routine/Routine";

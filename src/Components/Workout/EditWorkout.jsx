@@ -6,7 +6,7 @@ import {
   } from 'mdb-react-ui-kit';
 import { editWorkoutByID } from '../../API/Workout/Workout';
 
-const EditWorkout = ({workoutToEdit, editToggle, setEditToggle}) => {
+const EditWorkout = ({workoutToEdit, editToggle, setEditToggle, setWorkoutToEdit}) => {
     const [formInput, setFormInput] = useState({user_id: "", name:""})
 
     useEffect(() => {
@@ -25,6 +25,7 @@ const EditWorkout = ({workoutToEdit, editToggle, setEditToggle}) => {
         } finally {
           setFormInput({user_id: "", name:""});
           setEditToggle((prevState) => !prevState)
+          setWorkoutToEdit((prevState) => !prevState)
         }
       }
         

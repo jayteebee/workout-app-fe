@@ -12,6 +12,8 @@ const FetchAllWorkouts = ({workoutToggle}) => {
     const [workoutToDelete, setWorkoutToDelete] = useState(null)
     const [deleteToggle, setDeleteToggle] = useState(null)
 
+    console.log(editToggle)
+
     useEffect(() => {
         getAllWorkouts()
         .then((data) => {
@@ -31,7 +33,7 @@ const FetchAllWorkouts = ({workoutToggle}) => {
         </div>
     ))}
 {selectedExerciseID && <FetchExercisesInWorkout selectedExerciseID={selectedExerciseID} />}
-{workoutToEdit && <EditWorkout workoutToEdit={workoutToEdit} editToggle={editToggle} setEditToggle={setEditToggle}/>}
+{workoutToEdit && <EditWorkout workoutToEdit={workoutToEdit} editToggle={editToggle} setEditToggle={setEditToggle} setWorkoutToEdit={setWorkoutToEdit}/>}
 {workoutToDelete && <DeleteWorkout workoutToDelete={workoutToDelete} setWorkoutToDelete={setWorkoutToDelete} setDeleteToggle={setDeleteToggle} />}
   
     </div>
