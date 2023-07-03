@@ -12,7 +12,6 @@ const FetchAllWorkouts = ({workoutToggle}) => {
     const [workoutToDelete, setWorkoutToDelete] = useState(null)
     const [deleteToggle, setDeleteToggle] = useState(null)
 
-    console.log(editToggle)
 
     useEffect(() => {
         getAllWorkouts()
