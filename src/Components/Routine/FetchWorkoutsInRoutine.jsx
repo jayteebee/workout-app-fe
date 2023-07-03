@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getWorkoutsInRoutine } from '../../API/Routine/Routine'
 
 const FetchWorkoutsInRoutine = ({rID}) => {
     const [workoutsInRoutine, setWorkoutsInRoutine] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         if(rID) {
         getWorkoutsInRoutine(rID)
@@ -14,11 +15,16 @@ const FetchWorkoutsInRoutine = ({rID}) => {
         .catch((err) => console.log("getWorkoutsInRoutine API Call Failed",err))
     }}, [rID])
     
+const showExerciseCreation = () => {
+  navigate("/CreateExercise")
+}
+
   return (
     <div>
     {workoutsInRoutine.map((workouts) => (
         <div key={workouts.id}> 
-        <p>{workouts.workout.name}</p>
+        <button onClick={() => showExerciseCreation()}>{workouts.workout.name}</button>
+        
         </div>
     ))}
     </div>

@@ -11,6 +11,7 @@ import Knowledge from "./Pages/Knowledge";
 import PersonalBests from "./Pages/PersonalBests";
 import Logs from "./Pages/Logs";
 import { useEffect, useState } from "react";
+import ExerciseCreation from "./Pages/ExerciseCreation";
 
 // brew services start redis - backend service
 // bundle exec sidekiq
@@ -38,6 +39,8 @@ function App() {
             <Route path="/Routines" element={<Routines />} />
 
             <Route path="/Workout" element={<Workout />} />
+
+            <Route path="/CreateExercise" element={<ExerciseCreation />} />
 
             <Route path="/Knowledge" element={<Knowledge />} />
 
