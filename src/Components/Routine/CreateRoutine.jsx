@@ -8,7 +8,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle }) => {
     frequency: "",
     user_id: "",
   });
-  console.log(formInput);
+
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");

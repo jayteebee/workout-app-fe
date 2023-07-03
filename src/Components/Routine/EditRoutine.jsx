@@ -6,20 +6,20 @@ import {
 } from "mdb-react-ui-kit";
 import { editRoutineByID } from "../../API/Routine/Routine";
 
-const EditRoutine = ({ eID, setEditToggle }) => {
+const EditRoutine = ({ eID, setEditToggle, setRoutineToEdit, editToggle }) => {
   const [formInput, setFormInput] = useState({
     name: "",
     frequency: "",
     user_id: "",
   });
-  console.log(formInput);
+console.log(formInput);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
     const userID = decodedToken.sub;
     setFormInput((prevState) => ({ ...prevState, user_id: userID }));
-  }, []);
+  }, [editToggle]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +28,10 @@ const EditRoutine = ({ eID, setEditToggle }) => {
     } catch (err) {
       console.error("Error:", err);
     } finally {
-      setFormInput({});
+      setFormInput({name: "",
+      frequency: "",
+      user_id: ""});
+      setRoutineToEdit((prevState) => !prevState);
       setEditToggle((prevState) => !prevState);
     }
   };
@@ -56,7 +59,7 @@ const EditRoutine = ({ eID, setEditToggle }) => {
           type="text"
           label="Edit Frequency"
           value={formInput.frequency}
-          name="name"
+          name="frequency"
           onChange={handlechange}
         />
         <MDBBtn type="submit" className="mb-4" block>

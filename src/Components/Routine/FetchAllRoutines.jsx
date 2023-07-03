@@ -35,7 +35,7 @@ useEffect(() => {
         </div>
     ))}
     {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />}
-    {routineToEdit && <EditRoutine eID={routineToEdit} setEditToggle={setEditToggle}/> }
+    {routineToEdit && <EditRoutine eID={routineToEdit} editToggle={editToggle} setEditToggle={setEditToggle} setRoutineToEdit={setRoutineToEdit} /> }
     {routineToDelete && <DeleteRoutine routineToDelete={routineToDelete} setRoutineToDelete={setRoutineToDelete} setDeleteToggle={setDeleteToggle} />}
     
     </div>
