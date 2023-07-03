@@ -22,6 +22,7 @@ const Workout = () => {
     <div className='createWorkout'>
       <CreateWorkout setWorkoutToggle={setWorkoutToggle} workoutToggle={workoutToggle}/>
     </div>
+    
     <button onClick={hc}>All Exercises</button>
     {tee && <FetchAllExercises />}
     </div>

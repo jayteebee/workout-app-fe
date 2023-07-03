@@ -24,7 +24,6 @@ const showWorkout = () => {
     {workoutsInRoutine.map((workouts) => (
         <div key={workouts.id}> 
         <button onClick={() => showWorkout()}>{workouts.workout.name}</button>
-        
         </div>
     ))}
     </div>
