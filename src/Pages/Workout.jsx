@@ -3,6 +3,7 @@ import FetchAllExercises from '../Components/Exercises/FetchAllExercises'
 import CreateWorkout from '../Components/Workout/CreateWorkout'
 import FetchAllWorkouts from '../Components/Workout/FetchAllWorkouts'
 import FetchExercisesInWorkout from '../Components/Workout/FetchExercisesInWorkout'
+import FetchWorkoutByID from '../Components/Workout/FetchWorkoutByID'
 
 const Workout = () => {
   const [workoutToggle, setWorkoutToggle] = useState(false)
@@ -15,6 +16,9 @@ const Workout = () => {
     <h3>Workout</h3>
     <div className='fetchAllWorkouts'>
     <FetchAllWorkouts workoutToggle={workoutToggle}/>
+    </div>
+    <div className='fetchWorkoutByID'>
+    <FetchWorkoutByID workoutToggle={workoutToggle}/>
     </div>
     <div className='fetchExercisesInWorkout'>
       <FetchExercisesInWorkout />
