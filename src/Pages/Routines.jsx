@@ -15,9 +15,12 @@ const Routines = () => {
       <div className="fetchAllRoutines">
         <FetchAllRoutines routineToggle={routineToggle}/>
       </div>
-      <div className="fetchRoutineByID">
+
+      {
+        /*<div className="fetchRoutineByID">
         <FetchRoutineByID />
-      </div>
+        </div>*/
+      }
       <div className="fetchWorkoutsInRoutine">
         <FetchWorkoutsInRoutine />
       </div>

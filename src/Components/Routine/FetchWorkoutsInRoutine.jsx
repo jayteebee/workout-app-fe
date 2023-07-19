@@ -10,7 +10,6 @@ const FetchWorkoutsInRoutine = ({rID}) => {
         getWorkoutsInRoutine(rID)
         .then((data) => {
             setWorkoutsInRoutine(data)
-            console.log(data)
         })
         .catch((err) => console.log("getWorkoutsInRoutine API Call Failed",err))
     }}, [rID])
@@ -23,7 +22,7 @@ const showWorkout = () => {
     <div>
     {workoutsInRoutine.map((workouts) => (
         <div key={workouts.id}> 
-        <button onClick={() => showWorkout()}>{workouts.workout.name}</button>
+        <button onClick={() => showWorkout()}>{workouts.workout.name} here</button>
         </div>
     ))}
     </div>

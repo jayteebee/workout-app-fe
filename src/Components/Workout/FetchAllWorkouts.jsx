@@ -39,7 +39,7 @@ const FetchAllWorkouts = ({workoutToggle}) => {
     <div>
     {allWorkouts.map((workout) => (
         <div key={workout.id}> 
-        <button onClick={() => setSelectedExerciseID(workout.id)}>{workout.name}</button>
+        <button onClick={() => setSelectedExerciseID(workout.id)}>{workout.name} </button>
         <button onClick={() => setWorkoutToEdit(workout.id)}>Change Name</button>
         <button onClick={() => setWorkoutToDelete(workout.id)}>Delete</button>
         <button onClick={() => showExerciseCreationPage(workout.id)}>Add Exercises To Workout</button>
