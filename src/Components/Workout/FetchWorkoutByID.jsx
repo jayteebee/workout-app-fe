@@ -7,17 +7,25 @@ const [workout, setWorkout] = useState([])
 const location = useLocation();
 const selectedRoutineID = location.state?.selectedRoutineID;
 console.log(selectedRoutineID)
+console.log("w",workout,workout[0].routine.name)
+
 
 useEffect(() => {
-    getWorkoutsInRoutine()
+    getWorkoutsInRoutine(selectedRoutineID)
     .then((data) => {
         setWorkout(data)
     })
     .catch((err) => {console.log("getWorkoutsInRoutine API Call Failed",err)})
 }, [selectedRoutineID])
+
   return (
     <div>
-    <p> now {selectedRoutineID} </p> 
+    <h3>{workout[0].routine.name}</h3>
+    {workout.map((workout) => (
+        <div key={workout.id}>
+            <p>{workout.workout.name}</p>
+        </div>
+    ))}
     
     </div>
   )
