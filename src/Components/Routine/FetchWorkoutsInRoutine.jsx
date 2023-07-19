@@ -16,13 +16,14 @@ const FetchWorkoutsInRoutine = ({rID}) => {
     
 const showWorkout = () => {
   navigate("/Workout")
+  
 }
 
   return (
     <div>
     {workoutsInRoutine.map((workouts) => (
         <div key={workouts.id}> 
-        <button onClick={() => showWorkout()}>{workouts.workout.name} here</button>
+        <button onClick={() => showWorkout()}>{workouts.workout.name} </button>
         </div>
     ))}
     </div>

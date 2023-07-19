@@ -14,9 +14,11 @@ const Workout = () => {
   return (
     <div>
     <h3>Workout</h3>
-    <div className='fetchAllWorkouts'>
+
+    {/*<div className='fetchAllWorkouts'>
     <FetchAllWorkouts workoutToggle={workoutToggle}/>
-    </div>
+  </div>*/}
+
     <div className='fetchWorkoutByID'>
     <FetchWorkoutByID workoutToggle={workoutToggle}/>
     </div>
