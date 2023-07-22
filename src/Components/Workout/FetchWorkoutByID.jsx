@@ -2,26 +2,27 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { getWorkoutsInRoutine } from '../../API/Routine/Routine'
 
-const FetchWorkoutByID = () => {
+const FetchWorkoutByID = ({setRoutineID, workoutCreated}) => {
 const [workout, setWorkout] = useState([])
 const location = useLocation();
 const selectedRoutineID = location.state?.selectedRoutineID;
 console.log(selectedRoutineID)
-console.log("w",workout,workout[0].routine.name)
+// console.log("w",workout,workout[0].routine.name)
 
 
 useEffect(() => {
+    setRoutineID(selectedRoutineID)
     getWorkoutsInRoutine(selectedRoutineID)
     .then((data) => {
         setWorkout(data)
     })
     .catch((err) => {console.log("getWorkoutsInRoutine API Call Failed",err)})
-}, [selectedRoutineID])
+}, [selectedRoutineID, workoutCreated])
 
   return (
     <div>
-    <h3>{workout[0].routine.name}</h3>
-    {workout.map((workout) => (
+    <h3>{workout.length > 0 && workout[0].routine.name}</h3>
+    {workout.length > 0 && workout.map((workout) => (
         <div key={workout.id}>
             <p>{workout.workout.name}</p>
         </div>
