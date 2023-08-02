@@ -11,7 +11,7 @@ const [workoutToEdit, setWorkoutToEdit] = useState(null)
 const [editToggle, setEditToggle] = useState(false)
 const [workoutToDelete, setWorkoutToDelete] = useState(null)
 const [deleteToggle, setDeleteToggle] = useState(null)
-const [selectedWorkoutID, setSelectedWorkoutID] = useState(null)
+const [selectedWorkout, setSelectedWorkout] = useState({selectedWorkout: 0, selectedWorkoutName: ""})
 const location = useLocation();
 const selectedRoutineID = location.state?.selectedRoutineID;
 const navigate = useNavigate()
@@ -26,9 +26,9 @@ useEffect(() => {
     .catch((err) => {console.log("getWorkoutsInRoutine API Call Failed",err)})
 }, [selectedRoutineID, workoutCreated, editToggle, deleteToggle])
 
-const displayExercises = (workoutID) => {
-  setSelectedWorkoutID(workoutID);
-  navigate("/CreateExercise", {state: {selectedWorkoutID: workoutID}})
+const displayExercises = (workoutID, workoutName) => {
+  setSelectedWorkout({selectedWorkout: workoutID, selectedWorkoutName: workoutName});
+  navigate("/CreateExercise", {state: {selectedWorkout: workoutID, selectedWorkoutName: workoutName}})
 }
 
   return (
@@ -39,7 +39,7 @@ const displayExercises = (workoutID) => {
             <p>{workout.workout.name} </p>
         <MDBBtn onClick={() => setWorkoutToEdit(workout.id)}>Change Name</MDBBtn>
         <MDBBtn onClick={() => setWorkoutToDelete(workout.id)}>Delete</MDBBtn>
-        <MDBBtn onClick={() => displayExercises(workout.id)}>Add Exercises To Workout</MDBBtn>
+        <MDBBtn onClick={() => displayExercises(workout.id, workout.workout.name)}>Add Exercises To Workout</MDBBtn>
         </div>
     ))}
     {workoutToEdit && <EditWorkout workoutToEdit={workoutToEdit} editToggle={editToggle} setEditToggle={setEditToggle} setWorkoutToEdit={setWorkoutToEdit}/>}
