@@ -28,7 +28,7 @@ useEffect(() => {
 
 const displayExercises = (workoutID) => {
   setSelectedWorkoutID(workoutID);
-  navigate("/ExerciseCreation", {state: {selectedWorkoutID: workoutID}})
+  navigate("/CreateExercise", {state: {selectedWorkoutID: workoutID}})
 }
 
   return (
