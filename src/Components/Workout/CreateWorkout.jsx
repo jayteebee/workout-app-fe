@@ -7,7 +7,8 @@ import { addWorkoutToRoutine } from "../../API/Routine/Routine";
 const CreateWorkout = ({setWorkoutToggle, workoutToggle, routineID, setWorkoutCreated}) => {
   const [formInput, setFormInput] = useState({ user_id: "", name: "", order: 0 });
 const [createdWorkout, setCreatedWorkout] = useState([])
-console.log("FI", formInput)
+
+console.log("Form Input: ",formInput)
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -33,6 +34,7 @@ console.log("FI", formInput)
     if(createdWorkout.id) {
       addWorkoutToRoutine(routineID, {workout_id: createdWorkout.id, order: formInput.order})
       setWorkoutCreated((prevState) => !prevState);
+      setCreatedWorkout([]);
     }
   }, [createdWorkout, formInput.order, routineID]);
   
@@ -41,8 +43,7 @@ console.log("FI", formInput)
     setFormInput({
       ...formInput,
       [e.target.name]: e.target.value,
-      [e.target.order]: e.target.value,
-
+      // [e.target.name]: e.target.value,
     });
   };
 

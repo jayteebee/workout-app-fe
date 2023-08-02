@@ -12,8 +12,8 @@ const FetchAllWorkouts = ({workoutToggle}) => {
     const [selectedExerciseID, setSelectedExerciseID] = useState(null)
     // const [workoutToEdit, setWorkoutToEdit] = useState(null)
     // const [editToggle, setEditToggle] = useState(false)
-    const [workoutToDelete, setWorkoutToDelete] = useState(null)
-    const [deleteToggle, setDeleteToggle] = useState(null)
+    // const [workoutToDelete, setWorkoutToDelete] = useState(null)
+    // const [deleteToggle, setDeleteToggle] = useState(null)
     const [showExerciseCreation, setShowExerciseCreation] = useState(false)
     
 
@@ -23,7 +23,7 @@ const FetchAllWorkouts = ({workoutToggle}) => {
             setAllWorkouts(data);
         })
         .catch((err) => {console.log("getAllWorkouts API Call Failed",err)})
-    },[workoutToggle, /*editToggle,*/ deleteToggle] )
+    },[workoutToggle, /*editToggle, deleteToggle */ ] )
 
     const showExerciseCreationPage = (workoutId) => {
         setShowExerciseCreation(true)
@@ -41,13 +41,13 @@ const FetchAllWorkouts = ({workoutToggle}) => {
         <div key={workout.id}> 
         <button onClick={() => setSelectedExerciseID(workout.id)}>{workout.name}</button>
         {/*<button onClick={() => setWorkoutToEdit(workout.id)}>Change Name</button>*/}
-        <button onClick={() => setWorkoutToDelete(workout.id)}>Delete</button>
+        {/*<button onClick={() => setWorkoutToDelete(workout.id)}>Delete</button>*/}
         <button onClick={() => showExerciseCreationPage(workout.id)}>Add Exercises To Workout</button>
         </div>
     ))}
 {selectedExerciseID && <FetchExercisesInWorkout selectedExerciseID={selectedExerciseID} />}
-    {/*{workoutToEdit && <EditWorkout workoutToEdit={workoutToEdit} editToggle={editToggle} setEditToggle={setEditToggle} setWorkoutToEdit={setWorkoutToEdit}/>}*/}
-{workoutToDelete && <DeleteWorkout workoutToDelete={workoutToDelete} setWorkoutToDelete={setWorkoutToDelete} setDeleteToggle={setDeleteToggle} />}
+    {/*{workoutToEdit && <EditWorkout workoutToEdit={workoutToEdit} editToggle={editToggle} setEditToggle={setEditToggle} setWorkoutToEdit={setWorkoutToEdit}/>}
+{workoutToDelete && <DeleteWorkout workoutToDelete={workoutToDelete} setWorkoutToDelete={setWorkoutToDelete} setDeleteToggle={setDeleteToggle} />}*/}
     </div>
   )
 }

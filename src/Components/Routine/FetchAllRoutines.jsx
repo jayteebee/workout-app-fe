@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getAllRoutines } from '../../API/Routine/Routine'
 import FetchWorkoutByID from '../Workout/FetchWorkoutByID'
+import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import DeleteRoutine from './DeleteRoutine'
 import EditRoutine from './EditRoutine'
 import FetchWorkoutsInRoutine from './FetchWorkoutsInRoutine'
@@ -36,11 +37,10 @@ const displayWorkouts = (routineID) => {
     <div>
     {allRoutines.map((routine) => (
         <div key={routine.id}>
-        <button onClick={() => displayWorkouts(routine.id)}>{routine.name} here</button> 
+        <MDBBtn onClick={() => displayWorkouts(routine.id)}>{routine.name}</MDBBtn> 
         {routine.frequency}
-        <button onClick={() => setRoutineToEdit(routine.id)}>Change Name/Frequency</button>
-        <button onClick={() => setRoutineToDelete(routine.id)}>Delete</button>
-        
+        <MDBBtn onClick={() => setRoutineToEdit(routine.id)}>Change Name/Frequency</MDBBtn>
+        <MDBBtn onClick={() => setRoutineToDelete(routine.id)}>Delete</MDBBtn>
         </div>
     ))}
     {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />  }
