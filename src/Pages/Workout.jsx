@@ -29,7 +29,6 @@ const Workout = () => {
           workoutToggle={workoutToggle}
           setRoutineID={setRoutineID}
           workoutCreated={workoutCreated}
-
         />
       </div>
 
