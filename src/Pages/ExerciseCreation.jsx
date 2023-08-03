@@ -1,19 +1,19 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom';
+import Search from '../Components/Exercises/Search';
 
 const ExerciseCreation = () => {
 
   const location = useLocation();
   const selectedWorkout = location.state?.selectedWorkout;
   const selectedWorkoutName = location.state?.selectedWorkoutName;
-console.log("SWID: ", selectedWorkout)
-console.log("SWN: ", selectedWorkoutName)
 
   return (
     <div>
-    <p>Exercise Creation</p>
-
+    <h2>Exercise Creation</h2>
+    <h4>Workout: {selectedWorkoutName}</h4>
     
+    <Search />
     </div>
   )
 }
