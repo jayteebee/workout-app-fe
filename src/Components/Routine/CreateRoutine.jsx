@@ -33,7 +33,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle }) => {
     }
   };
 
-  const handlechange = (e) => {
+  const handleChange = (e) => {
     setFormInput({
       ...formInput,
       [e.target.name]: e.target.value,
@@ -49,7 +49,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle }) => {
           label="Routine Name"
           value={formInput.name}
           name="name"
-          onChange={handlechange}
+          onChange={handleChange}
         />
         <MDBInput
           className="mb-4"
@@ -57,7 +57,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle }) => {
           label="Frequency"
           value={formInput.frequency}
           name="frequency"
-          onChange={handlechange}
+          onChange={handleChange}
         />
 
         <MDBBtn type="submit" className="mb-4" block>
