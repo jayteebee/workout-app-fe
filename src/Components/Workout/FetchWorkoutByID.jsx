@@ -51,10 +51,3 @@ const displayExercises = (workoutID, workoutName) => {
 
 export default FetchWorkoutByID
 
-
-
-
-// from the FetchAllRoutines page, we need to send the ID of the selected
-// routine to here
-// we then need to display all the workouts belonging to that routine
-// on the new workouts page
