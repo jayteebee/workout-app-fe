@@ -3,9 +3,10 @@ import { getAllExercises } from "../../API/Exercise/Exercise";
 import ReactSelect from "react-select";
 
 const Search = () => {
-  const [formInput, setFormInput] = useState(null);
-  console.log("FormInput - Search", formInput);
-
+  const [searchedExerciseName, setSearchedExerciseName] = useState(null);
+  console.log("searchedExerciseName - Search", searchedExerciseName);
+  const [searchedMuscleGroup, setSearchedMuscleGroup] = useState(null);
+  console.log("searchedMuscleGroup - Search", searchedMuscleGroup);
   const [allExercises, setAllExercises] = useState([]);
 
   useEffect(() => {
@@ -19,23 +20,38 @@ const Search = () => {
   }, []);
   console.log(allExercises);
 
-  const exercises = allExercises.map((exercise) => ({
+  const exerciseName = allExercises.map((exercise) => ({
     label: exercise.name,
   }));
 
-  const handleChange = (formInput) => {
-    setFormInput(formInput);
+  const handleChangeForExerciseName = (searchedExerciseName) => {
+    setSearchedExerciseName(searchedExerciseName);
   };
+
+  const handleChangeForMuscleGroup = (searchedMuscleGroup) => {
+    setSearchedMuscleGroup(searchedMuscleGroup);
+  };
+
+  const muscleGroup = allExercises.map((exercise) => ({
+    label: exercise.name,
+    value: exercise.primary_muscles
+  }));
 
   return (
     <div>
       <h3>Search</h3>
-
       <ReactSelect
         placeholder="Search By Exercise Name"
-        options={exercises}
-        value={formInput}
-        onChange={handleChange}
+        options={exerciseName}
+        value={searchedExerciseName}
+        onChange={handleChangeForExerciseName}
+      />
+
+      <ReactSelect
+        placeholder="Search By Muscle Group"
+        options={muscleGroup}
+        value={searchedMuscleGroup}
+        onChange={handleChangeForMuscleGroup}
       />
     </div>
   );
