@@ -12,9 +12,14 @@ const Search = () => {
   const [barbells, setBarbells] = useState(false);
   const [dumbbells, setDumbbells] = useState(false);
   const [machines, setMachines] = useState(false);
+  const [searchByExerciseName, setSearchByExerciseName] = useState(false);
+  const [searchByMuscleGroup, setSearchByMuscleGroup] = useState(false);
+
+
 
   const barbellToggle = () => {
     setBarbells((prevState) => !prevState);
+
   };
   console.log("Barbells: ", barbells);
 
@@ -54,7 +59,7 @@ const Search = () => {
 
   const muscleGroup = allExercises.map((exercise) => ({
     label: exercise.name,
-    value: exercise.name,
+    value: exercise.primary_muscles
   }));
 
   const barbellFilter = allExercises.filter(
@@ -84,49 +89,67 @@ const Search = () => {
   }));
   // console.log("machineFilterMapped", machineFilterMapped)
 
-let options = []
+let exerciseNameOptions = []
 if (barbells && dumbbells && machines) {
-  options = exerciseName
+  exerciseNameOptions = exerciseName
    }
 else if (barbells && dumbbells) {
-  options = [...barbellFilterMapped, ...dumbbellFilterMapped]
+  exerciseNameOptions = [...barbellFilterMapped, ...dumbbellFilterMapped]
  } else if (barbells && machines) {
-  options = [...barbellFilterMapped, ...machineFilterMapped]
+  exerciseNameOptions = [...barbellFilterMapped, ...machineFilterMapped]
  } else if (dumbbells && machines) {
-  options = [...dumbbellFilterMapped, ...machineFilterMapped]
+  exerciseNameOptions = [...dumbbellFilterMapped, ...machineFilterMapped]
  } else if (barbells) {
-  options = barbellFilterMapped
+  exerciseNameOptions = barbellFilterMapped
 } else if (dumbbells) {
-  options = dumbbellFilterMapped
+  exerciseNameOptions = dumbbellFilterMapped
 } else if (machines) {
-  options = machineFilterMapped
+  exerciseNameOptions = machineFilterMapped
 } else {
-  options = exerciseName
+  exerciseNameOptions = exerciseName
 }
-console.log("options", options)
+console.log("exerciseNameOptions", exerciseNameOptions)
+
+
+const searchViaMuscle = () => {
+  setSearchByMuscleGroup((prevState) => !prevState)
+  setSearchByExerciseName(false)
+}
+console.log("exerciseName", searchByExerciseName)
+console.log("muscleGroup", searchByMuscleGroup)
+
+
   return (
     <div>
       <h3>Search</h3>
 
-      <MDBBtn onClick={barbellToggle}>Barbells</MDBBtn>
-      <MDBBtn onClick={dumbbellToggle}>Dumbbells</MDBBtn>
-      <MDBBtn onClick={machineToggle}>Machines</MDBBtn>
+      <MDBBtn onClick={barbellToggle} color={ barbells ? "success" : ""}>Barbells</MDBBtn>
+      <MDBBtn onClick={dumbbellToggle} color={ dumbbells ? "success" : ""}>Dumbbells</MDBBtn>
+      <MDBBtn onClick={machineToggle} color={ machines ? "success" : ""}>Machines</MDBBtn>
 
-      <ReactSelect
-        placeholder="Search By Exercise Name"
-        options={options}
-        value={searchedExerciseName}
-        onChange={handleChangeForExerciseName}
-      />
+      <MDBBtn onClick={searchViaMuscle} color={ searchByMuscleGroup ? "success" : ""}>Muscle Group</MDBBtn>
 
-      <ReactSelect
+      {searchByMuscleGroup ? <ReactSelect
         placeholder="Search By Muscle Group"
         options={muscleGroup}
         value={searchedMuscleGroup}
         onChange={handleChangeForMuscleGroup}
-      />
+      /> : <ReactSelect
+      placeholder="Search By Exercise Name"
+      options={exerciseNameOptions}
+      value={searchedExerciseName}
+      onChange={handleChangeForExerciseName}
+    />}
+      
+      
+
+      
     </div>
   );
 };
 
 export default Search;
+
+
+
+// <MDBBtn onClick={searchViaName} color={ searchByExerciseName ? "success" : ""}>Exercise Name</MDBBtn>
