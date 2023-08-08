@@ -4,10 +4,6 @@ import ReactSelect from "react-select";
 import { MDBBtn } from "mdb-react-ui-kit";
 
 const Search = ({setSearchedExerciseName, searchedExerciseName, searchedMuscleGroup, setSearchedMuscleGroup}) => {
-  // const [searchedExerciseName, setSearchedExerciseName] = useState(null);
-  // console.log("searchedExerciseName - Search", searchedExerciseName);
-  // const [searchedMuscleGroup, setSearchedMuscleGroup] = useState(null);
-  // console.log("searchedMuscleGroup - Search", searchedMuscleGroup);
   const [allExercises, setAllExercises] = useState([]);
   const [barbells, setBarbells] = useState(false);
   const [dumbbells, setDumbbells] = useState(false);
@@ -17,17 +13,14 @@ const Search = ({setSearchedExerciseName, searchedExerciseName, searchedMuscleGr
   const barbellToggle = () => {
     setBarbells((prevState) => !prevState);
   };
-  // console.log("Barbells: ", barbells);
 
   const dumbbellToggle = () => {
     setDumbbells((prevState) => !prevState);
   };
-  // console.log("Dumbbells: ", dumbbells);
 
   const machineToggle = () => {
     setMachines((prevState) => !prevState);
   };
-  // console.log("Machines: ", machines);
 
   useEffect(() => {
     getAllExercises()
@@ -38,7 +31,6 @@ const Search = ({setSearchedExerciseName, searchedExerciseName, searchedMuscleGr
         console.log("getAllExercises API Call Failed: ", err);
       });
   }, []);
-  // console.log(allExercises);
 
   const exerciseName = allExercises.map((exercise) => ({
     label: exercise.name,
@@ -55,8 +47,6 @@ const Search = ({setSearchedExerciseName, searchedExerciseName, searchedMuscleGr
     setSearchedExerciseName(null);
   };
 
-  // console.log("searchByMuscleGroup", searchByMuscleGroup);
-
   const getEquipmentOptions = (equipmentType, searchByMuscleGroup) => {
 
     let filteredExercises = allExercises;
@@ -66,7 +56,6 @@ const Search = ({setSearchedExerciseName, searchedExerciseName, searchedMuscleGr
       (exercise) => exercise.equipment_used === equipmentType
     );
     }
-    console.log("searchByMuscleGroup Inside equip opt", searchByMuscleGroup)
     
     return filteredExercises.map((exercise) => ({
       label: exercise.name,
