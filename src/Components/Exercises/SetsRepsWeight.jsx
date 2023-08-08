@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactSelect from "react-select";
 
 const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup }) => {
   console.log("searchedExerciseName:SRW", searchedExerciseName);
   console.log("searchedMuscleGroup:SRW", searchedMuscleGroup);
-  const [exerciseParameters, setExerciseParameters] = useState({
-    sets: 0,
-    reps: 0,
-    weight: 0,
-  });
-  console.log("exerciseParameters", exerciseParameters);
+ 
 
   const [sets, setSets] = useState(null);
   const [reps, setReps] = useState(null);
@@ -18,11 +13,28 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup }) => {
   console.log("reps", reps);
   console.log("weight", weight);
 
+ const [exerciseParameters, setExerciseParameters] = useState({
+    sets: 0,
+    reps: 0,
+    weight: 0
+  });
+  console.log("exerciseParameters", exerciseParameters);
 
+useEffect(() => {
+    if (sets !== null || reps !== null || weight !== null) 
+    {
+        setExerciseParameters((prevParameters) => ({
+            ...prevParameters,
+            sets: sets !== null ? sets.value : prevParameters.sets,
+            reps: reps !== null ? reps.value : prevParameters.reps,
+            weight: weight !== null ? weight.value : prevParameters.weight,
+        }));
+    }
+}, [sets,reps,weight])
 
   let setOptions = [];
   for (let i = 0; i < 21; i++) {
-    setOptions.push({ label: `${i}`, value: i });
+    setOptions.push({ label: `${i}`, value: i});
   }
 
   let repOptions = [];
@@ -32,9 +44,9 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup }) => {
 
   let weightOptions = [];
   for (let i = 0; i < 500; i += 2.5) {
-    weightOptions.push({ label: `${i}`, value: i });
+    weightOptions.push({ label: `${i}`, value: i});
   }
-console.log("weightOptions",weightOptions)
+
   const updateSets = (sets) => {
     setSets(sets);
   };
@@ -49,8 +61,11 @@ console.log("weightOptions",weightOptions)
 
   return (
     <div>
-      <h3>Sets</h3>
-      <ReactSelect
+     
+      {searchedExerciseName || searchedMuscleGroup ? 
+        <div>
+         <h3>Sets</h3>
+        <ReactSelect
         placeholder="Sets"
         options={setOptions}
         value={sets}
@@ -69,7 +84,8 @@ console.log("weightOptions",weightOptions)
         options={weightOptions}
         value={weight}
         onChange={updateWeight}
-      />
+      /> </div>: null}
+      
     </div>
   );
 };
