@@ -33,12 +33,17 @@ const displayExercises = (workoutID, workoutName) => {
   navigate("/CreateExercise", {state: {selectedWorkout: workoutID, selectedWorkoutName: workoutName}})
 }
 
+const navToExercisePage = (workoutID) => {
+  setViewExercisesInWorkout(workoutID)
+  navigate("/ViewExercises")
+}
+
   return (
     <div>
     <h3>{workout.length > 0 && workout[0].routine.name}</h3>
     {workout.length > 0 && workout.map((workout) => (
         <div key={workout.id}>
-        <MDBBtn color='info' onClick={() => setViewExercisesInWorkout(workout.id)}>{workout.workout.name} </MDBBtn>
+        <MDBBtn color='info' onClick={() =>navToExercisePage(workout.id)}>{workout.workout.name} </MDBBtn>
         <MDBBtn onClick={() => setWorkoutToEdit(workout.id)}>Change Name</MDBBtn>
         <MDBBtn onClick={() => setWorkoutToDelete(workout.id)}>Delete</MDBBtn>
         <MDBBtn onClick={() => displayExercises(workout.id, workout.workout.name)}>Add Exercises To Workout</MDBBtn>
