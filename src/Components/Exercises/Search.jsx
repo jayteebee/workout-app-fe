@@ -3,7 +3,12 @@ import { getAllExercises } from "../../API/Exercise/Exercise";
 import ReactSelect from "react-select";
 import { MDBBtn } from "mdb-react-ui-kit";
 
-const Search = ({setSearchedExerciseName, searchedExerciseName, searchedMuscleGroup, setSearchedMuscleGroup}) => {
+const Search = ({
+  setSearchedExerciseName,
+  searchedExerciseName,
+  searchedMuscleGroup,
+  setSearchedMuscleGroup,
+}) => {
   const [allExercises, setAllExercises] = useState([]);
   const [barbells, setBarbells] = useState(false);
   const [dumbbells, setDumbbells] = useState(false);
@@ -48,15 +53,14 @@ const Search = ({setSearchedExerciseName, searchedExerciseName, searchedMuscleGr
   };
 
   const getEquipmentOptions = (equipmentType, searchByMuscleGroup) => {
-
     let filteredExercises = allExercises;
 
     if (equipmentType !== "All") {
       filteredExercises = allExercises.filter(
-      (exercise) => exercise.equipment_used === equipmentType
-    );
+        (exercise) => exercise.equipment_used === equipmentType
+      );
     }
-    
+
     return filteredExercises.map((exercise) => ({
       label: exercise.name,
       value: searchByMuscleGroup ? exercise.primary_muscles : exercise.name,
@@ -69,9 +73,8 @@ const Search = ({setSearchedExerciseName, searchedExerciseName, searchedMuscleGr
     const calculateExerciseOptions = () => {
       let newExerciseOptions = [];
       if (!barbells && !dumbbells && !machines) {
-        newExerciseOptions = getEquipmentOptions("All", searchByMuscleGroup)
-      }
-      else if (barbells && dumbbells && machines) {
+        newExerciseOptions = getEquipmentOptions("All", searchByMuscleGroup);
+      } else if (barbells && dumbbells && machines) {
         newExerciseOptions = exerciseName;
       } else if (barbells && dumbbells) {
         newExerciseOptions = [
@@ -89,11 +92,20 @@ const Search = ({setSearchedExerciseName, searchedExerciseName, searchedMuscleGr
           ...getEquipmentOptions("Machine", searchByMuscleGroup),
         ];
       } else if (barbells) {
-        newExerciseOptions = getEquipmentOptions("Barbell", searchByMuscleGroup);
+        newExerciseOptions = getEquipmentOptions(
+          "Barbell",
+          searchByMuscleGroup
+        );
       } else if (dumbbells) {
-        newExerciseOptions = getEquipmentOptions("Dumbbells", searchByMuscleGroup);
+        newExerciseOptions = getEquipmentOptions(
+          "Dumbbells",
+          searchByMuscleGroup
+        );
       } else if (machines) {
-        newExerciseOptions = getEquipmentOptions("Machine", searchByMuscleGroup);
+        newExerciseOptions = getEquipmentOptions(
+          "Machine",
+          searchByMuscleGroup
+        );
       } else {
         newExerciseOptions = exerciseName;
       }
