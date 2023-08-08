@@ -8,12 +8,15 @@ const Search = ({
   searchedExerciseName,
   searchedMuscleGroup,
   setSearchedMuscleGroup,
+  setExerciseID
 }) => {
   const [allExercises, setAllExercises] = useState([]);
   const [barbells, setBarbells] = useState(false);
   const [dumbbells, setDumbbells] = useState(false);
   const [machines, setMachines] = useState(false);
   const [searchByMuscleGroup, setSearchByMuscleGroup] = useState(false);
+
+  // console.log("allExercises", allExercises)
 
   const barbellToggle = () => {
     setBarbells((prevState) => !prevState);
@@ -43,8 +46,13 @@ const Search = ({
   }));
 
   const handleChangeForExerciseName = (searchedExerciseName) => {
+    const idFinder = allExercises.filter(
+      (exercise) => exercise.name === searchedExerciseName.value
+    );
+    let exerciseID = idFinder[0];
     setSearchedExerciseName(searchedExerciseName);
     setSearchedMuscleGroup(null);
+    setExerciseID(exerciseID.id)
   };
 
   const handleChangeForMuscleGroup = (searchedMuscleGroup) => {
