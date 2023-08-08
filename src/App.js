@@ -12,6 +12,7 @@ import PersonalBests from "./Pages/PersonalBests";
 import Logs from "./Pages/Logs";
 import { useEffect, useState } from "react";
 import ExerciseCreation from "./Pages/ExerciseCreation";
+import ViewExercises from "./Pages/ViewExercises";
 
 // brew services start redis - backend service
 // bundle exec sidekiq
@@ -47,6 +48,8 @@ function App() {
             <Route path="/PersonalBests" element={<PersonalBests />} />
 
             <Route path="/Logs" element={<Logs />} />
+
+            <Route path="/ViewExercises" element={<ViewExercises />}/>
           </Route>
 
           <Route path="/GettingStarted" element={<RegisterOrLogIn setLoggedIn={setLoggedIn} />} />
