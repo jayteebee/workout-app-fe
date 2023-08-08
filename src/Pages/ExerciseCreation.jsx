@@ -13,6 +13,19 @@ const ExerciseCreation = () => {
 
   const [searchedMuscleGroup, setSearchedMuscleGroup] = useState(null);
   console.log("searchedMuscleGroup - EC", searchedMuscleGroup);
+
+  const [exerciseID, setExerciseID] = useState(null)
+  console.log("exerciseID", exerciseID)
+
+  const [exerciseParameters, setExerciseParameters] = useState({
+    name: null,
+    sets: 0,
+    reps: 0,
+    weight: 0,
+  });
+  console.log("exerciseParameters", exerciseParameters);
+
+
   return (
     <div>
       <h2>Exercise Creation</h2>
@@ -23,11 +36,13 @@ const ExerciseCreation = () => {
         searchedExerciseName={searchedExerciseName}
         searchedMuscleGroup={searchedMuscleGroup}
         setSearchedMuscleGroup={setSearchedMuscleGroup}
+        setExerciseID={setExerciseID}
       />
 
       <SetsRepsWeight
         searchedExerciseName={searchedExerciseName}
         searchedMuscleGroup={searchedMuscleGroup}
+        setExerciseParameters={setExerciseParameters}
       />
     </div>
   );
