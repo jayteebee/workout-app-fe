@@ -3,16 +3,15 @@ import { getAllExercises } from "../../API/Exercise/Exercise";
 import ReactSelect from "react-select";
 import { MDBBtn } from "mdb-react-ui-kit";
 
-const Search = () => {
-  const [searchedExerciseName, setSearchedExerciseName] = useState(null);
+const Search = ({setSearchedExerciseName, searchedExerciseName, searchedMuscleGroup, setSearchedMuscleGroup}) => {
+  // const [searchedExerciseName, setSearchedExerciseName] = useState(null);
   // console.log("searchedExerciseName - Search", searchedExerciseName);
-  const [searchedMuscleGroup, setSearchedMuscleGroup] = useState(null);
+  // const [searchedMuscleGroup, setSearchedMuscleGroup] = useState(null);
   // console.log("searchedMuscleGroup - Search", searchedMuscleGroup);
   const [allExercises, setAllExercises] = useState([]);
   const [barbells, setBarbells] = useState(false);
   const [dumbbells, setDumbbells] = useState(false);
   const [machines, setMachines] = useState(false);
-  const [searchByExerciseName, setSearchByExerciseName] = useState(false);
   const [searchByMuscleGroup, setSearchByMuscleGroup] = useState(false);
 
   const barbellToggle = () => {
@@ -48,13 +47,15 @@ const Search = () => {
 
   const handleChangeForExerciseName = (searchedExerciseName) => {
     setSearchedExerciseName(searchedExerciseName);
+    setSearchedMuscleGroup(null);
   };
 
   const handleChangeForMuscleGroup = (searchedMuscleGroup) => {
     setSearchedMuscleGroup(searchedMuscleGroup);
+    setSearchedExerciseName(null);
   };
 
-  console.log("searchByMuscleGroup", searchByMuscleGroup);
+  // console.log("searchByMuscleGroup", searchByMuscleGroup);
 
   const getEquipmentOptions = (equipmentType, searchByMuscleGroup) => {
 
@@ -65,6 +66,7 @@ const Search = () => {
       (exercise) => exercise.equipment_used === equipmentType
     );
     }
+    console.log("searchByMuscleGroup Inside equip opt", searchByMuscleGroup)
     
     return filteredExercises.map((exercise) => ({
       label: exercise.name,
@@ -77,8 +79,10 @@ const Search = () => {
   useEffect(() => {
     const calculateExerciseOptions = () => {
       let newExerciseOptions = [];
-
-      if (barbells && dumbbells && machines) {
+      if (!barbells && !dumbbells && !machines) {
+        newExerciseOptions = getEquipmentOptions("All", searchByMuscleGroup)
+      }
+      else if (barbells && dumbbells && machines) {
         newExerciseOptions = exerciseName;
       } else if (barbells && dumbbells) {
         newExerciseOptions = [
@@ -101,8 +105,6 @@ const Search = () => {
         newExerciseOptions = getEquipmentOptions("Dumbbells", searchByMuscleGroup);
       } else if (machines) {
         newExerciseOptions = getEquipmentOptions("Machine", searchByMuscleGroup);
-      } else if (!barbells && !dumbbells && !machines) {
-        newExerciseOptions = getEquipmentOptions("All", searchByMuscleGroup)
       } else {
         newExerciseOptions = exerciseName;
       }
@@ -115,7 +117,6 @@ const Search = () => {
 
   const searchViaMuscle = () => {
     setSearchByMuscleGroup((prevState) => !prevState);
-    console.log("SBMG:", searchByMuscleGroup);
   };
 
   return (
@@ -159,89 +160,3 @@ const Search = () => {
 };
 
 export default Search;
-
-// <MDBBtn onClick={searchViaName} color={ searchByExerciseName ? "success" : ""}>Exercise Name</MDBBtn>
-
-// let exerciseNameOptions = []
-
-//   if (barbells && dumbbells && machines) {
-//     exerciseNameOptions = exerciseName;
-//   } else if (barbells && dumbbells) {
-//     exerciseNameOptions = [
-//       ...getEquipmentOptions("Barbell"),
-//       ...getEquipmentOptions("Dumbbells")
-//     ];
-//   } else if (barbells && machines) {
-//     exerciseNameOptions = [
-//       ...getEquipmentOptions("Barbell"),
-//       ...getEquipmentOptions("Machine")
-//     ];
-//   } else if (dumbbells && machines) {
-//     exerciseNameOptions = [
-//       ...getEquipmentOptions("Dumbbells"),
-//       ...getEquipmentOptions("Machine")
-//     ];
-//   } else if (barbells) {
-//     exerciseNameOptions = getEquipmentOptions("Barbell");
-//   } else if (dumbbells) {
-//     exerciseNameOptions = getEquipmentOptions("Dumbbells");
-//   } else if (machines) {
-//     exerciseNameOptions = getEquipmentOptions("Machine");
-//   } else {
-//     exerciseNameOptions = exerciseName;
-//   }
-
-// console.log("exerciseNameOptions",exerciseNameOptions)
-
-// const muscleGroup = allExercises.map((exercise) => ({
-//   label: exercise.name,
-//   value: exercise.primary_muscles
-// }));
-
-// const barbellFilter = allExercises.filter(
-//   (exercise) => exercise.equipment_used === "Barbell"
-// );
-// const barbellFilterMapped = barbellFilter.map((exercise) => ({
-//   label: exercise.name,
-//   value: exercise.name,
-// }));
-// // console.log("barbellFilterMapped", barbellFilterMapped)
-
-// const dumbbellFilter = allExercises.filter(
-//   (exercise) => exercise.equipment_used === "Dumbbells"
-// );
-// const dumbbellFilterMapped = dumbbellFilter.map((exercise) => ({
-//   label: exercise.name,
-//   value: exercise.name,
-// }));
-// // console.log("dumbbellFilterMapped", dumbbellFilterMapped)
-
-// const machineFilter = allExercises.filter(
-//   (exercise) => exercise.equipment_used === "Machine"
-// );
-// const machineFilterMapped = machineFilter.map((exercise) => ({
-//   label: exercise.name,
-//   value: exercise.name,
-// }));
-// console.log("machineFilterMapped", machineFilterMapped)
-
-// let exerciseNameOptions = []
-// if (barbells && dumbbells && machines) {
-//   exerciseNameOptions = exerciseName
-//    }
-// else if (barbells && dumbbells) {
-//   exerciseNameOptions = [...barbellFilterMapped, ...dumbbellFilterMapped]
-//  } else if (barbells && machines) {
-//   exerciseNameOptions = [...barbellFilterMapped, ...machineFilterMapped]
-//  } else if (dumbbells && machines) {
-//   exerciseNameOptions = [...dumbbellFilterMapped, ...machineFilterMapped]
-//  } else if (barbells) {
-//   exerciseNameOptions = barbellFilterMapped
-// } else if (dumbbells) {
-//   exerciseNameOptions = dumbbellFilterMapped
-// } else if (machines) {
-//   exerciseNameOptions = machineFilterMapped
-// } else {
-//   exerciseNameOptions = exerciseName
-// }
-// console.log("exerciseNameOptions", exerciseNameOptions)
