@@ -7,14 +7,9 @@ import FetchWorkoutByID from "../Components/Workout/FetchWorkoutByID";
 
 const Workout = () => {
   const [workoutToggle, setWorkoutToggle] = useState(false);
-  const [tee, setTee] = useState(false);
   const [routineID, setRoutineID] = useState(Number);
   const [workoutCreated, setWorkoutCreated] = useState(false);
 
-
-  const hc = () => {
-    setTee(true);
-  };
 
   return (
     <div>
@@ -45,8 +40,7 @@ const Workout = () => {
         />
       </div>
 
-      <button onClick={hc}>All Exercises</button>
-      {tee && <FetchAllExercises />}
+    
 
 
     </div>
