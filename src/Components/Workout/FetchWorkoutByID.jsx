@@ -18,7 +18,7 @@ const location = useLocation();
 const selectedRoutineID = location.state?.selectedRoutineID;
 const navigate = useNavigate()
 
-
+console.log("viewExercisesInWorkout FWID:", viewExercisesInWorkout)
 useEffect(() => {
     setRoutineID(selectedRoutineID)
     getWorkoutsInRoutine(selectedRoutineID)
@@ -33,9 +33,10 @@ const displayExercises = (workoutID, workoutName) => {
   navigate("/CreateExercise", {state: {selectedWorkout: workoutID, selectedWorkoutName: workoutName}})
 }
 
-const navToExercisePage = (workoutID) => {
-  setViewExercisesInWorkout(workoutID)
-  navigate("/ViewExercises")
+const navToExercisePage =  (workoutID) => {
+  console.log("WID:", workoutID)
+   setViewExercisesInWorkout(workoutID)
+  navigate("/ViewExercises", {state: {workoutId: workoutID}})
 }
 
   return (
@@ -51,10 +52,10 @@ const navToExercisePage = (workoutID) => {
     ))}
     {workoutToEdit && <EditWorkout workoutToEdit={workoutToEdit} editToggle={editToggle} setEditToggle={setEditToggle} setWorkoutToEdit={setWorkoutToEdit}/>}
     {workoutToDelete && <DeleteWorkout workoutToDelete={workoutToDelete} setWorkoutToDelete={setWorkoutToDelete} setDeleteToggle={setDeleteToggle} />}
-    {viewExercisesInWorkout && <ViewExercises viewExercisesInWorkout={viewExercisesInWorkout} />}
     </div>
   )
 }
 
 export default FetchWorkoutByID
 
+// {viewExercisesInWorkout && <ViewExercises viewExercisesInWorkout={viewExercisesInWorkout} />}
