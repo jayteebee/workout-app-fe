@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { MDBBtn } from "mdb-react-ui-kit";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { addExerciseToWorkout } from "../API/Workout/Workout";
 import Search from "../Components/Exercises/Search";
 import SetsRepsWeight from "../Components/Exercises/SetsRepsWeight";
 
@@ -18,13 +20,24 @@ const ExerciseCreation = () => {
   console.log("exerciseID", exerciseID)
 
   const [exerciseParameters, setExerciseParameters] = useState({
-    name: null,
+    exercise_id: null,
     sets: 0,
     reps: 0,
     weight: 0,
   });
   console.log("exerciseParameters", exerciseParameters);
 
+  const addExercise = () => {
+    console.log("addExerciseToWorkout",selectedWorkout,exerciseParameters)
+    addExerciseToWorkout(selectedWorkout,exerciseParameters)
+  }
+
+  useEffect(() => {
+    setExerciseParameters((prevParameters) => ({
+      ...prevParameters,
+      exercise_id: exerciseID !== null ? exerciseID : null,
+    }))
+  },[exerciseID])
 
   return (
     <div>
@@ -44,6 +57,8 @@ const ExerciseCreation = () => {
         searchedMuscleGroup={searchedMuscleGroup}
         setExerciseParameters={setExerciseParameters}
       />
+
+      <MDBBtn onClick={addExercise}>Add Exercise To Workout</MDBBtn>
     </div>
   );
 };
