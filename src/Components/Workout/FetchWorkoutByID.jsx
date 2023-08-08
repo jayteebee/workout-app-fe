@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { getWorkoutsInRoutine } from '../../API/Routine/Routine'
 import EditWorkout from './EditWorkout'
 import DeleteWorkout from './DeleteWorkout';
+import ViewExercises from '../../Pages/ViewExercises';
 
 const FetchWorkoutByID = ({setRoutineID, workoutCreated}) => {
 const [workout, setWorkout] = useState([])
@@ -12,6 +13,7 @@ const [editToggle, setEditToggle] = useState(false)
 const [workoutToDelete, setWorkoutToDelete] = useState(null)
 const [deleteToggle, setDeleteToggle] = useState(null)
 const [selectedWorkout, setSelectedWorkout] = useState({selectedWorkout: 0, selectedWorkoutName: ""})
+const [viewExercisesInWorkout, setViewExercisesInWorkout] = useState(null)
 const location = useLocation();
 const selectedRoutineID = location.state?.selectedRoutineID;
 const navigate = useNavigate()
@@ -36,7 +38,7 @@ const displayExercises = (workoutID, workoutName) => {
     <h3>{workout.length > 0 && workout[0].routine.name}</h3>
     {workout.length > 0 && workout.map((workout) => (
         <div key={workout.id}>
-            <p>{workout.workout.name} </p>
+        <MDBBtn color='info' onClick={() => setViewExercisesInWorkout(workout.id)}>{workout.workout.name} </MDBBtn>
         <MDBBtn onClick={() => setWorkoutToEdit(workout.id)}>Change Name</MDBBtn>
         <MDBBtn onClick={() => setWorkoutToDelete(workout.id)}>Delete</MDBBtn>
         <MDBBtn onClick={() => displayExercises(workout.id, workout.workout.name)}>Add Exercises To Workout</MDBBtn>
@@ -44,7 +46,7 @@ const displayExercises = (workoutID, workoutName) => {
     ))}
     {workoutToEdit && <EditWorkout workoutToEdit={workoutToEdit} editToggle={editToggle} setEditToggle={setEditToggle} setWorkoutToEdit={setWorkoutToEdit}/>}
     {workoutToDelete && <DeleteWorkout workoutToDelete={workoutToDelete} setWorkoutToDelete={setWorkoutToDelete} setDeleteToggle={setDeleteToggle} />}
-    
+    {viewExercisesInWorkout && <ViewExercises viewExercisesInWorkout={viewExercisesInWorkout} />}
     </div>
   )
 }
