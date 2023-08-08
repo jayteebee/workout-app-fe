@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Search from '../Components/Exercises/Search';
+import SetsRepsWeight from '../Components/Exercises/SetsRepsWeight';
 
 const ExerciseCreation = () => {
 
@@ -17,7 +18,6 @@ const ExerciseCreation = () => {
     <div>
     <h2>Exercise Creation</h2>
     <h4>Workout: {selectedWorkoutName}</h4>
-
     
     <Search 
     setSearchedExerciseName={setSearchedExerciseName}
@@ -25,6 +25,8 @@ const ExerciseCreation = () => {
     searchedMuscleGroup={searchedMuscleGroup}
     setSearchedMuscleGroup={setSearchedMuscleGroup}
     />
+
+<SetsRepsWeight />
     </div>
   )
 }
