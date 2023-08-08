@@ -7,13 +7,6 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
   const [sets, setSets] = useState(null);
   const [reps, setReps] = useState(null);
   const [weight, setWeight] = useState(null);
-//   const [exerciseParameters, setExerciseParameters] = useState({
-//     name: null,
-//     sets: 0,
-//     reps: 0,
-//     weight: 0,
-//   });
-//   console.log("exerciseParameters", exerciseParameters);
 
   useEffect(() => {
     if (sets !== null || reps !== null || weight !== null) {
