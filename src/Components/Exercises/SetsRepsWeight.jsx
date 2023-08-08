@@ -1,8 +1,15 @@
 import React from 'react'
 
-const SetsRepsWeight = () => {
-  return (
-    <div>SetsRepsWeight</div>
+const SetsRepsWeight = ({searchedExerciseName, searchedMuscleGroup}) => {
+  console.log("searchedExerciseName:SRW", searchedExerciseName)
+  console.log("searchedMuscleGroup:SRW", searchedMuscleGroup)
+
+  
+    return (
+    <div>
+ 
+    
+    </div>
   )
 }
 
