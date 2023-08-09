@@ -40,9 +40,9 @@ const displayWorkouts = (routineID) => {
         <div key={routine.id}>
         <MDBBtn onClick={() => displayWorkouts(routine.id)}>{routine.name}</MDBBtn> 
         <MDBBtn onClick={() => setRoutineToEdit(routine.id)}>Change Name/Frequency</MDBBtn>
-        <MDBBtn outline color='light' onClick={() => setRoutineToDelete(routine.id)}>
+        <a onClick={() => setRoutineToDelete(routine.id)} href>
         <img src={deleteIcon} alt="delete" className='deleteIcon' />
-        </MDBBtn>
+        </a>
         </div>
     ))}
     {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />  }
