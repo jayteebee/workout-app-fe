@@ -38,7 +38,6 @@ const displayWorkouts = (routineID) => {
     {allRoutines.map((routine) => (
         <div key={routine.id}>
         <MDBBtn onClick={() => displayWorkouts(routine.id)}>{routine.name}</MDBBtn> 
-        {routine.frequency}
         <MDBBtn onClick={() => setRoutineToEdit(routine.id)}>Change Name/Frequency</MDBBtn>
         <MDBBtn onClick={() => setRoutineToDelete(routine.id)}>Delete</MDBBtn>
         </div>
