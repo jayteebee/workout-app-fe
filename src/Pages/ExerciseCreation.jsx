@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { addExerciseToWorkout } from "../API/Workout/Workout";
 import Search from "../Components/Exercises/Search";
 import SetsRepsWeight from "../Components/Exercises/SetsRepsWeight";
+import "../CSS/ExerciseCreation.css"
 
 const ExerciseCreation = () => {
   const location = useLocation();
@@ -44,6 +45,7 @@ const ExerciseCreation = () => {
       <h2 className="pageHeader">Exercise Creation</h2>
       <h4 className="subHeader">Workout: {selectedWorkoutName}</h4>
 
+      <div className="search" >
       <Search
         setSearchedExerciseName={setSearchedExerciseName}
         searchedExerciseName={searchedExerciseName}
@@ -51,7 +53,7 @@ const ExerciseCreation = () => {
         setSearchedMuscleGroup={setSearchedMuscleGroup}
         setExerciseID={setExerciseID}
       />
-
+      </div>
       <SetsRepsWeight
         searchedExerciseName={searchedExerciseName}
         searchedMuscleGroup={searchedMuscleGroup}
