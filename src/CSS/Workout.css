@@ -8,6 +8,10 @@
 }
 
 .deleteIcon {
-    height: 20px;
+    height: 40px;
     width: auto;
+}
+
+.deleteIcon:hover {
+    background-color: aqua;
 }

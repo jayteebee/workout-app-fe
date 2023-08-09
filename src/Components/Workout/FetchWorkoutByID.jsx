@@ -47,9 +47,9 @@ const navToExercisePage =  (workoutID) => {
         <div key={workout.id}>
         <MDBBtn color='info' onClick={() =>navToExercisePage(workout.id)}>{workout.workout.name} </MDBBtn>
         <MDBBtn onClick={() => setWorkoutToEdit(workout.id)}>Change Name</MDBBtn>
-        <MDBBtn outline color='link' onClick={() => setWorkoutToDelete(workout.id)}>
+        <a onClick={() => setWorkoutToDelete(workout.id)}>
           <img src={deleteIcon} alt="delete" className='deleteIcon' />
-        </MDBBtn>
+        </a>
         <MDBBtn onClick={() => displayExercises(workout.id, workout.workout.name)}>Add Exercises</MDBBtn>
         </div>
     ))}
@@ -61,4 +61,6 @@ const navToExercisePage =  (workoutID) => {
 
 export default FetchWorkoutByID
 
-// {viewExercisesInWorkout && <ViewExercises viewExercisesInWorkout={viewExercisesInWorkout} />}
+// <MDBBtn outline color='light' onClick={() => setWorkoutToDelete(workout.id)}>
+//           <img src={deleteIcon} alt="delete" className='deleteIcon' />
+//         </MDBBtn>
