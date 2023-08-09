@@ -47,7 +47,7 @@ const navToExercisePage =  (workoutID) => {
         <MDBBtn color='info' onClick={() =>navToExercisePage(workout.id)}>{workout.workout.name} </MDBBtn>
         <MDBBtn onClick={() => setWorkoutToEdit(workout.id)}>Change Name</MDBBtn>
         <MDBBtn onClick={() => setWorkoutToDelete(workout.id)}>Delete</MDBBtn>
-        <MDBBtn onClick={() => displayExercises(workout.id, workout.workout.name)}>Add Exercises To Workout</MDBBtn>
+        <MDBBtn onClick={() => displayExercises(workout.id, workout.workout.name)}>Add Exercises</MDBBtn>
         </div>
     ))}
     {workoutToEdit && <EditWorkout workoutToEdit={workoutToEdit} editToggle={editToggle} setEditToggle={setEditToggle} setWorkoutToEdit={setWorkoutToEdit}/>}
