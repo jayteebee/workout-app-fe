@@ -3,13 +3,21 @@
 }
 
 .createRoutine {
-    width: 25vw;
     display: flex;
     justify-content: center;
 }
 
-.container {
+/* .container {
     grid-column: 2;
+} */
+
+.formContainer {
+    width: 20vw;
+}
+
+.mdb-input .form-control {
+    /* background-color: rgba(11, 12, 16, 0.3); */
+    color: white;
 }
 
 .container h3 {

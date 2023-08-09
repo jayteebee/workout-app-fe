@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { createRoutine } from "../../API/Routine/Routine";
+
 const CreateRoutine = ({ routineToggle, setRoutineToggle }) => {
   const [formInput, setFormInput] = useState({
     name: "",
@@ -42,7 +43,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="formContainer">
         <MDBInput
           className="mb-4"
           type="text"
@@ -50,6 +51,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle }) => {
           value={formInput.name}
           name="name"
           onChange={handleChange}
+          contrast
         />
         <MDBInput
           className="mb-4"
@@ -58,6 +60,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle }) => {
           value={formInput.frequency}
           name="frequency"
           onChange={handleChange}
+          contrast
         />
 
         <MDBBtn type="submit" className="mb-4" block>
