@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../../CSS/Workout.css";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
@@ -49,7 +50,7 @@ console.log("Form Input: ",formInput)
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="inputForm">
         <MDBInput
           className="mb-4"
           type="text"
