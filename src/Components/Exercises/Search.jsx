@@ -130,7 +130,6 @@ const Search = ({
 
   return (
     <div>
-      <h3>Search</h3>
 
       <MDBBtn onClick={barbellToggle} color={barbells ? "success" : ""}>
         Barbells
