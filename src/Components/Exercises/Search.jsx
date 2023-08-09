@@ -168,7 +168,7 @@ const Search = ({
             menu: (baseStyles) => ({
               ...baseStyles,
               backgroundColor: "rgba(11, 12, 16, 0.3)",
-              width: "20vw"
+              width: "20vw",
             }),
             option: (baseStyles, { isFocused }) => ({
               ...baseStyles,

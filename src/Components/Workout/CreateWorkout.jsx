@@ -58,6 +58,7 @@ console.log("Form Input: ",formInput)
           value={formInput.name}
           name="name"
           onChange={handlechange}
+          contrast
         />
 
         <MDBInput
@@ -67,6 +68,7 @@ console.log("Form Input: ",formInput)
           value={formInput.order}
           name="order"
           onChange={handlechange}
+          contrast
         />
         <MDBBtn type="submit" className="mb-4" block>
           Create Workout
