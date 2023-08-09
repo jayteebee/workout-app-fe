@@ -1,37 +1,38 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
-import { getExercisesInWorkout } from '../API/Workout/Workout';
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { getExercisesInWorkout } from "../API/Workout/Workout";
 
 const ViewExercises = () => {
-    const location = useLocation();
-    const workoutID = location.state?.workoutId
-console.log("VE WID", workoutID)
+  const location = useLocation();
+  const workoutID = location.state?.workoutId;
+  console.log("VE WID", workoutID);
 
-const [exercises, setExercises] = useState([])
-useEffect(() => {
+  const [exercises, setExercises] = useState([]);
+  useEffect(() => {
     if (workoutID) {
-        getExercisesInWorkout(workoutID)
+      getExercisesInWorkout(workoutID)
         .then((data) => {
-            setExercises(data)
+          setExercises(data);
         })
-        .catch((err) => {console.log("getExercisesInWorkout API Call Failed",err)})
+        .catch((err) => {
+          console.log("getExercisesInWorkout API Call Failed", err);
+        });
     }
-}, [workoutID])
+  }, [workoutID]);
 
-console.log("exercises", exercises)
+  console.log("exercises", exercises);
   return (
     <div>
-    <h3>Workout</h3>
+      <h3 className="pageHeader">Exercises</h3>
 
-{exercises.map((exercises, index) => (
-    <div key={index}>
-        <p>REPS:{exercises.reps}</p>
-        <p>NAME: {exercises.exercise.name}</p>
-
+      {exercises.map((exercises, index) => (
+        <div key={index}>
+          <p>REPS:{exercises.reps}</p>
+          <p>NAME: {exercises.exercise.name}</p>
+        </div>
+      ))}
     </div>
-  ))}
-    </div>
-  )
-}
+  );
+};
 
-export default ViewExercises
+export default ViewExercises;

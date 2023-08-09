@@ -13,7 +13,7 @@ const Workout = () => {
 
   return (
     <div>
-      <h3>Workout</h3>
+      <h3 className="pageHeader">Workout</h3>
 
       {/*<div className='fetchAllWorkouts'>
     <FetchAllWorkouts workoutToggle={workoutToggle}/>
