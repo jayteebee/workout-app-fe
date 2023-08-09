@@ -6,7 +6,7 @@
 }
 
 .App-inner {
-  background-color:#1F2833 ;
+  background-color:#001F3F;
   border-radius: 25px;
   height: 100vh;
   color: #66fcf1;
@@ -15,6 +15,12 @@
 .pageHeader {
   font-family: "Bebas Neue", sans-serif;
   font-size: 3rem;
+  text-decoration: underline;
+}
+
+.subHeader {
+  font-family: "League Gothic", sans-serif;
+  font-size: 2.5rem;
 }
 
 p {
