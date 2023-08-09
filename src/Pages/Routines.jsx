@@ -11,7 +11,7 @@ const Routines = () => {
 
   return (
     <div >
-      <h3>Routines</h3>
+      <h3 className="pageHeader">Routines</h3>
       <div className="fetchAllRoutines">
         <FetchAllRoutines routineToggle={routineToggle}/>
       </div>
@@ -21,7 +21,7 @@ const Routines = () => {
         <FetchRoutineByID />
         </div>*/
       }
-      <div className="fetchWorkoutsInRoutine">
+    <div className="fetchWorkoutsInRoutine">
         <FetchWorkoutsInRoutine />
       </div>
       <div className="createRoutine">
