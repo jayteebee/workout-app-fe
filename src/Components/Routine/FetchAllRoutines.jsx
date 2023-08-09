@@ -7,6 +7,7 @@ import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import DeleteRoutine from './DeleteRoutine'
 import EditRoutine from './EditRoutine'
 import FetchWorkoutsInRoutine from './FetchWorkoutsInRoutine'
+import deleteIcon from "../../CSS/Icons/deleteIcon.png"
 
 const FetchAllRoutines = ({routineToggle}) => {
 
@@ -39,7 +40,9 @@ const displayWorkouts = (routineID) => {
         <div key={routine.id}>
         <MDBBtn onClick={() => displayWorkouts(routine.id)}>{routine.name}</MDBBtn> 
         <MDBBtn onClick={() => setRoutineToEdit(routine.id)}>Change Name/Frequency</MDBBtn>
-        <MDBBtn onClick={() => setRoutineToDelete(routine.id)}>Delete</MDBBtn>
+        <MDBBtn outline color='light' onClick={() => setRoutineToDelete(routine.id)}>
+        <img src={deleteIcon} alt="delete" className='deleteIcon' />
+        </MDBBtn>
         </div>
     ))}
     {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />  }
