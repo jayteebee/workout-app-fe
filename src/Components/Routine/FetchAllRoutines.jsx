@@ -8,6 +8,7 @@ import DeleteRoutine from './DeleteRoutine'
 import EditRoutine from './EditRoutine'
 import FetchWorkoutsInRoutine from './FetchWorkoutsInRoutine'
 import deleteIcon from "../../CSS/Icons/deleteIcon.png"
+import editIcon from "../../CSS/Icons/editIcon.png"
 
 const FetchAllRoutines = ({routineToggle}) => {
 
@@ -39,7 +40,12 @@ const displayWorkouts = (routineID) => {
     {allRoutines.map((routine) => (
         <div key={routine.id}>
         <MDBBtn onClick={() => displayWorkouts(routine.id)}>{routine.name}</MDBBtn> 
-        <MDBBtn onClick={() => setRoutineToEdit(routine.id)}>Change Name/Frequency</MDBBtn>
+        
+        <a onClick={() => setRoutineToEdit(routine.id)} href>
+        <img src={editIcon} alt="edit" className='editIcon' />
+        
+        </a>
+
         <a onClick={() => setRoutineToDelete(routine.id)} href>
         <img src={deleteIcon} alt="delete" className='deleteIcon' />
         </a>

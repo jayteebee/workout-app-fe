@@ -23,3 +23,8 @@
 .container h3 {
     color: aqua;
 }
+
+.editIcon {
+    height: 40px;
+    width: auto;
+}
