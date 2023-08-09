@@ -2,8 +2,12 @@
     background-color: rgba(11, 12, 16, 0.3);
     width: 25vw;
     border-radius: 10%;
-    
 }
+
+.colored-hamburger {
+    filter: invert(1) sepia(1) saturate(10) hue-rotate(190deg);
+  }
+  
 
 .hamburgerMenu h2 {
     color: #66fcf1;

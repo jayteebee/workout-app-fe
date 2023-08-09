@@ -12,7 +12,7 @@ const toggleMenu = () => {
 
   return (
     <div >
-    <img src={HamburgerMenu} alt="Menu" onClick={toggleMenu} /> 
+    <img src={HamburgerMenu} alt="Menu" onClick={toggleMenu} className="colored-hamburger" /> 
     {showMenu ? <NavBarMenu setShowMenu={setShowMenu}/> : null}
     </div>
   )
