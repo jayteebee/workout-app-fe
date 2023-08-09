@@ -5,6 +5,7 @@ import { getWorkoutsInRoutine } from '../../API/Routine/Routine'
 import EditWorkout from './EditWorkout'
 import DeleteWorkout from './DeleteWorkout';
 import ViewExercises from '../../Pages/ViewExercises';
+import deleteIcon from "../../CSS/Icons/deleteIcon.png"
 
 const FetchWorkoutByID = ({setRoutineID, workoutCreated}) => {
 const [workout, setWorkout] = useState([])
@@ -46,7 +47,9 @@ const navToExercisePage =  (workoutID) => {
         <div key={workout.id}>
         <MDBBtn color='info' onClick={() =>navToExercisePage(workout.id)}>{workout.workout.name} </MDBBtn>
         <MDBBtn onClick={() => setWorkoutToEdit(workout.id)}>Change Name</MDBBtn>
-        <MDBBtn onClick={() => setWorkoutToDelete(workout.id)}>Delete</MDBBtn>
+        <MDBBtn outline color='link' onClick={() => setWorkoutToDelete(workout.id)}>
+          <img src={deleteIcon} alt="delete" className='deleteIcon' />
+        </MDBBtn>
         <MDBBtn onClick={() => displayExercises(workout.id, workout.workout.name)}>Add Exercises</MDBBtn>
         </div>
     ))}

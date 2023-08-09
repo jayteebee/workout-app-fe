@@ -6,3 +6,8 @@
     display: flex;
     justify-content: center;
 }
+
+.deleteIcon {
+    height: 20px;
+    width: auto;
+}
