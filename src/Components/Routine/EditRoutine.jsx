@@ -44,8 +44,8 @@ console.log(formInput);
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="inputFormEditRoutine">
+      <form onSubmit={handleSubmit} className="inputForm">
         <MDBInput
           className="mb-4"
           type="text"
@@ -53,6 +53,7 @@ console.log(formInput);
           value={formInput.name}
           name="name"
           onChange={handlechange}
+          contrast
         />
         <MDBInput
           className="mb-4"
@@ -61,6 +62,7 @@ console.log(formInput);
           value={formInput.frequency}
           name="frequency"
           onChange={handlechange}
+          contrast
         />
         <MDBBtn type="submit" className="mb-4" block>
           Edit

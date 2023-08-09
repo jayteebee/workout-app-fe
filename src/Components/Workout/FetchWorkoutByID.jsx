@@ -47,11 +47,11 @@ const navToExercisePage =  (workoutID) => {
     {workout.length > 0 && workout.map((workout) => (
         <div key={workout.id}>
         <MDBBtn color='info' onClick={() =>navToExercisePage(workout.id)}>{workout.workout.name} </MDBBtn>
-        <a onClick={() => setWorkoutToEdit(workout.id)}>
+        <a href onClick={() => setWorkoutToEdit(workout.id)}>
         <img src={editIcon} alt="edit" className='editIcon' />
         
         </a>
-        <a onClick={() => setWorkoutToDelete(workout.id)}>
+        <a href onClick={() => setWorkoutToDelete(workout.id)}>
           <img src={deleteIcon} alt="delete" className='deleteIcon' />
         </a>
         <MDBBtn onClick={() => displayExercises(workout.id, workout.workout.name)}>Add Exercises</MDBBtn>

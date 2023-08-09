@@ -1,15 +1,7 @@
-.fetchAllRoutines {
-    /* border: black 3px solid; */
-}
-
 .createRoutine {
     display: flex;
     justify-content: center;
 }
-
-/* .container {
-    grid-column: 2;
-} */
 
 .formContainer {
     width: 20vw;
@@ -27,4 +19,9 @@
 .editIcon {
     height: 40px;
     width: auto;
+}
+
+.inputFormEditRoutine {
+    display: flex;
+    justify-content: center;
 }

@@ -27,8 +27,10 @@ const ViewExercises = () => {
 
       {exercises.map((exercises, index) => (
         <div key={index}>
-          <p>REPS:{exercises.reps}</p>
-          <p>NAME: {exercises.exercise.name}</p>
+          <p>{exercises.exercise.name}</p>
+          <p>SETS: {exercises.sets}</p>
+           <p>REPS:{exercises.reps}</p>
+          
         </div>
       ))}
     </div>

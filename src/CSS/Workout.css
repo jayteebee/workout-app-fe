@@ -2,6 +2,11 @@
     width: 20vw;
 }
 
+.inputFormEditWorkout {
+    display: flex;
+    justify-content: center;
+}
+
 .createWorkout {
     display: flex;
     justify-content: center;
