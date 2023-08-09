@@ -13,5 +13,5 @@
 }
 
 .deleteIcon:hover {
-    background-color: aqua;
+    filter: invert(10%) sepia(100%) saturate(400%) hue-rotate(169deg);
 }
