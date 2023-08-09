@@ -41,8 +41,8 @@ const ExerciseCreation = () => {
 
   return (
     <div>
-      <h2>Exercise Creation</h2>
-      <h4>Workout: {selectedWorkoutName}</h4>
+      <h2 className="pageHeader">Exercise Creation</h2>
+      <h4 className="subHeader">Workout: {selectedWorkoutName}</h4>
 
       <Search
         setSearchedExerciseName={setSearchedExerciseName}
