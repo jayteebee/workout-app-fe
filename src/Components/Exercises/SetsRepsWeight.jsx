@@ -56,26 +56,74 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
     <div>
       {searchedExerciseName || searchedMuscleGroup ? (
         <div>
-          <h3>Sets</h3>
+          <h3 className="subHeader">Sets</h3>
           <ReactSelect
             placeholder="Sets"
             options={setOptions}
             value={sets}
             onChange={updateSets}
+            styles={{
+              control: (baseStyles) => ({
+                ...baseStyles,
+                width: "7vw",
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                backgroundColor: "rgba(11, 12, 16, 0.3)",
+                width: "7vw"
+              }),
+              option: (baseStyles, { isFocused }) => ({
+                ...baseStyles,
+                backgroundColor: isFocused ? "#1F2833" :"rgba(11, 12, 16, 0.6)" , 
+                color: "#66fcf1", 
+              }),
+            }}
           />
-          <h3>Reps</h3>
+          <h3 className="subHeader">Reps</h3>
           <ReactSelect
             placeholder="Reps"
             options={repOptions}
             value={reps}
             onChange={updateReps}
+            styles={{
+              control: (baseStyles) => ({
+                ...baseStyles,
+                width: "7vw",
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                backgroundColor: "rgba(11, 12, 16, 0.3)",
+                width: "7vw"
+              }),
+              option: (baseStyles, { isFocused }) => ({
+                ...baseStyles,
+                backgroundColor: isFocused ? "#1F2833" :"rgba(11, 12, 16, 0.6)" , 
+                color: "#66fcf1", 
+              }),
+            }}
           />
-          <h3>Weight</h3>
+          <h3 className="subHeader">Weight</h3>
           <ReactSelect
             placeholder="Weight"
             options={weightOptions}
             value={weight}
             onChange={updateWeight}
+            styles={{
+              control: (baseStyles) => ({
+                ...baseStyles,
+                width: "7vw",
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                backgroundColor: "rgba(11, 12, 16, 0.3)",
+                width: "7vw"
+              }),
+              option: (baseStyles, { isFocused }) => ({
+                ...baseStyles,
+                backgroundColor: isFocused ? "#1F2833" :"rgba(11, 12, 16, 0.6)" , 
+                color: "#66fcf1", 
+              }),
+            }}
           />{" "}
         </div>
       ) : null}

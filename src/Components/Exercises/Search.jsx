@@ -8,7 +8,7 @@ const Search = ({
   searchedExerciseName,
   searchedMuscleGroup,
   setSearchedMuscleGroup,
-  setExerciseID
+  setExerciseID,
 }) => {
   const [allExercises, setAllExercises] = useState([]);
   const [barbells, setBarbells] = useState(false);
@@ -52,7 +52,7 @@ const Search = ({
     let exerciseID = idFinder[0];
     setSearchedExerciseName(searchedExerciseName);
     setSearchedMuscleGroup(null);
-    setExerciseID(exerciseID.id)
+    setExerciseID(exerciseID.id);
   };
 
   const handleChangeForMuscleGroup = (searchedMuscleGroup) => {
@@ -130,7 +130,6 @@ const Search = ({
 
   return (
     <div>
-
       <MDBBtn onClick={barbellToggle} color={barbells ? "success" : ""}>
         Barbells
       </MDBBtn>
@@ -161,6 +160,22 @@ const Search = ({
           options={exerciseOptions}
           value={searchedExerciseName}
           onChange={handleChangeForExerciseName}
+          styles={{
+            control: (baseStyles) => ({
+              ...baseStyles,
+              width: "20vw",
+            }),
+            menu: (baseStyles) => ({
+              ...baseStyles,
+              backgroundColor: "rgba(11, 12, 16, 0.3)",
+              width: "20vw"
+            }),
+            option: (baseStyles, { isFocused }) => ({
+              ...baseStyles,
+              backgroundColor: isFocused ? "#1F2833" :"rgba(11, 12, 16, 0.6)" , 
+              color: "#66fcf1", 
+            }),
+          }}
         />
       )}
     </div>
