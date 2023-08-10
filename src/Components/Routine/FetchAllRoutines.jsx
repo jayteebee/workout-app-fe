@@ -35,6 +35,12 @@ const FetchAllRoutines = ({ routineToggle }) => {
     navigate("/Workout", { state: { selectedRoutineID: routineID } });
   };
 
+  const editRoutineToggle = (routineID) => {
+    routineToEdit === null
+      ? setRoutineToEdit(routineID)
+      : setRoutineToEdit(null);
+  };
+
   return (
     <div>
       {allRoutines.map((routine) => (
@@ -43,7 +49,7 @@ const FetchAllRoutines = ({ routineToggle }) => {
             {routine.name}
           </MDBBtn>
 
-          <a onClick={() => setRoutineToEdit(routine.id)} href>
+          <a onClick={() => editRoutineToggle(routine.id)} href>
             <img src={editIcon} alt="edit" className="editIcon" />
           </a>
 
