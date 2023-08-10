@@ -13,6 +13,7 @@ import Logs from "./Pages/Logs";
 import { useEffect, useState } from "react";
 import ExerciseCreation from "./Pages/ExerciseCreation";
 import ViewExercises from "./Pages/ViewExercises";
+import Profile from "./Pages/Profile";
 
 // brew services start redis - backend service
 // bundle exec sidekiq
@@ -50,6 +51,9 @@ function App() {
             <Route path="/Logs" element={<Logs />} />
 
             <Route path="/ViewExercises" element={<ViewExercises />}/>
+
+            <Route path="/Profile" element={<Profile />}/>
+
           </Route>
 
           <Route path="/GettingStarted" element={<RegisterOrLogIn setLoggedIn={setLoggedIn} />} />
