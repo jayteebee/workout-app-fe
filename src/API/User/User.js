@@ -19,7 +19,7 @@ export const getUserById = async (userID) => {
 
 // PUT REQUESTS
 // EDIT USER BY ID - WORKING!
-export const updateUser = async (userID, userData = { weight: 200 }) => {
+export const updateUser = async (userID, userData) => {
   const r = await axiosInstance.put(`/users/${userID}`, userData);
   return r.data;
 };
