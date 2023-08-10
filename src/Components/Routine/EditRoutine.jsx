@@ -12,7 +12,6 @@ const EditRoutine = ({ eID, setEditToggle, setRoutineToEdit, editToggle }) => {
     frequency: "",
     user_id: "",
   });
-console.log(formInput);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
