@@ -153,6 +153,22 @@ const Search = ({
           options={exerciseOptions}
           value={searchedMuscleGroup}
           onChange={handleChangeForMuscleGroup}
+          styles={{
+            control: (baseStyles) => ({
+              ...baseStyles,
+              width: "20vw",
+            }),
+            menu: (baseStyles) => ({
+              ...baseStyles,
+              backgroundColor: "rgba(11, 12, 16, 0.3)",
+              width: "20vw",
+            }),
+            option: (baseStyles, { isFocused }) => ({
+              ...baseStyles,
+              backgroundColor: isFocused ? "#1F2833" :"rgba(11, 12, 16, 0.6)" , 
+              color: "#66fcf1", 
+            }),
+          }}
         />
       ) : (
         <ReactSelect
