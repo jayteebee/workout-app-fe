@@ -56,7 +56,7 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
     <div>
       {searchedExerciseName || searchedMuscleGroup ? (
         <div>
-          <h3 className="subHeader">Sets</h3>
+          
           <ReactSelect
             placeholder="Sets"
             options={setOptions}
