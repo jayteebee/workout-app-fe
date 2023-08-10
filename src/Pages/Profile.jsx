@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
-import { updateUser } from "../API/User/User";
+import { getUserById, updateUser } from "../API/User/User";
 import { parseJwt } from "../API/Authentication/parseJwt";
 
 const Profile = () => {
@@ -10,18 +10,34 @@ const Profile = () => {
     weight: "",
   });
   const [userID, setUserID] = useState(null);
+  const [userDetails, setUserDetails] = useState([]);
+  const [userToggle, setUserToggle] = useState(false);
+  console.log("user deets", userDetails);
+  console.log("form input: ", formInput);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
     const userID = decodedToken.sub;
     setUserID(userID);
+    setUserToggle((prevState) => !prevState);
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateUser(userID, formInput);
+      console.log("Form Input: ", formInput);
+
+      const updatedFields = Object.fromEntries(
+        Object.entries(formInput).filter(([key, value]) => value !== "")
+      );
+
+      setUserDetails((prevUserDetails) => ({
+        ...prevUserDetails,
+        ...updatedFields,
+      }));
+
+      await updateUser(userID, updatedFields);
     } catch (err) {
       console.error("Error:", err);
     } finally {
@@ -30,15 +46,26 @@ const Profile = () => {
         height: "",
         weight: "",
       });
+      setUserToggle((prevState) => !prevState);
     }
   };
 
   const handleChange = (e) => {
-    setFormInput({
-      ...formInput,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormInput((prevFormInput) => ({
+      ...prevFormInput,
+      [name]: value,
+    }));
   };
+
+  useEffect(() => {
+    getUserById(userID)
+      .then((data) => setUserDetails(data))
+      .catch((err) => {
+        console.log("getUserById API Call Failed: ", err);
+      });
+  }, [userToggle]);
+
   return (
     <div>
       <form onSubmit={handleSubmit} className="formContainer">
@@ -74,6 +101,13 @@ const Profile = () => {
           Update Info
         </MDBBtn>
       </form>
+
+      <div>
+        <p>{userDetails.name}</p>
+        <p>{userDetails.height}</p>
+        <p>{userDetails.weight}</p>
+        <p>{userDetails.email}</p>
+      </div>
     </div>
   );
 };
