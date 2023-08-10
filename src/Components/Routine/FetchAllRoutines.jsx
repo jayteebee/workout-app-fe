@@ -49,11 +49,11 @@ const FetchAllRoutines = ({ routineToggle }) => {
             {routine.name}
           </MDBBtn>
 
-          <a onClick={() => editRoutineToggle(routine.id)} href>
+          <a onClick={() => editRoutineToggle(routine.id)} href="#E">
             <img src={editIcon} alt="edit" className="editIcon" />
           </a>
 
-          <a onClick={() => setRoutineToDelete(routine.id)} href>
+          <a onClick={() => setRoutineToDelete(routine.id)} href="#D">
             <img src={deleteIcon} alt="delete" className="deleteIcon" />
           </a>
         </div>
