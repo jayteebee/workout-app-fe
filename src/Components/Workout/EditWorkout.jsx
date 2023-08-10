@@ -31,7 +31,7 @@ const EditWorkout = ({
     }
   };
 
-  const handlechange = (e) => {
+  const handleChange = (e) => {
     setFormInput({
       ...formInput,
       [e.target.name]: e.target.value,
@@ -44,10 +44,10 @@ const EditWorkout = ({
         <MDBInput
           className="mb-4"
           type="text"
-          label="Edit Routine Name"
+          label="Edit Workout Name"
           value={formInput.name}
           name="name"
-          onChange={handlechange}
+          onChange={handleChange}
           contrast
         />
         <MDBBtn type="submit" className="mb-4" block>
