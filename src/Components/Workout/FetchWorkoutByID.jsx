@@ -67,11 +67,11 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
               {workout.workout.name}{" "}
             </MDBBtn>
 
-            <a href onClick={() => editWorkoutToggle(workout.id)}>
+            <a href="#E" onClick={() => editWorkoutToggle(workout.id)}>
               <img src={editIcon} alt="edit" className="editIcon" />
             </a>
 
-            <a href onClick={() => setWorkoutToDelete(workout.id)}>
+            <a href="#D" onClick={() => setWorkoutToDelete(workout.id)}>
               <img src={deleteIcon} alt="delete" className="deleteIcon" />
             </a>
             <MDBBtn
