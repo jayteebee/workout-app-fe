@@ -49,6 +49,8 @@ const Search = ({
     const idFinder = allExercises.filter(
       (exercise) => exercise.name === searchedExerciseName.value
     );
+    console.log("idFinder EN", idFinder);
+
     let exerciseID = idFinder[0];
     setSearchedExerciseName(searchedExerciseName);
     setSearchedMuscleGroup(null);
@@ -56,8 +58,13 @@ const Search = ({
   };
 
   const handleChangeForMuscleGroup = (searchedMuscleGroup) => {
+    const idFinder = allExercises.filter(
+      (exercise) => exercise.name === searchedMuscleGroup.label
+    );
+    let exerciseID = idFinder[0];
     setSearchedMuscleGroup(searchedMuscleGroup);
     setSearchedExerciseName(null);
+    setExerciseID(exerciseID.id);
   };
 
   const getEquipmentOptions = (equipmentType, searchByMuscleGroup) => {
@@ -165,8 +172,8 @@ const Search = ({
             }),
             option: (baseStyles, { isFocused }) => ({
               ...baseStyles,
-              backgroundColor: isFocused ? "#1F2833" :"rgba(11, 12, 16, 0.6)" , 
-              color: "#66fcf1", 
+              backgroundColor: isFocused ? "#1F2833" : "rgba(11, 12, 16, 0.6)",
+              color: "#66fcf1",
             }),
           }}
         />
@@ -188,8 +195,8 @@ const Search = ({
             }),
             option: (baseStyles, { isFocused }) => ({
               ...baseStyles,
-              backgroundColor: isFocused ? "#1F2833" :"rgba(11, 12, 16, 0.6)" , 
-              color: "#66fcf1", 
+              backgroundColor: isFocused ? "#1F2833" : "rgba(11, 12, 16, 0.6)",
+              color: "#66fcf1",
             }),
           }}
         />

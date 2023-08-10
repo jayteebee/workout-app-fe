@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import ReactSelect from "react-select";
 
 const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExerciseParameters }) => {
-    console.log("searchedMuscleGroup", searchedMuscleGroup)
-    console.log("searchedExerciseName SRW:", searchedExerciseName)
+    // console.log("searchedMuscleGroup", searchedMuscleGroup)
+    // console.log("searchedExerciseName SRW:", searchedExerciseName)
   const [sets, setSets] = useState(null);
   const [reps, setReps] = useState(null);
   const [weight, setWeight] = useState(null);

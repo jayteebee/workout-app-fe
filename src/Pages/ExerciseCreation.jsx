@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { addExerciseToWorkout } from "../API/Workout/Workout";
 import Search from "../Components/Exercises/Search";
 import SetsRepsWeight from "../Components/Exercises/SetsRepsWeight";
-import "../CSS/ExerciseCreation.css"
+import "../CSS/ExerciseCreation.css";
 
 const ExerciseCreation = () => {
   const location = useLocation();
@@ -12,13 +12,13 @@ const ExerciseCreation = () => {
   const selectedWorkoutName = location.state?.selectedWorkoutName;
 
   const [searchedExerciseName, setSearchedExerciseName] = useState(null);
-  console.log("searchedExerciseName - EC", searchedExerciseName);
+  // console.log("searchedExerciseName - EC", searchedExerciseName);
 
   const [searchedMuscleGroup, setSearchedMuscleGroup] = useState(null);
   console.log("searchedMuscleGroup - EC", searchedMuscleGroup);
 
-  const [exerciseID, setExerciseID] = useState(null)
-  console.log("exerciseID", exerciseID)
+  const [exerciseID, setExerciseID] = useState(null);
+  console.log("exerciseID", exerciseID);
 
   const [exerciseParameters, setExerciseParameters] = useState({
     exercise_id: null,
@@ -29,30 +29,30 @@ const ExerciseCreation = () => {
   console.log("exerciseParameters", exerciseParameters);
 
   const addExercise = () => {
-    console.log("addExerciseToWorkout",selectedWorkout,exerciseParameters)
-    addExerciseToWorkout(selectedWorkout,exerciseParameters)
-  }
+    console.log("addExerciseToWorkout", selectedWorkout, exerciseParameters);
+    addExerciseToWorkout(selectedWorkout, exerciseParameters);
+  };
 
   useEffect(() => {
     setExerciseParameters((prevParameters) => ({
       ...prevParameters,
       exercise_id: exerciseID !== null ? exerciseID : null,
-    }))
-  },[exerciseID])
+    }));
+  }, [exerciseID]);
 
   return (
     <div>
       <h2 className="pageHeader">Exercise Creation</h2>
       <h4 className="subHeader">Workout: {selectedWorkoutName}</h4>
 
-      <div className="search" >
-      <Search
-        setSearchedExerciseName={setSearchedExerciseName}
-        searchedExerciseName={searchedExerciseName}
-        searchedMuscleGroup={searchedMuscleGroup}
-        setSearchedMuscleGroup={setSearchedMuscleGroup}
-        setExerciseID={setExerciseID}
-      />
+      <div className="search">
+        <Search
+          setSearchedExerciseName={setSearchedExerciseName}
+          searchedExerciseName={searchedExerciseName}
+          searchedMuscleGroup={searchedMuscleGroup}
+          setSearchedMuscleGroup={setSearchedMuscleGroup}
+          setExerciseID={setExerciseID}
+        />
       </div>
       <SetsRepsWeight
         searchedExerciseName={searchedExerciseName}
