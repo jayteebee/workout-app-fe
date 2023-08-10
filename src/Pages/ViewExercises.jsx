@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getExercisesInWorkout } from "../API/Workout/Workout";
+import "../CSS/Exercises.css"
 
 const ViewExercises = () => {
   const location = useLocation();
@@ -24,15 +25,16 @@ const ViewExercises = () => {
   return (
     <div>
       <h3 className="pageHeader">Exercises</h3>
-
+<div className="scrollableDivForViewExercises">
       {exercises.map((exercises, index) => (
-        <div key={index}>
+        <div  key={index}>
           <p>{exercises.exercise.name}</p>
           <p>SETS: {exercises.sets}</p>
            <p>REPS:{exercises.reps}</p>
           
         </div>
       ))}
+      </div>
     </div>
   );
 };
