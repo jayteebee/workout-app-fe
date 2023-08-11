@@ -16,8 +16,6 @@ const Search = ({
   const [machines, setMachines] = useState(false);
   const [searchByMuscleGroup, setSearchByMuscleGroup] = useState(false);
 
-  // console.log("allExercises", allExercises)
-
   const barbellToggle = () => {
     setBarbells((prevState) => !prevState);
   };
@@ -49,8 +47,6 @@ const Search = ({
     const idFinder = allExercises.filter(
       (exercise) => exercise.name === searchedExerciseName.value
     );
-    console.log("idFinder EN", idFinder);
-
     let exerciseID = idFinder[0];
     setSearchedExerciseName(searchedExerciseName);
     setSearchedMuscleGroup(null);

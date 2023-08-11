@@ -5,11 +5,18 @@ import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
 import { addWorkoutToRoutine } from "../../API/Routine/Routine";
 
-const CreateWorkout = ({setWorkoutToggle, workoutToggle, routineID, setWorkoutCreated}) => {
-  const [formInput, setFormInput] = useState({ user_id: "", name: "", order: 0 });
-const [createdWorkout, setCreatedWorkout] = useState([])
-
-console.log("Form Input: ",formInput)
+const CreateWorkout = ({
+  setWorkoutToggle,
+  workoutToggle,
+  routineID,
+  setWorkoutCreated,
+}) => {
+  const [formInput, setFormInput] = useState({
+    user_id: "",
+    name: "",
+    order: 0,
+  });
+  const [createdWorkout, setCreatedWorkout] = useState([]);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -22,29 +29,30 @@ console.log("Form Input: ",formInput)
     e.preventDefault();
     try {
       let data = await createWorkout(formInput);
-        setCreatedWorkout(data);
+      setCreatedWorkout(data);
     } catch (err) {
       console.error("Error:", err);
     } finally {
       setFormInput({ user_id: "", name: "", order: 0 });
       setWorkoutToggle((prevState) => !prevState);
     }
-  };  
+  };
 
   useEffect(() => {
-    if(createdWorkout.id) {
-      addWorkoutToRoutine(routineID, {workout_id: createdWorkout.id, order: formInput.order})
+    if (createdWorkout.id) {
+      addWorkoutToRoutine(routineID, {
+        workout_id: createdWorkout.id,
+        order: formInput.order,
+      });
       setWorkoutCreated((prevState) => !prevState);
       setCreatedWorkout([]);
     }
   }, [createdWorkout, formInput.order, routineID]);
-  
 
   const handlechange = (e) => {
     setFormInput({
       ...formInput,
       [e.target.name]: e.target.value,
-      // [e.target.name]: e.target.value,
     });
   };
 

@@ -13,8 +13,6 @@ const Profile = () => {
   const [userID, setUserID] = useState(null);
   const [userDetails, setUserDetails] = useState([]);
   const [userToggle, setUserToggle] = useState(false);
-  console.log("user deets", userDetails);
-  console.log("form input: ", formInput);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -110,10 +108,9 @@ const Profile = () => {
         <p>{userDetails.email}</p>
       </div>
 
-<div>
-<LogOut />
-</div>
-
+      <div>
+        <LogOut />
+      </div>
     </div>
   );
 };
