@@ -104,8 +104,8 @@ const Profile = () => {
 
       <div>
         <p>{userDetails.name}</p>
-        <p>{userDetails.height}</p>
-        <p>{userDetails.weight}</p>
+        <p>{userDetails.height} cm</p>
+        <p>{userDetails.weight} lbs</p>
         <p>{userDetails.email}</p>
       </div>
     </div>
