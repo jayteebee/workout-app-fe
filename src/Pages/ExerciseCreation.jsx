@@ -12,24 +12,16 @@ const ExerciseCreation = () => {
   const selectedWorkoutName = location.state?.selectedWorkoutName;
 
   const [searchedExerciseName, setSearchedExerciseName] = useState(null);
-  // console.log("searchedExerciseName - EC", searchedExerciseName);
-
   const [searchedMuscleGroup, setSearchedMuscleGroup] = useState(null);
-  console.log("searchedMuscleGroup - EC", searchedMuscleGroup);
-
   const [exerciseID, setExerciseID] = useState(null);
-  console.log("exerciseID", exerciseID);
-
   const [exerciseParameters, setExerciseParameters] = useState({
     exercise_id: null,
     sets: 0,
     reps: 0,
     weight: 0,
   });
-  console.log("exerciseParameters", exerciseParameters);
 
   const addExercise = () => {
-    console.log("addExerciseToWorkout", selectedWorkout, exerciseParameters);
     addExerciseToWorkout(selectedWorkout, exerciseParameters);
   };
 
