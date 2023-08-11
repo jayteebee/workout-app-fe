@@ -18,9 +18,8 @@ const FetchAllRoutines = ({ routineToggle }) => {
   const [editToggle, setEditToggle] = useState(false);
   const [routineToDelete, setRoutineToDelete] = useState(null);
   const [deleteToggle, setDeleteToggle] = useState(null);
-  const [userID, setUserID] = useState(null)
-  console.log("userID From UseEffect", userID)
-  const [filteredRoutines, setFilteredRoutines] = useState(null)
+  const [userID, setUserID] = useState(null);
+  const [filteredRoutines, setFilteredRoutines] = useState(null);
 
   const navigate = useNavigate();
 
@@ -28,7 +27,7 @@ const FetchAllRoutines = ({ routineToggle }) => {
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
     const userID = decodedToken.sub;
-    setUserID(userID)
+    setUserID(userID);
   }, []);
 
   useEffect(() => {
@@ -52,43 +51,34 @@ const FetchAllRoutines = ({ routineToggle }) => {
       : setRoutineToEdit(null);
   };
 
-console.log("all routines", allRoutines)
+  useEffect(() => {
+    console.log("USER ID IN FUNCTION", userID);
+    const routinesFilteredForID = allRoutines.filter(
+      (r) => r.user_id == userID
+    );
+    console.log("routinesFilteredForID", routinesFilteredForID);
+    setFilteredRoutines(routinesFilteredForID);
+  }, [allRoutines]);
 
-const routineFilter = () => {
-// console.log("USER ID IN FUNCTION", userID)
-// const routinesFilteredForID = allRoutines.filter((r) => r.user_id == userID)
-// console.log("routinesFilteredForID", routinesFilteredForID)
-// setFilteredRoutines(routinesFilteredForID)
-}
-
-useEffect(() => {
-  console.log("USER ID IN FUNCTION", userID)
-  const routinesFilteredForID = allRoutines.filter((r) => r.user_id == userID)
-  console.log("routinesFilteredForID", routinesFilteredForID)
-  setFilteredRoutines(routinesFilteredForID)
-},[allRoutines])
-
-
-console.log("filteredRoutines: ", filteredRoutines)
   return (
     <div>
-    <button onClick={routineFilter}> test </button>
+      {filteredRoutines
+        ? filteredRoutines.map((routine) => (
+            <div key={routine.id}>
+              <MDBBtn onClick={() => displayWorkouts(routine.id)}>
+                {routine.name}
+              </MDBBtn>
 
-      {filteredRoutines ? filteredRoutines.map((routine) => (
-        <div key={routine.id}>
-          <MDBBtn onClick={() => displayWorkouts(routine.id)}>
-            {routine.name}
-          </MDBBtn>
+              <a onClick={() => editRoutineToggle(routine.id)} href="#E">
+                <img src={editIcon} alt="edit" className="editIcon" />
+              </a>
 
-          <a onClick={() => editRoutineToggle(routine.id)} href="#E">
-            <img src={editIcon} alt="edit" className="editIcon" />
-          </a>
-
-          <a onClick={() => setRoutineToDelete(routine.id)} href="#D">
-            <img src={deleteIcon} alt="delete" className="deleteIcon" />
-          </a>
-        </div>
-      )) : null}
+              <a onClick={() => setRoutineToDelete(routine.id)} href="#D">
+                <img src={deleteIcon} alt="delete" className="deleteIcon" />
+              </a>
+            </div>
+          ))
+        : null}
       {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />}
       {routineToEdit && (
         <EditRoutine
