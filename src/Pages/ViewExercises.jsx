@@ -6,7 +6,6 @@ import "../CSS/Exercises.css"
 const ViewExercises = () => {
   const location = useLocation();
   const workoutID = location.state?.workoutId;
-  console.log("VE WID", workoutID);
 
   const [exercises, setExercises] = useState([]);
   useEffect(() => {
@@ -21,7 +20,6 @@ const ViewExercises = () => {
     }
   }, [workoutID]);
 
-  console.log("exercises", exercises);
   return (
     <div>
       <h3 className="pageHeader">Exercises</h3>
