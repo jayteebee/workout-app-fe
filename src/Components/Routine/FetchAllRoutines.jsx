@@ -9,6 +9,7 @@ import EditRoutine from "./EditRoutine";
 import FetchWorkoutsInRoutine from "./FetchWorkoutsInRoutine";
 import deleteIcon from "../../CSS/Icons/deleteIcon.png";
 import editIcon from "../../CSS/Icons/editIcon.png";
+import { parseJwt } from "../../API/Authentication/parseJwt";
 
 const FetchAllRoutines = ({ routineToggle }) => {
   const [allRoutines, setAllRoutines] = useState([]);
@@ -17,8 +18,18 @@ const FetchAllRoutines = ({ routineToggle }) => {
   const [editToggle, setEditToggle] = useState(false);
   const [routineToDelete, setRoutineToDelete] = useState(null);
   const [deleteToggle, setDeleteToggle] = useState(null);
+  const [userID, setUserID] = useState(null)
+  console.log("userID From UseEffect", userID)
+  const [filteredRoutines, setFilteredRoutines] = useState(null)
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    const decodedToken = parseJwt(token);
+    const userID = decodedToken.sub;
+    setUserID(userID)
+  }, []);
 
   useEffect(() => {
     getAllRoutines()
@@ -41,9 +52,29 @@ const FetchAllRoutines = ({ routineToggle }) => {
       : setRoutineToEdit(null);
   };
 
+console.log("all routines", allRoutines)
+
+const routineFilter = () => {
+// console.log("USER ID IN FUNCTION", userID)
+// const routinesFilteredForID = allRoutines.filter((r) => r.user_id == userID)
+// console.log("routinesFilteredForID", routinesFilteredForID)
+// setFilteredRoutines(routinesFilteredForID)
+}
+
+useEffect(() => {
+  console.log("USER ID IN FUNCTION", userID)
+  const routinesFilteredForID = allRoutines.filter((r) => r.user_id == userID)
+  console.log("routinesFilteredForID", routinesFilteredForID)
+  setFilteredRoutines(routinesFilteredForID)
+},[allRoutines])
+
+
+console.log("filteredRoutines: ", filteredRoutines)
   return (
     <div>
-      {allRoutines.map((routine) => (
+    <button onClick={routineFilter}> test </button>
+
+      {filteredRoutines ? filteredRoutines.map((routine) => (
         <div key={routine.id}>
           <MDBBtn onClick={() => displayWorkouts(routine.id)}>
             {routine.name}
@@ -57,7 +88,7 @@ const FetchAllRoutines = ({ routineToggle }) => {
             <img src={deleteIcon} alt="delete" className="deleteIcon" />
           </a>
         </div>
-      ))}
+      )) : null}
       {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />}
       {routineToEdit && (
         <EditRoutine
