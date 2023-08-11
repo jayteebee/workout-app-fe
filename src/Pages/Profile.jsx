@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { getUserById, updateUser } from "../API/User/User";
 import { parseJwt } from "../API/Authentication/parseJwt";
+import LogOut from "../Components/LogOut/LogOut";
 
 const Profile = () => {
   const [formInput, setFormInput] = useState({
@@ -108,6 +109,11 @@ const Profile = () => {
         <p>{userDetails.weight} lbs</p>
         <p>{userDetails.email}</p>
       </div>
+
+<div>
+<LogOut />
+</div>
+
     </div>
   );
 };
