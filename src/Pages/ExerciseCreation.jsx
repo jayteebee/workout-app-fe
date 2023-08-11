@@ -23,6 +23,8 @@ const ExerciseCreation = () => {
 
   const addExercise = () => {
     addExerciseToWorkout(selectedWorkout, exerciseParameters);
+    setSearchedExerciseName(null)
+    setSearchedMuscleGroup(null)
   };
 
   useEffect(() => {
