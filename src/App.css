@@ -29,9 +29,9 @@ p {
 }
 
 
-/* .scrollableDiv {
-  height: 100vh;
+.scrollableDiv {
+  height: 75vh;
   width: 100vw;
   overflow-y: auto;
-} */
+} 
 
