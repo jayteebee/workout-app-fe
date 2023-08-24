@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getWorkoutsInRoutine } from "../../API/Routine/Routine";
 import EditWorkout from "./EditWorkout";
@@ -12,11 +11,13 @@ import {
   MDBDropdownMenu,
   MDBDropdownToggle,
   MDBDropdownItem,
+  MDBInput,
+  MDBBtn,
 } from "mdb-react-ui-kit";
 import { createWorkoutDay } from "../../API/WorkoutDays/WorkoutDays";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 
-const FetchWorkoutByID = ({setRoutineID, workoutCreated }) => {
+const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
   const [workout, setWorkout] = useState([]);
   const [workoutToEdit, setWorkoutToEdit] = useState(null);
   const [editToggle, setEditToggle] = useState(false);
@@ -27,7 +28,10 @@ const FetchWorkoutByID = ({setRoutineID, workoutCreated }) => {
     selectedWorkoutName: "",
   });
   const [viewExercisesInWorkout, setViewExercisesInWorkout] = useState(null);
-const [userID, setUserID] = useState(null)
+  const [userID, setUserID] = useState(null);
+  const [workoutDays, setWorkoutDays] = useState([]);
+  const [idOfRoutine, setIdOfRoutine] = useState(null);
+  const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false);
   const [daysOfWeek, setDaysOfWeek] = useState([
     { Monday: false, value: 0 },
     { Tuesday: false, value: 1 },
@@ -38,10 +42,6 @@ const [userID, setUserID] = useState(null)
     { Sunday: false, value: 6 },
   ]);
 
-  const [workoutDays, setWorkoutDays] = useState([])
-const [idOfRoutine, setIdOfRoutine] = useState(null)
-const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false)
-
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
@@ -49,19 +49,15 @@ const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false)
     setUserID(userID);
   }, []);
 
-
   const location = useLocation();
   const selectedRoutineID = location.state?.selectedRoutineID;
   const navigate = useNavigate();
+
   useEffect(() => {
-    setIdOfRoutine(selectedRoutineID)
-  }, [])
-  console.log(" selected routineID: ", selectedRoutineID)
-  console.log(" routineID state: ", idOfRoutine)
-  
-
-
-
+    setIdOfRoutine(selectedRoutineID);
+  }, []);
+  console.log(" selected routineID: ", selectedRoutineID);
+  console.log(" routineID state: ", idOfRoutine);
 
   useEffect(() => {
     setRoutineID(selectedRoutineID);
@@ -124,37 +120,38 @@ const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false)
   const [createWorkoutDayData, setCreateWorkoutDayData] = useState({
     user_id: userID,
     days_of_week: workoutDays,
-    routine_id: 0
-  })
+    routine_id: 0,
+  });
 
   const apiCall = () => {
     const newWorkoutDays = daysOfWeek
       .filter((day) => day[daysOfWeekArray[day.value]])
       .map((day) => day.value);
-      console.log("newWorkoutDays: ", newWorkoutDays)
+    console.log("newWorkoutDays: ", newWorkoutDays);
     setWorkoutDays(newWorkoutDays);
 
     setCreateWorkoutDayData((prevData) => ({
       ...prevData,
       user_id: userID,
       days_of_week: newWorkoutDays,
-      routine_id: idOfRoutine
+      routine_id: idOfRoutine,
     }));
 
-    setCreateWorkoutDayToggle(prevState => !prevState)
+    setCreateWorkoutDayToggle((prevState) => !prevState);
   };
-  console.log("workoutDays: ", workoutDays)
+  console.log("workoutDays: ", workoutDays);
 
-  console.log("createWorkoutDayData", createWorkoutDayData)
+  console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
     createWorkoutDay(createWorkoutDayData)
-    .then(response => {console.log("Response: ", response)})
-    .catch((err) => {
-    console.log("createWorkoutDay API Call Failed", err);
-  })
-  }, [createWorkoutDayToggle])
-
+      .then((response) => {
+        console.log("Response: ", response);
+      })
+      .catch((err) => {
+        console.log("createWorkoutDay API Call Failed", err);
+      });
+  }, [createWorkoutDayToggle]);
 
   return (
     <div>
@@ -212,9 +209,7 @@ const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false)
         />
       )}
 
-      <MDBBtn
-      onClick={apiCall}
-      >Finalise Days</MDBBtn>
+      <MDBBtn onClick={apiCall}>Finalise Days</MDBBtn>
     </div>
   );
 };
