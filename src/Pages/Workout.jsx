@@ -10,7 +10,6 @@ const Workout = () => {
   const [routineID, setRoutineID] = useState(Number);
   const [workoutCreated, setWorkoutCreated] = useState(false);
 
-
   return (
     <div>
       <h3 className="pageHeader">Workout</h3>
@@ -39,13 +38,7 @@ const Workout = () => {
           setWorkoutCreated={setWorkoutCreated}
         />
       </div>
-
-    
-
-
     </div>
-
-
   );
 };
 

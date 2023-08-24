@@ -7,8 +7,16 @@ import DeleteWorkout from "./DeleteWorkout";
 import ViewExercises from "../../Pages/ViewExercises";
 import deleteIcon from "../../CSS/Icons/deleteIcon.png";
 import editIcon from "../../CSS/Icons/editIcon.png";
+import {
+  MDBDropdown,
+  MDBDropdownMenu,
+  MDBDropdownToggle,
+  MDBDropdownItem,
+} from "mdb-react-ui-kit";
+import { createWorkoutDay } from "../../API/WorkoutDays/WorkoutDays";
+import { parseJwt } from "../../API/Authentication/parseJwt";
 
-const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
+const FetchWorkoutByID = ({setRoutineID, workoutCreated }) => {
   const [workout, setWorkout] = useState([]);
   const [workoutToEdit, setWorkoutToEdit] = useState(null);
   const [editToggle, setEditToggle] = useState(false);
@@ -19,10 +27,41 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
     selectedWorkoutName: "",
   });
   const [viewExercisesInWorkout, setViewExercisesInWorkout] = useState(null);
+const [userID, setUserID] = useState(null)
+  const [daysOfWeek, setDaysOfWeek] = useState([
+    { Monday: false, value: 0 },
+    { Tuesday: false, value: 1 },
+    { Wednesday: false, value: 2 },
+    { Thursday: false, value: 3 },
+    { Friday: false, value: 4 },
+    { Saturday: false, value: 5 },
+    { Sunday: false, value: 6 },
+  ]);
+
+  const [workoutDays, setWorkoutDays] = useState([])
+const [idOfRoutine, setIdOfRoutine] = useState(null)
+const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false)
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    const decodedToken = parseJwt(token);
+    const userID = decodedToken.sub;
+    setUserID(userID);
+  }, []);
+
 
   const location = useLocation();
   const selectedRoutineID = location.state?.selectedRoutineID;
   const navigate = useNavigate();
+  useEffect(() => {
+    setIdOfRoutine(selectedRoutineID)
+  }, [])
+  console.log(" selected routineID: ", selectedRoutineID)
+  console.log(" routineID state: ", idOfRoutine)
+  
+
+
+
 
   useEffect(() => {
     setRoutineID(selectedRoutineID);
@@ -57,6 +96,66 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
       : setWorkoutToEdit(null);
   };
 
+  const workoutDaysSelector = (clickedIndex) => {
+    const updatedDaysOfWeek = daysOfWeek.map((day) => {
+      if (day.value === clickedIndex) {
+        return {
+          ...day,
+          [daysOfWeekArray[clickedIndex]]: !day[daysOfWeekArray[clickedIndex]],
+        };
+      }
+      return day;
+    });
+
+    setDaysOfWeek(updatedDaysOfWeek);
+  };
+  console.log("DAYS OF WEEK", daysOfWeek);
+
+  const daysOfWeekArray = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  const [createWorkoutDayData, setCreateWorkoutDayData] = useState({
+    user_id: userID,
+    days_of_week: workoutDays,
+    routine_id: 0
+  })
+
+  const apiCall = () => {
+    const newWorkoutDays = daysOfWeek
+      .filter((day) => day[daysOfWeekArray[day.value]])
+      .map((day) => day.value);
+      console.log("newWorkoutDays: ", newWorkoutDays)
+    setWorkoutDays(newWorkoutDays);
+
+    setCreateWorkoutDayData((prevData) => ({
+      ...prevData,
+      user_id: userID,
+      days_of_week: newWorkoutDays,
+      routine_id: idOfRoutine
+    }));
+
+    setCreateWorkoutDayToggle(prevState => !prevState)
+  };
+  console.log("workoutDays: ", workoutDays)
+
+  console.log("createWorkoutDayData", createWorkoutDayData)
+
+  useEffect(() => {
+    createWorkoutDay(createWorkoutDayData)
+    .then(response => {console.log("Response: ", response)})
+    .catch((err) => {
+    console.log("createWorkoutDay API Call Failed", err);
+  })
+  }, [createWorkoutDayToggle])
+
+
   return (
     <div>
       <h3>{workout.length > 0 && workout[0].routine.name}</h3>
@@ -66,7 +165,8 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
             <MDBBtn color="info" onClick={() => navToExercisePage(workout.id)}>
               {workout.workout.name}{" "}
             </MDBBtn>
-
+            {/* BUG NEEDING FIXED - when editing and then choosing an exercise, if the user presses the back button they will be navigated to
+              /Workout#E which isn't a page  - likewise for the other href=# links */}
             <a href="#E" onClick={() => editWorkoutToggle(workout.id)}>
               <img src={editIcon} alt="edit" className="editIcon" />
             </a>
@@ -79,6 +179,21 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
             >
               Add Exercises
             </MDBBtn>
+
+            <MDBDropdown>
+              <MDBDropdownToggle>Day</MDBDropdownToggle>
+              <MDBDropdownMenu>
+                {daysOfWeekArray.map((day, index) => (
+                  <MDBDropdownItem
+                    key={index}
+                    onClick={() => workoutDaysSelector(index)}
+                    link
+                  >
+                    {day}
+                  </MDBDropdownItem>
+                ))}
+              </MDBDropdownMenu>
+            </MDBDropdown>
           </div>
         ))}
       {workoutToEdit && (
@@ -96,6 +211,10 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
           setDeleteToggle={setDeleteToggle}
         />
       )}
+
+      <MDBBtn
+      onClick={apiCall}
+      >Finalise Days</MDBBtn>
     </div>
   );
 };
