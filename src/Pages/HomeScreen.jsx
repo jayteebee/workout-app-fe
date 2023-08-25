@@ -14,22 +14,11 @@ const HomeScreen = () => {
         console.log("getAllWorkoutSchedules API Call Failed", err);
       });
   }, []);
+
   console.log("workoutSchedule", workoutSchedule);
+
   const sortedSchedule = workoutSchedule.slice().sort((a, b) => a.id - b.id);
   console.log("sortedSchedule", sortedSchedule);
-
-  // const schedule = workoutSchedule.map((date, index) => {
-  //   const inputDate = new Date (`${date.date}`)
-  //   const formattedDate = format(inputDate, 'EEEE do MMMM yyyy')
-  //   console.log("DC",date.completed)
-  //   return (
-  //     <div>
-  //     <p>{formattedDate}</p>
-  //     <p>{date.completed ? <p>Completed</p> : <p>Not Completed</p>}</p>
-  //     </div>
-  //     )
-  // })
-  // console.log("schedule", schedule)
 
   return (
     <div className="scrollableDiv">
