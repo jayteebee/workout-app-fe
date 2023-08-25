@@ -19,6 +19,7 @@ import { parseJwt } from "../../API/Authentication/parseJwt";
 
 const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
   const [workout, setWorkout] = useState([]);
+  console.log("WORKOUT:", workout);
   const [workoutToEdit, setWorkoutToEdit] = useState(null);
   const [editToggle, setEditToggle] = useState(false);
   const [workoutToDelete, setWorkoutToDelete] = useState(null);
@@ -100,6 +101,7 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
           [daysOfWeekArray[clickedIndex]]: !day[daysOfWeekArray[clickedIndex]],
         };
       }
+      console.log("day:", day);
       return day;
     });
 
@@ -128,19 +130,20 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
       .filter((day) => day[daysOfWeekArray[day.value]])
       .map((day) => day.value);
     console.log("newWorkoutDays: ", newWorkoutDays);
-    setWorkoutDays(newWorkoutDays);
+    if (newWorkoutDays.length <= workout.length) {
+      setWorkoutDays(newWorkoutDays);
 
-    setCreateWorkoutDayData((prevData) => ({
-      ...prevData,
-      user_id: userID,
-      days_of_week: newWorkoutDays,
-      routine_id: idOfRoutine,
-    }));
+      setCreateWorkoutDayData((prevData) => ({
+        ...prevData,
+        user_id: userID,
+        days_of_week: newWorkoutDays,
+        routine_id: idOfRoutine,
+      }));
+    }
 
     setCreateWorkoutDayToggle((prevState) => !prevState);
   };
   console.log("workoutDays: ", workoutDays);
-
   console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
@@ -176,21 +179,6 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
             >
               Add Exercises
             </MDBBtn>
-
-            <MDBDropdown>
-              <MDBDropdownToggle>Day</MDBDropdownToggle>
-              <MDBDropdownMenu>
-                {daysOfWeekArray.map((day, index) => (
-                  <MDBDropdownItem
-                    key={index}
-                    onClick={() => workoutDaysSelector(index)}
-                    link
-                  >
-                    {day}
-                  </MDBDropdownItem>
-                ))}
-              </MDBDropdownMenu>
-            </MDBDropdown>
           </div>
         ))}
       {workoutToEdit && (
@@ -208,6 +196,29 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
           setDeleteToggle={setDeleteToggle}
         />
       )}
+
+      <MDBDropdown>
+        <MDBDropdownToggle>Days</MDBDropdownToggle>
+        <MDBDropdownMenu>
+          {daysOfWeekArray.map((day, index) => (
+            <MDBDropdownItem
+              key={index}
+              onClick={() => workoutDaysSelector(index)}
+              link
+            >
+              {day}
+            </MDBDropdownItem>
+          ))}
+        </MDBDropdownMenu>
+      </MDBDropdown>
+
+      {daysOfWeek.map((day, index) => (
+        day[Object.keys(day)[0]] && (
+          <div key={index}>
+            <p>{Object.keys(day)[0]}</p>
+          </div>
+        )
+      ))}
 
       <MDBBtn onClick={apiCall}>Finalise Days</MDBBtn>
     </div>
