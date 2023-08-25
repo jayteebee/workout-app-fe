@@ -35,3 +35,7 @@ p {
   overflow-y: auto;
 } 
 
+.calendar {
+  width: 50vw;
+  height: auto;
+}
