@@ -4,10 +4,15 @@ import FetchAllRoutines from "../Components/Routine/FetchAllRoutines";
 import FetchRoutineByID from "../Components/Routine/FetchRoutineByID";
 import FetchWorkoutsInRoutine from "../Components/Routine/FetchWorkoutsInRoutine";
 import CreateRoutine from "../Components/Routine/CreateRoutine";
+import { MDBBtn } from "mdb-react-ui-kit";
 
 const Routines = () => {
   const [routineToggle, setRoutineToggle] = useState(false)
+  const [createRoutineToggle , setCreateRoutineToggle] = useState(false)
 
+  const toggleCreateRoutine = () => {
+    setCreateRoutineToggle(prevState => !prevState)
+  }
 
   return (
     <div >
@@ -24,9 +29,13 @@ const Routines = () => {
     <div className="fetchWorkoutsInRoutine">
         <FetchWorkoutsInRoutine />
       </div>
-      <div className="createRoutine">
+      <MDBBtn onClick={toggleCreateRoutine}>Create Routine</MDBBtn>
+
+      {createRoutineToggle && <div className="createRoutine">
         <CreateRoutine routineToggle={routineToggle} setRoutineToggle={setRoutineToggle} />
-      </div>
+      </div>}
+      
+
     </div>
   );
 };
