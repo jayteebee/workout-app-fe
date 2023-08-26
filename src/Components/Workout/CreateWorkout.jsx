@@ -10,6 +10,7 @@ const CreateWorkout = ({
   workoutToggle,
   routineID,
   setWorkoutCreated,
+  setToggleCreateWorkout
 }) => {
   const [formInput, setFormInput] = useState({
     user_id: "",
@@ -35,6 +36,8 @@ const CreateWorkout = ({
     } finally {
       setFormInput({ user_id: "", name: "", order: 0 });
       setWorkoutToggle((prevState) => !prevState);
+  setToggleCreateWorkout(prevState => !prevState)
+
     }
   };
 
