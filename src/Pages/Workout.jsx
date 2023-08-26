@@ -10,11 +10,11 @@ const Workout = () => {
   const [workoutToggle, setWorkoutToggle] = useState(false);
   const [routineID, setRoutineID] = useState(Number);
   const [workoutCreated, setWorkoutCreated] = useState(false);
-  const [toggleCreateWorkout, setToggleCreateWorkout] = useState(false)
+  const [toggleCreateWorkout, setToggleCreateWorkout] = useState(false);
 
-const createWorkoutToggle = () => {
-  setToggleCreateWorkout(prevState => !prevState)
-}
+  const createWorkoutToggle = () => {
+    setToggleCreateWorkout((prevState) => !prevState);
+  };
 
   return (
     <div>
@@ -36,18 +36,21 @@ const createWorkoutToggle = () => {
         <FetchExercisesInWorkout />
       </div>
 
-<MDBBtn onClick={createWorkoutToggle} >{ toggleCreateWorkout ? "Hide Create Workout" : "Create Workout"}</MDBBtn>
+      <MDBBtn onClick={createWorkoutToggle}>
+        {toggleCreateWorkout ? "Hide Create Workout" : "Create Workout"}
+      </MDBBtn>
 
-{toggleCreateWorkout && <div className="createWorkout">
-        <CreateWorkout
-          setWorkoutToggle={setWorkoutToggle}
-          workoutToggle={workoutToggle}
-          routineID={routineID}
-          setWorkoutCreated={setWorkoutCreated}
-          setToggleCreateWorkout={setToggleCreateWorkout}
-        />
-      </div>}
-      
+      {toggleCreateWorkout && (
+        <div className="createWorkout">
+          <CreateWorkout
+            setWorkoutToggle={setWorkoutToggle}
+            workoutToggle={workoutToggle}
+            routineID={routineID}
+            setWorkoutCreated={setWorkoutCreated}
+            setToggleCreateWorkout={setToggleCreateWorkout}
+          />
+        </div>
+      )}
     </div>
   );
 };
