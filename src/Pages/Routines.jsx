@@ -13,7 +13,7 @@ const Routines = () => {
   const toggleCreateRoutine = () => {
     setCreateRoutineToggle(prevState => !prevState)
   }
-
+console.log("createRoutineToggle", createRoutineToggle)
   return (
     <div >
       <h3 className="pageHeader">Routines</h3>
@@ -29,10 +29,12 @@ const Routines = () => {
     <div className="fetchWorkoutsInRoutine">
         <FetchWorkoutsInRoutine />
       </div>
-      <MDBBtn onClick={toggleCreateRoutine}>Create Routine</MDBBtn>
+
+      
+      <MDBBtn onClick={toggleCreateRoutine}>{createRoutineToggle ? "Hide Create Routine" : "Create Routine"}</MDBBtn>
 
       {createRoutineToggle && <div className="createRoutine">
-        <CreateRoutine routineToggle={routineToggle} setRoutineToggle={setRoutineToggle} />
+        <CreateRoutine routineToggle={routineToggle} setRoutineToggle={setRoutineToggle} setCreateRoutineToggle={setCreateRoutineToggle} />
       </div>}
       
 
