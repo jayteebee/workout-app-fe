@@ -66,7 +66,7 @@ const FetchAllRoutines = ({ routineToggle }) => {
         ? filteredRoutines.map((routine) => (
             <div key={routine.id}>
               <MDBBtn onClick={() => displayWorkouts(routine.id)}>
-                {routine.name}
+                View <strong>{routine.name}</strong> Workouts
               </MDBBtn>
 
               <button className="utilityButton" onClick={() => editRoutineToggle(routine.id)} >
