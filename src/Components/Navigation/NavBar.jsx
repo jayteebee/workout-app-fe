@@ -4,8 +4,8 @@ import HamburgerMenu from '../../StyleResources/HamburgerMenu.png'
 import NavBarMenu from './NavBarMenu'
 import "../../CSS/NavBar.css"
 
-const NavBar = () => {
-const [showMenu, setShowMenu] = useState(false)
+const NavBar = ({setShowMenu, showMenu}) => {
+// const [showMenu, setShowMenu] = useState(false)
 
 const toggleMenu = () => {
     setShowMenu((prevState) => !prevState);

@@ -21,18 +21,28 @@ import Profile from "./Pages/Profile";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
-  
+const [showMenu, setShowMenu] = useState(false)
+
   useEffect(() => {
   const token = window.localStorage.getItem("token");
   token ? setLoggedIn(true) : setLoggedIn(false)
 }, [])
   
+const externalNavToggle = () => {
+  if (showMenu) {
+    setShowMenu(false)
+  }
+}
+console.log("showMenu", showMenu)
 
   return (
     <div className="App">
-      <div className="App-inner">
+      <div className="App-inner" onClick={externalNavToggle}>
   
-        { loggedIn ? <NavBar className="navbar" /> : null }
+        { loggedIn ? <NavBar className="navbar"
+        setShowMenu={setShowMenu}
+        showMenu={showMenu}
+        /> : null }
         
         <Routes>
           <Route element={<PrivateRoute />}>
