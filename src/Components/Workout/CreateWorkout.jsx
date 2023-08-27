@@ -36,10 +36,9 @@ const CreateWorkout = ({
     } finally {
       setFormInput({ user_id: "", name: "", order: 0 });
       setWorkoutToggle((prevState) => !prevState);
-  setToggleCreateWorkout(prevState => !prevState)
-
     }
   };
+
 
   useEffect(() => {
     if (createdWorkout.id) {
@@ -52,7 +51,8 @@ const CreateWorkout = ({
     }
   }, [createdWorkout, formInput.order, routineID]);
 
-  const handlechange = (e) => {
+
+  const handleChange = (e) => {
     setFormInput({
       ...formInput,
       [e.target.name]: e.target.value,
@@ -68,7 +68,7 @@ const CreateWorkout = ({
           label="Workout Name"
           value={formInput.name}
           name="name"
-          onChange={handlechange}
+          onChange={handleChange}
           contrast
         />
 
@@ -78,7 +78,7 @@ const CreateWorkout = ({
           label="Workout Order"
           value={formInput.order}
           name="order"
-          onChange={handlechange}
+          onChange={handleChange}
           contrast
         />
         <MDBBtn type="submit" className="mb-4" block>
