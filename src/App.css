@@ -39,3 +39,8 @@ p {
   width: 50vw;
   height: auto;
 }
+
+.utilityButton {
+  background-color: transparent;
+  border: none;
+}

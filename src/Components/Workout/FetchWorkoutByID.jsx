@@ -163,17 +163,17 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
         workout.map((workout) => (
           <div key={workout.id}>
             <MDBBtn color="info" onClick={() => navToExercisePage(workout.id)}>
-              {workout.workout.name}{" "}
+              {workout.workout.name}
             </MDBBtn>
             {/* BUG NEEDING FIXED - when editing and then choosing an exercise, if the user presses the back button they will be navigated to
               /Workout#E which isn't a page  - likewise for the other href=# links */}
-            <a href="#E" onClick={() => editWorkoutToggle(workout.id)}>
+            <button className="utilityButton" onClick={() => editWorkoutToggle(workout.id)}>
               <img src={editIcon} alt="edit" className="editIcon" />
-            </a>
+            </button>
 
-            <a href="#D" onClick={() => setWorkoutToDelete(workout.id)}>
+            <button className="utilityButton" onClick={() => setWorkoutToDelete(workout.id)}>
               <img src={deleteIcon} alt="delete" className="deleteIcon" />
-            </a>
+            </button>
             <MDBBtn
               onClick={() => displayExercises(workout.id, workout.workout.name)}
             >
