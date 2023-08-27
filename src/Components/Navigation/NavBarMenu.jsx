@@ -3,6 +3,7 @@ import "../../CSS/NavBar.css";
 import { Link } from "react-router-dom";
 
 const NavBarMenu = ({ setShowMenu }) => {
+
   const toggleMenu = () => {
     setShowMenu((prevState) => !prevState);
   };
