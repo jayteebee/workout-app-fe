@@ -29,7 +29,7 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
   });
   const [viewExercisesInWorkout, setViewExercisesInWorkout] = useState(null);
   const [userID, setUserID] = useState(null);
-  const [workoutDays, setWorkoutDays] = useState([]); // this state might not be contributing anything
+ // const [workoutDays, setWorkoutDays] = useState([]);  this state might not be contributing anything
   const [idOfRoutine, setIdOfRoutine] = useState(null);
   const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false);
   const [daysOfWeek, setDaysOfWeek] = useState([
@@ -121,7 +121,7 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
 
   const [createWorkoutDayData, setCreateWorkoutDayData] = useState({
     user_id: userID,
-    days_of_week: workoutDays,
+    days_of_week: [],
     routine_id: 0,
   });
 
@@ -132,7 +132,7 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
       .map((day) => day.value);
     console.log("newWorkoutDays: ", newWorkoutDays);
     if (newWorkoutDays.length <= workout.length) {
-      setWorkoutDays(newWorkoutDays);
+      // setWorkoutDays(newWorkoutDays);
 
       setCreateWorkoutDayData((prevData) => ({
         ...prevData,
@@ -144,7 +144,7 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
 
     setCreateWorkoutDayToggle((prevState) => !prevState);
   };
-  console.log("workoutDays: ", workoutDays);
+  // console.log("workoutDays: ", workoutDays);
   console.log("createWorkoutDayData", createWorkoutDayData);
 
 
