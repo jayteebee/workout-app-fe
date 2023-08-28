@@ -56,8 +56,8 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
   useEffect(() => {
     setIdOfRoutine(selectedRoutineID);
   }, []);
-  console.log(" selected routineID: ", selectedRoutineID);
-  console.log(" routineID state: ", idOfRoutine);
+  // console.log(" selected routineID: ", selectedRoutineID);
+  // console.log(" routineID state: ", idOfRoutine);
 
   useEffect(() => {
     setRoutineID(selectedRoutineID);
