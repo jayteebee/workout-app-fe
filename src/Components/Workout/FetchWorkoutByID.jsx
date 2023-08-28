@@ -165,8 +165,7 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
             <MDBBtn color="info" onClick={() => navToExercisePage(workout.id)}>
               View <strong>{workout.workout.name}</strong>'s Exercises
             </MDBBtn>
-            {/* BUG NEEDING FIXED - when editing and then choosing an exercise, if the user presses the back button they will be navigated to
-              /Workout#E which isn't a page  - likewise for the other href=# links */}
+            
             <button className="utilityButton" onClick={() => editWorkoutToggle(workout.id)}>
               <img src={editIcon} alt="edit" className="editIcon" />
             </button>
