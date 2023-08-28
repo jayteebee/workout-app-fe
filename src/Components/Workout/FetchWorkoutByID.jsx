@@ -128,8 +128,8 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
   const createDataForApiCall = () => {
     debugger;
     const newWorkoutDays = daysOfWeek
-      .filter((day) => day[daysOfWeekArray[day.value]])
-      .map((day) => day.value);
+      .filter((day) => day[daysOfWeekArray[day.value]]) // check if the boolean is true
+      .map((day) => day.value); // create array with true values
     console.log("newWorkoutDays: ", newWorkoutDays);
     if (newWorkoutDays.length <= workout.length) {
       // setWorkoutDays(newWorkoutDays);
