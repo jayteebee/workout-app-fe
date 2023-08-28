@@ -11,7 +11,7 @@ const Workout = () => {
   const [routineID, setRoutineID] = useState(Number);
   const [workoutCreated, setWorkoutCreated] = useState(false);
   const [toggleCreateWorkout, setToggleCreateWorkout] = useState(false);
-console.log("WORKOUT TOGGLE", workoutToggle)
+
   const createWorkoutToggle = () => {
     setToggleCreateWorkout((prevState) => !prevState);
   };
