@@ -10,14 +10,18 @@ const CreateWorkout = ({
   workoutToggle,
   routineID,
   setWorkoutCreated,
-  setToggleCreateWorkout
 }) => {
+
   const [formInput, setFormInput] = useState({
     user_id: "",
     name: "",
-    order: 0,
   });
+  console.log("** formInput: ", formInput)
+
   const [createdWorkout, setCreatedWorkout] = useState([]);
+  console.log("** createdWorkout: ", createdWorkout)
+
+  const [order, setOrder] = useState(0)
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -34,7 +38,7 @@ const CreateWorkout = ({
     } catch (err) {
       console.error("Error:", err);
     } finally {
-      setFormInput({ user_id: "", name: "", order: 0 });
+      setFormInput({ user_id: "", name: ""}); 
       setWorkoutToggle((prevState) => !prevState);
     }
   };
@@ -44,12 +48,12 @@ const CreateWorkout = ({
     if (createdWorkout.id) {
       addWorkoutToRoutine(routineID, {
         workout_id: createdWorkout.id,
-        order: formInput.order,
+        order: order,
       });
       setWorkoutCreated((prevState) => !prevState);
       setCreatedWorkout([]);
     }
-  }, [createdWorkout, formInput.order, routineID]);
+  }, [createdWorkout, order, routineID]);
 
 
   const handleChange = (e) => {
@@ -76,11 +80,20 @@ const CreateWorkout = ({
           className="mb-4"
           type="text"
           label="Workout Order"
-          value={formInput.order}
+          value={order}
           name="order"
-          onChange={handleChange}
+          onChange={(e) => setOrder(e.target.value)}
           contrast
         />
+
+      {/* 1) Create a new input field here that will accept
+              the day of the week that workout will be done on.
+          2) Add another line to the form input state object
+              to accept dayOfWeek.
+          3) Create a function to transform Mon-Sun to 0-6.
+
+    */}
+
         <MDBBtn type="submit" className="mb-4" block>
           Create Workout
         </MDBBtn>
