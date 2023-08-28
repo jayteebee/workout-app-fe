@@ -29,7 +29,7 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
   });
   const [viewExercisesInWorkout, setViewExercisesInWorkout] = useState(null);
   const [userID, setUserID] = useState(null);
-  const [workoutDays, setWorkoutDays] = useState([]);
+  const [workoutDays, setWorkoutDays] = useState([]); // this state might not be contributing anything
   const [idOfRoutine, setIdOfRoutine] = useState(null);
   const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false);
   const [daysOfWeek, setDaysOfWeek] = useState([
@@ -125,7 +125,8 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
     routine_id: 0,
   });
 
-  const apiCall = () => {
+  const createDataForApiCall = () => {
+    debugger;
     const newWorkoutDays = daysOfWeek
       .filter((day) => day[daysOfWeekArray[day.value]])
       .map((day) => day.value);
@@ -220,7 +221,7 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
         )
       ))}
 
-      <MDBBtn onClick={apiCall}>Finalise Days</MDBBtn>
+      <MDBBtn onClick={createDataForApiCall}>Finalise Days</MDBBtn>
     </div>
   );
 };
