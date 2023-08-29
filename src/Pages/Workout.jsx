@@ -1,5 +1,7 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
+import { parseJwt } from "../API/Authentication/parseJwt";
+import { createWorkoutDay } from "../API/WorkoutDays/WorkoutDays";
 import FetchAllExercises from "../Components/Exercises/FetchAllExercises";
 import CreateWorkout from "../Components/Workout/CreateWorkout";
 import FetchAllWorkouts from "../Components/Workout/FetchAllWorkouts";
@@ -21,6 +23,30 @@ const Workout = () => {
     { sunday: false, value: 6 },
   ]);
 
+  const [createWorkoutDayData, setCreateWorkoutDayData] = useState({
+    user_id: "",
+    days_of_week: [],
+    routine_id: 0,
+  });
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    const decodedToken = parseJwt(token);
+    const userID = decodedToken.sub;
+    setCreateWorkoutDayData((prevState) => ({ ...prevState, user_id: userID, routine_id: routineID }));
+  }, [workoutToggle]);
+
+  const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false);
+
+  const daysOfWeekArray = [
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+  ];
 
   const createWorkoutToggle = () => {
     setToggleCreateWorkout((prevState) => !prevState);
@@ -29,6 +55,32 @@ const Workout = () => {
 // useEffect(() => {
 //   setToggleCreateWorkout((prevState) => !prevState);
 // }, [workoutToggle])
+
+const createDataForApiCall = () => {
+  console.log("createDataForApiCall CALLED");
+  const newWorkoutDays = dayOfWeek
+    .filter((day) => day[daysOfWeekArray[day.value]]) // check if the boolean is true
+    .map((day) => day.value); // create array with true values
+  console.log("newWorkoutDays: ", newWorkoutDays);
+
+  setCreateWorkoutDayData((prevData) => ({
+    ...prevData,
+    days_of_week: newWorkoutDays,
+  }));
+  setCreateWorkoutDayToggle((prevState) => !prevState);
+};
+
+console.log("createWorkoutDayData", createWorkoutDayData);
+
+useEffect(() => {
+  createWorkoutDay(createWorkoutDayData)
+    .then((response) => {
+      console.log("Response: ", response);
+    })
+    .catch((err) => {
+      console.log("createWorkoutDay API Call Failed", err);
+    });
+}, [createWorkoutDayToggle]);
 
   return (
     <div>
@@ -67,6 +119,8 @@ const Workout = () => {
           />
         </div>
       )}
+
+      <MDBBtn onClick={createDataForApiCall}>Finalise Days</MDBBtn>
     </div>
   );
 };
