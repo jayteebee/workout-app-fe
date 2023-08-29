@@ -11,14 +11,13 @@ const CreateWorkout = ({
   routineID,
   setWorkoutCreated,
   dayOfWeek,
-  setDayOfWeek
+  setDayOfWeek,
 }) => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
     const userID = decodedToken.sub;
     setFormInput((prevState) => ({ ...prevState, user_id: userID }));
-    setCreateWorkoutDayData((prevState) => ({ ...prevState, user_id: userID }));
   }, [workoutToggle]);
 
   const [formInput, setFormInput] = useState({
@@ -30,19 +29,6 @@ const CreateWorkout = ({
   const [workoutDay, setWorkoutDay] = useState("");
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
   console.log("** workoutDayINDEX", workoutDayIndex);
-  const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false);
-
-  const [createWorkoutDayData, setCreateWorkoutDayData] = useState({
-    user_id: "",
-    days_of_week: [],
-    routine_id: 0,
-  });
-
-  console.log("*** createWorkoutDayData", createWorkoutDayData);
-
-  const [createDataForApiCallToggle, setCreateDataForApiCallToggle] =
-    useState(false);
-  // console.log("createDataForApiCallToggle", createDataForApiCallToggle)
 
   const daysOfWeekArray = [
     "monday",
@@ -59,12 +45,6 @@ const CreateWorkout = ({
       toggleDaysOfWeekBoolean(workoutDayIndex);
     }
   }, [workoutDayIndex]);
-
-  // useEffect(() => {
-  //   if (createDataForApiCallToggle !== null) {
-  //     createDataForApiCall();
-  //   }
-  // }, [createDataForApiCallToggle]);
 
   const toggleDaysOfWeekBoolean = (workoutIndex) => {
     console.log("clickedIndex INSIDE:", workoutIndex);
@@ -130,36 +110,6 @@ const CreateWorkout = ({
       [e.target.name]: e.target.value,
     });
   };
-
-  // const createDataForApiCall = () => {
-  //   console.log("createDataForApiCall CALLED");
-  //   const newWorkoutDays = dayOfWeek
-  //     .filter((day) => day[daysOfWeekArray[day.value]]) // check if the boolean is true
-  //     .map((day) => day.value); // create array with true values
-  //   console.log("newWorkoutDays: ", newWorkoutDays);
-
-  //   setCreateWorkoutDayData((prevData) => ({
-  //     ...prevData,
-  //     user_id: userID,
-  //     days_of_week: newWorkoutDays,
-  //     routine_id: idOfRoutine,
-  //   }));
-
-  //   setCreateWorkoutDayToggle((prevState) => !prevState);
-  // };
-
-  // console.log("workoutDays: ", workoutDays);
-  // console.log("createWorkoutDayData", createWorkoutDayData);
-
-  // useEffect(() => {
-  //   createWorkoutDay(createWorkoutDayData)
-  //     .then((response) => {
-  //       console.log("Response: ", response);
-  //     })
-  //     .catch((err) => {
-  //       console.log("createWorkoutDay API Call Failed", err);
-  //     });
-  // }, [createWorkoutDayToggle]);
 
   return (
     <div>
