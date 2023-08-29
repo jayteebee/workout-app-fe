@@ -10,6 +10,10 @@
 .createWorkout {
     display: flex;
     justify-content: center;
+    background-color:#001F3F;
+    border-radius: 25px;
+    height: 100vh;
+    color: #66fcf1;
 }
 
 .deleteIcon {
