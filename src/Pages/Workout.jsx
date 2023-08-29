@@ -16,9 +16,9 @@ const Workout = () => {
     setToggleCreateWorkout((prevState) => !prevState);
   };
 
-useEffect(() => {
-  setToggleCreateWorkout((prevState) => !prevState);
-}, [workoutToggle])
+// useEffect(() => {
+//   setToggleCreateWorkout((prevState) => !prevState);
+// }, [workoutToggle])
 
   return (
     <div>
