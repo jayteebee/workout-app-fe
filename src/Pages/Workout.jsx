@@ -11,6 +11,16 @@ const Workout = () => {
   const [routineID, setRoutineID] = useState(Number);
   const [workoutCreated, setWorkoutCreated] = useState(false);
   const [toggleCreateWorkout, setToggleCreateWorkout] = useState(false);
+  const [dayOfWeek, setDayOfWeek] = useState([
+    { monday: false, value: 0 },
+    { tuesday: false, value: 1 },
+    { wednesday: false, value: 2 },
+    { thursday: false, value: 3 },
+    { friday: false, value: 4 },
+    { saturday: false, value: 5 },
+    { sunday: false, value: 6 },
+  ]);
+
 
   const createWorkoutToggle = () => {
     setToggleCreateWorkout((prevState) => !prevState);
@@ -52,6 +62,8 @@ const Workout = () => {
             routineID={routineID}
             setWorkoutCreated={setWorkoutCreated}
             setToggleCreateWorkout={setToggleCreateWorkout}
+            setDayOfWeek={setDayOfWeek}
+            dayOfWeek={dayOfWeek}
           />
         </div>
       )}

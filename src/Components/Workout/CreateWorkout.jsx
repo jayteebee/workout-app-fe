@@ -10,6 +10,8 @@ const CreateWorkout = ({
   workoutToggle,
   routineID,
   setWorkoutCreated,
+  dayOfWeek,
+  setDayOfWeek
 }) => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -29,16 +31,6 @@ const CreateWorkout = ({
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
   console.log("** workoutDayINDEX", workoutDayIndex);
   const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false);
-
-  const [dayOfWeek, setDayOfWeek] = useState([
-    { monday: false, value: 0 },
-    { tuesday: false, value: 1 },
-    { wednesday: false, value: 2 },
-    { thursday: false, value: 3 },
-    { friday: false, value: 4 },
-    { saturday: false, value: 5 },
-    { sunday: false, value: 6 },
-  ]);
 
   const [createWorkoutDayData, setCreateWorkoutDayData] = useState({
     user_id: "",
@@ -148,9 +140,9 @@ const CreateWorkout = ({
 
   //   setCreateWorkoutDayData((prevData) => ({
   //     ...prevData,
-  //     // user_id: userID,
+  //     user_id: userID,
   //     days_of_week: newWorkoutDays,
-  //     // routine_id: idOfRoutine,
+  //     routine_id: idOfRoutine,
   //   }));
 
   //   setCreateWorkoutDayToggle((prevState) => !prevState);
