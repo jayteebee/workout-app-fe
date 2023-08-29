@@ -33,7 +33,7 @@ const externalNavToggle = () => {
     setShowMenu(false)
   }
 }
-console.log("showMenu", showMenu)
+// console.log("showMenu", showMenu)
 
   return (
     <div className="App">
