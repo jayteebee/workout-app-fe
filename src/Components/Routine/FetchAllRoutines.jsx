@@ -52,11 +52,11 @@ const FetchAllRoutines = ({ routineToggle }) => {
   };
 
   useEffect(() => {
-    console.log("USER ID IN FUNCTION", userID);
+    // console.log("USER ID IN FUNCTION", userID);
     const routinesFilteredForID = allRoutines.filter(
       (r) => r.user_id == userID
     );
-    console.log("routinesFilteredForID", routinesFilteredForID);
+    // console.log("routinesFilteredForID", routinesFilteredForID);
     setFilteredRoutines(routinesFilteredForID);
   }, [allRoutines]);
 

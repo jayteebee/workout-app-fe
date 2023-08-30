@@ -13,7 +13,7 @@ const Routines = () => {
   const toggleCreateRoutine = () => {
     setCreateRoutineToggle(prevState => !prevState)
   }
-console.log("createRoutineToggle", createRoutineToggle)
+// console.log("createRoutineToggle", createRoutineToggle)
   return (
     <div >
       <h3 className="pageHeader">Routines</h3>
