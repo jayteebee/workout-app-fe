@@ -5,6 +5,8 @@ import { addExerciseToWorkout } from "../API/Workout/Workout";
 import Search from "../Components/Exercises/Search";
 import SetsRepsWeight from "../Components/Exercises/SetsRepsWeight";
 import "../CSS/ExerciseCreation.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ExerciseCreation = () => {
   const location = useLocation();
@@ -21,10 +23,20 @@ const ExerciseCreation = () => {
     weight: 0,
   });
 
-  const addExercise = () => {
-    addExerciseToWorkout(selectedWorkout, exerciseParameters);
-    setSearchedExerciseName(null)
-    setSearchedMuscleGroup(null)
+  const addExercise = async () => {
+    await addExerciseToWorkout(selectedWorkout, exerciseParameters);
+    setSearchedExerciseName(null);
+    setSearchedMuscleGroup(null);
+    toast.success("Exercise added to workout", {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   useEffect(() => {
@@ -55,6 +67,8 @@ const ExerciseCreation = () => {
       />
 
       <MDBBtn onClick={addExercise}>Add Exercise To Workout</MDBBtn>
+
+      <ToastContainer />
     </div>
   );
 };
