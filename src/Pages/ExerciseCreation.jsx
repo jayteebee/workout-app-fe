@@ -27,7 +27,7 @@ const ExerciseCreation = () => {
     await addExerciseToWorkout(selectedWorkout, exerciseParameters);
     setSearchedExerciseName(null);
     setSearchedMuscleGroup(null);
-    toast.success("Exercise added to workout", {
+    toast.success("Exercise added to workout! Head to the View Exercises page to view.", {
       position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
