@@ -24,13 +24,13 @@ const CreateWorkout = ({
     user_id: "",
     name: "",
   });
-console.log(formInput);
+// console.log(formInput);
 
   const [createdWorkout, setCreatedWorkout] = useState([]);
   const [order, setOrder] = useState(0);
   const [workoutDay, setWorkoutDay] = useState("");
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
-  console.log("** workoutDayINDEX", workoutDayIndex);
+  // console.log("** workoutDayINDEX", workoutDayIndex);
 
   const daysOfWeekArray = [
     "monday",
@@ -58,7 +58,7 @@ console.log(formInput);
           [daysOfWeekArray[workoutIndex]]: !day[daysOfWeekArray[workoutIndex]], // toggles the boolean
         };
       }
-      console.log("day:", day);
+      // console.log("day:", day);
       return day;
     });
 

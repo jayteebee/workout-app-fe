@@ -4,7 +4,7 @@ import { deleteWorkoutByID } from '../../API/Workout/Workout'
 const DeleteWorkout = ({workoutToDelete, setWorkoutToDelete, setDeleteToggle }) => {
 
     useEffect(() => {
-        console.log(workoutToDelete)
+        // console.log(workoutToDelete)
         deleteWorkoutByID(workoutToDelete)
         .then(() => {
             setWorkoutToDelete(null)
