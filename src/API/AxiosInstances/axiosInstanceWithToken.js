@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { logOut } from '../Authentication/Authentication';
 
 
 const axiosInstanceWithToken = axios.create({
@@ -15,6 +16,18 @@ axiosInstanceWithToken.interceptors.request.use(function(config) {
     config.headers.Authorization =  token ? `${token}` : '';
     return config;
 });
+
+axiosInstanceWithToken.interceptors.response.use(
+    response => response,
+    async error => {
+      if (error.response && error.response.status === 401) {
+        // Token expired or invalid
+        await logOut(); // Perform logout action
+        window.location.href = '/GettingStarted'; // Redirect to login page
+      }
+      return Promise.reject(error);
+    }
+  );
 
 export default axiosInstanceWithToken;
 
