@@ -9,6 +9,7 @@ const DeleteRoutine = ({routineToDelete, setRoutineToDelete, setDeleteToggle}) =
         })
         .catch((err) => console.error(err))
         setDeleteToggle((prevState) => !prevState)
+        localStorage.removeItem('hiddenState')
     }, [routineToDelete, setRoutineToDelete])
 
 
