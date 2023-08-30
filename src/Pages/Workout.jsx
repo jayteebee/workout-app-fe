@@ -59,9 +59,9 @@ const Workout = () => {
     setToggleCreateWorkout((prevState) => !prevState);
   };
 
-  // useEffect(() => {
-  //   setToggleCreateWorkout((prevState) => !prevState);
-  // }, [workoutToggle])
+  useEffect(() => {
+    setToggleCreateWorkout((prevState) => !prevState);
+  }, [workoutToggle])
 
   const createDataForApiCall = () => {
     console.log("createDataForApiCall CALLED");
@@ -133,8 +133,8 @@ const Workout = () => {
         {toggleCreateWorkout ? "Hide Create Workout" : "Create Workout"}
       </MDBBtn>
 
-      {toggleCreateWorkout && (
-        <div className="createWorkout">
+      
+        <div className={toggleCreateWorkout ? "createWorkout" : "hidden"}>
           <CreateWorkout
             setWorkoutToggle={setWorkoutToggle}
             workoutToggle={workoutToggle}
@@ -145,7 +145,7 @@ const Workout = () => {
             dayOfWeek={dayOfWeek}
           />
         </div>
-      )}
+      
 
       <div className={isButtonHidden ? "hidden" : null}>
         <MDBBtn onClick={createDataForApiCall}> Finalise Days </MDBBtn>
