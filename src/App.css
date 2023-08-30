@@ -49,3 +49,16 @@ p {
 .hidden {
   display: none;
 }
+
+.password {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.passWordAuthMessage {
+  margin: 0;
+  padding: 0;
+  color: red;
+  font-size: 1em;
+  padding-bottom: 1em;
+}

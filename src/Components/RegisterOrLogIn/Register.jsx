@@ -40,7 +40,8 @@ const handleSubmit = async (e) => {
       <MDBRow className='mb-4'>
       </MDBRow>
       <MDBInput className='mb-4' type='email' label='Email address' value={formInput.email} name="email" onChange={handlechange} />
-      <MDBInput className='mb-4' type='password'  label='Password' value={formInput.password} name="password" onChange={handlechange} />
+      <MDBInput className='password' type='password'  label='Password' value={formInput.password} name="password" onChange={handlechange} />
+      <p className='passWordAuthMessage'>Password must be longer than 6 characters.</p>
 
 
       <MDBBtn type='submit' className='mb-4' block >
