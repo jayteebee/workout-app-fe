@@ -23,6 +23,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 const [showMenu, setShowMenu] = useState(false)
 
+
+
   useEffect(() => {
   const token = window.localStorage.getItem("token");
   token ? setLoggedIn(true) : setLoggedIn(false)
@@ -46,11 +48,11 @@ const externalNavToggle = () => {
         
         <Routes>
           <Route element={<PrivateRoute />}>
-            <Route path="/" element={<HomeScreen />} />
+            <Route path="/" element={<HomeScreen  />} />
 
             <Route path="/Routines" element={<Routines />} />
 
-            <Route path="/Workout" element={<Workout />} />
+            <Route path="/Workout" element={<Workout  />} />
 
             <Route path="/CreateExercise" element={<ExerciseCreation />} />
 
