@@ -9,8 +9,9 @@ import editIcon from "../../CSS/Icons/editIcon.png";
 import { MDBBtn } from "mdb-react-ui-kit";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 
-const FetchWorkoutByID = ({ setRoutineID, workoutCreated }) => {
-  const [workout, setWorkout] = useState([]);
+const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout }) => {
+  // const [workout, setWorkout] = useState([]);
+  // console.log("workout:", workout);
   const [workoutToEdit, setWorkoutToEdit] = useState(null);
   const [editToggle, setEditToggle] = useState(false);
   const [workoutToDelete, setWorkoutToDelete] = useState(null);

@@ -44,3 +44,8 @@ p {
   background-color: transparent;
   border: none;
 }
+
+
+.hidden {
+  display: none;
+}
