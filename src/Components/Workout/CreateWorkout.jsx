@@ -24,6 +24,8 @@ const CreateWorkout = ({
     user_id: "",
     name: "",
   });
+console.log(formInput);
+
   const [createdWorkout, setCreatedWorkout] = useState([]);
   const [order, setOrder] = useState(0);
   const [workoutDay, setWorkoutDay] = useState("");
@@ -88,7 +90,7 @@ const CreateWorkout = ({
     } catch (err) {
       console.error("Error:", err);
     } finally {
-      setFormInput({ user_id: "", name: "" });
+      setFormInput({ user_id: "", name: ""});
       setWorkoutToggle((prevState) => !prevState);
     }
   };
