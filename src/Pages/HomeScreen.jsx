@@ -19,14 +19,14 @@ const HomeScreen = () => {
       });
   }, []);
 
-  console.log("workoutSchedule", workoutSchedule);
+  // console.log("workoutSchedule", workoutSchedule);
 
   useEffect(() => {
     const sortSchedule = workoutSchedule.slice().sort((a, b) => a.id - b.id);
     setSortedSchedule(sortSchedule)
   }, [workoutSchedule]);
 
-  console.log("sortedSchedule", sortedSchedule);
+  // console.log("sortedSchedule", sortedSchedule);
 
   useEffect(() => {
     const events = sortedSchedule.map((data) => {
@@ -41,7 +41,7 @@ const HomeScreen = () => {
     setCalendarEvents(events);
   }, [sortedSchedule]);
 
-  console.log("CALENDAR EVENTS: ", calendarEvents);
+  // console.log("CALENDAR EVENTS: ", calendarEvents);
 
   return (
     <div className="calendar">
