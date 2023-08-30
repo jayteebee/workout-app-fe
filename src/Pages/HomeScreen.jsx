@@ -38,7 +38,6 @@ const HomeScreen = () => {
         id: data.id,
       };
     });
-
     setCalendarEvents(events);
   }, [sortedSchedule]);
 
@@ -60,17 +59,3 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
-
-
-
-// {sortedSchedule.map((date, index) => {
-//   const inputDate = new Date(`${date.date}`);
-//   const formattedDate = format(inputDate, "EEEE dd MMMM yyyy");
-//   return (
-//     <div key={index}>
-//       <h3>{formattedDate}</h3>
-//       <h3>{date.workout_name}</h3>
-//       {date.completed ? <p>Completed</p> : <p>Not Completed</p>}
-//     </div>
-//   );
-// })}
