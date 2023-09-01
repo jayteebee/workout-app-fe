@@ -43,14 +43,14 @@ const HomeScreen = () => {
 
   // console.log("CALENDAR EVENTS: ", calendarEvents);
 
+  // className="calendar"
   return (
-    <div className="calendar">
+    <div className="calendar"> 
 
 
       <FullCalendar
       plugins={[ dayGridPlugin ]}
       initialView="dayGridMonth"
-      weekends={false}
       events={calendarEvents}
     />
 
