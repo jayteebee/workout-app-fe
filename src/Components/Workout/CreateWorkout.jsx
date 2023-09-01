@@ -32,15 +32,26 @@ const CreateWorkout = ({
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
   // console.log("** workoutDayINDEX", workoutDayIndex);
 
+  // const daysOfWeekArray = [
+  //   "monday",
+  //   "tuesday",
+  //   "wednesday",
+  //   "thursday",
+  //   "friday",
+  //   "saturday",
+  //   "sunday",
+  // ];
+
   const daysOfWeekArray = [
+    "sunday",
     "monday",
     "tuesday",
     "wednesday",
     "thursday",
     "friday",
     "saturday",
-    "sunday",
   ];
+  
 
   useEffect(() => {
     if (workoutDayIndex !== false) {
@@ -73,15 +84,26 @@ const CreateWorkout = ({
       let data = await createWorkout(formInput);
       setCreatedWorkout(data);
 
+      // const dayNameToIndex = {
+      //   monday: 0,
+      //   tuesday: 1,
+      //   wednesday: 2,
+      //   thursday: 3,
+      //   friday: 4,
+      //   saturday: 5,
+      //   sunday: 6,
+      // };
+
       const dayNameToIndex = {
-        monday: 0,
-        tuesday: 1,
-        wednesday: 2,
-        thursday: 3,
-        friday: 4,
-        saturday: 5,
-        sunday: 6,
+        sunday: 0,
+        monday: 1,
+        tuesday: 2,
+        wednesday: 3,
+        thursday: 4,
+        friday: 5,
+        saturday: 6,
       };
+      
 
       const lowercaseDay = workoutDay.toLowerCase();
       if (dayNameToIndex.hasOwnProperty(lowercaseDay)) {
@@ -91,10 +113,12 @@ const CreateWorkout = ({
       console.error("Error:", err);
     } finally {
       setFormInput({ user_id: "", name: ""});
+      // setOrder(0);
+      // setWorkoutDay("");
       setWorkoutToggle((prevState) => !prevState);
     }
   };
-
+console.log("order", order);
   useEffect(() => {
     if (createdWorkout.id) {
       addWorkoutToRoutine(routineID, {
