@@ -85,11 +85,11 @@ const Workout = () => {
   }, [workoutToggle])
 
   const createDataForApiCall = () => {
-    console.log("createDataForApiCall CALLED");
+    // console.log("createDataForApiCall CALLED");
     const newWorkoutDays = dayOfWeek
       .filter((day) => day[daysOfWeekArray[day.value]]) // check if the boolean is true
       .map((day) => day.value); // create array with true values
-    console.log("newWorkoutDays: ", newWorkoutDays);
+    // console.log("newWorkoutDays: ", newWorkoutDays);
 
     setCreateWorkoutDayData((prevData) => ({
       ...prevData,

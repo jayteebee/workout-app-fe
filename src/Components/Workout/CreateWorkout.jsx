@@ -60,7 +60,7 @@ const CreateWorkout = ({
   }, [workoutDayIndex]);
 
   const toggleDaysOfWeekBoolean = (workoutIndex) => {
-    console.log("clickedIndex INSIDE:", workoutIndex);
+    // console.log("clickedIndex INSIDE:", workoutIndex);
 
     const updatedDaysOfWeek = dayOfWeek.map((day) => {
       if (day.value === workoutIndex) {
@@ -69,14 +69,13 @@ const CreateWorkout = ({
           [daysOfWeekArray[workoutIndex]]: !day[daysOfWeekArray[workoutIndex]], // toggles the boolean
         };
       }
-      // console.log("day:", day);
       return day;
     });
 
     setDayOfWeek(updatedDaysOfWeek);
   };
 
-  console.log("dayOfWeek ***", dayOfWeek);
+  // console.log("dayOfWeek ***", dayOfWeek);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,7 +117,9 @@ const CreateWorkout = ({
       setWorkoutToggle((prevState) => !prevState);
     }
   };
+
 console.log("order", order);
+
   useEffect(() => {
     if (createdWorkout.id) {
       addWorkoutToRoutine(routineID, {
