@@ -16,14 +16,23 @@ const Workout = () => {
   const [routineID, setRoutineID] = useState(Number);
   const [workoutCreated, setWorkoutCreated] = useState(false);
   const [toggleCreateWorkout, setToggleCreateWorkout] = useState(false);
+  // const [dayOfWeek, setDayOfWeek] = useState([
+  //   { monday: false, value: 0 },
+  //   { tuesday: false, value: 1 },
+  //   { wednesday: false, value: 2 },
+  //   { thursday: false, value: 3 },
+  //   { friday: false, value: 4 },
+  //   { saturday: false, value: 5 },
+  //   { sunday: false, value: 6 },
+  // ]);
   const [dayOfWeek, setDayOfWeek] = useState([
-    { monday: false, value: 0 },
-    { tuesday: false, value: 1 },
-    { wednesday: false, value: 2 },
-    { thursday: false, value: 3 },
-    { friday: false, value: 4 },
-    { saturday: false, value: 5 },
-    { sunday: false, value: 6 },
+    { sunday: false, value: 0 },
+    { monday: false, value: 1 },
+    { tuesday: false, value: 2 },
+    { wednesday: false, value: 3 },
+    { thursday: false, value: 4 },
+    { friday: false, value: 5 },
+    { saturday: false, value: 6 },
   ]);
 
   const [createWorkoutDayData, setCreateWorkoutDayData] = useState({
@@ -45,20 +54,32 @@ const Workout = () => {
 
   const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false);
 
+  // const daysOfWeekArray = [
+  //   "monday",
+  //   "tuesday",
+  //   "wednesday",
+  //   "thursday",
+  //   "friday",
+  //   "saturday",
+  //   "sunday",
+  // ];
+
   const daysOfWeekArray = [
+    "sunday",
     "monday",
     "tuesday",
     "wednesday",
     "thursday",
     "friday",
     "saturday",
-    "sunday",
   ];
-
+  
+// used for conditionally rendering the createWorkout Button
   const createWorkoutToggle = () => {
     setToggleCreateWorkout((prevState) => !prevState);
   };
 
+  // used for conditionally rendering the createWorkout form after it has been filled out and submitted
   useEffect(() => {
     setToggleCreateWorkout((prevState) => !prevState);
   }, [workoutToggle])
