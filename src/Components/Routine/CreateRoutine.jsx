@@ -3,7 +3,7 @@ import { parseJwt } from "../../API/Authentication/parseJwt";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { createRoutine } from "../../API/Routine/Routine";
 
-const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle }) => {
+const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle, custom, weekly }) => {
   const [formInput, setFormInput] = useState({
     name: "",
     frequency: "",
@@ -54,6 +54,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
           onChange={handleChange}
           contrast
         />
+        <div className={weekly ? "hidden" : null}>
         <MDBInput
           className="mb-4"
           type="text"
@@ -63,7 +64,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
           onChange={handleChange}
           contrast
         />
-
+        </div>
         <MDBBtn type="submit" className="mb-4" block>
           Create Routine
         </MDBBtn>

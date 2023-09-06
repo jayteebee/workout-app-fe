@@ -6,7 +6,7 @@ import FetchWorkoutsInRoutine from "../Components/Routine/FetchWorkoutsInRoutine
 import CreateRoutine from "../Components/Routine/CreateRoutine";
 import { MDBBtn } from "mdb-react-ui-kit";
 
-const Routines = () => {
+const Routines = ({custom, setCustom, weekly, setWeekly}) => {
   const [routineToggle, setRoutineToggle] = useState(false)
   const [createRoutineToggle , setCreateRoutineToggle] = useState(false)
 
@@ -17,6 +17,13 @@ const Routines = () => {
   return (
     <div >
       <h3 className="pageHeader">Routines</h3>
+      <p>Will you be working out in a custom or weekly frequency?</p>
+
+      <div>
+      <MDBBtn onClick={() => {setWeekly(false); setCustom(true)}}>Custom</MDBBtn>
+      <MDBBtn  onClick={() => {setCustom(false); setWeekly(true)}}>Weekly</MDBBtn>
+      </div>
+
       <div className="fetchAllRoutines">
         <FetchAllRoutines routineToggle={routineToggle}/>
       </div>
@@ -34,7 +41,7 @@ const Routines = () => {
       <MDBBtn onClick={toggleCreateRoutine}>{createRoutineToggle ? "Hide Create Routine" : "Create Routine"}</MDBBtn>
 
       {createRoutineToggle && <div className="createRoutine">
-        <CreateRoutine routineToggle={routineToggle} setRoutineToggle={setRoutineToggle} setCreateRoutineToggle={setCreateRoutineToggle} />
+        <CreateRoutine custom={custom} weekly={weekly} routineToggle={routineToggle} setRoutineToggle={setRoutineToggle} setCreateRoutineToggle={setCreateRoutineToggle} />
       </div>}
       
 

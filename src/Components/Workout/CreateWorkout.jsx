@@ -12,6 +12,7 @@ const CreateWorkout = ({
   setWorkoutCreated,
   dayOfWeek,
   setDayOfWeek,
+  weekly
 }) => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -118,13 +119,15 @@ const CreateWorkout = ({
     }
   };
 
-console.log("order", order);
+// console.log("order", order);
 
   useEffect(() => {
     if (createdWorkout.id) {
+      console.log("workoutDay", workoutDay)
       addWorkoutToRoutine(routineID, {
         workout_id: createdWorkout.id,
         order: order,
+        day: [workoutDay]
       });
       setWorkoutCreated((prevState) => !prevState);
       setCreatedWorkout([]);
@@ -151,6 +154,7 @@ console.log("order", order);
           contrast
         />
 
+        <div className={weekly ? "hidden" : null}>
         <MDBInput
           className="mb-4"
           type="text"
@@ -160,7 +164,7 @@ console.log("order", order);
           onChange={(e) => setOrder(e.target.value)}
           contrast
         />
-
+</div>
         <MDBInput
           className="mb-4"
           type="text"

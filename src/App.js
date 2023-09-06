@@ -22,6 +22,10 @@ import Profile from "./Pages/Profile";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 const [showMenu, setShowMenu] = useState(false)
+const [custom, setCustom] = useState(false)
+console.log("custom", custom)
+const [weekly, setWeekly] = useState(false)
+console.log("weekly", weekly)
 
 
 
@@ -50,9 +54,16 @@ const externalNavToggle = () => {
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<HomeScreen  />} />
 
-            <Route path="/Routines" element={<Routines />} />
+            <Route path="/Routines" element={<Routines
+              setCustom={setCustom}
+              custom={custom}
+              setWeekly={setWeekly}
+              weekly={weekly}
+              />} />
 
-            <Route path="/Workout" element={<Workout  />} />
+            <Route path="/Workout" element={<Workout
+              weekly={weekly}
+              />} />
 
             <Route path="/CreateExercise" element={<ExerciseCreation />} />
 

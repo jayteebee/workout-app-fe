@@ -10,7 +10,7 @@ import FetchWorkoutByID from "../Components/Workout/FetchWorkoutByID";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Workout = () => {
+const Workout = ({weekly}) => {
   const [workout, setWorkout] = useState([]);
   const [workoutToggle, setWorkoutToggle] = useState(false);
   const [routineID, setRoutineID] = useState(Number);
@@ -89,7 +89,7 @@ const Workout = () => {
     const newWorkoutDays = dayOfWeek
       .filter((day) => day[daysOfWeekArray[day.value]]) // check if the boolean is true
       .map((day) => day.value); // create array with true values
-    // console.log("newWorkoutDays: ", newWorkoutDays);
+    console.log("newWorkoutDays: ", newWorkoutDays); 
 
     setCreateWorkoutDayData((prevData) => ({
       ...prevData,
@@ -164,6 +164,7 @@ const Workout = () => {
             setToggleCreateWorkout={setToggleCreateWorkout}
             setDayOfWeek={setDayOfWeek}
             dayOfWeek={dayOfWeek}
+            weekly={weekly}
           />
         </div>
       
