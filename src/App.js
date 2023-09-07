@@ -23,9 +23,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 const [showMenu, setShowMenu] = useState(false)
 const [custom, setCustom] = useState(false)
-console.log("custom", custom)
 const [weekly, setWeekly] = useState(false)
-console.log("weekly", weekly)
+
 
 
 
