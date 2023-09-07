@@ -20,6 +20,7 @@ const FetchAllRoutines = ({ routineToggle }) => {
   const [deleteToggle, setDeleteToggle] = useState(null);
   const [userID, setUserID] = useState(null);
   const [filteredRoutines, setFilteredRoutines] = useState(null);
+  // console.log("filteredRoutines", filteredRoutines)
 
   const navigate = useNavigate();
 
