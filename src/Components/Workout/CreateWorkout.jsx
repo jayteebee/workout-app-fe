@@ -33,16 +33,6 @@ const CreateWorkout = ({
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
   // console.log("** workoutDayINDEX", workoutDayIndex);
 
-  // const daysOfWeekArray = [
-  //   "monday",
-  //   "tuesday",
-  //   "wednesday",
-  //   "thursday",
-  //   "friday",
-  //   "saturday",
-  //   "sunday",
-  // ];
-
   const daysOfWeekArray = [
     "sunday",
     "monday",
@@ -83,16 +73,6 @@ const CreateWorkout = ({
     try {
       let data = await createWorkout(formInput);
       setCreatedWorkout(data);
-
-      // const dayNameToIndex = {
-      //   monday: 0,
-      //   tuesday: 1,
-      //   wednesday: 2,
-      //   thursday: 3,
-      //   friday: 4,
-      //   saturday: 5,
-      //   sunday: 6,
-      // };
 
       const dayNameToIndex = {
         sunday: 0,
