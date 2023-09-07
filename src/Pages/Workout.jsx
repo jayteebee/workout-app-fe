@@ -84,8 +84,8 @@ const Workout = ({weekly}) => {
     setToggleCreateWorkout((prevState) => !prevState);
   }, [workoutToggle])
 
-  const createDataForApiCall = () => {
-    // console.log("createDataForApiCall CALLED");
+  const createDataForCreateWorkoutDayApiCall = () => {
+    // console.log("createDataForCreateWorkoutDayApiCall CALLED");
     const newWorkoutDays = dayOfWeek
       .filter((day) => day[daysOfWeekArray[day.value]]) // check if the boolean is true
       .map((day) => day.value); // create array with true values
@@ -170,7 +170,7 @@ const Workout = ({weekly}) => {
       
 
       <div className={isButtonHidden ? "hidden" : null}>
-        <MDBBtn onClick={createDataForApiCall}> Finalise Days </MDBBtn>
+        <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Finalise Days </MDBBtn>
       </div>
 
       <ToastContainer />
