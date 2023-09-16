@@ -32,6 +32,11 @@ export const createWorkoutDay = async (workoutDayData) => {
 
 // console.log(createWorkoutDay());
 
+// CREATE FREQUENCY WORKOUT DAYS
+export const frequency = async (workoutDayData) => {
+    const r = await axiosInstanceWithToken.post(`/workout_days_frequency`, workoutDayData);
+    return r.data;
+};
 
 // PUT REQUESTS
 
