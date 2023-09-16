@@ -4,11 +4,15 @@ import format from "date-fns/format";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import Timer from "../Components/WorkoutSession/Timer";
+import { MDBBtn } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 
 const HomeScreen = () => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
   const [calendarEvents, setCalendarEvents] = useState(null);
   const [sortedSchedule, setSortedSchedule] = useState([]);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     getAllWorkoutSchedules()
@@ -45,6 +49,11 @@ const HomeScreen = () => {
   // console.log("CALENDAR EVENTS: ", calendarEvents);
 
   // className="calendar"
+
+const startWorkout = () => {
+  navigate("/Session")
+}
+
   return (
     <div className="calendar"> 
 
@@ -55,7 +64,7 @@ const HomeScreen = () => {
       events={calendarEvents}
     />
 
-<Timer />
+<MDBBtn onClick={startWorkout} >Start Workout</MDBBtn>
     </div>
   );
 };

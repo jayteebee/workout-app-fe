@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import ExerciseCreation from "./Pages/ExerciseCreation";
 import ViewExercises from "./Pages/ViewExercises";
 import Profile from "./Pages/Profile";
+import WorkoutSession from "./Pages/WorkoutSession";
 
 // brew services start redis - backend service
 // bundle exec sidekiq
@@ -78,6 +79,9 @@ const externalNavToggle = () => {
             <Route path="/ViewExercises" element={<ViewExercises />}/>
 
             <Route path="/Profile" element={<Profile />}/>
+
+            <Route path="/Session" element={<WorkoutSession />}/>
+
 
           </Route>
 
