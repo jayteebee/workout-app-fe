@@ -41,7 +41,7 @@ const Workout = ({weekly, custom, routineFrequency}) => {
     routine_id: 0,
     frequency: null
   });
-console.log("createWorkoutDayData", createWorkoutDayData)
+// console.log("createWorkoutDayData", createWorkoutDayData)
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -116,7 +116,7 @@ console.log("createWorkoutDayData", createWorkoutDayData)
     );
   };
 
-  console.log("createWorkoutDayData", createWorkoutDayData);
+  // console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
     createWorkoutDay(createWorkoutDayData)

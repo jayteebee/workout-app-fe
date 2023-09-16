@@ -30,7 +30,7 @@ const CreateWorkout = ({
 
   const [createdWorkout, setCreatedWorkout] = useState([]);
   const [order, setOrder] = useState(0);
-  console.log("order", order)
+  // console.log("order", order)
   const [workoutDay, setWorkoutDay] = useState("");
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
   // console.log("** workoutDayINDEX", workoutDayIndex);

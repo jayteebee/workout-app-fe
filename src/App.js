@@ -26,7 +26,7 @@ const [showMenu, setShowMenu] = useState(false)
 const [custom, setCustom] = useState(false)
 const [weekly, setWeekly] = useState(false)
 const [routineFrequency, setRoutineFrequency] = useState([])
-console.log("routineFrequency", routineFrequency)
+// console.log("routineFrequency", routineFrequency)
 
 
 

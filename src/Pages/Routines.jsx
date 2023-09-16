@@ -14,7 +14,7 @@ const Routines = ({custom, setCustom, weekly, setWeekly, setRoutineFrequency}) =
     setCreateRoutineToggle(prevState => !prevState)
   }
 // console.log("createRoutineToggle", createRoutineToggle)
-console.log("custom, weekly", custom, weekly)
+// console.log("custom, weekly", custom, weekly)
   return (
     <div >
       <h3 className="pageHeader">Routines</h3>

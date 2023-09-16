@@ -20,7 +20,7 @@ const FetchAllRoutines = ({ routineToggle, setRoutineFrequency }) => {
   const [deleteToggle, setDeleteToggle] = useState(null);
   const [userID, setUserID] = useState(null);
   const [filteredRoutines, setFilteredRoutines] = useState(null);
-  console.log("filteredRoutines", filteredRoutines)
+  // console.log("filteredRoutines", filteredRoutines)
 
 useEffect(() => {
   const routineFrequency = filteredRoutines && filteredRoutines.map((f) => (f.frequency))
