@@ -14,6 +14,7 @@ const Routines = ({custom, setCustom, weekly, setWeekly, setRoutineFrequency}) =
     setCreateRoutineToggle(prevState => !prevState)
   }
 // console.log("createRoutineToggle", createRoutineToggle)
+console.log("custom, weekly", custom, weekly)
   return (
     <div >
       <h3 className="pageHeader">Routines</h3>
@@ -37,13 +38,14 @@ const Routines = ({custom, setCustom, weekly, setWeekly, setRoutineFrequency}) =
         <FetchWorkoutsInRoutine />
       </div>
 
-      
+      <div className={custom || weekly ? "" : "hidden"}>
       <MDBBtn onClick={toggleCreateRoutine}>{createRoutineToggle ? "Hide Create Routine" : "Create Routine"}</MDBBtn>
-
+      </div>
+      
       {createRoutineToggle && <div className="createRoutine">
         <CreateRoutine custom={custom} weekly={weekly} routineToggle={routineToggle} setRoutineToggle={setRoutineToggle} setCreateRoutineToggle={setCreateRoutineToggle} />
       </div>}
-      
+     
 
     </div>
   );
