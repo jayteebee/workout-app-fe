@@ -3,6 +3,7 @@ import { getAllWorkoutSchedules } from "../API/WorkoutSchedule/WorkoutSchedule";
 import format from "date-fns/format";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import Timer from "../Components/WorkoutSession/Timer";
 
 const HomeScreen = () => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
@@ -54,6 +55,7 @@ const HomeScreen = () => {
       events={calendarEvents}
     />
 
+<Timer />
     </div>
   );
 };
