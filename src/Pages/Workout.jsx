@@ -39,6 +39,7 @@ const Workout = ({weekly}) => {
     user_id: "",
     days_of_week: [],
     routine_id: 0,
+    frequency: null
   });
 
   useEffect(() => {
