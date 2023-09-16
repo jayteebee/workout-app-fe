@@ -24,8 +24,7 @@ const FetchAllRoutines = ({ routineToggle, setRoutineFrequency }) => {
 
 useEffect(() => {
   const routineFrequency = filteredRoutines && filteredRoutines.map((f) => (f.frequency))
-  setRoutineFrequency(routineFrequency)
-console.log("routinesFreq", routineFrequency)
+  routineFrequency && setRoutineFrequency(routineFrequency[0])
 }, [filteredRoutines])
 
 
