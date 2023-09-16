@@ -64,6 +64,7 @@ const externalNavToggle = () => {
 
             <Route path="/Workout" element={<Workout
               weekly={weekly}
+              routineFrequency={routineFrequency}
               />} />
 
             <Route path="/CreateExercise" element={<ExerciseCreation />} />

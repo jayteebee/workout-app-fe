@@ -10,7 +10,7 @@ import FetchWorkoutByID from "../Components/Workout/FetchWorkoutByID";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Workout = ({weekly}) => {
+const Workout = ({weekly, routineFrequency}) => {
   const [workout, setWorkout] = useState([]);
   const [workoutToggle, setWorkoutToggle] = useState(false);
   const [routineID, setRoutineID] = useState(Number);
@@ -41,6 +41,7 @@ const Workout = ({weekly}) => {
     routine_id: 0,
     frequency: null
   });
+console.log("createWorkoutDayData", createWorkoutDayData)
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -50,6 +51,7 @@ const Workout = ({weekly}) => {
       ...prevState,
       user_id: userID,
       routine_id: routineID,
+      frequency: routineFrequency
     }));
   }, [workoutToggle]);
 
