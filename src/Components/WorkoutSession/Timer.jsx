@@ -53,7 +53,7 @@ const Timer = () => {
       >
         Stop
       </button>
-      <div>{formatTime(count)}</div>
+      <div>Workout Timer: {formatTime(count)}</div>
 
     </div>
   );
