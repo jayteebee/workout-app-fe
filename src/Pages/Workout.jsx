@@ -1,7 +1,7 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 import { parseJwt } from "../API/Authentication/parseJwt";
-import { createWorkoutDay } from "../API/WorkoutDays/WorkoutDays";
+import { createWorkoutDay, frequency } from "../API/WorkoutDays/WorkoutDays";
 import FetchAllExercises from "../Components/Exercises/FetchAllExercises";
 import CreateWorkout from "../Components/Workout/CreateWorkout";
 import FetchAllWorkouts from "../Components/Workout/FetchAllWorkouts";
@@ -131,6 +131,16 @@ console.log("createWorkoutDayData", createWorkoutDayData)
   const storedHiddenState = localStorage.getItem("hiddenState");
   const isButtonHidden = workout.length < 1 || storedHiddenState === "true";
 
+const customFrequencyWorkoutDaysAPICall = () => {
+  frequency(createWorkoutDayData)
+  .then((response) => {
+    console.log("Response: ", response);
+  })
+  .catch((err) => {
+    console.log("customFrequencyWorkoutDaysAPICall Failed", err);
+  });
+}
+
   return (
     <div>
       <h3 className="pageHeader">Workout</h3>
@@ -177,7 +187,7 @@ console.log("createWorkoutDayData", createWorkoutDayData)
       </div>
 
       <div>
-      <MDBBtn>Finalise Custom Days</MDBBtn>
+      <MDBBtn onClick={customFrequencyWorkoutDaysAPICall} >Finalise Custom Days</MDBBtn>
       </div>
 
       <ToastContainer />
