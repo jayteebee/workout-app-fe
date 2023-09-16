@@ -202,7 +202,7 @@ const customFrequencyWorkoutDaysAPICall = async () => {
         <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Finalise Days </MDBBtn>
       </div>
 
-      <div>
+      <div className={isButtonHidden || weekly ? "hidden" : null}>
       <MDBBtn onClick={customFrequencyWorkoutDaysAPICall} >Finalise Custom Days</MDBBtn>
       </div>
 
