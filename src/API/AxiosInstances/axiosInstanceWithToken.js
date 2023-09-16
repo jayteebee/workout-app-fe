@@ -4,7 +4,7 @@ import { logOut } from '../Authentication/Authentication';
 
 const axiosInstanceWithToken = axios.create({
     baseURL: process.env.NODE_ENV === 'production' 
-                ? 'https://workout-app-web-service.onrender.com '//'https://workout-app-backend-a67feb525b8a.herokuapp.com' 
+                ? 'https://workout-app-web-service.onrender.com'//'https://workout-app-backend-a67feb525b8a.herokuapp.com' 
                 : 'http://localhost:4000',
     headers: {
         'Content-Type': 'application/json'
