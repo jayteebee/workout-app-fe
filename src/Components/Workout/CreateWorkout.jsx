@@ -30,6 +30,7 @@ const CreateWorkout = ({
 
   const [createdWorkout, setCreatedWorkout] = useState([]);
   const [order, setOrder] = useState(0);
+  console.log("order", order)
   const [workoutDay, setWorkoutDay] = useState("");
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
   // console.log("** workoutDayINDEX", workoutDayIndex);
@@ -94,7 +95,7 @@ const CreateWorkout = ({
       console.error("Error:", err);
     } finally {
       setFormInput({ user_id: "", name: ""});
-      // setOrder(0);
+      setOrder(prevOrder => prevOrder +=1);
       // setWorkoutDay("");
       setWorkoutToggle((prevState) => !prevState);
     }
@@ -135,7 +136,8 @@ const CreateWorkout = ({
           contrast
         />
 
-        <div className={weekly ? "hidden" : null}>
+        {/*<div className={weekly ? "hidden" : null}>*/}
+        <div className="hidden">
         <MDBInput
           className="mb-4"
           type="text"

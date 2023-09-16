@@ -131,14 +131,29 @@ console.log("createWorkoutDayData", createWorkoutDayData)
   const storedHiddenState = localStorage.getItem("hiddenState");
   const isButtonHidden = workout.length < 1 || storedHiddenState === "true";
 
-const customFrequencyWorkoutDaysAPICall = () => {
-  frequency(createWorkoutDayData)
+const customFrequencyWorkoutDaysAPICall = async () => {
+ await frequency(createWorkoutDayData)
   .then((response) => {
     console.log("Response: ", response);
   })
   .catch((err) => {
     console.log("customFrequencyWorkoutDaysAPICall Failed", err);
   });
+
+  toast.success(
+    "Workout Schedule Created! Head to the homepage to see your workouts on the calendar",
+    {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    }
+  );
+
 }
 
   return (
