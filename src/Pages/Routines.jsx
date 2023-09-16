@@ -6,7 +6,7 @@ import FetchWorkoutsInRoutine from "../Components/Routine/FetchWorkoutsInRoutine
 import CreateRoutine from "../Components/Routine/CreateRoutine";
 import { MDBBtn } from "mdb-react-ui-kit";
 
-const Routines = ({custom, setCustom, weekly, setWeekly}) => {
+const Routines = ({custom, setCustom, weekly, setWeekly, setRoutineFrequency}) => {
   const [routineToggle, setRoutineToggle] = useState(false)
   const [createRoutineToggle , setCreateRoutineToggle] = useState(false)
 
@@ -25,7 +25,7 @@ const Routines = ({custom, setCustom, weekly, setWeekly}) => {
       </div>
 
       <div className="fetchAllRoutines">
-        <FetchAllRoutines routineToggle={routineToggle}/>
+        <FetchAllRoutines routineToggle={routineToggle} setRoutineFrequency={setRoutineFrequency}/>
       </div>
 
       {

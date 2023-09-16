@@ -24,7 +24,8 @@ function App() {
 const [showMenu, setShowMenu] = useState(false)
 const [custom, setCustom] = useState(false)
 const [weekly, setWeekly] = useState(false)
-
+const [routineFrequency, setRoutineFrequency] = useState([])
+console.log("routineFrequency", routineFrequency)
 
 
 
@@ -58,6 +59,7 @@ const externalNavToggle = () => {
               custom={custom}
               setWeekly={setWeekly}
               weekly={weekly}
+              setRoutineFrequency={setRoutineFrequency}
               />} />
 
             <Route path="/Workout" element={<Workout
