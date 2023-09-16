@@ -173,6 +173,10 @@ const Workout = ({weekly}) => {
         <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Finalise Days </MDBBtn>
       </div>
 
+      <div>
+      <MDBBtn>Finalise Custom Days</MDBBtn>
+      </div>
+
       <ToastContainer />
     </div>
   );
