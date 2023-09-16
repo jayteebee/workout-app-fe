@@ -12,7 +12,8 @@ const CreateWorkout = ({
   setWorkoutCreated,
   dayOfWeek,
   setDayOfWeek,
-  weekly
+  weekly,
+  custom
 }) => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -145,7 +146,8 @@ const CreateWorkout = ({
           contrast
         />
 </div>
-        <MDBInput
+        <div className={custom ? "hidden" : null}>
+          <MDBInput
           className="mb-4"
           type="text"
           label="Workout Day"
@@ -154,7 +156,7 @@ const CreateWorkout = ({
           onChange={(e) => setWorkoutDay(e.target.value)}
           contrast
         />
-
+          </div>
         <MDBBtn type="submit" className="mb-4" block>
           Create Workout
         </MDBBtn>

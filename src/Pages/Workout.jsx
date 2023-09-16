@@ -10,7 +10,7 @@ import FetchWorkoutByID from "../Components/Workout/FetchWorkoutByID";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Workout = ({weekly, routineFrequency}) => {
+const Workout = ({weekly, custom, routineFrequency}) => {
   const [workout, setWorkout] = useState([]);
   const [workoutToggle, setWorkoutToggle] = useState(false);
   const [routineID, setRoutineID] = useState(Number);
@@ -178,11 +178,12 @@ const customFrequencyWorkoutDaysAPICall = () => {
             setDayOfWeek={setDayOfWeek}
             dayOfWeek={dayOfWeek}
             weekly={weekly}
+            custom={custom}
           />
         </div>
       
 
-      <div className={isButtonHidden ? "hidden" : null}>
+      <div className={isButtonHidden || custom ? "hidden" : null}>
         <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Finalise Days </MDBBtn>
       </div>
 
