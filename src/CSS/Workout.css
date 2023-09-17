@@ -24,3 +24,24 @@
 .deleteIcon:hover {
     filter: invert(10%) sepia(100%) saturate(400%) hue-rotate(169deg);
 }
+
+/* Custom contrast class */
+.contrast-dropdown {
+    background-color: #001f3f; 
+    color: #FFF; 
+    border: 1px solid #FFF; 
+  }
+
+  /* Custom CSS to style the selected option */
+.select-selected-option {
+    background-color: #001f3f; 
+    color: #FFF; 
+  }
+
+
+
+
+
+  
+  
+  

@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../../CSS/Workout.css";
 import { parseJwt } from "../../API/Authentication/parseJwt";
-import { MDBInput, MDBBtn, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from "mdb-react-ui-kit";
+import {
+  MDBInput,
+  MDBBtn,
+  MDBDropdown,
+  MDBDropdownMenu,
+  MDBDropdownToggle,
+  MDBDropdownItem,
+} from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
 import { addWorkoutToRoutine } from "../../API/Routine/Routine";
 
@@ -13,7 +20,7 @@ const CreateWorkout = ({
   dayOfWeek,
   setDayOfWeek,
   weekly,
-  custom
+  custom,
 }) => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -26,7 +33,7 @@ const CreateWorkout = ({
     user_id: "",
     name: "",
   });
-// console.log(formInput);
+  // console.log(formInput);
 
   const [createdWorkout, setCreatedWorkout] = useState([]);
   const [order, setOrder] = useState(0);
@@ -44,7 +51,6 @@ const CreateWorkout = ({
     "friday",
     "saturday",
   ];
-  
 
   useEffect(() => {
     if (workoutDayIndex !== false) {
@@ -85,7 +91,6 @@ const CreateWorkout = ({
         friday: 5,
         saturday: 6,
       };
-      
 
       const lowercaseDay = workoutDay.toLowerCase();
       if (dayNameToIndex.hasOwnProperty(lowercaseDay)) {
@@ -94,22 +99,22 @@ const CreateWorkout = ({
     } catch (err) {
       console.error("Error:", err);
     } finally {
-      setFormInput({ user_id: "", name: ""});
-      setOrder(prevOrder => prevOrder +=1);
+      setFormInput({ user_id: "", name: "" });
+      setOrder((prevOrder) => (prevOrder += 1));
       // setWorkoutDay("");
       setWorkoutToggle((prevState) => !prevState);
     }
   };
 
-// console.log("order", order);
+  // console.log("order", order);
 
   useEffect(() => {
     if (createdWorkout.id) {
-      console.log("workoutDay", workoutDay)
+      console.log("workoutDay", workoutDay);
       addWorkoutToRoutine(routineID, {
         workout_id: createdWorkout.id,
         order: order,
-        day: [workoutDay]
+        day: [workoutDay],
       });
       setWorkoutCreated((prevState) => !prevState);
       setCreatedWorkout([]);
@@ -138,37 +143,39 @@ const CreateWorkout = ({
 
         {/*<div className={weekly ? "hidden" : null}>*/}
         <div className="hidden">
-        <MDBInput
-          className="mb-4"
-          type="text"
-          label="Workout Order"
-          value={order}
-          name="order"
-          onChange={(e) => setOrder(e.target.value)}
-          contrast
-        />
-</div>
+          <MDBInput
+            className="mb-4"
+            type="text"
+            label="Workout Order"
+            value={order}
+            name="order"
+            onChange={(e) => setOrder(e.target.value)}
+            contrast
+          />
+        </div>
         <div className={custom ? "hidden" : null}>
-       
-          </div>
-
-  
           <select
-          label="Workout Day"
-          value={workoutDay}
-          name="day"
-          onChange={(e) => setWorkoutDay(e.target.value)}
+            className="form-control contrast-dropdown"
+            value={workoutDay}
+            name="day"
+            onChange={(e) => setWorkoutDay(e.target.value)}
           >
-          {daysOfWeekArray.map((day, i) => {
-            const newDay = day.charAt(0).toUpperCase() + day.slice(1);
-            return (
-              <option key={i} value={newDay}>
-                {newDay}
-              </option>
-            );
-          })}
-        </select>
-        
+            {daysOfWeekArray.map((day, i) => {
+              const newDay = day.charAt(0).toUpperCase() + day.slice(1);
+              return (
+                <option
+                  key={i}
+                  value={newDay}
+                  className={
+                    workoutDay === newDay ? "select-selected-option" : ""
+                  }
+                >
+                  {newDay}
+                </option>
+              );
+            })}
+          </select>
+        </div>
 
         <MDBBtn type="submit" className="mb-4" block>
           Create Workout
@@ -180,8 +187,6 @@ const CreateWorkout = ({
 
 export default CreateWorkout;
 
-
-
 //  <select
 //           label="Workout Day"
 //           value={workoutDay}
@@ -192,7 +197,6 @@ export default CreateWorkout;
 //               <option key={i} value={day}>{day}</option>
 //             ))}
 //           </select>
-
 
 // <MDBInput
 // className="mb-4"
