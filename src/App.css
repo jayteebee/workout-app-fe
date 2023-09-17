@@ -35,6 +35,12 @@ p {
   overflow-y: auto;
 } 
 
+.fullScrollableDiv {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+} 
+
 .calendar {
   width: 50vw;
   height: auto;

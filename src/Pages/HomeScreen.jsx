@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { getAllWorkoutSchedules } from "../API/WorkoutSchedule/WorkoutSchedule";
 import format from "date-fns/format";
-import { FullCalendar, eventClick } from '@fullcalendar/react';
+import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { MDBBtn } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
+import { getExercisesInWorkout } from "../API/Workout/Workout";
+import "../App.css"
 
-const HomeScreen = ({routineID}) => {
+const HomeScreen = ({ routineID }) => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
   const [calendarEvents, setCalendarEvents] = useState(null);
   const [sortedSchedule, setSortedSchedule] = useState([]);
-console.log("routineID", routineID)
-  const navigate = useNavigate()
+  const [exercisesInWorkout, setExercisesInWorkout] = useState([])
+  console.log("exercisesInWorkout", exercisesInWorkout)
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllWorkoutSchedules()
@@ -27,7 +30,7 @@ console.log("routineID", routineID)
 
   useEffect(() => {
     const sortSchedule = workoutSchedule.slice().sort((a, b) => a.id - b.id);
-    setSortedSchedule(sortSchedule)
+    setSortedSchedule(sortSchedule);
   }, [workoutSchedule]);
 
   // console.log("sortedSchedule", sortedSchedule);
@@ -40,6 +43,7 @@ console.log("routineID", routineID)
         title: data.workout_name,
         start: formattedDate,
         id: data.id,
+        routineWorkoutId: data.routine_workout_id,
       };
     });
     setCalendarEvents(events);
@@ -49,21 +53,45 @@ console.log("routineID", routineID)
 
   // className="calendar"
 
-const startWorkout = () => {
-  navigate("/Session")
-}
+  const startWorkout = () => {
+    navigate("/Session");
+  };
+
+  const handleEventClick = async (eventClickInfo) => {
+    const routineWorkoutId = eventClickInfo.event.extendedProps.routineWorkoutId;
+    console.log("routineWorkoutId", routineWorkoutId);
+
+  await getExercisesInWorkout(routineWorkoutId)
+  .then((data) => setExercisesInWorkout(data))
+  .catch(error => {
+    console.log("Error with getExercisesInWorkout API Call: ", error)
+  })
+  };
+
+const displayWorkoutData = exercisesInWorkout.map((exercise) => (
+  <div key={exercise.id}>
+  Workout Name: {exercise.workout_name}
+  Exercise: {exercise.exercise.name}
+  Sets: {exercise.sets}
+  Reps: {exercise.reps}
+  </div>
+))
+console.log("displayWorkoutData", displayWorkoutData)
 
   return (
-    <div className="calendar"> 
-
-
+    <div>
+    <div className="calendar">
       <FullCalendar
-      plugins={[ dayGridPlugin ]}
-      initialView="dayGridMonth"
-      events={calendarEvents}
-    />
+        plugins={[dayGridPlugin]}
+        initialView="dayGridMonth"
+        events={calendarEvents}
+        eventClick={handleEventClick}
+      />
 
-<MDBBtn onClick={startWorkout} >Start Workout</MDBBtn>
+      <MDBBtn onClick={startWorkout}>Start Workout</MDBBtn>
+    </div>
+    
+    {displayWorkoutData}
     </div>
   );
 };

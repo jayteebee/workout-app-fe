@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const Timer = () => {
+const StopWatch = () => {
   const [count, setCount] = useState(0);
   const [active, setActive] = useState(false);
   const [intervalId, setIntervalId] = useState(null); 
@@ -59,4 +59,4 @@ const Timer = () => {
   );
 };
 
-export default Timer;
+export default StopWatch;

@@ -1,15 +1,17 @@
 import React from 'react'
-import Timer from '../Components/WorkoutSession/Timer'
+import StopWatch from '../Components/WorkoutSession/StopWatch'
 
 const WorkoutSession = () => {
   return (
     <div>
     <div>WorkoutSession</div>
+<StopWatch />
     
-    <Timer />
     
     </div>
   )
 }
 
 export default WorkoutSession
+
+
