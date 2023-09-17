@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../CSS/Workout.css";
 import { parseJwt } from "../../API/Authentication/parseJwt";
-import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import { MDBInput, MDBBtn, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
 import { addWorkoutToRoutine } from "../../API/Routine/Routine";
 
@@ -149,16 +149,27 @@ const CreateWorkout = ({
         />
 </div>
         <div className={custom ? "hidden" : null}>
-          <MDBInput
-          className="mb-4"
-          type="text"
+       
+          </div>
+
+  
+          <select
           label="Workout Day"
           value={workoutDay}
           name="day"
           onChange={(e) => setWorkoutDay(e.target.value)}
-          contrast
-        />
-          </div>
+          >
+          {daysOfWeekArray.map((day, i) => {
+            const newDay = day.charAt(0).toUpperCase() + day.slice(1);
+            return (
+              <option key={i} value={newDay}>
+                {newDay}
+              </option>
+            );
+          })}
+        </select>
+        
+
         <MDBBtn type="submit" className="mb-4" block>
           Create Workout
         </MDBBtn>
@@ -168,3 +179,27 @@ const CreateWorkout = ({
 };
 
 export default CreateWorkout;
+
+
+
+//  <select
+//           label="Workout Day"
+//           value={workoutDay}
+//           name="day"
+//           onChange={(e) => setWorkoutDay(e.target.value)}
+//           >
+//             {daysOfWeekArray.map((day, i) => (
+//               <option key={i} value={day}>{day}</option>
+//             ))}
+//           </select>
+
+
+// <MDBInput
+// className="mb-4"
+// type="text"
+// label="Workout Day"
+// value={workoutDay}
+// name="day"
+// onChange={(e) => setWorkoutDay(e.target.value)}
+// contrast
+// />
