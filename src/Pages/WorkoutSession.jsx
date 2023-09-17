@@ -2,6 +2,9 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import StopWatch from "../Components/WorkoutSession/StopWatch";
 import greenRhombus from "../CSS/Icons/GreenRhombus.png"
+import redRhombus from "../CSS/Icons/redRhombus.png"
+import purpleRhombus from "../CSS/Icons/purpleRhombus.png"
+
 
 const WorkoutSession = () => {
 
@@ -23,6 +26,9 @@ const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
     <p>Sets: {exercise.sets}</p>
     <p>Reps: {exercise.reps}</p>
     <img src={greenRhombus} alt="edit" className="rhombus" />
+    <img src={redRhombus} alt="edit" className="rhombus" />
+    <img src={purpleRhombus} alt="edit" className="rhombus" />
+
 
     </div>
   </div>
