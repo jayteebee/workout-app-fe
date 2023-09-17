@@ -72,3 +72,25 @@ p {
 .red {
   background-color: red;
 }
+
+
+.exerciseSession {
+  border: 1px solid;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  padding: 10px;
+}
+
+.exerciseSession div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.rhombus {
+  height: 50px;
+  width: auto;
+}

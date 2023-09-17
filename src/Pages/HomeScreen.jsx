@@ -15,7 +15,6 @@ const HomeScreen = ({ routineID }) => {
   const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
   console.log("exercisesInWorkout", exercisesInWorkout);
 
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const HomeScreen = ({ routineID }) => {
       const inputDate = new Date(`${data.date}`);
       const formattedDate = format(inputDate, "yyyy-MM-dd");
       return {
-        title: data.workout_name,
+        title: `Start ${data.workout_name}`,
         start: formattedDate,
         id: data.id,
         routineWorkoutId: data.routine_workout_id,
@@ -56,17 +55,19 @@ const HomeScreen = ({ routineID }) => {
   // className="calendar"
 
   const startWorkout = () => {
-    const currentDate = new Date()
+    const currentDate = new Date();
     const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
 
     const hasEventOnCurrentDay = calendarEvents.some(
       (event) => event.start === formattedCurrentDate
     );
-    if (hasEventOnCurrentDay) { 
-    navigate("/Session");
-    console.log("success")
+    if (hasEventOnCurrentDay) {
+      navigate("/Session", {
+        state: { exercisesInWorkout: exercisesInWorkout },
+      });
+      console.log("success");
     } else {
-      console.log("Failure")
+      console.log("Failure");
     }
   };
 
@@ -80,18 +81,23 @@ const HomeScreen = ({ routineID }) => {
       .catch((error) => {
         console.log("Error with getExercisesInWorkout API Call: ", error);
       });
-
   };
 
-  const displayWorkoutData = exercisesInWorkout.map((exercise) => (
-    <div key={exercise.id}>
-      Workout Name: {exercise.workout_name}
-      Exercise: {exercise.exercise.name}
-      Sets: {exercise.sets}
-      Reps: {exercise.reps}
-    </div>
-  ));
-  console.log("displayWorkoutData", displayWorkoutData);
+  useEffect(() => {
+    if (exercisesInWorkout.length > 0) {
+      startWorkout()
+    }
+  }, [exercisesInWorkout])
+
+  // const displayWorkoutData = exercisesInWorkout.map((exercise) => (
+  //   <div key={exercise.id}>
+  //     Workout Name: {exercise.workout_name}
+  //     Exercise: {exercise.exercise.name}
+  //     Sets: {exercise.sets}
+  //     Reps: {exercise.reps}
+  //   </div>
+  // ));
+  // console.log("displayWorkoutData", displayWorkoutData);
 
   return (
     <div>
@@ -105,8 +111,6 @@ const HomeScreen = ({ routineID }) => {
 
         <MDBBtn onClick={startWorkout}>Start Workout</MDBBtn>
       </div>
-
-      {displayWorkoutData}
 
     </div>
   );
