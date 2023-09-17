@@ -7,11 +7,11 @@ import Timer from "../Components/WorkoutSession/Timer";
 import { MDBBtn } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 
-const HomeScreen = () => {
+const HomeScreen = ({routineID}) => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
   const [calendarEvents, setCalendarEvents] = useState(null);
   const [sortedSchedule, setSortedSchedule] = useState([]);
-
+console.log("routineID", routineID)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const HomeScreen = () => {
       });
   }, []);
 
-  // console.log("workoutSchedule", workoutSchedule);
+  console.log("workoutSchedule", workoutSchedule);
 
   useEffect(() => {
     const sortSchedule = workoutSchedule.slice().sort((a, b) => a.id - b.id);
@@ -46,7 +46,7 @@ const HomeScreen = () => {
     setCalendarEvents(events);
   }, [sortedSchedule]);
 
-  // console.log("CALENDAR EVENTS: ", calendarEvents);
+  console.log("CALENDAR EVENTS: ", calendarEvents);
 
   // className="calendar"
 

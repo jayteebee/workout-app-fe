@@ -11,7 +11,7 @@ import deleteIcon from "../../CSS/Icons/deleteIcon.png";
 import editIcon from "../../CSS/Icons/editIcon.png";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 
-const FetchAllRoutines = ({ routineToggle, setRoutineFrequency }) => {
+const FetchAllRoutines = ({ routineToggle, setRoutineFrequency}) => {
   const [allRoutines, setAllRoutines] = useState([]);
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
   const [routineToEdit, setRoutineToEdit] = useState(null);
@@ -20,7 +20,7 @@ const FetchAllRoutines = ({ routineToggle, setRoutineFrequency }) => {
   const [deleteToggle, setDeleteToggle] = useState(null);
   const [userID, setUserID] = useState(null);
   const [filteredRoutines, setFilteredRoutines] = useState(null);
-  // console.log("filteredRoutines", filteredRoutines)
+  console.log("filteredRoutines", filteredRoutines)
 
 useEffect(() => {
   const routineFrequency = filteredRoutines && filteredRoutines.map((f) => (f.frequency))
@@ -82,6 +82,7 @@ useEffect(() => {
       {filteredRoutines
         ? filteredRoutines.map((routine) => (
             <div key={routine.id}>
+            {localStorage.setItem("routineID", routine.id)} 
               <MDBBtn onClick={() => displayWorkouts(routine.id)}>
                 View <strong>{routine.name}</strong> Workouts
               </MDBBtn>

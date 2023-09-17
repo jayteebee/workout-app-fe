@@ -15,10 +15,11 @@ import ExerciseCreation from "./Pages/ExerciseCreation";
 import ViewExercises from "./Pages/ViewExercises";
 import Profile from "./Pages/Profile";
 import WorkoutSession from "./Pages/WorkoutSession";
+import { getAllRoutines } from "./API/Routine/Routine";
+import { parseJwt } from "./API/Authentication/parseJwt";
 
 // brew services start redis - backend service
-// bundle exec sidekiq
-// WorkoutScheduleRegenerationJob.perform_async
+// foreman start -p 4000
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,8 +27,11 @@ const [showMenu, setShowMenu] = useState(false)
 const [custom, setCustom] = useState(false)
 const [weekly, setWeekly] = useState(false)
 const [routineFrequency, setRoutineFrequency] = useState([])
-// console.log("routineFrequency", routineFrequency)
-
+const [routineID, setRoutineID] = useState(0)
+console.log("routineID", routineID)
+const [allRoutines, setAllRoutines] = useState([])
+const [userID, setUserID] = useState(0)
+const [filteredRoutines, setFilteredRoutines] = useState([])
 
 
   useEffect(() => {
@@ -35,6 +39,13 @@ const [routineFrequency, setRoutineFrequency] = useState([])
   token ? setLoggedIn(true) : setLoggedIn(false)
 }, [])
   
+useEffect(() => {
+  const token = window.localStorage.getItem("token");
+  const decodedToken = parseJwt(token);
+  const userID = decodedToken.sub;
+  setUserID(userID);
+}, []);
+
 const externalNavToggle = () => {
   if (showMenu) {
     setShowMenu(false)
@@ -42,10 +53,35 @@ const externalNavToggle = () => {
 }
 // console.log("showMenu", showMenu)
 
+
+useEffect(() => {
+  getAllRoutines()
+    .then((data) => {
+      setAllRoutines(data);
+    })
+    .catch((err) => {
+      console.log("getAllRoutines API Call Failed", err);
+    });
+}, []);
+
+useEffect(() => {
+  const routinesFilteredForID = allRoutines.filter(
+    (r) => r.user_id == userID
+  );
+  setFilteredRoutines(routinesFilteredForID);
+}, [allRoutines]);
+
+
+useEffect(() => {
+  const routineID = filteredRoutines && filteredRoutines.map((f) => (f.id))
+  routineID && setRoutineID(routineID[0])
+}, [filteredRoutines])
+
+
   return (
     <div className="App">
       <div className="App-inner" onClick={externalNavToggle}>
-  
+
         { loggedIn ? <NavBar className="navbar"
         setShowMenu={setShowMenu}
         showMenu={showMenu}
@@ -53,7 +89,9 @@ const externalNavToggle = () => {
         
         <Routes>
           <Route element={<PrivateRoute />}>
-            <Route path="/" element={<HomeScreen  />} />
+            <Route path="/" element={<HomeScreen
+              routineID={routineID}
+              />} />
 
             <Route path="/Routines" element={<Routines
               setCustom={setCustom}
