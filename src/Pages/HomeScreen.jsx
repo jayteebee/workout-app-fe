@@ -6,14 +6,16 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import { MDBBtn } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import { getExercisesInWorkout } from "../API/Workout/Workout";
-import "../App.css"
+import "../App.css";
 
 const HomeScreen = ({ routineID }) => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
   const [calendarEvents, setCalendarEvents] = useState(null);
   const [sortedSchedule, setSortedSchedule] = useState([]);
-  const [exercisesInWorkout, setExercisesInWorkout] = useState([])
-  console.log("exercisesInWorkout", exercisesInWorkout)
+  const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
+  console.log("exercisesInWorkout", exercisesInWorkout);
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,44 +56,58 @@ const HomeScreen = ({ routineID }) => {
   // className="calendar"
 
   const startWorkout = () => {
+    const currentDate = new Date()
+    const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
+
+    const hasEventOnCurrentDay = calendarEvents.some(
+      (event) => event.start === formattedCurrentDate
+    );
+    if (hasEventOnCurrentDay) { 
     navigate("/Session");
+    console.log("success")
+    } else {
+      console.log("Failure")
+    }
   };
 
   const handleEventClick = async (eventClickInfo) => {
-    const routineWorkoutId = eventClickInfo.event.extendedProps.routineWorkoutId;
+    const routineWorkoutId =
+      eventClickInfo.event.extendedProps.routineWorkoutId;
     console.log("routineWorkoutId", routineWorkoutId);
 
-  await getExercisesInWorkout(routineWorkoutId)
-  .then((data) => setExercisesInWorkout(data))
-  .catch(error => {
-    console.log("Error with getExercisesInWorkout API Call: ", error)
-  })
+    await getExercisesInWorkout(routineWorkoutId)
+      .then((data) => setExercisesInWorkout(data))
+      .catch((error) => {
+        console.log("Error with getExercisesInWorkout API Call: ", error);
+      });
+
   };
 
-const displayWorkoutData = exercisesInWorkout.map((exercise) => (
-  <div key={exercise.id}>
-  Workout Name: {exercise.workout_name}
-  Exercise: {exercise.exercise.name}
-  Sets: {exercise.sets}
-  Reps: {exercise.reps}
-  </div>
-))
-console.log("displayWorkoutData", displayWorkoutData)
+  const displayWorkoutData = exercisesInWorkout.map((exercise) => (
+    <div key={exercise.id}>
+      Workout Name: {exercise.workout_name}
+      Exercise: {exercise.exercise.name}
+      Sets: {exercise.sets}
+      Reps: {exercise.reps}
+    </div>
+  ));
+  console.log("displayWorkoutData", displayWorkoutData);
 
   return (
     <div>
-    <div className="calendar">
-      <FullCalendar
-        plugins={[dayGridPlugin]}
-        initialView="dayGridMonth"
-        events={calendarEvents}
-        eventClick={handleEventClick}
-      />
+      <div className="calendar">
+        <FullCalendar
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
+          events={calendarEvents}
+          eventClick={handleEventClick}
+        />
 
-      <MDBBtn onClick={startWorkout}>Start Workout</MDBBtn>
-    </div>
-    
-    {displayWorkoutData}
+        <MDBBtn onClick={startWorkout}>Start Workout</MDBBtn>
+      </div>
+
+      {displayWorkoutData}
+
     </div>
   );
 };
