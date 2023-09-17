@@ -101,16 +101,20 @@ const HomeScreen = ({ routineID }) => {
 
   return (
     <div>
+
+    <div className="calendar-container" >
       <div className="calendar">
         <FullCalendar
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"
           events={calendarEvents}
           eventClick={handleEventClick}
+          height="80vh"
         />
 
-        <MDBBtn onClick={startWorkout}>Start Workout</MDBBtn>
       </div>
+</div>
+      <MDBBtn onClick={startWorkout}>Start Workout</MDBBtn>
 
     </div>
   );

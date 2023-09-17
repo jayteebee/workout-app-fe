@@ -8,6 +8,10 @@ import purpleRhombus from "../CSS/Icons/purpleRhombus.png";
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
   console.log("buttonColor", buttonColor);
+  const [expandDiv, setExpandDiv] = useState(false)
+  console.log("expandDiv", expandDiv);
+
+
   const location = useLocation();
   const exercisesInWorkout = location.state?.exercisesInWorkout;
   console.log("exercisesInWorkout", exercisesInWorkout);
@@ -16,6 +20,10 @@ const WorkoutSession = () => {
     setButtonColor("");
     setButtonColor(value);
   };
+
+const moreExerciseInfo = () => {
+setExpandDiv(prevState => !prevState)
+}
 
   const workoutName = exercisesInWorkout.map((exercise) => (
     <div key={exercise.id}>
@@ -26,10 +34,18 @@ const WorkoutSession = () => {
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
     <div key={exercise.id} className="exerciseSession">
       <div className="exerciseInfo">
-        <p>{i + 1} {")"}</p>
-        <p>{exercise.exercise.name}</p>
-        <p>Sets: {exercise.sets}</p>
-        <p>Reps: {exercise.reps}</p>
+
+        <div style={{width: "5%"}}>
+          <p>
+            {i + 1} {")"}
+          </p>
+        </div>
+
+        <div className={ expandDiv ? "exerciseSessionBorderExpanded" : "exerciseSessionBorder"} onClick={moreExerciseInfo}>
+          <p>{exercise.exercise.name}</p>
+          <p>Sets {exercise.sets}</p>
+          <p>Reps {exercise.reps}</p>
+        </div>
 
         {buttonColor === "green" ? (
           <button className="button" onClick={() => exerciseButton("red")}>
@@ -49,6 +65,7 @@ const WorkoutSession = () => {
           </button>
         ) : null}
       </div>
+
     </div>
   ));
   console.log("displayWorkoutData", displayWorkoutData);

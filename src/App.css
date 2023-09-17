@@ -8,7 +8,7 @@
 .App-inner {
   background-color:#001F3F;
   border-radius: 25px;
-  height: 100vh;
+  height: 200vh;
   color: #66fcf1;
 }
 
@@ -41,9 +41,14 @@ p {
   overflow-y: auto;
 } 
 
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .calendar {
-  width: 50vw;
-  height: auto;
+  width: 90vw;
 }
 
 .utilityButton {
@@ -75,7 +80,7 @@ p {
 
 
 .exerciseSession {
-  border: 1px solid;
+  /* border: 1px solid; */
   width: 50vw;
   display: flex;
   flex-direction: column;
@@ -86,6 +91,7 @@ p {
 
 .exerciseSession div {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
 }
@@ -102,3 +108,27 @@ p {
   height: 50px;
   width: auto;
 }
+
+.exerciseSessionBorder {
+  border: #66fcf1 1px solid;
+  border-radius: 5%;
+ justify-content: space-around;
+}
+
+.exerciseSessionBorderExpanded {
+  border: #66fcf1 1px solid;
+  border-radius: 5%;
+ justify-content: space-around;
+padding-bottom: 10vh;
+}
+
+/* .exerciseInfo {
+    display: flex;
+  justify-content: center;
+}
+
+
+
+.exerciseSessionBorder p {
+
+} */
