@@ -26,7 +26,7 @@ const WorkoutSession = () => {
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
     <div key={exercise.id} className="exerciseSession">
       <div className="exerciseInfo">
-        <p>{i + 1}:</p>
+        <p>{i + 1} {")"}</p>
         <p>{exercise.exercise.name}</p>
         <p>Sets: {exercise.sets}</p>
         <p>Reps: {exercise.reps}</p>
