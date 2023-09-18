@@ -3,7 +3,6 @@ import { getAllWorkoutSchedules } from "../API/WorkoutSchedule/WorkoutSchedule";
 import format from "date-fns/format";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import { MDBBtn } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import { getExercisesInWorkout } from "../API/Workout/Workout";
 import "../App.css";
