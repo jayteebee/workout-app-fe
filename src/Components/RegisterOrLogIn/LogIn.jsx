@@ -29,7 +29,7 @@ const navigate = useNavigate()
     navigate("/")
   }
     
-  const handlechange = (e) => {
+  const handleChange = (e) => {
     setFormInput({
       ...formInput,
       [e.target.name]: e.target.value,
@@ -44,8 +44,8 @@ const navigate = useNavigate()
   return (
     <div>
     <form onSubmit={handleSubmit}>
-      <MDBInput className='mb-4' type='email' label='Email address' value={formInput.email} name="email" onChange={handlechange} />
-      <MDBInput className='mb-4' type='password' label='Password' value={formInput.password} name="password" onChange={handlechange} />
+      <MDBInput className='mb-4' type='email' label='Email address' value={formInput.email} name="email" onChange={handleChange} />
+      <MDBInput className='mb-4' type='password' label='Password' value={formInput.password} name="password" onChange={handleChange} />
 
       <MDBRow className='mb-4'>
         <MDBCol className='d-flex justify-content-center'>
