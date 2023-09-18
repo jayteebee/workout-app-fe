@@ -8,15 +8,17 @@ import RestTimer from "../Components/WorkoutSession/RestTimer";
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
-  // console.log("buttonColor", buttonColor);
+  console.log("buttonColor", buttonColor);
   const [expandDiv, setExpandDiv] = useState(false);
   // console.log("expandDiv", expandDiv);
 
   const location = useLocation();
   const exercisesInWorkout = location.state?.exercisesInWorkout;
-  console.log("exercisesInWorkout", exercisesInWorkout);
+  // console.log("exercisesInWorkout", exercisesInWorkout);
 
-  const exerciseButton = (value) => {
+
+  const exerciseButton = (index, value, eID) => {
+    console.log("E", eID)
     setButtonColor("");
     setButtonColor(value);
   };
@@ -31,6 +33,7 @@ const WorkoutSession = () => {
 
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
     <div key={exercise.id} className="exerciseSession">
+
       <div className="exerciseInfo">
         <div style={{ width: "5%" }}>
           <p>
@@ -50,28 +53,34 @@ const WorkoutSession = () => {
           <p>Sets {exercise.sets}</p>
           <p>Reps {exercise.reps}</p>
         </div>
+        <h2>{exercise.id} {i}</h2>
 
         {buttonColor === "green" ? (
-          <button className="button" onClick={() => exerciseButton("red")}>
-            <img src={greenRhombus} alt="edit" className="rhombus" />
+          <button className="button" value={i} onClick={() => exerciseButton(i, "red", exercise.id)}>
+            <img src={greenRhombus} alt="greenRhombus" className="rhombus" />
           </button>
         ) : null}
 
         {buttonColor === "red" ? (
-          <button className="button" onClick={() => exerciseButton("purple")}>
-            <img src={redRhombus} alt="edit" className="rhombus" />
+          <button className="button" onClick={() => exerciseButton(i, "purple", exercise.id)}>
+            <img src={redRhombus} alt="redRhombus" className="rhombus" />
           </button>
         ) : null}
 
         {buttonColor === "purple" ? (
-          <button className="button" onClick={() => exerciseButton("green")}>
-            <img src={purpleRhombus} alt="edit" className="rhombus" />
+          <button className="button" onClick={() => exerciseButton(i, "green", exercise.id)}>
+            <img src={purpleRhombus} alt="purpleRhombus" className="rhombus" />
           </button>
         ) : null}
+
       </div>
     </div>
   ));
-  console.log("displayWorkoutData", displayWorkoutData);
+
+  // console.log("displayWorkoutData", displayWorkoutData);
+
+
+
 
   return (
     <div>

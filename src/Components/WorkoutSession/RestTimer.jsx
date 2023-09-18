@@ -6,7 +6,7 @@ const RestTimer = ({exercisesInWorkout}) => {
   const [active, setActive] = useState(false);
   const [intervalId, setIntervalId] = useState(null); 
 const [exercises, setExercises] = useState(exercisesInWorkout)
-console.log("exercises in rest", exercises)
+// console.log("exercises in rest", exercises)
 
   useEffect(() => {
 
