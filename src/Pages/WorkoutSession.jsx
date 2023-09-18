@@ -9,13 +9,15 @@ import { ToastContainer, toast } from "react-toastify";
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
-  console.log("buttonColor", buttonColor);
+  // console.log("buttonColor", buttonColor);
   const [expandDiv, setExpandDiv] = useState(false);
   // console.log("expandDiv", expandDiv);
   const [id, setId] = useState(null);
   const [setsComplete, setSetsComplete] = useState(0);
   const [exercisesCompleted, setExercisesCompleted] = useState(0);
   const [active, setActive] = useState(false);
+  const [restTimerExercise, setRestTimerExercise] = useState([])
+console.log("restTimerExercise", restTimerExercise)
 
   const location = useLocation();
   const exercisesInWorkout = location.state?.exercisesInWorkout;
@@ -26,11 +28,17 @@ const WorkoutSession = () => {
   }, [exercisesInWorkout]);
 
   const exerciseButton = (value, eID, sets) => {
+console.log("eID", eID)
+
+let restTimerExerciseFilter = exercisesInWorkout.filter(exercise =>  exercise.id === eID)
+console.log("restTimerExerciseFilter", restTimerExerciseFilter)
+setRestTimerExercise(restTimerExerciseFilter)
+
+
     if (value === "red" && exercisesCompleted === 0) {
       setActive(true);
     }
 
-    setButtonColor("");
     value === "purple" &&
       setSetsComplete((prevSetsComplete) => (prevSetsComplete += 1));
 
@@ -135,7 +143,9 @@ whilst the button is red, the set timer will be running, when the red button is 
     <div>
       <div>WorkoutSession</div>
       <StopWatch active={active} />
-      <RestTimer exercisesInWorkout={exercisesInWorkout} />
+      <RestTimer 
+      restTimerExercise={restTimerExercise}
+      />
       {workoutName}
       {displayWorkoutData}
       <ToastContainer />

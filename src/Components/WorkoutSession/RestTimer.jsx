@@ -1,38 +1,38 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
-const RestTimer = ({exercisesInWorkout}) => {
-
+const RestTimer = ({ restTimerExercise }) => {
   const [count, setCount] = useState(0);
   const [active, setActive] = useState(false);
-  const [intervalId, setIntervalId] = useState(null); 
-const [exercises, setExercises] = useState(exercisesInWorkout)
-// console.log("exercises in rest", exercises)
+  const [intervalId, setIntervalId] = useState(null);
+  const [exercises, setExercises] = useState(null);
+  console.log("exercises in rest", exercises);
 
   useEffect(() => {
+    setExercises(restTimerExercise);
+  }, [restTimerExercise]);
 
+  useEffect(() => {
     if (active) {
       const id = setInterval(() => {
         setCount((prevState) => (prevState -= 1));
       }, 1000);
-      setIntervalId(id)
+      setIntervalId(id);
     } else {
       clearInterval(intervalId);
     }
 
     return () => {
-        if (intervalId) {
-          clearInterval(intervalId);
-        }
-      };
-
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
   }, [active]);
 
   return (
     <div>
-    
-    <h2>rest timer</h2>
+      <h2>rest timer</h2>
     </div>
-  )
-}
+  );
+};
 
-export default RestTimer
+export default RestTimer;
