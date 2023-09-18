@@ -114,7 +114,7 @@ const HomeScreen = ({ routineID }) => {
 
       </div>
 </div>
-      <MDBBtn onClick={startWorkout}>Start Workout</MDBBtn>
+      {/*<MDBBtn onClick={startWorkout}>Start Workout</MDBBtn>*/}
 
     </div>
   );
