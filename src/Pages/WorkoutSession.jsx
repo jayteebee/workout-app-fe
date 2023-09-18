@@ -5,21 +5,75 @@ import greenRhombus from "../CSS/Icons/GreenRhombus.png";
 import redRhombus from "../CSS/Icons/redRhombus.png";
 import purpleRhombus from "../CSS/Icons/purpleRhombus.png";
 import RestTimer from "../Components/WorkoutSession/RestTimer";
+import { ToastContainer, toast } from "react-toastify";
+
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
   console.log("buttonColor", buttonColor);
   const [expandDiv, setExpandDiv] = useState(false);
   // console.log("expandDiv", expandDiv);
+  const [id, setId] = useState(null);
+  const [setsComplete, setSetsComplete] = useState(0);
+  console.log("setsComplete", setsComplete);
+  const [exercisesCompleted, setExercisesCompleted] = useState(0)
+console.log("exercisesCompleted", exercisesCompleted)
+const [active, setActive] = useState(false);
+
 
   const location = useLocation();
   const exercisesInWorkout = location.state?.exercisesInWorkout;
   // console.log("exercisesInWorkout", exercisesInWorkout);
 
+  console.log("EID");
 
-  const exerciseButton = (index, value, eID) => {
-    console.log("E", eID)
+  useEffect(() => {
+    setId(exercisesInWorkout[0].id);
+  }, [exercisesInWorkout]);
+
+  const exerciseButton = (value, eID, sets) => {
+    console.log("E", eID);
+    console.log("sets", sets);
+
+if (value === "red" && exercisesCompleted === 0) {
+  setActive(true);
+}
+
     setButtonColor("");
+    value === "purple" &&
+      setSetsComplete((prevSetsComplete) => (prevSetsComplete += 1));
+
+    
+
+    if (sets === setsComplete) {
+      value === "green" && setId(eID + 1);
+      setSetsComplete(0);
+      setExercisesCompleted(prevExercisesCompleted => prevExercisesCompleted +=1 )
+    }
+
+    const numberOfExercises = exercisesInWorkout.length -1
+    console.log("numberOfExercises", numberOfExercises);
+
+    if (exercisesCompleted === numberOfExercises && value === "green") {
+
+      toast.success(
+        "Workout Complete!!",
+        {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        }
+      );
+      setActive(false);
+
+      setExercisesCompleted(0)
+    }
+
     setButtonColor(value);
   };
 
@@ -33,7 +87,6 @@ const WorkoutSession = () => {
 
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
     <div key={exercise.id} className="exerciseSession">
-
       <div className="exerciseInfo">
         <div style={{ width: "5%" }}>
           <p>
@@ -53,44 +106,56 @@ const WorkoutSession = () => {
           <p>Sets {exercise.sets}</p>
           <p>Reps {exercise.reps}</p>
         </div>
-        <h2>{exercise.id} {i}</h2>
 
-        {buttonColor === "green" ? (
-          <button className="button" value={i} onClick={() => exerciseButton(i, "red", exercise.id)}>
+        {/* Green is to start the exercise, so when you're exercising, the button will be red 
+when you tap the green button, a "setTimer" will be activated which will time how long each set takes
+*/}
+        {buttonColor === "green" && id === exercise.id ? (
+          <button
+            className="button"
+            value={i}
+            onClick={() => exerciseButton("red", exercise.id, exercise.sets)}
+          >
             <img src={greenRhombus} alt="greenRhombus" className="rhombus" />
           </button>
         ) : null}
-
-        {buttonColor === "red" ? (
-          <button className="button" onClick={() => exerciseButton(i, "purple", exercise.id)}>
+        {/* Pressing Red is to say you have finished the exercise, and will turn the button purple
+whilst the button is red, the set timer will be running, when the red button is tapped to turn to purple, the set timer will stop
+*/}
+        {buttonColor === "red" && id === exercise.id ? (
+          <button
+            className="button"
+            onClick={() => exerciseButton("purple", exercise.id, exercise.sets)}
+          >
             <img src={redRhombus} alt="redRhombus" className="rhombus" />
           </button>
         ) : null}
-
-        {buttonColor === "purple" ? (
-          <button className="button" onClick={() => exerciseButton(i, "green", exercise.id)}>
+        {/* Purple will show the rest timer counting down, and when it hits 0, the green button is triggered */}
+        {buttonColor === "purple" && id === exercise.id ? (
+          <button
+            className="button"
+            onClick={() => exerciseButton("green", exercise.id, exercise.sets)}
+          >
             <img src={purpleRhombus} alt="purpleRhombus" className="rhombus" />
           </button>
         ) : null}
-
       </div>
     </div>
   ));
 
   // console.log("displayWorkoutData", displayWorkoutData);
 
-
-
-
   return (
     <div>
       <div>WorkoutSession</div>
-      <StopWatch />
-      <RestTimer
-      exercisesInWorkout={exercisesInWorkout}
+      <StopWatch
+      active={active}
       />
+      <RestTimer exercisesInWorkout={exercisesInWorkout} />
       {workoutName}
       {displayWorkoutData}
+      <ToastContainer />
+
     </div>
   );
 };

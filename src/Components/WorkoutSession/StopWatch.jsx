@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const StopWatch = () => {
+const StopWatch = ({active}) => {
   const [count, setCount] = useState(0);
-  const [active, setActive] = useState(false);
   const [intervalId, setIntervalId] = useState(null); 
 
   useEffect(() => {
@@ -39,20 +38,7 @@ const StopWatch = () => {
 
   return (
     <div>
-      <button
-        onClick={() => {
-          setActive(true);
-        }}
-      >
-        Start
-      </button>
-      <button
-        onClick={() => {
-          setActive(false);
-        }}
-      >
-        Stop
-      </button>
+  
       <div>Workout Timer: {formatTime(count)}</div>
 
     </div>
