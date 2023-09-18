@@ -8,6 +8,7 @@ const ViewExercises = () => {
   const workoutID = location.state?.workoutId;
 
   const [exercises, setExercises] = useState([]);
+  console.log("Exercises", exercises)
   useEffect(() => {
     if (workoutID) {
       getExercisesInWorkout(workoutID)
@@ -27,8 +28,10 @@ const ViewExercises = () => {
       {exercises.map((exercises, index) => (
         <div  key={index}>
           <p>{exercises.exercise.name}</p>
-          <p>SETS: {exercises.sets}</p>
-           <p>REPS:{exercises.reps}</p>
+          <p>Sets: {exercises.sets}</p>
+           <p>Reps: {exercises.reps}</p>
+           <p>Rest: {exercises.rest_timer} seconds</p>
+
           
         </div>
       ))}
