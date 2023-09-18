@@ -7,7 +7,6 @@ import purpleRhombus from "../CSS/Icons/purpleRhombus.png";
 import RestTimer from "../Components/WorkoutSession/RestTimer";
 import { ToastContainer, toast } from "react-toastify";
 
-
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
   console.log("buttonColor", buttonColor);
@@ -15,63 +14,50 @@ const WorkoutSession = () => {
   // console.log("expandDiv", expandDiv);
   const [id, setId] = useState(null);
   const [setsComplete, setSetsComplete] = useState(0);
-  console.log("setsComplete", setsComplete);
-  const [exercisesCompleted, setExercisesCompleted] = useState(0)
-console.log("exercisesCompleted", exercisesCompleted)
-const [active, setActive] = useState(false);
-
+  const [exercisesCompleted, setExercisesCompleted] = useState(0);
+  const [active, setActive] = useState(false);
 
   const location = useLocation();
   const exercisesInWorkout = location.state?.exercisesInWorkout;
   // console.log("exercisesInWorkout", exercisesInWorkout);
-
-  console.log("EID");
 
   useEffect(() => {
     setId(exercisesInWorkout[0].id);
   }, [exercisesInWorkout]);
 
   const exerciseButton = (value, eID, sets) => {
-    console.log("E", eID);
-    console.log("sets", sets);
-
-if (value === "red" && exercisesCompleted === 0) {
-  setActive(true);
-}
+    if (value === "red" && exercisesCompleted === 0) {
+      setActive(true);
+    }
 
     setButtonColor("");
     value === "purple" &&
       setSetsComplete((prevSetsComplete) => (prevSetsComplete += 1));
 
-    
-
     if (sets === setsComplete) {
       value === "green" && setId(eID + 1);
       setSetsComplete(0);
-      setExercisesCompleted(prevExercisesCompleted => prevExercisesCompleted +=1 )
+      setExercisesCompleted(
+        (prevExercisesCompleted) => (prevExercisesCompleted += 1)
+      );
     }
 
-    const numberOfExercises = exercisesInWorkout.length -1
-    console.log("numberOfExercises", numberOfExercises);
+    const numberOfExercises = exercisesInWorkout.length - 1;
 
     if (exercisesCompleted === numberOfExercises && value === "green") {
-
-      toast.success(
-        "Workout Complete!!",
-        {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        }
-      );
+      toast.success("Workout Complete!!", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       setActive(false);
 
-      setExercisesCompleted(0)
+      setExercisesCompleted(0);
     }
 
     setButtonColor(value);
@@ -148,14 +134,11 @@ whilst the button is red, the set timer will be running, when the red button is 
   return (
     <div>
       <div>WorkoutSession</div>
-      <StopWatch
-      active={active}
-      />
+      <StopWatch active={active} />
       <RestTimer exercisesInWorkout={exercisesInWorkout} />
       {workoutName}
       {displayWorkoutData}
       <ToastContainer />
-
     </div>
   );
 };
