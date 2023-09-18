@@ -4,6 +4,7 @@ import StopWatch from "../Components/WorkoutSession/StopWatch";
 import greenRhombus from "../CSS/Icons/GreenRhombus.png";
 import redRhombus from "../CSS/Icons/redRhombus.png";
 import purpleRhombus from "../CSS/Icons/purpleRhombus.png";
+import RestTimer from "../Components/WorkoutSession/RestTimer";
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
@@ -76,6 +77,9 @@ const WorkoutSession = () => {
     <div>
       <div>WorkoutSession</div>
       <StopWatch />
+      <RestTimer
+      exercisesInWorkout={exercisesInWorkout}
+      />
       {workoutName}
       {displayWorkoutData}
     </div>
