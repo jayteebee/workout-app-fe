@@ -83,7 +83,7 @@ console.log("count", count)
   };
 
   const workoutName = (
-    <h2>Workout Name: {exercisesInWorkout[0].workout_name}</h2>
+    <h2>Workout: {exercisesInWorkout[0].workout_name}</h2>
   );
 
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
@@ -148,7 +148,6 @@ whilst the button is red, the set timer will be running, when the red button is 
 
   return (
     <div>
-      <div>WorkoutSession</div>
       <StopWatch active={active} />
       <RestTimer 
       restTimerExercise={restTimerExercise}

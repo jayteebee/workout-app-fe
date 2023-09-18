@@ -39,7 +39,7 @@ const StopWatch = ({active}) => {
   return (
     <div>
   
-      <div>Workout Timer: {formatTime(count)}</div>
+      <h2>Workout Timer: {formatTime(count)}</h2>
 
     </div>
   );

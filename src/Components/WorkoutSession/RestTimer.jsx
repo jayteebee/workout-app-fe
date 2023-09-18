@@ -52,7 +52,7 @@ setCount(restTime[0])
   return (
     <div>
 
-      <div>Rest Timer: {formatTime(count)}</div>
+      <h2>Rest: {formatTime(count)}</h2>
 
     </div>
   );
