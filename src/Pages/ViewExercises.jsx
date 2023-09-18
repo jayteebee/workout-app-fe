@@ -26,11 +26,13 @@ const ViewExercises = () => {
       <h3 className="pageHeader">Exercises</h3>
       <div className="scrollableDivForViewExercises">
         {exercises.map((exercises, index) => (
-          <div key={index}>
+          <div key={index} className="exerciseSession">
+          <div> 
             <p>{exercises.exercise.name}</p>
             <p>Sets: {exercises.sets}</p>
             <p>Reps: {exercises.reps}</p>
             <p>Rest: {exercises.rest_timer} seconds</p>
+            </div>
           </div>
         ))}
       </div>
