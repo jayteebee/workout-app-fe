@@ -2,9 +2,10 @@
     position: absolute;
     top: 2%;
     right: 5%;
-    background-color: rgba(11, 12, 16, 0.3);
+    background-color: rgba(11, 12, 16, 0.7);
     width: 25vw;
     border-radius: 10%;
+    z-index: 10;
 }
 
 .colored-hamburger {
