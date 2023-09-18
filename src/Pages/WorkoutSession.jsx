@@ -13,7 +13,7 @@ const WorkoutSession = () => {
 
   const location = useLocation();
   const exercisesInWorkout = location.state?.exercisesInWorkout;
-  // console.log("exercisesInWorkout", exercisesInWorkout);
+  console.log("exercisesInWorkout", exercisesInWorkout);
 
   const exerciseButton = (value) => {
     setButtonColor("");
