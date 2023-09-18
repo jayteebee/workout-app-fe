@@ -6,9 +6,11 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
   const [sets, setSets] = useState(null);
   const [reps, setReps] = useState(null);
   const [weight, setWeight] = useState(null);
+  const [rest, setRest] = useState(null);
+
 
   useEffect(() => {
-    if (sets !== null || reps !== null || weight !== null) {
+    if (sets !== null || reps !== null || weight !== null || rest !== null) {
       setExerciseParameters((prevParameters) => ({
         ...prevParameters,
 
@@ -20,9 +22,11 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
         sets: sets !== null ? sets.value : prevParameters.sets,
         reps: reps !== null ? reps.value : prevParameters.reps,
         weight: weight !== null ? weight.value : prevParameters.weight,
+        rest: rest !== null ? rest.value : prevParameters.rest,
+
       }));
     }
-  }, [sets, reps, weight, searchedExerciseName, searchedMuscleGroup]);
+  }, [sets, reps, weight, rest, searchedExerciseName, searchedMuscleGroup]);
 
   let setOptions = [];
   for (let i = 0; i < 21; i++) {
@@ -55,6 +59,10 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
 
   const updateWeight = (weight) => {
     setWeight(weight);
+  };
+
+  const updateRest = (rest) => {
+    setRest(rest);
   };
 
   return (
@@ -129,7 +137,30 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
                 color: "#66fcf1", 
               }),
             }}
-          />{" "}
+          />
+          <h3 className="subHeader">Rest</h3>
+          <ReactSelect
+            placeholder="Rest"
+            options={restOptions}
+            value={rest}
+            onChange={updateRest}
+            styles={{
+              control: (baseStyles) => ({
+                ...baseStyles,
+                width: "7vw",
+              }),
+              menu: (baseStyles) => ({
+                ...baseStyles,
+                backgroundColor: "rgba(11, 12, 16, 0.3)",
+                width: "7vw"
+              }),
+              option: (baseStyles, { isFocused }) => ({
+                ...baseStyles,
+                backgroundColor: isFocused ? "#1F2833" :"rgba(11, 12, 16, 0.6)" , 
+                color: "#66fcf1", 
+              }),
+            }}
+          />
         </div>
       ) : null}
     </div>

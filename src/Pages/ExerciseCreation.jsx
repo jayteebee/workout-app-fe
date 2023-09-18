@@ -21,6 +21,7 @@ const ExerciseCreation = () => {
     sets: 0,
     reps: 0,
     weight: 0,
+    rest: 0
   });
 
   const addExercise = async () => {
