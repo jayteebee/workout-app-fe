@@ -16,8 +16,12 @@ const WorkoutSession = () => {
   const [setsComplete, setSetsComplete] = useState(0);
   const [exercisesCompleted, setExercisesCompleted] = useState(0);
   const [active, setActive] = useState(false);
+  const [startRestTimer, setStartRestTimer] = useState(false);
   const [restTimerExercise, setRestTimerExercise] = useState([])
 console.log("restTimerExercise", restTimerExercise)
+const [count, setCount] = useState(0);
+console.log("count", count)
+
 
   const location = useLocation();
   const exercisesInWorkout = location.state?.exercisesInWorkout;
@@ -27,48 +31,51 @@ console.log("restTimerExercise", restTimerExercise)
     setId(exercisesInWorkout[0].id);
   }, [exercisesInWorkout]);
 
-  const exerciseButton = (value, eID, sets) => {
-console.log("eID", eID)
+    const exerciseButton = (value, eID, sets) => {
+        console.log("eID", eID)
 
-let restTimerExerciseFilter = exercisesInWorkout.filter(exercise =>  exercise.id === eID)
-console.log("restTimerExerciseFilter", restTimerExerciseFilter)
-setRestTimerExercise(restTimerExerciseFilter)
+          let restTimerExerciseFilter = exercisesInWorkout.filter(exercise =>  exercise.id === eID)
+          console.log("restTimerExerciseFilter", restTimerExerciseFilter)
 
 
-    if (value === "red" && exercisesCompleted === 0) {
-      setActive(true);
-    }
+          if (value === "red" && exercisesCompleted === 0) {
+            setActive(true);
+          }
 
-    value === "purple" &&
-      setSetsComplete((prevSetsComplete) => (prevSetsComplete += 1));
+          if (value === "purple") {
+            setSetsComplete((prevSetsComplete) => (prevSetsComplete += 1));
+            setStartRestTimer(true)
+          }
 
-    if (sets === setsComplete) {
-      value === "green" && setId(eID + 1);
-      setSetsComplete(0);
-      setExercisesCompleted(
-        (prevExercisesCompleted) => (prevExercisesCompleted += 1)
-      );
-    }
+          value === "red" && setRestTimerExercise(restTimerExerciseFilter)
 
-    const numberOfExercises = exercisesInWorkout.length - 1;
+          if (sets === setsComplete) {
+            value === "green" && setId(eID + 1);
+            setSetsComplete(0);
+            setExercisesCompleted(
+              (prevExercisesCompleted) => (prevExercisesCompleted += 1)
+            );
+          }
 
-    if (exercisesCompleted === numberOfExercises && value === "green") {
-      toast.success("Workout Complete!!", {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      setActive(false);
+          const numberOfExercises = exercisesInWorkout.length - 1;
 
-      setExercisesCompleted(0);
-    }
+          if (exercisesCompleted === numberOfExercises && value === "green") {
+            toast.success("Workout Complete!!", {
+              position: "bottom-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            setActive(false);
 
-    setButtonColor(value);
+            setExercisesCompleted(0);
+          }
+
+          setButtonColor(value);
   };
 
   const moreExerciseInfo = () => {
@@ -128,7 +135,7 @@ whilst the button is red, the set timer will be running, when the red button is 
         {buttonColor === "purple" && id === exercise.id ? (
           <button
             className="button"
-            onClick={() => exerciseButton("green", exercise.id, exercise.sets)}
+            {...count === 0 && exerciseButton("green", exercise.id, exercise.sets)}
           >
             <img src={purpleRhombus} alt="purpleRhombus" className="rhombus" />
           </button>
@@ -145,6 +152,10 @@ whilst the button is red, the set timer will be running, when the red button is 
       <StopWatch active={active} />
       <RestTimer 
       restTimerExercise={restTimerExercise}
+      startRestTimer={startRestTimer}
+      setStartRestTimer={setStartRestTimer}
+      count={count}
+      setCount={setCount}
       />
       {workoutName}
       {displayWorkoutData}

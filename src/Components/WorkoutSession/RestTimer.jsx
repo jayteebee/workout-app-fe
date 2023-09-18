@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 
-const RestTimer = ({ restTimerExercise }) => {
-  const [count, setCount] = useState(0);
-  const [active, setActive] = useState(false);
+const RestTimer = ({ restTimerExercise, startRestTimer, setStartRestTimer, count, setCount }) => {
   const [intervalId, setIntervalId] = useState(null);
-  const [exercises, setExercises] = useState(null);
+  const [exercises, setExercises] = useState([]);
   console.log("exercises in rest", exercises);
 
   useEffect(() => {
     setExercises(restTimerExercise);
   }, [restTimerExercise]);
 
+useEffect(() => {
+let restTime = exercises.map((e) => (e.rest_timer))
+console.log("restTime", restTime)
+setCount(restTime[0])
+}, [exercises])
+
+
   useEffect(() => {
-    if (active) {
+    if (startRestTimer) {
       const id = setInterval(() => {
         setCount((prevState) => (prevState -= 1));
       }, 1000);
@@ -20,17 +25,35 @@ const RestTimer = ({ restTimerExercise }) => {
     } else {
       clearInterval(intervalId);
     }
-
+    
     return () => {
       if (intervalId) {
         clearInterval(intervalId);
       }
     };
-  }, [active]);
+  }, [startRestTimer]);
+
+  useEffect(() => {
+    if (count === 0) {
+      setStartRestTimer(false);
+    }
+  }, [count]);
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    return `${String(minutes).padStart(
+      2,
+      "0"
+    )}:${String(remainingSeconds).padStart(2, "0")}`;
+  };
+
 
   return (
     <div>
-      <h2>rest timer</h2>
+
+      <div>Rest Timer: {formatTime(count)}</div>
+
     </div>
   );
 };
