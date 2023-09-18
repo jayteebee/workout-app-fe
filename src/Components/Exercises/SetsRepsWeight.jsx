@@ -39,6 +39,12 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
     weightOptions.push({ label: `${i}`, value: i });
   }
 
+  let restOptions = [];
+  for (let i = 0; i < 480; i += 5) {
+    restOptions.push({ label: `${i}`, value: i });
+  }
+
+
   const updateSets = (sets) => {
     setSets(sets);
   };
