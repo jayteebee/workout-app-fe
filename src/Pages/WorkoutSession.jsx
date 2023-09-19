@@ -18,9 +18,7 @@ const WorkoutSession = () => {
   const [active, setActive] = useState(false);
   const [startRestTimer, setStartRestTimer] = useState(false);
   const [restTimerExercise, setRestTimerExercise] = useState([])
-console.log("restTimerExercise", restTimerExercise)
-const [count, setCount] = useState(0);
-console.log("count", count)
+  const [count, setCount] = useState(0);  
 
 
   const location = useLocation();
@@ -59,7 +57,8 @@ console.log("count", count)
 
           const numberOfExercises = exercisesInWorkout.length - 1;
 
-          if (exercisesCompleted === numberOfExercises && value === "green") {
+          console.log("exercisesCompleted", exercisesCompleted, "numberOfExercises", numberOfExercises, "sets", sets, "setsComplete", setsComplete)
+          if (exercisesCompleted === numberOfExercises && sets === setsComplete && value === "green") {
             toast.success("Workout Complete!!", {
               position: "bottom-center",
               autoClose: 5000,

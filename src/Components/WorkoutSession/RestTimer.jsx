@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 const RestTimer = ({ restTimerExercise, startRestTimer, setStartRestTimer, count, setCount }) => {
   const [intervalId, setIntervalId] = useState(null);
   const [exercises, setExercises] = useState([]);
-  console.log("exercises in rest", exercises);
 
   useEffect(() => {
     setExercises(restTimerExercise);
@@ -11,7 +10,6 @@ const RestTimer = ({ restTimerExercise, startRestTimer, setStartRestTimer, count
 
 useEffect(() => {
 let restTime = exercises.map((e) => (e.rest_timer))
-console.log("restTime", restTime)
 setCount(restTime[0])
 }, [exercises])
 
@@ -52,7 +50,7 @@ setCount(restTime[0])
   return (
     <div>
 
-      <h2>Rest: {formatTime(count)}</h2>
+      <h2>Rest: {formatTime(count)}</h2> 
 
     </div>
   );
