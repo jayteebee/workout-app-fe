@@ -10,6 +10,7 @@ import { createWorkoutSession, editWorkoutSessionByID } from "../API/WorkoutSess
 import { parseJwt } from "../API/Authentication/parseJwt";
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { createExerciseSession } from "../API/ExerciseSession/ExerciseSession";
+import { createSessionLogs, getAllSessionLogs } from "../API/SessionLogs/SessionLogs";
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
@@ -194,6 +195,8 @@ const workoutSessionId = workoutSession.id
 useEffect(() => {
 if (workoutSessionId) {
   editWorkoutSessionByID(workoutSessionId, {total_duration: stopWatchCount} )
+  createSessionLogs(workoutSession)
+  .then((data) => console.log("dayter", data))
 } 
 }, [workoutComplete, workoutSession])
 
