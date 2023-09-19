@@ -36,8 +36,11 @@ const [exerciseSessionData, setExerciseSessionData] = useState({
   weight_used: weightAchieved,
   set_timer: 0
 })
-console.log("exerciseSessionData", exerciseSessionData)
+// console.log("exerciseSessionData", exerciseSessionData)
+const [metricForm, setMetricForm] = useState(false)
+// console.log("metricForm", metricForm)
 
+console.log("*** id", id)
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -69,6 +72,7 @@ console.log("exerciseSessionData", exerciseSessionData)
     setId(exercisesInWorkout[0].id);
   }, [exercisesInWorkout]);
 
+
     const exerciseButton = (value, eID, sets) => {
 
           let restTimerExerciseFilter = exercisesInWorkout.filter(exercise =>  exercise.id === eID)
@@ -89,17 +93,22 @@ console.log("exerciseSessionData", exerciseSessionData)
           if (value === "purple") {
             setSetsComplete((prevSetsComplete) => (prevSetsComplete += 1));
             setStartRestTimer(true)
+            setMetricForm(true)
           }
 
           value === "red" && setRestTimerExercise(restTimerExerciseFilter)
 
-          if (sets === setsComplete) {
-            value === "green" && setId(eID + 1);
+          console.log("sets", sets, "setsComplete", setsComplete, "metricForm", metricForm, "value", value, "ID state", id, "eID", eID, "exercisesCompleted", exercisesCompleted)
+
+          if (sets === setsComplete && metricForm === false ) {
+            setId(eID + 1);
             setSetsComplete(0);
             setExercisesCompleted(
               (prevExercisesCompleted) => (prevExercisesCompleted += 1)
             );
-          }
+          } 
+          
+
 
           const numberOfExercises = exercisesInWorkout.length - 1;
 
@@ -120,6 +129,7 @@ console.log("exerciseSessionData", exerciseSessionData)
           }
 
           setButtonColor(value);
+
   };
 
   const moreExerciseInfo = () => {
@@ -129,6 +139,7 @@ console.log("exerciseSessionData", exerciseSessionData)
   const workoutName = (
     <h2>Workout: {exercisesInWorkout[0].workout_name}</h2>
   );
+
 
 const updateExerciseMetrics = (e) => {
 let name = e.target.name
@@ -156,9 +167,9 @@ const handleWeightAndRepsSubmit = (e) => {
   e.preventDefault();
   console.log("EX SESH DATA", exerciseSessionData)
   createExerciseSession(exerciseSessionData)
-  .then(() => {})
+  .then((data) => console.log("Data:", data))
   .catch((err) => console.log("Error with createExerciseSession API Call:", err))
-
+  setMetricForm(false)
 }
 
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
@@ -181,7 +192,6 @@ const handleWeightAndRepsSubmit = (e) => {
           <p>{exercise.exercise.name}</p>
           <p>Sets {exercise.sets}</p>
           <p>Reps {exercise.reps}</p>
-
           <p>Weight: {exercise.weight}kg</p>
         </div>
 
@@ -220,7 +230,7 @@ const handleWeightAndRepsSubmit = (e) => {
           </button>
         ) : null}
         
-        {(buttonColor === "purple" || buttonColor === "green") && setsComplete > 0 && id === exercise.id && (
+        {(buttonColor === "purple" || buttonColor === "green") && setsComplete > 0 && id === exercise.id && metricForm &&  (
           <div>
           <form onSubmit={handleWeightAndRepsSubmit}>
             <MDBInput
@@ -260,6 +270,7 @@ const handleWeightAndRepsSubmit = (e) => {
       {workoutName}
       {displayWorkoutData}
       <ToastContainer />
+
     </div>
   );
 };
