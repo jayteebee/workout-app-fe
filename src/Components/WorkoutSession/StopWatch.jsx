@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const StopWatch = ({active}) => {
-  const [count, setCount] = useState(0);
+const StopWatch = ({active, stopWatchCount, setStopWatchCount}) => {
   const [intervalId, setIntervalId] = useState(null); 
 
   useEffect(() => {
 
     if (active) {
       const id = setInterval(() => {
-        setCount((prevState) => (prevState += 1));
+        setStopWatchCount((prevState) => (prevState += 1));
       }, 1000);
       setIntervalId(id)
     } else {
@@ -35,11 +34,10 @@ const StopWatch = ({active}) => {
     )}:${String(remainingSeconds).padStart(2, "0")}`;
   };
 
-
   return (
     <div>
   
-      <h2>Workout Timer: {formatTime(count)}</h2>
+      <h2>Workout Timer: {formatTime(stopWatchCount)}</h2>
 
     </div>
   );

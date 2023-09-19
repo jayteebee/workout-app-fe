@@ -32,7 +32,7 @@ export const createWorkoutSession = async (workoutSessionData) => {
 // PUT REQUESTS
 
 // EDIT WORKOUT SESSION BY ID - Working!
-export const editWorkoutSessionByID = async (workoutSessionID, workoutSessionData = {date: "2023-06-24T17:18:33.548Z"}) => {
+export const editWorkoutSessionByID = async (workoutSessionID, workoutSessionData) => {
     const r = await axiosInstanceWithToken.put(`/workout_session/${workoutSessionID}`, workoutSessionData);
     return r.data;
 };

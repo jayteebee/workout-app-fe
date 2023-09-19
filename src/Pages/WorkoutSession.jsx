@@ -6,13 +6,14 @@ import redRhombus from "../CSS/Icons/redRhombus.png";
 import purpleRhombus from "../CSS/Icons/purpleRhombus.png";
 import RestTimer from "../Components/WorkoutSession/RestTimer";
 import { ToastContainer, toast } from "react-toastify";
-import { createWorkoutSession } from "../API/WorkoutSession/WorkoutSession";
+import { createWorkoutSession, editWorkoutSessionByID } from "../API/WorkoutSession/WorkoutSession";
 import { parseJwt } from "../API/Authentication/parseJwt";
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { createExerciseSession } from "../API/ExerciseSession/ExerciseSession";
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
+  const [stopWatchCount, setStopWatchCount] = useState(0);
   // console.log("buttonColor", buttonColor);
   const [expandDiv, setExpandDiv] = useState(false);
   // console.log("expandDiv", expandDiv);
@@ -25,7 +26,7 @@ const WorkoutSession = () => {
   const [count, setCount] = useState(0);  
   const [userID, setUserID] = useState(null)
   const [workoutSession, setWorkoutSession] = useState([])
-// console.log("workoutSession", workoutSession)
+console.log("workoutSession", workoutSession)
 const [repsAchieved, setRepsAchieved] = useState(0)
 const [weightAchieved, setWeightAchieved] = useState(0)
 const [exerciseSessionData, setExerciseSessionData] = useState({
@@ -39,6 +40,8 @@ const [exerciseSessionData, setExerciseSessionData] = useState({
 // console.log("exerciseSessionData", exerciseSessionData)
 const [metricForm, setMetricForm] = useState(false)
 // console.log("metricForm", metricForm)
+const [currentExerciseButton, setCurrentExerciseButton ] = useState({})
+const [workoutComplete, setWorkoutComplete] = useState(false)
 
 console.log("*** id", id)
 
@@ -74,8 +77,13 @@ console.log("*** id", id)
 
 
     const exerciseButton = (value, eID, sets) => {
+      setCurrentExerciseButton({
+        value: value,
+        eID: eID,
+        sets: sets
+      })
 
-          let restTimerExerciseFilter = exercisesInWorkout.filter(exercise =>  exercise.id === eID)
+      let restTimerExerciseFilter = exercisesInWorkout.filter(exercise =>  exercise.id === eID)
 
           if (value === "red" && setsComplete === 0 && exercisesCompleted === 0 ) {
             createWorkoutSession(workoutSessionData)
@@ -90,6 +98,8 @@ console.log("*** id", id)
             setActive(true);
           }
 
+          console.log("sets", sets, "setsComplete", setsComplete, "ID state", id, "eID", eID, "exercisesCompleted", exercisesCompleted)
+
           if (value === "purple") {
             setSetsComplete((prevSetsComplete) => (prevSetsComplete += 1));
             setStartRestTimer(true)
@@ -98,21 +108,20 @@ console.log("*** id", id)
 
           value === "red" && setRestTimerExercise(restTimerExerciseFilter)
 
-          console.log("sets", sets, "setsComplete", setsComplete, "metricForm", metricForm, "value", value, "ID state", id, "eID", eID, "exercisesCompleted", exercisesCompleted)
 
-          if (sets === setsComplete && metricForm === false ) {
-            setId(eID + 1);
-            setSetsComplete(0);
-            setExercisesCompleted(
-              (prevExercisesCompleted) => (prevExercisesCompleted += 1)
-            );
-          } 
-          
-
+          // if (sets === setsComplete && metricForm === false ) {
+          //   setId(eID + 1);
+          //   setSetsComplete(0);
+          //   setExercisesCompleted(
+          //     (prevExercisesCompleted) => (prevExercisesCompleted += 1)
+          //   );
+          // } 
+        
 
           const numberOfExercises = exercisesInWorkout.length - 1;
 
           if (exercisesCompleted === numberOfExercises && sets === setsComplete && value === "green") {
+            setWorkoutComplete(true)
             toast.success("Workout Complete!!", {
               position: "bottom-center",
               autoClose: 5000,
@@ -127,9 +136,7 @@ console.log("*** id", id)
 
             setExercisesCompleted(0);
           }
-
           setButtonColor(value);
-
   };
 
   const moreExerciseInfo = () => {
@@ -161,7 +168,7 @@ useEffect(() => {
     weight_used: weightAchieved,
     set_timer: 0
   })
-}, [weightAchieved])
+}, [weightAchieved, setsComplete, repsAchieved, id])
 
 const handleWeightAndRepsSubmit = (e) => {
   e.preventDefault();
@@ -170,7 +177,25 @@ const handleWeightAndRepsSubmit = (e) => {
   .then((data) => console.log("Data:", data))
   .catch((err) => console.log("Error with createExerciseSession API Call:", err))
   setMetricForm(false)
+
+const {value, eID, sets} = currentExerciseButton
+
+  if (sets === setsComplete ) {
+    setId(eID + 1);
+    setSetsComplete(0);
+    setExercisesCompleted(
+      (prevExercisesCompleted) => (prevExercisesCompleted += 1)
+    );
+  } 
 }
+
+const workoutSessionId = workoutSession.id
+
+useEffect(() => {
+if (workoutSessionId) {
+  editWorkoutSessionByID(workoutSessionId, {total_duration: stopWatchCount} )
+} 
+}, [workoutComplete, workoutSession])
 
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
     <div key={exercise.id} className="exerciseSession">
@@ -259,7 +284,7 @@ const handleWeightAndRepsSubmit = (e) => {
 
   return (
     <div>
-      <StopWatch active={active} />
+      <StopWatch active={active} stopWatchCount={stopWatchCount} setStopWatchCount={setStopWatchCount} />
       <RestTimer 
       restTimerExercise={restTimerExercise}
       startRestTimer={startRestTimer}
@@ -276,13 +301,3 @@ const handleWeightAndRepsSubmit = (e) => {
 };
 
 export default WorkoutSession;
-
-
-
-
-// {(buttonColor === "purple" || buttonColor === "green") && setsComplete > 0 && (
-//   <div>
-//     <MDBInput></MDBInput>
-//     <MDBInput></MDBInput>
-//   </div>
-// )}
