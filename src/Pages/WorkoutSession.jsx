@@ -6,6 +6,8 @@ import redRhombus from "../CSS/Icons/redRhombus.png";
 import purpleRhombus from "../CSS/Icons/purpleRhombus.png";
 import RestTimer from "../Components/WorkoutSession/RestTimer";
 import { ToastContainer, toast } from "react-toastify";
+import { createWorkoutSession } from "../API/WorkoutSession/WorkoutSession";
+import { parseJwt } from "../API/Authentication/parseJwt";
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
@@ -19,22 +21,50 @@ const WorkoutSession = () => {
   const [startRestTimer, setStartRestTimer] = useState(false);
   const [restTimerExercise, setRestTimerExercise] = useState([])
   const [count, setCount] = useState(0);  
+  const [userID, setUserID] = useState(null)
 
+
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    const decodedToken = parseJwt(token);
+    const userID = decodedToken.sub;
+    setUserID(userID);
+  }, []);
+
+  useEffect(() => {
+    setWorkoutSessionData((prevData) => ({
+      ...prevData,
+      user_id: userID
+    }))
+  }, [userID])
 
   const location = useLocation();
   const exercisesInWorkout = location.state?.exercisesInWorkout;
   // console.log("exercisesInWorkout", exercisesInWorkout);
+  const routineWorkoutID = location.state?.rwID
+
+  const [workoutSessionData, setWorkoutSessionData] = useState({
+    user_id: null,
+    routine_workout_id: routineWorkoutID,
+    date: new Date()
+  })
+// console.log("workoutSessionData", workoutSessionData)
 
   useEffect(() => {
     setId(exercisesInWorkout[0].id);
   }, [exercisesInWorkout]);
 
     const exerciseButton = (value, eID, sets) => {
-        console.log("eID", eID)
 
           let restTimerExerciseFilter = exercisesInWorkout.filter(exercise =>  exercise.id === eID)
-          console.log("restTimerExerciseFilter", restTimerExerciseFilter)
+          // console.log("restTimerExerciseFilter", restTimerExerciseFilter)
 
+          if (value === "red" && setsComplete === 0 && exercisesCompleted === 0) {
+            createWorkoutSession(workoutSessionData)
+            .then((res) => console.log("response:",  res))
+            .catch((err) => console.log("createWorkoutSession API Call Failed:", err))
+          }
 
           if (value === "red" && exercisesCompleted === 0) {
             setActive(true);
@@ -57,7 +87,6 @@ const WorkoutSession = () => {
 
           const numberOfExercises = exercisesInWorkout.length - 1;
 
-          console.log("exercisesCompleted", exercisesCompleted, "numberOfExercises", numberOfExercises, "sets", sets, "setsComplete", setsComplete)
           if (exercisesCompleted === numberOfExercises && sets === setsComplete && value === "green") {
             toast.success("Workout Complete!!", {
               position: "bottom-center",

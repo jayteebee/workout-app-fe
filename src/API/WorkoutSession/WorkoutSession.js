@@ -21,7 +21,7 @@ export const getWorkoutSessionById = async (workoutSessionID) => {
 // POST REQUESTS
 
 // CREATE WORKOUT SESSION - Working!
-export const createWorkoutSession = async (workoutSessionData = {user_id:5, workout_id:5}) => {
+export const createWorkoutSession = async (workoutSessionData) => {
     const r = await axiosInstanceWithToken.post(`/workout_session`, workoutSessionData);
     return r.data;
 };

@@ -13,6 +13,7 @@ const HomeScreen = ({ routineID }) => {
   const [sortedSchedule, setSortedSchedule] = useState([]);
   const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
   console.log("exercisesInWorkout", exercisesInWorkout);
+  const [idOfRoutineWorkout, setIdOfRoutineWorkout] = useState(null)
 
   const navigate = useNavigate();
 
@@ -53,7 +54,7 @@ const HomeScreen = ({ routineID }) => {
 
   // className="calendar"
 
-  const startWorkout = () => {
+  const startWorkout = (rwID) => {
     const currentDate = new Date();
     const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
 
@@ -62,7 +63,7 @@ const HomeScreen = ({ routineID }) => {
     );
     if (hasEventOnCurrentDay) {
       navigate("/Session", {
-        state: { exercisesInWorkout: exercisesInWorkout },
+        state: { exercisesInWorkout: exercisesInWorkout, rwID: rwID },
       });
       console.log("success");
     } else {
@@ -73,7 +74,8 @@ const HomeScreen = ({ routineID }) => {
   const handleEventClick = async (eventClickInfo) => {
     const routineWorkoutId =
       eventClickInfo.event.extendedProps.routineWorkoutId;
-    console.log("routineWorkoutId", routineWorkoutId);
+    // console.log("routineWorkoutId", routineWorkoutId);
+    setIdOfRoutineWorkout(routineWorkoutId)
 
     await getExercisesInWorkout(routineWorkoutId)
       .then((data) => setExercisesInWorkout(data))
@@ -84,7 +86,7 @@ const HomeScreen = ({ routineID }) => {
 
   useEffect(() => {
     if (exercisesInWorkout.length > 0) {
-      startWorkout()
+      startWorkout(idOfRoutineWorkout)
     }
   }, [exercisesInWorkout])
 
