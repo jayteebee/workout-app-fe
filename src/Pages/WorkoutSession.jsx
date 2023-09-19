@@ -8,6 +8,8 @@ import RestTimer from "../Components/WorkoutSession/RestTimer";
 import { ToastContainer, toast } from "react-toastify";
 import { createWorkoutSession } from "../API/WorkoutSession/WorkoutSession";
 import { parseJwt } from "../API/Authentication/parseJwt";
+import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
+import { createExerciseSession } from "../API/ExerciseSession/ExerciseSession";
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
@@ -22,7 +24,19 @@ const WorkoutSession = () => {
   const [restTimerExercise, setRestTimerExercise] = useState([])
   const [count, setCount] = useState(0);  
   const [userID, setUserID] = useState(null)
-
+  const [workoutSession, setWorkoutSession] = useState([])
+// console.log("workoutSession", workoutSession)
+const [repsAchieved, setRepsAchieved] = useState(0)
+const [weightAchieved, setWeightAchieved] = useState(0)
+const [exerciseSessionData, setExerciseSessionData] = useState({
+  workout_session_id: workoutSession.id,
+  exercise_id: id,
+  sets_completed: setsComplete,
+  reps_completed: repsAchieved,
+  weight_used: weightAchieved,
+  set_timer: 0
+})
+console.log("exerciseSessionData", exerciseSessionData)
 
 
   useEffect(() => {
@@ -58,11 +72,13 @@ const WorkoutSession = () => {
     const exerciseButton = (value, eID, sets) => {
 
           let restTimerExerciseFilter = exercisesInWorkout.filter(exercise =>  exercise.id === eID)
-          // console.log("restTimerExerciseFilter", restTimerExerciseFilter)
 
-          if (value === "red" && setsComplete === 0 && exercisesCompleted === 0) {
+          if (value === "red" && setsComplete === 0 && exercisesCompleted === 0 ) {
             createWorkoutSession(workoutSessionData)
-            .then((res) => console.log("response:",  res))
+            .then((data) => {
+              setWorkoutSession(data);
+              console.log("response:",  data)
+            })
             .catch((err) => console.log("createWorkoutSession API Call Failed:", err))
           }
 
@@ -114,6 +130,37 @@ const WorkoutSession = () => {
     <h2>Workout: {exercisesInWorkout[0].workout_name}</h2>
   );
 
+const updateExerciseMetrics = (e) => {
+let name = e.target.name
+let value = e.target.value
+
+if (name === "reps") {
+  setRepsAchieved(value)
+}
+if (name === "weight") {
+  setWeightAchieved(value)
+}}
+
+useEffect(() => {
+  setExerciseSessionData({
+    workout_session_id: workoutSession.id,
+    exercise_id: id,
+    sets_completed: setsComplete,
+    reps_completed: repsAchieved,
+    weight_used: weightAchieved,
+    set_timer: 0
+  })
+}, [weightAchieved])
+
+const handleWeightAndRepsSubmit = (e) => {
+  e.preventDefault();
+  console.log("EX SESH DATA", exerciseSessionData)
+  createExerciseSession(exerciseSessionData)
+  .then(() => {})
+  .catch((err) => console.log("Error with createExerciseSession API Call:", err))
+
+}
+
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
     <div key={exercise.id} className="exerciseSession">
       <div className="exerciseInfo">
@@ -134,11 +181,13 @@ const WorkoutSession = () => {
           <p>{exercise.exercise.name}</p>
           <p>Sets {exercise.sets}</p>
           <p>Reps {exercise.reps}</p>
+
+          <p>Weight: {exercise.weight}kg</p>
         </div>
 
         {/* Green is to start the exercise, so when you're exercising, the button will be red 
-when you tap the green button, a "setTimer" will be activated which will time how long each set takes
-*/}
+            when you tap the green button, a "setTimer" will be activated which will time how long each set takes
+            */}
         {buttonColor === "green" && id === exercise.id ? (
           <button
             className="button"
@@ -148,9 +197,11 @@ when you tap the green button, a "setTimer" will be activated which will time ho
             <img src={greenRhombus} alt="greenRhombus" className="rhombus" />
           </button>
         ) : null}
+
+
         {/* Pressing Red is to say you have finished the exercise, and will turn the button purple
-whilst the button is red, the set timer will be running, when the red button is tapped to turn to purple, the set timer will stop
-*/}
+          whilst the button is red, the set timer will be running, when the red button is tapped to turn to purple, the set timer will stop
+          */}
         {buttonColor === "red" && id === exercise.id ? (
           <button
             className="button"
@@ -168,6 +219,28 @@ whilst the button is red, the set timer will be running, when the red button is 
             <img src={purpleRhombus} alt="purpleRhombus" className="rhombus" />
           </button>
         ) : null}
+        
+        {(buttonColor === "purple" || buttonColor === "green") && setsComplete > 0 && id === exercise.id && (
+          <div>
+          <form onSubmit={handleWeightAndRepsSubmit}>
+            <MDBInput
+            placeholder="Reps Achieved"
+            value={repsAchieved}
+            name="reps"
+            onChange={updateExerciseMetrics}
+            ></MDBInput>
+
+            <MDBInput
+            placeholder="Weight Achieved"
+            value={weightAchieved}
+            name="weight"
+            onChange={updateExerciseMetrics}
+            ></MDBInput>
+            <MDBBtn type="submit">Log Weight and Reps</MDBBtn>
+            </form>
+          </div>
+        )}
+
       </div>
     </div>
   ));
@@ -192,3 +265,13 @@ whilst the button is red, the set timer will be running, when the red button is 
 };
 
 export default WorkoutSession;
+
+
+
+
+// {(buttonColor === "purple" || buttonColor === "green") && setsComplete > 0 && (
+//   <div>
+//     <MDBInput></MDBInput>
+//     <MDBInput></MDBInput>
+//   </div>
+// )}
