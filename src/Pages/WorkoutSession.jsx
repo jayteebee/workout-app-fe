@@ -213,17 +213,13 @@ const workoutSessionId = workoutSession.id
 
 useEffect(() => {
 if (workoutSessionId) {
-  console.log("Meant to fire once")
   editWorkoutSessionByID(workoutSessionId, {total_duration: stopWatchCount} )
 } 
-}, [workoutComplete]) // , workoutSession
+}, [workoutComplete]) 
 
 
 useEffect(() => {
-  console.log("workoutSession.total_duration", workoutSession.total_duration)
   if (workoutSession.total_duration > 0) {
-  console.log("*** workoutSession.total_duration", workoutSession.total_duration)
-  console.log("*** workoutSession", workoutSession)
     createSessionLogs(workoutSession)
     .then((data) => console.log("dayter", data))
   }
