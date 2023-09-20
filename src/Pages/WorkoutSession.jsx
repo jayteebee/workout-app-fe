@@ -46,6 +46,7 @@ const WorkoutSession = () => {
   const [metricForm, setMetricForm] = useState(false);
   // console.log("metricForm", metricForm)
   const [currentExerciseButton, setCurrentExerciseButton] = useState({});
+  console.log("currentExerciseButton at top", currentExerciseButton)
   const [workoutComplete, setWorkoutComplete] = useState(false);
   const [setTimer, setSetTimer] = useState(false);
   const [setTimerCount, setSetTimerCount] = useState(0);
@@ -80,11 +81,13 @@ const WorkoutSession = () => {
     setId(exercisesInWorkout[0].id);
   }, [exercisesInWorkout]);
 
-  const exerciseButton = (value, eID, sets) => {
+  const exerciseButton = (value, eID, sets, exerciseID) => {
+    console.log("exerciseID in exerciseButton", exerciseID)
     setCurrentExerciseButton({
       value: value,
       eID: eID,
       sets: sets,
+      exerciseID: exerciseID
     });
 
     let restTimerExerciseFilter = exercisesInWorkout.filter(
@@ -124,10 +127,6 @@ const WorkoutSession = () => {
     setButtonColor(value);
   };
 
-  // if (setTimerCount > 0 && setTimer === false) {
-  //   console.log("Great success")
-  //   }
-
   const moreExerciseInfo = () => {
     setExpandDiv((prevState) => !prevState);
   };
@@ -147,9 +146,12 @@ const WorkoutSession = () => {
   };
 
   useEffect(() => {
+    const { value, eID, sets, exerciseID } = currentExerciseButton;
+    console.log("exerciseID in setExerciseSessionData useEffect", exerciseID)
     setExerciseSessionData({
       workout_session_id: workoutSession.id,
-      exercise_id: id,
+      // this exercise_id is wrong. It shouldn't be set to id, it should be set to a diff piece of state which holds the db id of the exercise
+      exercise_id: exerciseID,
       sets_completed: setsComplete,
       reps_completed: repsAchieved,
       weight_used: weightAchieved,
@@ -159,7 +161,7 @@ const WorkoutSession = () => {
 
   const handleWeightAndRepsSubmit = (e) => {
     e.preventDefault();
-    // console.log("EX SESH DATA", exerciseSessionData)
+    console.log("Exercise session data inside form submit", exerciseSessionData)
     createExerciseSession(exerciseSessionData)
       .then((data) => console.log("Data:", data))
       .catch((err) =>
@@ -247,7 +249,7 @@ const WorkoutSession = () => {
           <button
             className="button"
             value={i}
-            onClick={() => exerciseButton("red", exercise.id, exercise.sets)}
+            onClick={() => exerciseButton("red", exercise.id, exercise.sets, exercise.exercise.id)}
           >
             <img src={greenRhombus} alt="greenRhombus" className="rhombus" />
           </button>
@@ -256,7 +258,7 @@ const WorkoutSession = () => {
         {buttonColor === "red" && id === exercise.id ? (
           <button
             className="button"
-            onClick={() => exerciseButton("purple", exercise.id, exercise.sets)}
+            onClick={() => exerciseButton("purple", exercise.id, exercise.sets, exercise.exercise.id)}
           >
             <img src={redRhombus} alt="redRhombus" className="rhombus" />
           </button>
@@ -266,7 +268,7 @@ const WorkoutSession = () => {
           <button
             className="button"
             {...(count === 0 &&
-              exerciseButton("green", exercise.id, exercise.sets))}
+              exerciseButton("green", exercise.id, exercise.sets, exercise.exercise.id))} // need to send exercise.exercise.id at this point
           >
             <img src={purpleRhombus} alt="purpleRhombus" className="rhombus" />
           </button>
