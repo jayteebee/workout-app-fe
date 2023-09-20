@@ -19,9 +19,7 @@ import SetTimer from "../Components/WorkoutSession/SetTimer";
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
   const [stopWatchCount, setStopWatchCount] = useState(0);
-  // console.log("buttonColor", buttonColor);
   const [expandDiv, setExpandDiv] = useState(false);
-  // console.log("expandDiv", expandDiv);
   const [id, setId] = useState(null);
   const [setsComplete, setSetsComplete] = useState(0);
   const [exercisesCompleted, setExercisesCompleted] = useState(0);
@@ -31,7 +29,6 @@ const WorkoutSession = () => {
   const [count, setCount] = useState(0);
   const [userID, setUserID] = useState(null);
   const [workoutSession, setWorkoutSession] = useState([]);
-  // console.log("workoutSession", workoutSession)
   const [repsAchieved, setRepsAchieved] = useState(0);
   const [weightAchieved, setWeightAchieved] = useState(0);
   const [exerciseSessionData, setExerciseSessionData] = useState({
@@ -42,11 +39,8 @@ const WorkoutSession = () => {
     weight_used: weightAchieved,
     set_timer: 0,
   });
-  // console.log("exerciseSessionData", exerciseSessionData)
   const [metricForm, setMetricForm] = useState(false);
-  // console.log("metricForm", metricForm)
   const [currentExerciseButton, setCurrentExerciseButton] = useState({});
-  console.log("currentExerciseButton at top", currentExerciseButton)
   const [workoutComplete, setWorkoutComplete] = useState(false);
   const [setTimer, setSetTimer] = useState(false);
   const [setTimerCount, setSetTimerCount] = useState(0);
@@ -75,19 +69,17 @@ const WorkoutSession = () => {
     routine_workout_id: routineWorkoutID,
     date: new Date(),
   });
-  // console.log("workoutSessionData", workoutSessionData)
 
   useEffect(() => {
     setId(exercisesInWorkout[0].id);
   }, [exercisesInWorkout]);
 
   const exerciseButton = (value, eID, sets, exerciseID) => {
-    console.log("exerciseID in exerciseButton", exerciseID)
     setCurrentExerciseButton({
       value: value,
       eID: eID,
       sets: sets,
-      exerciseID: exerciseID
+      exerciseID: exerciseID,
     });
 
     let restTimerExerciseFilter = exercisesInWorkout.filter(
@@ -109,8 +101,6 @@ const WorkoutSession = () => {
       setActive(true);
     }
 
-    // console.log("sets", sets, "setsComplete", setsComplete, "ID state", id, "eID", eID, "exercisesCompleted", exercisesCompleted)
-
     if (value === "purple") {
       setSetsComplete((prevSetsComplete) => (prevSetsComplete += 1));
       setStartRestTimer(true);
@@ -122,7 +112,6 @@ const WorkoutSession = () => {
       setRestTimerExercise(restTimerExerciseFilter);
       setSetTimer(true);
     }
-
 
     setButtonColor(value);
   };
@@ -147,10 +136,8 @@ const WorkoutSession = () => {
 
   useEffect(() => {
     const { value, eID, sets, exerciseID } = currentExerciseButton;
-    console.log("exerciseID in setExerciseSessionData useEffect", exerciseID)
     setExerciseSessionData({
       workout_session_id: workoutSession.id,
-      // this exercise_id is wrong. It shouldn't be set to id, it should be set to a diff piece of state which holds the db id of the exercise
       exercise_id: exerciseID,
       sets_completed: setsComplete,
       reps_completed: repsAchieved,
@@ -161,7 +148,6 @@ const WorkoutSession = () => {
 
   const handleWeightAndRepsSubmit = (e) => {
     e.preventDefault();
-    console.log("Exercise session data inside form submit", exerciseSessionData)
     createExerciseSession(exerciseSessionData)
       .then((data) => console.log("Data:", data))
       .catch((err) =>
@@ -217,7 +203,7 @@ const WorkoutSession = () => {
   useEffect(() => {
     if (workoutSession.total_duration > 0) {
       createSessionLogs(workoutSession).then((data) =>
-        console.log("dayter", data)
+        console.log("data", data)
       );
     }
   }, [workoutComplete]);
@@ -249,7 +235,14 @@ const WorkoutSession = () => {
           <button
             className="button"
             value={i}
-            onClick={() => exerciseButton("red", exercise.id, exercise.sets, exercise.exercise.id)}
+            onClick={() =>
+              exerciseButton(
+                "red",
+                exercise.id,
+                exercise.sets,
+                exercise.exercise.id
+              )
+            }
           >
             <img src={greenRhombus} alt="greenRhombus" className="rhombus" />
           </button>
@@ -258,7 +251,14 @@ const WorkoutSession = () => {
         {buttonColor === "red" && id === exercise.id ? (
           <button
             className="button"
-            onClick={() => exerciseButton("purple", exercise.id, exercise.sets, exercise.exercise.id)}
+            onClick={() =>
+              exerciseButton(
+                "purple",
+                exercise.id,
+                exercise.sets,
+                exercise.exercise.id
+              )
+            }
           >
             <img src={redRhombus} alt="redRhombus" className="rhombus" />
           </button>
@@ -268,7 +268,12 @@ const WorkoutSession = () => {
           <button
             className="button"
             {...(count === 0 &&
-              exerciseButton("green", exercise.id, exercise.sets, exercise.exercise.id))} // need to send exercise.exercise.id at this point
+              exerciseButton(
+                "green",
+                exercise.id,
+                exercise.sets,
+                exercise.exercise.id
+              ))}
           >
             <img src={purpleRhombus} alt="purpleRhombus" className="rhombus" />
           </button>
@@ -301,8 +306,6 @@ const WorkoutSession = () => {
     </div>
   ));
 
-  // console.log("displayWorkoutData", displayWorkoutData);
-
   return (
     <div>
       <StopWatch
@@ -331,33 +334,31 @@ const WorkoutSession = () => {
 
 export default WorkoutSession;
 
-
-
 // insert in line 122/123
 
-    // if (sets === setsComplete && metricForm === false ) {
-    //   setId(eID + 1);
-    //   setSetsComplete(0);
-    //   setExercisesCompleted(
-    //     (prevExercisesCompleted) => (prevExercisesCompleted += 1)
-    //   );
-    // }
+// if (sets === setsComplete && metricForm === false ) {
+//   setId(eID + 1);
+//   setSetsComplete(0);
+//   setExercisesCompleted(
+//     (prevExercisesCompleted) => (prevExercisesCompleted += 1)
+//   );
+// }
 
-    // const numberOfExercises = exercisesInWorkout.length - 1;
+// const numberOfExercises = exercisesInWorkout.length - 1;
 
-    // if (exercisesCompleted === numberOfExercises && sets === setsComplete && value === "green" && metricForm === false) {
-    //   setWorkoutComplete(true)
-    //   toast.success("Workout Complete!!", {
-    //     position: "bottom-center",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "dark",
-    //   });
-    //   setActive(false);
+// if (exercisesCompleted === numberOfExercises && sets === setsComplete && value === "green" && metricForm === false) {
+//   setWorkoutComplete(true)
+//   toast.success("Workout Complete!!", {
+//     position: "bottom-center",
+//     autoClose: 5000,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: true,
+//     draggable: true,
+//     progress: undefined,
+//     theme: "dark",
+//   });
+//   setActive(false);
 
-    //   setExercisesCompleted(0);
-    // }
+//   setExercisesCompleted(0);
+// }
