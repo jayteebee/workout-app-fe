@@ -11,6 +11,7 @@ import { parseJwt } from "../API/Authentication/parseJwt";
 import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { createExerciseSession } from "../API/ExerciseSession/ExerciseSession";
 import { createSessionLogs, getAllSessionLogs } from "../API/SessionLogs/SessionLogs";
+import SetTimer from "../Components/WorkoutSession/SetTimer";
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
@@ -43,6 +44,9 @@ const [metricForm, setMetricForm] = useState(false)
 // console.log("metricForm", metricForm)
 const [currentExerciseButton, setCurrentExerciseButton ] = useState({})
 const [workoutComplete, setWorkoutComplete] = useState(false)
+const [setTimer, setSetTimer] = useState(false)
+const [setTimerCount, setSetTimerCount] = useState(0)
+
 
 
   useEffect(() => {
@@ -104,9 +108,13 @@ const [workoutComplete, setWorkoutComplete] = useState(false)
             setSetsComplete((prevSetsComplete) => (prevSetsComplete += 1));
             setStartRestTimer(true)
             setMetricForm(true)
+            setSetTimer(false)
           }
 
-          value === "red" && setRestTimerExercise(restTimerExerciseFilter)
+          if (value === "red") {
+            setRestTimerExercise(restTimerExerciseFilter)
+            setSetTimer(true)
+          } 
 
           // if (sets === setsComplete && metricForm === false ) {
           //   setId(eID + 1);
@@ -138,6 +146,10 @@ const [workoutComplete, setWorkoutComplete] = useState(false)
           setButtonColor(value);
   };
 
+  // if (setTimerCount > 0 && setTimer === false) {
+  //   console.log("Great success")
+  //   }
+
   const moreExerciseInfo = () => {
     setExpandDiv((prevState) => !prevState);
   };
@@ -165,9 +177,9 @@ useEffect(() => {
     sets_completed: setsComplete,
     reps_completed: repsAchieved,
     weight_used: weightAchieved,
-    set_timer: 0
+    set_timer: setTimerCount
   })
-}, [weightAchieved, setsComplete, repsAchieved, id])
+}, [weightAchieved, setsComplete, repsAchieved, id, setTimerCount])
 
 const handleWeightAndRepsSubmit = (e) => {
 
@@ -206,7 +218,7 @@ const {value, eID, sets} = currentExerciseButton
 
     setExercisesCompleted(0);
   }
-  
+  setSetTimerCount(0)
 }
 
 const workoutSessionId = workoutSession.id
@@ -321,6 +333,11 @@ useEffect(() => {
       setStartRestTimer={setStartRestTimer}
       count={count}
       setCount={setCount}
+      />
+      <SetTimer 
+      setTimer={setTimer}
+      setSetTimerCount={setSetTimerCount}
+      setTimerCount={setTimerCount}
       />
       {workoutName}
       {displayWorkoutData}
