@@ -250,6 +250,8 @@ useEffect(() => {
 
         {/* Green is to start the exercise, so when you're exercising, the button will be red 
             when you tap the green button, a "setTimer" will be activated which will time how long each set takes
+            1) when green is clicked, set timer needs to start
+            2) when red is clicked, set timer needs to stop
             */}
         {buttonColor === "green" && id === exercise.id ? (
           <button
