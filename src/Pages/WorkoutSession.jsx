@@ -44,6 +44,7 @@ const [metricForm, setMetricForm] = useState(false)
 const [currentExerciseButton, setCurrentExerciseButton ] = useState({})
 const [workoutComplete, setWorkoutComplete] = useState(false)
 
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
@@ -106,7 +107,6 @@ const [workoutComplete, setWorkoutComplete] = useState(false)
           }
 
           value === "red" && setRestTimerExercise(restTimerExerciseFilter)
-
 
           // if (sets === setsComplete && metricForm === false ) {
           //   setId(eID + 1);
@@ -190,7 +190,7 @@ const {value, eID, sets} = currentExerciseButton
 
   const numberOfExercises = exercisesInWorkout.length - 1;
 
-  if (exercisesCompleted === numberOfExercises && sets === setsComplete && value === "green") {
+  if (exercisesCompleted === numberOfExercises && sets === setsComplete && (value === "green" || "purple")) {
     setWorkoutComplete(true)
     toast.success("Workout Complete!!", {
       position: "bottom-center",
