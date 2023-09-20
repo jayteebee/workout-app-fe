@@ -287,14 +287,16 @@ const WorkoutSession = () => {
             <div>
               <form onSubmit={handleWeightAndRepsSubmit}>
                 <MDBInput
-                  placeholder="Reps Achieved"
+                  contrast
+                  label="Reps Achieved"
                   value={repsAchieved}
                   name="reps"
                   onChange={updateExerciseMetrics}
                 ></MDBInput>
 
                 <MDBInput
-                  placeholder="Weight Achieved"
+                  contrast
+                  label="Weight Achieved"
                   value={weightAchieved}
                   name="weight"
                   onChange={updateExerciseMetrics}
