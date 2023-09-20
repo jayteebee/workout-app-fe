@@ -27,7 +27,7 @@ const WorkoutSession = () => {
   const [count, setCount] = useState(0);  
   const [userID, setUserID] = useState(null)
   const [workoutSession, setWorkoutSession] = useState([])
-console.log("workoutSession", workoutSession)
+// console.log("workoutSession", workoutSession)
 const [repsAchieved, setRepsAchieved] = useState(0)
 const [weightAchieved, setWeightAchieved] = useState(0)
 const [exerciseSessionData, setExerciseSessionData] = useState({
@@ -43,8 +43,6 @@ const [metricForm, setMetricForm] = useState(false)
 // console.log("metricForm", metricForm)
 const [currentExerciseButton, setCurrentExerciseButton ] = useState({})
 const [workoutComplete, setWorkoutComplete] = useState(false)
-
-console.log("*** id", id)
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -99,7 +97,7 @@ console.log("*** id", id)
             setActive(true);
           }
 
-          console.log("sets", sets, "setsComplete", setsComplete, "ID state", id, "eID", eID, "exercisesCompleted", exercisesCompleted)
+          // console.log("sets", sets, "setsComplete", setsComplete, "ID state", id, "eID", eID, "exercisesCompleted", exercisesCompleted)
 
           if (value === "purple") {
             setSetsComplete((prevSetsComplete) => (prevSetsComplete += 1));
@@ -119,24 +117,24 @@ console.log("*** id", id)
           // } 
         
 
-          const numberOfExercises = exercisesInWorkout.length - 1;
+          // const numberOfExercises = exercisesInWorkout.length - 1;
 
-          if (exercisesCompleted === numberOfExercises && sets === setsComplete && value === "green") {
-            setWorkoutComplete(true)
-            toast.success("Workout Complete!!", {
-              position: "bottom-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
-            });
-            setActive(false);
+          // if (exercisesCompleted === numberOfExercises && sets === setsComplete && value === "green" && metricForm === false) {
+          //   setWorkoutComplete(true)
+          //   toast.success("Workout Complete!!", {
+          //     position: "bottom-center",
+          //     autoClose: 5000,
+          //     hideProgressBar: false,
+          //     closeOnClick: true,
+          //     pauseOnHover: true,
+          //     draggable: true,
+          //     progress: undefined,
+          //     theme: "dark",
+          //   });
+          //   setActive(false);
 
-            setExercisesCompleted(0);
-          }
+          //   setExercisesCompleted(0);
+          // }
           setButtonColor(value);
   };
 
@@ -172,8 +170,9 @@ useEffect(() => {
 }, [weightAchieved, setsComplete, repsAchieved, id])
 
 const handleWeightAndRepsSubmit = (e) => {
+
   e.preventDefault();
-  console.log("EX SESH DATA", exerciseSessionData)
+  // console.log("EX SESH DATA", exerciseSessionData)
   createExerciseSession(exerciseSessionData)
   .then((data) => console.log("Data:", data))
   .catch((err) => console.log("Error with createExerciseSession API Call:", err))
@@ -188,17 +187,47 @@ const {value, eID, sets} = currentExerciseButton
       (prevExercisesCompleted) => (prevExercisesCompleted += 1)
     );
   } 
+
+  const numberOfExercises = exercisesInWorkout.length - 1;
+
+  if (exercisesCompleted === numberOfExercises && sets === setsComplete && value === "green") {
+    setWorkoutComplete(true)
+    toast.success("Workout Complete!!", {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+    setActive(false);
+
+    setExercisesCompleted(0);
+  }
+  
 }
 
 const workoutSessionId = workoutSession.id
 
 useEffect(() => {
 if (workoutSessionId) {
+  console.log("Meant to fire once")
   editWorkoutSessionByID(workoutSessionId, {total_duration: stopWatchCount} )
-  createSessionLogs(workoutSession)
-  .then((data) => console.log("dayter", data))
 } 
-}, [workoutComplete, workoutSession])
+}, [workoutComplete]) // , workoutSession
+
+
+useEffect(() => {
+  console.log("workoutSession.total_duration", workoutSession.total_duration)
+  if (workoutSession.total_duration > 0) {
+  console.log("*** workoutSession.total_duration", workoutSession.total_duration)
+  console.log("*** workoutSession", workoutSession)
+    createSessionLogs(workoutSession)
+    .then((data) => console.log("dayter", data))
+  }
+}, [workoutComplete])
 
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
     <div key={exercise.id} className="exerciseSession">

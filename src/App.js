@@ -39,11 +39,13 @@ const [filteredRoutines, setFilteredRoutines] = useState([])
 }, [])
   
 useEffect(() => {
+  if (loggedIn) {
   const token = window.localStorage.getItem("token");
   const decodedToken = parseJwt(token);
   const userID = decodedToken.sub;
   setUserID(userID);
-}, []);
+  }
+}, [loggedIn]);
 
 const externalNavToggle = () => {
   if (showMenu) {
