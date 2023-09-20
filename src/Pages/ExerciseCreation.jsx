@@ -7,6 +7,7 @@ import SetsRepsWeight from "../Components/Exercises/SetsRepsWeight";
 import "../CSS/ExerciseCreation.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BackButton from "../Components/Navigation/BackButton";
 
 const ExerciseCreation = () => {
   const location = useLocation();
@@ -70,6 +71,8 @@ const ExerciseCreation = () => {
       <MDBBtn onClick={addExercise}>Add Exercise To Workout</MDBBtn>
 
       <ToastContainer />
+    <BackButton />
+
     </div>
   );
 };

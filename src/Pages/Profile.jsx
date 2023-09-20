@@ -3,6 +3,7 @@ import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { getUserById, updateUser } from "../API/User/User";
 import { parseJwt } from "../API/Authentication/parseJwt";
 import LogOut from "../Components/LogOut/LogOut";
+import BackButton from "../Components/Navigation/BackButton";
 
 const Profile = () => {
   const [formInput, setFormInput] = useState({
@@ -111,6 +112,8 @@ const Profile = () => {
       <div>
         <LogOut />
       </div>
+    <BackButton />
+
     </div>
   );
 };

@@ -9,6 +9,7 @@ import FetchExercisesInWorkout from "../Components/Workout/FetchExercisesInWorko
 import FetchWorkoutByID from "../Components/Workout/FetchWorkoutByID";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BackButton from "../Components/Navigation/BackButton";
 
 const Workout = ({weekly, custom, routineFrequency}) => {
   const [workout, setWorkout] = useState([]);
@@ -207,6 +208,8 @@ const customFrequencyWorkoutDaysAPICall = async () => {
       </div>
 
       <ToastContainer />
+    <BackButton />
+
     </div>
   );
 };

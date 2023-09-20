@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllSessionLogs } from "../API/SessionLogs/SessionLogs";
 import { getAllExercises } from "../API/Exercise/Exercise";
+import BackButton from "../Components/Navigation/BackButton";
 
 const Logs = () => {
   const [sessionLogs, setSessionLogs] = useState([]);
@@ -54,6 +55,8 @@ const Logs = () => {
     <div>
       <h2>Logs</h2>
       {workoutLogs}
+      <BackButton />
+
     </div>
   );
 };

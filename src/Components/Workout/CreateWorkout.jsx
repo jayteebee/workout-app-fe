@@ -11,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
 import { addWorkoutToRoutine } from "../../API/Routine/Routine";
+import BackButton from "../Navigation/BackButton";
 
 const CreateWorkout = ({
   setWorkoutToggle,
@@ -181,29 +182,10 @@ const CreateWorkout = ({
           Create Workout
         </MDBBtn>
       </form>
+    <BackButton />
+
     </div>
   );
 };
 
 export default CreateWorkout;
-
-//  <select
-//           label="Workout Day"
-//           value={workoutDay}
-//           name="day"
-//           onChange={(e) => setWorkoutDay(e.target.value)}
-//           >
-//             {daysOfWeekArray.map((day, i) => (
-//               <option key={i} value={day}>{day}</option>
-//             ))}
-//           </select>
-
-// <MDBInput
-// className="mb-4"
-// type="text"
-// label="Workout Day"
-// value={workoutDay}
-// name="day"
-// onChange={(e) => setWorkoutDay(e.target.value)}
-// contrast
-// />

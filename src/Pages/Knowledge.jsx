@@ -1,8 +1,14 @@
 import React from 'react'
+import BackButton from '../Components/Navigation/BackButton'
 
 const Knowledge = () => {
   return (
-    <div>Knowledge</div>
+    <div>
+    <h2>Knowledge</h2>
+    
+    <BackButton />
+    
+    </div>
   )
 }
 

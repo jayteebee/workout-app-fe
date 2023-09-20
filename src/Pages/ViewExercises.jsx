@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getExercisesInWorkout } from "../API/Workout/Workout";
+import BackButton from "../Components/Navigation/BackButton";
 import "../CSS/Exercises.css";
 
 const ViewExercises = () => {
@@ -36,6 +37,8 @@ const ViewExercises = () => {
           </div>
         ))}
       </div>
+    <BackButton />
+
     </div>
   );
 };
