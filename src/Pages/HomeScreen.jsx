@@ -102,7 +102,8 @@ const HomeScreen = ({ routineID }) => {
 
   return (
     <div>
-
+    <h3>Welcome to My Workout App</h3>
+    <h1 style={{textDecoration: "underline", color: "white"}}>--UNDER DEVELOPMENT--</h1>
     <div className="calendar-container" >
       <div className="calendar">
         <FullCalendar
