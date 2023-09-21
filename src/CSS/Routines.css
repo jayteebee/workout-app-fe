@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr); 
-  gap: 10px; 
+  /* gap: 10px;  */
 }
 
 .pageHeader.routines {
@@ -10,6 +10,10 @@
   text-align: center; /* Center the text horizontally within the column */
   padding: 10px; 
 }
+
+.hidden {
+    display: none;
+  }
 
 .backButton {
     grid-row: 1;
@@ -20,9 +24,51 @@
     justify-self: self-start;
 }
 
+.routineViewOptions {
+    grid-row: 2;
+    grid-column: 3 /span 2;
+}
+.createNewRoutineOptionChosen {
+    grid-row: 3/ span 2;
+    grid-column: 3 /span 2;
+}
+
+.routineQuestion {
+    grid-row: 2;
+    grid-column: 3 /span 2;
+}
+
+.routineCustomButton {
+    grid-row: 3;
+    grid-column: 3;
+    height: 40px;
+    align-self: center;
+}
+
+.routineWeeklyButton {
+    grid-row: 3;
+    grid-column: 4;
+    height: 40px;
+    align-self: center;
+}
+
+.createRoutineToggleButton {
+    grid-row: 3;
+    grid-column: 3 /span 2;
+
+}
+
 .createRoutine {
+    grid-row: 4 / span 2;
+    grid-column: 3 /span 2;
     display: flex;
     justify-content: center;
+
+}
+
+.fetchAllRoutines {
+    grid-row: 3/ span 2;
+    grid-column:3 /span 2;
 }
 
 .formContainer {

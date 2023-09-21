@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../CSS/Routines.css";
 import FetchAllRoutines from "../Components/Routine/FetchAllRoutines";
 import FetchRoutineByID from "../Components/Routine/FetchRoutineByID";
@@ -16,23 +16,50 @@ const Routines = ({
 }) => {
   const [routineToggle, setRoutineToggle] = useState(false);
   const [createRoutineToggle, setCreateRoutineToggle] = useState(false);
+  const [viewExistingRoutines, setViewExistingRoutines] = useState(false);
+  const [createNewRoutine, setCreateNewRoutine] = useState(false);
 
   const toggleCreateRoutine = () => {
     setCreateRoutineToggle((prevState) => !prevState);
   };
   // console.log("createRoutineToggle", createRoutineToggle)
   // console.log("custom, weekly", custom, weekly)
+
+  useEffect(() => {
+    setCustom(false);
+    setWeekly(false);
+  }, []);
+
+  const handleRoutineViewOptions = (e) => {
+    let name = e.target.name;
+    if (name === "createNewRoutine") {
+      setViewExistingRoutines(false);
+      setCreateNewRoutine(true);
+      setCustom(false)
+      setWeekly(false)
+    }
+    if (name === "viewExistingRoutines") {
+      setCreateNewRoutine(false);
+      setViewExistingRoutines(true);
+    }
+  };
+
   return (
     <div className="grid-container">
       <h3 className="pageHeader routines">Routines</h3>
-      <p>Will you be working out in a custom or weekly frequency?</p>
 
-      <div>
+      <div
+        className={createNewRoutine ? "createNewRoutineOptionChosen" : "hidden"}
+      >
+        <p className={weekly || custom ? "hidden" : "routineQuestion"}>
+          Will you be working out in a custom or weekly frequency?
+        </p>
         <MDBBtn
           onClick={() => {
             setWeekly(false);
             setCustom(true);
           }}
+          className={weekly || custom ? "hidden" : "routineCustomButton"}
         >
           Custom
         </MDBBtn>
@@ -41,16 +68,32 @@ const Routines = ({
             setCustom(false);
             setWeekly(true);
           }}
+          className={weekly || custom ? "hidden" : "routineWeeklyButton"}
         >
           Weekly
         </MDBBtn>
       </div>
 
-      <div className="fetchAllRoutines">
-        <FetchAllRoutines
-          routineToggle={routineToggle}
-          setRoutineFrequency={setRoutineFrequency}
-        />
+      <div
+        className="routineViewOptions"
+        
+      >
+        <MDBBtn name="createNewRoutine" onClick={handleRoutineViewOptions}>
+          Create New Routine
+        </MDBBtn>
+
+        <MDBBtn name="viewExistingRoutines" onClick={handleRoutineViewOptions}>
+          View Existing Routines
+        </MDBBtn>
+      </div>
+
+      <div className={viewExistingRoutines ? "fetchAllRoutines" : "hidden"}>
+        <div className="fetchAllRoutines">
+          <FetchAllRoutines
+            routineToggle={routineToggle}
+            setRoutineFrequency={setRoutineFrequency}
+          />
+        </div>
       </div>
 
       {/*<div className="fetchRoutineByID">
@@ -60,8 +103,17 @@ const Routines = ({
         <FetchWorkoutsInRoutine />
       </div>
 
-      <div className={custom || weekly ? "" : "hidden"}>
-        <MDBBtn onClick={toggleCreateRoutine}>
+      <div
+        className={ viewExistingRoutines ? "hidden createRoutineToggleButton" :
+          custom || weekly
+            ? "createRoutineToggleButton"
+            : "hidden createRoutineToggleButton"
+        }
+      >
+        <MDBBtn
+          // className="createRoutineToggleButton"
+          onClick={toggleCreateRoutine}
+        >
           {createRoutineToggle ? "Hide Create Routine" : "Create Routine"}
         </MDBBtn>
       </div>
@@ -77,10 +129,9 @@ const Routines = ({
           />
         </div>
       )}
-<div className="backButton">
-<BackButton />
-</div>
-
+      <div className="backButton">
+        <BackButton />
+      </div>
     </div>
   );
 };
