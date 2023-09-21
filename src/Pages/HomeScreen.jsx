@@ -12,7 +12,7 @@ const HomeScreen = ({ routineID }) => {
   const [calendarEvents, setCalendarEvents] = useState(null);
   const [sortedSchedule, setSortedSchedule] = useState([]);
   const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
-  console.log("exercisesInWorkout", exercisesInWorkout);
+  // console.log("exercisesInWorkout", exercisesInWorkout);
   const [idOfRoutineWorkout, setIdOfRoutineWorkout] = useState(null)
 
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const HomeScreen = ({ routineID }) => {
       });
   }, []);
 
-  console.log("workoutSchedule", workoutSchedule);
+  // console.log("workoutSchedule", workoutSchedule);
 
   useEffect(() => {
     const sortSchedule = workoutSchedule.slice().sort((a, b) => a.id - b.id);
@@ -50,7 +50,7 @@ const HomeScreen = ({ routineID }) => {
     setCalendarEvents(events);
   }, [sortedSchedule]);
 
-  console.log("CALENDAR EVENTS: ", calendarEvents);
+  // console.log("CALENDAR EVENTS: ", calendarEvents);
 
   // className="calendar"
 

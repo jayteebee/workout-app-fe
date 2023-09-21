@@ -5,6 +5,13 @@
   padding: 10px
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr); 
+  gap: 10px; 
+}
+
 .App-inner {
   background-color:#001F3F;
   border-radius: 25px;

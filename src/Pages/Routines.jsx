@@ -23,8 +23,8 @@ const Routines = ({
   // console.log("createRoutineToggle", createRoutineToggle)
   // console.log("custom, weekly", custom, weekly)
   return (
-    <div>
-      <h3 className="pageHeader">Routines</h3>
+    <div className="grid-container">
+      <h3 className="pageHeader routines">Routines</h3>
       <p>Will you be working out in a custom or weekly frequency?</p>
 
       <div>
@@ -77,8 +77,9 @@ const Routines = ({
           />
         </div>
       )}
-
-    <BackButton />
+<div className="backButton">
+<BackButton />
+</div>
 
     </div>
   );
