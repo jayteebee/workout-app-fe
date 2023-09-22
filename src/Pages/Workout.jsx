@@ -9,6 +9,7 @@ import FetchExercisesInWorkout from "../Components/Workout/FetchExercisesInWorko
 import FetchWorkoutByID from "../Components/Workout/FetchWorkoutByID";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useLocation } from "react-router-dom";
 
 
 const Workout = ({weekly, custom, routineFrequency}) => {
@@ -35,6 +36,14 @@ const Workout = ({weekly, custom, routineFrequency}) => {
     frequency: null
   });
 // console.log("createWorkoutDayData", createWorkoutDayData)
+
+const [createNewWorkout, setCreateNewWorkout] = useState(false)
+const [viewExistingWorkouts, setViewExistingWorkouts] = useState(false)
+
+
+const location = useLocation();
+  const routineFrequencyExists = location.state?.routineFrequencyExists;
+console.log('routineFrequencyExists', routineFrequencyExists)
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -151,15 +160,37 @@ const customFrequencyWorkoutDaysAPICall = async () => {
 
 }
 
+const handleWorkoutViewOptions = (e) => {
+  let name = e.target.name;
+  if (name === "createNewWorkout") {
+    setViewExistingWorkouts(false);
+    setCreateNewWorkout(true);
+  }
+  if (name === "viewExistingWorkouts") {
+    setCreateNewWorkout(false);
+    setViewExistingWorkouts(true);
+  }
+};
+
   return (
-    <div>
-      <h3 className="pageHeader">Workout</h3>
+    <div className="grid-container">
+      <h3 className="pageHeader workout">Workout</h3>
 
       {/*<div className='fetchAllWorkouts'>
     <FetchAllWorkouts workoutToggle={workoutToggle}/>
   </div>*/}
 
-      <div className="fetchWorkoutByID">
+  <div className="workoutViewOptions">
+  <MDBBtn name="createNewWorkout" onClick={handleWorkoutViewOptions}>
+    Create New Workout
+  </MDBBtn>
+
+  <MDBBtn name="viewExistingWorkouts" onClick={handleWorkoutViewOptions}>
+    View Existing Workouts
+  </MDBBtn>
+</div>
+
+      <div className={createNewWorkout ? "hidden" : "fetchWorkoutByID"}>
         <FetchWorkoutByID
           workoutToggle={workoutToggle}
           setRoutineID={setRoutineID}
@@ -173,12 +204,12 @@ const customFrequencyWorkoutDaysAPICall = async () => {
         <FetchExercisesInWorkout />
       </div>
 
-      <MDBBtn onClick={createWorkoutToggle}>
+      { /*<MDBBtn onClick={createWorkoutToggle}>
         {toggleCreateWorkout ? "Hide Create Workout" : "Create Workout"}
-      </MDBBtn>
+</MDBBtn> */}
 
-      
-        <div className={toggleCreateWorkout ? "createWorkout" : "hidden"}>
+      <div className={createNewWorkout ? "createWorkout" : "hidden"} >
+        {/*<div className={toggleCreateWorkout ? "createWorkout" : "hidden"}>*/}
           <CreateWorkout
             setWorkoutToggle={setWorkoutToggle}
             workoutToggle={workoutToggle}
@@ -190,17 +221,19 @@ const customFrequencyWorkoutDaysAPICall = async () => {
             weekly={weekly}
             custom={custom}
           />
-        </div>
-      
+        {/*</div>*/}
+      </div>
 
-      <div className={isButtonHidden || custom ? "hidden" : null}>
+      <div className="finaliseDaysButtons"> 
+      {/** These Two classes were rendered on the isButtonHidden being true as well */}
+      <div className={routineFrequencyExists ? "hidden" : null}>
         <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Finalise Days </MDBBtn>
       </div>
 
-      <div className={isButtonHidden || weekly ? "hidden" : null}>
+      <div className={routineFrequencyExists ? "" : "hidden"}>
       <MDBBtn onClick={customFrequencyWorkoutDaysAPICall} >Finalise Custom Days</MDBBtn>
       </div>
-
+      </div>
       <ToastContainer />
 
     </div>

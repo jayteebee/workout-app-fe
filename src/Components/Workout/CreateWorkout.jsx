@@ -11,7 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
 import { addWorkoutToRoutine } from "../../API/Routine/Routine";
-import BackButton from "../Navigation/BackButton";
+
 
 const CreateWorkout = ({
   setWorkoutToggle,
@@ -131,6 +131,7 @@ const CreateWorkout = ({
 
   return (
     <div>
+    <h2>Create Workout</h2>
       <form onSubmit={handleSubmit} className="inputForm">
         <MDBInput
           className="mb-4"
@@ -182,7 +183,6 @@ const CreateWorkout = ({
           Create Workout
         </MDBBtn>
       </form>
-    <BackButton />
 
     </div>
   );

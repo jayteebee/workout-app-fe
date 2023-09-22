@@ -58,9 +58,13 @@ useEffect(() => {
   });
 }, [deleteToggle])
 
-  const displayWorkouts = (routineID) => {
+  const displayWorkouts = (routineID, routineFreq) => {
     setSelectedRoutineID(routineID);
-    navigate("/Workout", { state: { selectedRoutineID: routineID } });
+    if (routineFreq) {
+    navigate("/Workout", { state: { selectedRoutineID: routineID, routineFrequencyExists: routineFreq } });
+    } else {
+      navigate("/Workout", { state: { selectedRoutineID: routineID } });
+    }
   };
 
   const editRoutineToggle = (routineID, routineFreq) => {
@@ -92,7 +96,7 @@ useEffect(() => {
         && filteredRoutines.map((routine) => (
             <div key={routine.id}>
             {localStorage.setItem("routineID", routine.id)} 
-              <MDBBtn onClick={() => displayWorkouts(routine.id)}>
+              <MDBBtn onClick={() => displayWorkouts(routine.id, routine.frequency)}>
                 <strong>{routine.name}</strong>: View / Create Workouts
               </MDBBtn>
 
