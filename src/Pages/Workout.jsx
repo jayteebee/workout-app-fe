@@ -17,15 +17,7 @@ const Workout = ({weekly, custom, routineFrequency}) => {
   const [routineID, setRoutineID] = useState(Number);
   const [workoutCreated, setWorkoutCreated] = useState(false);
   const [toggleCreateWorkout, setToggleCreateWorkout] = useState(false);
-  // const [dayOfWeek, setDayOfWeek] = useState([
-  //   { monday: false, value: 0 },
-  //   { tuesday: false, value: 1 },
-  //   { wednesday: false, value: 2 },
-  //   { thursday: false, value: 3 },
-  //   { friday: false, value: 4 },
-  //   { saturday: false, value: 5 },
-  //   { sunday: false, value: 6 },
-  // ]);
+
   const [dayOfWeek, setDayOfWeek] = useState([
     { sunday: false, value: 0 },
     { monday: false, value: 1 },
@@ -120,13 +112,15 @@ const Workout = ({weekly, custom, routineFrequency}) => {
   // console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
-    createWorkoutDay(createWorkoutDayData)
+    if (createWorkoutDayData > 0) {
+       createWorkoutDay(createWorkoutDayData)
       .then((response) => {
         console.log("Response: ", response);
       })
       .catch((err) => {
         console.log("createWorkoutDay API Call Failed", err);
       });
+    }
   }, [createWorkoutDayToggle]);
 
   const storedHiddenState = localStorage.getItem("hiddenState");
