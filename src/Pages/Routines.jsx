@@ -94,6 +94,7 @@ const Routines = ({
           <FetchAllRoutines
             routineToggle={routineToggle}
             setRoutineFrequency={setRoutineFrequency}
+            weekly={weekly}
           />
         </div>
       </div>
@@ -112,16 +113,15 @@ const Routines = ({
             : "hidden createRoutineToggleButton"
         }
       >
-        <MDBBtn
-          // className="createRoutineToggleButton"
+       {/* <MDBBtn
           onClick={toggleCreateRoutine}
         >
           {createRoutineToggle ? "Hide Create Routine" : "Create Routine"}
-        </MDBBtn>
+       </MDBBtn>*/}
       </div>
 
-      {createRoutineToggle && (
-        <div className={createNewRoutine ? "createRoutine" : "hidden"}>
+    {/*  {createRoutineToggle && ( */}
+        <div className={createNewRoutine && (custom || weekly) ? "createRoutine" : "hidden"}>
           <CreateRoutine
             custom={custom}
             weekly={weekly}
@@ -130,8 +130,8 @@ const Routines = ({
             setCreateRoutineToggle={setCreateRoutineToggle}
           />
         </div>
-      )}
-      <div className="backButton">
+
+        <div className="backButton">
         <BackButton />
       </div>
     </div>

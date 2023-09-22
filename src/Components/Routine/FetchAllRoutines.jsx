@@ -11,16 +11,18 @@ import deleteIcon from "../../CSS/Icons/deleteIcon.png";
 import editIcon from "../../CSS/Icons/editIcon.png";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 
-const FetchAllRoutines = ({ routineToggle, setRoutineFrequency}) => {
+const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, weekly}) => {
   const [allRoutines, setAllRoutines] = useState([]);
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
   const [routineToEdit, setRoutineToEdit] = useState(null);
+console.log('routineToEdit', routineToEdit)
   const [editToggle, setEditToggle] = useState(false);
   const [routineToDelete, setRoutineToDelete] = useState(null);
   const [deleteToggle, setDeleteToggle] = useState(null);
   const [userID, setUserID] = useState(null);
   const [filteredRoutines, setFilteredRoutines] = useState(null);
-  // console.log("filteredRoutines", filteredRoutines)
+  console.log("filteredRoutines", filteredRoutines)
+  const [editingFrequencyRoutine, setEditingFrequencyRoutine] = useState(false)
 
 useEffect(() => {
   const routineFrequency = filteredRoutines && filteredRoutines.map((f) => (f.frequency))
@@ -62,10 +64,11 @@ useEffect(() => {
     navigate("/Workout", { state: { selectedRoutineID: routineID } });
   };
 
-  const editRoutineToggle = (routineID) => {
+  const editRoutineToggle = (routineID, routineFreq) => {
     routineToEdit === null
       ? setRoutineToEdit(routineID)
       : setRoutineToEdit(null);
+      routineFreq ? setEditingFrequencyRoutine(true) : setEditingFrequencyRoutine(false)
   };
 
   useEffect(() => {
@@ -80,14 +83,14 @@ useEffect(() => {
   return (
     <div>
       {filteredRoutines
-        ? filteredRoutines.map((routine) => (
+        && filteredRoutines.map((routine) => (
             <div key={routine.id}>
             {localStorage.setItem("routineID", routine.id)} 
               <MDBBtn onClick={() => displayWorkouts(routine.id)}>
-                View <strong>{routine.name}</strong> Workouts
+                <strong>{routine.name}</strong>: View / Create Workouts
               </MDBBtn>
 
-              <button className="utilityButton" onClick={() => editRoutineToggle(routine.id)} >
+              <button className="utilityButton" onClick={() => editRoutineToggle(routine.id, routine.frequency)} >
                 <img src={editIcon} alt="edit" className="editIcon" />
               </button>
 
@@ -96,16 +99,21 @@ useEffect(() => {
               </button>
             </div>
           ))
-        : null}
+       }
       {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />}
+      
+      <div className="editRoutine">
       {routineToEdit && (
         <EditRoutine
           eID={routineToEdit}
           editToggle={editToggle}
           setEditToggle={setEditToggle}
           setRoutineToEdit={setRoutineToEdit}
+          editingFrequencyRoutine={editingFrequencyRoutine}
         />
       )}
+      </div>
+
       {routineToDelete && (
         <DeleteRoutine
           routineToDelete={routineToDelete}

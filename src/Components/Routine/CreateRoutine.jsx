@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { createRoutine } from "../../API/Routine/Routine";
+import { ToastContainer, toast } from "react-toastify";
+
 
 const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle, custom, weekly }) => {
   const [formInput, setFormInput] = useState({
@@ -32,6 +34,16 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
       });
       setRoutineToggle((prevState) => !prevState);
     setCreateRoutineToggle(prevState => !prevState)
+    toast.success("Routine Created!", {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
     }
   };
 
@@ -44,6 +56,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
 
   return (
     <div>
+    <h2>Create Routine</h2>
       <form onSubmit={handleSubmit} className="formContainer">
         <MDBInput
           className="mb-4"
@@ -69,6 +82,8 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
           Create Routine
         </MDBBtn>
       </form>
+      <ToastContainer />
+
     </div>
   );
 };

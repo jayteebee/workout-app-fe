@@ -6,7 +6,7 @@ import {
 } from "mdb-react-ui-kit";
 import { editRoutineByID } from "../../API/Routine/Routine";
 
-const EditRoutine = ({ eID, setEditToggle, setRoutineToEdit, editToggle }) => {
+const EditRoutine = ({ eID, setEditToggle, setRoutineToEdit, editToggle, editingFrequencyRoutine }) => {
   const [formInput, setFormInput] = useState({
     name: "",
     frequency: "",
@@ -54,6 +54,7 @@ const EditRoutine = ({ eID, setEditToggle, setRoutineToEdit, editToggle }) => {
           onChange={handlechange}
           contrast
         />
+        <div className={editingFrequencyRoutine ? "" : "hidden"}>
         <MDBInput
           className="mb-4"
           type="text"
@@ -63,6 +64,7 @@ const EditRoutine = ({ eID, setEditToggle, setRoutineToEdit, editToggle }) => {
           onChange={handlechange}
           contrast
         />
+        </div>
         <MDBBtn type="submit" className="mb-4" block>
           Edit
         </MDBBtn>
