@@ -4,10 +4,6 @@ import { parseJwt } from "../../API/Authentication/parseJwt";
 import {
   MDBInput,
   MDBBtn,
-  MDBDropdown,
-  MDBDropdownMenu,
-  MDBDropdownToggle,
-  MDBDropdownItem,
 } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
 import { addWorkoutToRoutine } from "../../API/Routine/Routine";
