@@ -15,6 +15,7 @@ const Profile = ({loggedIn}) => {
   const [userID, setUserID] = useState(null);
   const [userDetails, setUserDetails] = useState([]);
   const [userToggle, setUserToggle] = useState(false);
+  const [editDetailsForm, setEditDetailsForm] = useState(false)
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -48,6 +49,7 @@ const Profile = ({loggedIn}) => {
         weight: "",
       });
       setUserToggle((prevState) => !prevState);
+      setEditDetailsForm(false)
     }
   };
 
@@ -69,11 +71,17 @@ const Profile = ({loggedIn}) => {
     }
   }, [userToggle]);
 
+const editDetails = () => {
+  setEditDetailsForm(prevState => !prevState)
+}
+
   return (
     <div className="grid-container">
     <h3 className="pageHeader profile">Profile</h3>
 
-      <form onSubmit={handleSubmit} className="formContainer profile">
+    <MDBBtn onClick={editDetails}>Edit Details</MDBBtn>
+
+      <form onSubmit={handleSubmit} className={editDetailsForm ? "formContainer profile" : "hidden"}>
         <MDBInput
           className="mb-4"
           type="text"
@@ -117,7 +125,10 @@ const Profile = ({loggedIn}) => {
       <div>
         <LogOut />
       </div>
-    <BackButton />
+
+     <div className="backButton">
+        <BackButton />
+      </div>
 
     </div>
   );
