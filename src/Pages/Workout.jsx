@@ -121,7 +121,7 @@ console.log('routineFrequencyExists', routineFrequencyExists)
   // console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
-    if (createWorkoutDayData > 0) {
+    if (createWorkoutDayData) {
        createWorkoutDay(createWorkoutDayData)
       .then((response) => {
         console.log("Response: ", response);

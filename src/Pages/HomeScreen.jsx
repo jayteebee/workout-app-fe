@@ -9,6 +9,7 @@ import "../App.css";
 
 const HomeScreen = ({ routineID }) => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
+  // console.log('workoutSchedule', workoutSchedule)
   const [calendarEvents, setCalendarEvents] = useState(null);
   const [sortedSchedule, setSortedSchedule] = useState([]);
   const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
