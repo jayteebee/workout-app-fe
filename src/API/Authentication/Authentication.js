@@ -6,7 +6,7 @@ import { parseJwt } from "./parseJwt";
 // CREATE USER - Working!
 
 export const createUser = async (userData) => {
-  console.log(userData);
+  // console.log(userData);
   if (!userData) {
     return;
   } else {
