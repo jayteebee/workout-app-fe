@@ -98,6 +98,21 @@ const CreateWorkout = ({
       if (dayNameToIndex.hasOwnProperty(lowercaseDay)) {
         setWorkoutDayIndex(dayNameToIndex[lowercaseDay]);
       }
+
+      toast.success(
+        "Workout Created!",
+        {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        }
+      );
+
     } catch (err) {
       console.error("Error:", err);
     } finally {
@@ -106,19 +121,6 @@ const CreateWorkout = ({
       // setWorkoutDay("");
       setWorkoutToggle((prevState) => !prevState);
     }
-    toast.success(
-      "Workout Created!",
-      {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      }
-    );
   };
 
   // console.log("order", order);
