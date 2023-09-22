@@ -118,7 +118,9 @@ useEffect(() => {
 
             <Route path="/ViewExercises" element={<ViewExercises />}/>
 
-            <Route path="/Profile" element={<Profile />}/>
+            <Route path="/Profile" element={<Profile 
+              loggedIn={loggedIn}
+              />}/>
 
             <Route path="/Session" element={<WorkoutSession />}/>
 

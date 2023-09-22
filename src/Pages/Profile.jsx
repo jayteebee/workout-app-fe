@@ -4,8 +4,9 @@ import { getUserById, updateUser } from "../API/User/User";
 import { parseJwt } from "../API/Authentication/parseJwt";
 import LogOut from "../Components/LogOut/LogOut";
 import BackButton from "../Components/Navigation/BackButton";
+import "../CSS/Profile.css"
 
-const Profile = () => {
+const Profile = ({loggedIn}) => {
   const [formInput, setFormInput] = useState({
     name: "",
     height: "",
@@ -21,7 +22,7 @@ const Profile = () => {
     const userID = decodedToken.sub;
     setUserID(userID);
     setUserToggle((prevState) => !prevState);
-  }, []);
+  }, [loggedIn]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,7 +69,9 @@ const Profile = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="formContainer">
+    <h3 className="pageHeader profile">Profile</h3>
+
+      <form onSubmit={handleSubmit} className="formContainer profile">
         <MDBInput
           className="mb-4"
           type="text"
