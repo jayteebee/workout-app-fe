@@ -15,7 +15,7 @@ import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { createExerciseSession } from "../API/ExerciseSession/ExerciseSession";
 import { createSessionLogs } from "../API/SessionLogs/SessionLogs";
 import SetTimer from "../Components/WorkoutSession/SetTimer";
-import BackButton from "../Components/Navigation/BackButton";
+
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
@@ -331,7 +331,7 @@ const WorkoutSession = () => {
       {workoutName}
       {displayWorkoutData}
       <ToastContainer />
-      <BackButton />
+
     </div>
   );
 };

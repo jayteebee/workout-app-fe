@@ -137,10 +137,6 @@ const editDetails = () => {
         <LogOut />
       </div>
 
-     <div className="backButton">
-        <BackButton />
-      </div>
-
     </div>
   );
 };

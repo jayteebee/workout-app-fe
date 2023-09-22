@@ -71,7 +71,6 @@ const ExerciseCreation = () => {
       <MDBBtn onClick={addExercise}>Add Exercise To Workout</MDBBtn>
 
       <ToastContainer />
-    <BackButton />
 
     </div>
   );
