@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactSelect from "react-select";
 
-const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExerciseParameters }) => {
+const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExerciseParameters, setAddExerciseButton, parameterReset }) => {
 
   const [sets, setSets] = useState(null);
   const [reps, setReps] = useState(null);
@@ -65,11 +65,28 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
     setRest(rest);
   };
 
+  useEffect(() => {
+      if (sets && reps && weight && rest) {
+    setAddExerciseButton(true)
+  }
+  }, [sets, reps, weight, rest])
+
+
+  useEffect(() => {
+      if (parameterReset) {
+    setSets(false)
+    setReps(false)
+    setWeight(false)
+    setRest(false)
+  }
+  }, [parameterReset])
+
+
   return (
-    <div>
+    <div >
       {searchedExerciseName || searchedMuscleGroup ? (
-        <div>
-          
+        <div className="setsRepsWeightComponent">
+
           <ReactSelect
             placeholder="Sets"
             options={setOptions}
@@ -92,7 +109,7 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
               }),
             }}
           />
-          <h3 className="subHeader">Reps</h3>
+
           <ReactSelect
             placeholder="Reps"
             options={repOptions}
@@ -115,7 +132,7 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
               }),
             }}
           />
-          <h3 className="subHeader">Weight</h3>
+
           <ReactSelect
             placeholder="Weight"
             options={weightOptions}
@@ -138,7 +155,7 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
               }),
             }}
           />
-          <h3 className="subHeader">Rest</h3>
+
           <ReactSelect
             placeholder="Rest"
             options={restOptions}

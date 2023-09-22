@@ -132,7 +132,8 @@ const Search = ({
   };
 
   return (
-    <div>
+    <div className="" >
+    <div className="exerciseFilters">
       <MDBBtn onClick={barbellToggle} color={barbells ? "success" : ""}>
         Barbells
       </MDBBtn>
@@ -149,7 +150,8 @@ const Search = ({
       >
         Muscle Group
       </MDBBtn>
-
+</div>
+<div className="searchBar">
       {searchByMuscleGroup ? (
         <ReactSelect
           placeholder="Search By Muscle Group"
@@ -197,6 +199,7 @@ const Search = ({
           }}
         />
       )}
+      </div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import SetsRepsWeight from "../Components/Exercises/SetsRepsWeight";
 import "../CSS/ExerciseCreation.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import BackButton from "../Components/Navigation/BackButton";
+
 
 const ExerciseCreation = () => {
   const location = useLocation();
@@ -24,11 +24,15 @@ const ExerciseCreation = () => {
     weight: 0,
     rest: 0
   });
+  const [addExerciseButton, setAddExerciseButton] = useState(false)
+  const [parameterReset, setParameterReset] = useState(false)
 
   const addExercise = async () => {
     await addExerciseToWorkout(selectedWorkout, exerciseParameters);
     setSearchedExerciseName(null);
     setSearchedMuscleGroup(null);
+    setAddExerciseButton(false)
+    setParameterReset(true)
     toast.success("Exercise added to workout! Head to the View Exercises page to view.", {
       position: "bottom-center",
       autoClose: 5000,
@@ -49,9 +53,9 @@ const ExerciseCreation = () => {
   }, [exerciseID]);
 
   return (
-    <div>
-      <h2 className="pageHeader">Exercise Creation</h2>
-      <h4 className="subHeader">Workout: {selectedWorkoutName}</h4>
+    <div className="grid-container">
+      <h2 className="pageHeader exerciseCreation">Exercise Creation</h2>
+      <h4 className="subHeader exerciseCreation">Workout: {selectedWorkoutName}</h4>
 
       <div className="search">
         <Search
@@ -62,14 +66,20 @@ const ExerciseCreation = () => {
           setExerciseID={setExerciseID}
         />
       </div>
+
+      <div className="setsRepsWeightRender">
       <SetsRepsWeight
         searchedExerciseName={searchedExerciseName}
         searchedMuscleGroup={searchedMuscleGroup}
         setExerciseParameters={setExerciseParameters}
+        setAddExerciseButton={setAddExerciseButton}
+        parameterReset={parameterReset}
       />
+      </div>
 
+      <div className={addExerciseButton ? "addExerciseButton" : "hidden"}>
       <MDBBtn onClick={addExercise}>Add Exercise To Workout</MDBBtn>
-
+      </div>
       <ToastContainer />
 
     </div>
