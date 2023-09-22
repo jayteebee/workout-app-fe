@@ -11,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
 import { addWorkoutToRoutine } from "../../API/Routine/Routine";
+import { ToastContainer, toast } from "react-toastify";
 
 
 const CreateWorkout = ({
@@ -105,6 +106,19 @@ const CreateWorkout = ({
       // setWorkoutDay("");
       setWorkoutToggle((prevState) => !prevState);
     }
+    toast.success(
+      "Workout Created!",
+      {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      }
+    );
   };
 
   // console.log("order", order);
@@ -183,7 +197,7 @@ const CreateWorkout = ({
           Create Workout
         </MDBBtn>
       </form>
-
+<ToastContainer />
     </div>
   );
 };

@@ -224,13 +224,13 @@ const handleWorkoutViewOptions = (e) => {
         {/*</div>*/}
       </div>
 
-      <div className="finaliseDaysButtons"> 
+      <div className={viewExistingWorkouts ? "hidden" : "finaliseDaysButtons"}> 
       {/** These Two classes were rendered on the isButtonHidden being true as well */}
       <div className={routineFrequencyExists ? "hidden" : null}>
         <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Finalise Days </MDBBtn>
       </div>
 
-      <div className={routineFrequencyExists ? "" : "hidden"}>
+      <div className={routineFrequencyExists  ? "" : "hidden"}>
       <MDBBtn onClick={customFrequencyWorkoutDaysAPICall} >Finalise Custom Days</MDBBtn>
       </div>
       </div>
