@@ -4,11 +4,10 @@
     grid-template-rows: repeat(6, 1fr); 
   }
 
-  .pageHeader.routines {
+  .pageHeader.profile {
     grid-column: 3 / span 2;
     text-align: center; 
     padding: 10px; 
-    background-color: yellowgreen;
   }
 
   .formContainer.profile {

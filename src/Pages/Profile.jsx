@@ -70,7 +70,7 @@ const Profile = ({loggedIn}) => {
   }, [userToggle]);
 
   return (
-    <div>
+    <div className="grid-container">
     <h3 className="pageHeader profile">Profile</h3>
 
       <form onSubmit={handleSubmit} className="formContainer profile">
