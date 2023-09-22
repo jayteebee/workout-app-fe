@@ -79,7 +79,7 @@ const editDetails = () => {
     <div className="grid-container">
     <h3 className="pageHeader profile">Profile</h3>
 
-    <MDBBtn onClick={editDetails}>Edit Details</MDBBtn>
+    <MDBBtn onClick={editDetails} className="editDetailsCondRenderButton" >Edit Details</MDBBtn>
 
       <form onSubmit={handleSubmit} className={editDetailsForm ? "formContainer profile" : "hidden"}>
         <MDBInput
@@ -115,14 +115,25 @@ const editDetails = () => {
         </MDBBtn>
       </form>
 
-      <div>
+      <div className={editDetailsForm ? "hidden" :"userDetails" } >
+     
+      <div className="metrics">
+      <p>Name:</p>
+      <p>Height:</p>
+      <p>Weight:</p>
+      <p>Email:</p>
+      </div>
+
+      <div className="metrics">
         <p>{userDetails.name}</p>
         <p>{userDetails.height} cm</p>
         <p>{userDetails.weight} lbs</p>
         <p>{userDetails.email}</p>
+        </div>
+
       </div>
 
-      <div>
+      <div className="logOut">
         <LogOut />
       </div>
 
