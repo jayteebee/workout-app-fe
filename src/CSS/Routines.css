@@ -16,12 +16,10 @@
   }
 
 .backButton {
-    grid-row: 1;
-    grid-column: 1;
-    height: 55px;
+    height: 40px;
     width: auto;
-    align-self:self-start;
-    justify-self: self-start;
+    padding-top: 3px;
+    padding-left: 3px;
 }
 
 .routineViewOptions {
