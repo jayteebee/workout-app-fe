@@ -11,17 +11,16 @@ import deleteIcon from "../../CSS/Icons/deleteIcon.png";
 import editIcon from "../../CSS/Icons/editIcon.png";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 
-const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, weekly}) => {
+const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, createNewRoutine}) => {
   const [allRoutines, setAllRoutines] = useState([]);
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
   const [routineToEdit, setRoutineToEdit] = useState(null);
-console.log('routineToEdit', routineToEdit)
   const [editToggle, setEditToggle] = useState(false);
   const [routineToDelete, setRoutineToDelete] = useState(null);
   const [deleteToggle, setDeleteToggle] = useState(null);
   const [userID, setUserID] = useState(null);
   const [filteredRoutines, setFilteredRoutines] = useState(null);
-  console.log("filteredRoutines", filteredRoutines)
+  // console.log("filteredRoutines", filteredRoutines)
   const [editingFrequencyRoutine, setEditingFrequencyRoutine] = useState(false)
 
 useEffect(() => {
@@ -68,7 +67,8 @@ useEffect(() => {
     routineToEdit === null
       ? setRoutineToEdit(routineID)
       : setRoutineToEdit(null);
-      routineFreq ? setEditingFrequencyRoutine(true) : setEditingFrequencyRoutine(false)
+      routineFreq ? setEditingFrequencyRoutine(true) :
+      setEditingFrequencyRoutine(false)
   };
 
   useEffect(() => {
@@ -79,6 +79,12 @@ useEffect(() => {
     // console.log("routinesFilteredForID", routinesFilteredForID);
     setFilteredRoutines(routinesFilteredForID);
   }, [allRoutines]);
+
+useEffect(() => {
+  if (createNewRoutine) {
+    setRoutineToEdit(null)
+  }
+}, [createNewRoutine])
 
   return (
     <div>

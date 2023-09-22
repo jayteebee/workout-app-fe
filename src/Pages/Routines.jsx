@@ -95,6 +95,7 @@ const Routines = ({
             routineToggle={routineToggle}
             setRoutineFrequency={setRoutineFrequency}
             weekly={weekly}
+            createNewRoutine={createNewRoutine}
           />
         </div>
       </div>
