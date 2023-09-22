@@ -31,6 +31,8 @@ const Routines = ({
   }, []);
 
   const handleRoutineViewOptions = (e) => {
+    setCreateRoutineToggle(false)
+
     let name = e.target.name;
     if (name === "createNewRoutine") {
       setViewExistingRoutines(false);
@@ -119,7 +121,7 @@ const Routines = ({
       </div>
 
       {createRoutineToggle && (
-        <div className="createRoutine">
+        <div className={createNewRoutine ? "createRoutine" : "hidden"}>
           <CreateRoutine
             custom={custom}
             weekly={weekly}
