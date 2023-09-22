@@ -60,11 +60,13 @@ const Profile = ({loggedIn}) => {
   };
 
   useEffect(() => {
-    getUserById(userID)
+    if (userID) {
+      getUserById(userID)
       .then((data) => setUserDetails(data))
       .catch((err) => {
         console.log("getUserById API Call Failed: ", err);
       });
+    }
   }, [userToggle]);
 
   return (
