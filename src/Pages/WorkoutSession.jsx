@@ -15,8 +15,7 @@ import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { createExerciseSession } from "../API/ExerciseSession/ExerciseSession";
 import { createSessionLogs } from "../API/SessionLogs/SessionLogs";
 import SetTimer from "../Components/WorkoutSession/SetTimer";
-import "../CSS/WorkoutSession.css"
-
+import "../CSS/WorkoutSession.css";
 
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
@@ -211,175 +210,159 @@ const WorkoutSession = () => {
   }, [workoutComplete]);
 
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
-    <div key={exercise.id} className="exerciseSession">
-      <div className="exerciseInfo">
-        <div style={{ width: "5%" }}>
-          <p>
-            {i + 1} {")"}
-          </p>
+    <div key={exercise.id} className="exerciseSessionContainer">
+      
+        <div style={{ width: "5%" }} className="exerciseOrder">
+          <p>{i + 1} .</p>
         </div>
+
+       {/* <div className="individualExerciseInfo"> */}
 
         <div
           className={
-            expandDiv
+            expandDiv && id === exercise.id
               ? "exerciseSessionBorderExpanded"
               : "exerciseSessionBorder"
           }
           onClick={moreExerciseInfo}
         >
+
+        <div className="exerciseDetails">
           <p>{exercise.exercise.name}</p>
-          <p>Sets {exercise.sets}</p>
-          <p>Reps {exercise.reps}</p>
+          <p>S {exercise.sets}</p>
+          <p>R {exercise.reps}</p>
           <p>Weight: {exercise.weight}kg</p>
-        </div>
 
-        {buttonColor === "green" && id === exercise.id ? (
-          <button
-            className="button"
-            value={i}
-            onClick={() =>
-              exerciseButton(
-                "red",
-                exercise.id,
-                exercise.sets,
-                exercise.exercise.id
-              )
-            }
-          >
-            <img src={greenRhombus} alt="greenRhombus" className="rhombus" />
-          </button>
-        ) : null}
 
-        {buttonColor === "red" && id === exercise.id ? (
-          <button
-            className="button"
-            onClick={() =>
-              exerciseButton(
-                "purple",
-                exercise.id,
-                exercise.sets,
-                exercise.exercise.id
-              )
-            }
-          >
-            <img src={redRhombus} alt="redRhombus" className="rhombus" />
-          </button>
-        ) : null}
+          {buttonColor === "green" && id === exercise.id ? (
+            <button
+              className="button"
+              value={i}
+              onClick={() =>
+                exerciseButton(
+                  "red",
+                  exercise.id,
+                  exercise.sets,
+                  exercise.exercise.id
+                )
+              }
+            >
+              <img src={greenRhombus} alt="greenRhombus" className="rhombus" />
+            </button>
+          ) : null}
 
-        {buttonColor === "purple" && id === exercise.id ? (
-          <button
-            className="button"
-            {...(count === 0 &&
-              exerciseButton(
-                "green",
-                exercise.id,
-                exercise.sets,
-                exercise.exercise.id
-              ))}
-          >
-            <img src={purpleRhombus} alt="purpleRhombus" className="rhombus" />
-          </button>
-        ) : null}
+          {buttonColor === "red" && id === exercise.id ? (
+            <button
+              className="button"
+              onClick={() =>
+                exerciseButton(
+                  "purple",
+                  exercise.id,
+                  exercise.sets,
+                  exercise.exercise.id
+                )
+              }
+            >
+              <img src={redRhombus} alt="redRhombus" className="rhombus" />
+            </button>
+          ) : null}
 
-        {(buttonColor === "purple" || buttonColor === "green") &&
-          setsComplete > 0 &&
-          id === exercise.id &&
-          metricForm && (
-            <div>
-              <form onSubmit={handleWeightAndRepsSubmit}>
-                <MDBInput
-                  contrast
-                  label="Reps Achieved"
-                  value={repsAchieved}
-                  name="reps"
-                  onChange={updateExerciseMetrics}
-                ></MDBInput>
+          {buttonColor === "purple" && id === exercise.id ? (
+            <button
+              className="button"
+              {...(count === 0 &&
+                exerciseButton(
+                  "green",
+                  exercise.id,
+                  exercise.sets,
+                  exercise.exercise.id
+                ))}
+            >
+              <img
+                src={purpleRhombus}
+                alt="purpleRhombus"
+                className="rhombus"
+              />
+            </button>
+          ) : null}
+          
+          </div>
 
-                <MDBInput
-                  contrast
-                  label="Weight Achieved"
-                  value={weightAchieved}
-                  name="weight"
-                  onChange={updateExerciseMetrics}
-                ></MDBInput>
-                <MDBBtn type="submit">Log Weight and Reps</MDBBtn>
-              </form>
+          
+          {(buttonColor === "purple" || buttonColor === "green") &&
+            setsComplete > 0 &&
+            id === exercise.id &&
+            metricForm && (
+              <div>
+                <form
+                  className="metricForm"
+                  onSubmit={handleWeightAndRepsSubmit}
+                >
+                  <div className="inline-inputs">
+                    <MDBInput
+                      className="metricFormInput"
+                      contrast
+                      label="Reps Achieved"
+                      value={repsAchieved}
+                      name="reps"
+                      onChange={updateExerciseMetrics}
+                    ></MDBInput>
+
+                    <MDBInput
+                      className="metricFormInput"
+                      contrast
+                      label="Weight Achieved"
+                      value={weightAchieved}
+                      name="weight"
+                      onChange={updateExerciseMetrics}
+                    ></MDBInput>
+                  </div>
+                  <div className="button-container">
+                    <MDBBtn type="submit">Log Weight and Reps</MDBBtn>
+                  </div>
+                </form>
+              </div>
+            )}
             </div>
-          )}
-      </div>
+      {/*</div>*/}
     </div>
   ));
 
   return (
     <div className="grid-container">
-
-    <div className="stopWatch">
-      <StopWatch
-        active={active}
-        stopWatchCount={stopWatchCount}
-        setStopWatchCount={setStopWatchCount}
-      />
+      <div className="stopWatch">
+        <StopWatch
+          active={active}
+          stopWatchCount={stopWatchCount}
+          setStopWatchCount={setStopWatchCount}
+        />
       </div>
 
-    <div className="restTimer">
-      <RestTimer
-        restTimerExercise={restTimerExercise}
-        startRestTimer={startRestTimer}
-        setStartRestTimer={setStartRestTimer}
-        count={count}
-        setCount={setCount}
-      />
+      <div className="restTimer">
+        <RestTimer
+          restTimerExercise={restTimerExercise}
+          startRestTimer={startRestTimer}
+          setStartRestTimer={setStartRestTimer}
+          count={count}
+          setCount={setCount}
+        />
       </div>
 
-    <div className="setTimer">
-      <SetTimer
-        setTimer={setTimer}
-        setSetTimerCount={setSetTimerCount}
-        setTimerCount={setTimerCount}
-      />
-</div>
-
-      <div className="workoutName">
-      {workoutName}
+      <div className="setTimer">
+        <SetTimer
+          setTimer={setTimer}
+          setSetTimerCount={setSetTimerCount}
+          setTimerCount={setTimerCount}
+        />
       </div>
 
-      <div className="displayWorkoutData">
-      {displayWorkoutData}      
-      </div>
+      <div className="workoutName">{workoutName}</div>
+
+      <div className="displayWorkoutData">{displayWorkoutData}</div>
 
       <ToastContainer />
-
     </div>
   );
 };
 
 export default WorkoutSession;
-
-// insert in line 122/123
-
-// if (sets === setsComplete && metricForm === false ) {
-//   setId(eID + 1);
-//   setSetsComplete(0);
-//   setExercisesCompleted(
-//     (prevExercisesCompleted) => (prevExercisesCompleted += 1)
-//   );
-// }
-
-// const numberOfExercises = exercisesInWorkout.length - 1;
-
-// if (exercisesCompleted === numberOfExercises && sets === setsComplete && value === "green" && metricForm === false) {
-//   setWorkoutComplete(true)
-//   toast.success("Workout Complete!!", {
-//     position: "bottom-center",
-//     autoClose: 5000,
-//     hideProgressBar: false,
-//     closeOnClick: true,
-//     pauseOnHover: true,
-//     draggable: true,
-//     progress: undefined,
-//     theme: "dark",
-//   });
-//   setActive(false);
-
-//   setExercisesCompleted(0);
-// }
