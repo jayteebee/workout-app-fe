@@ -5,7 +5,7 @@ import { getAllExercises } from "../API/Exercise/Exercise";
 
 const Logs = () => {
   const [sessionLogs, setSessionLogs] = useState([]);
-  // console.log("sessionLogs", sessionLogs);
+  console.log("sessionLogs", sessionLogs);
   const [allExercises, setAllExercises] = useState([])
   // console.log("allExercises", allExercises);
 
@@ -35,6 +35,7 @@ const Logs = () => {
         {log.details.exercise_sessions.map((exercise, exerciseIndex) => {
           const filteredExercise = allExercises.length > 0 && allExercises.filter((ex) => ex.id === exercise.exercise_id)
           return (
+
           <div key={exerciseIndex}>
           {filteredExercise && (
             <div>
@@ -47,6 +48,7 @@ const Logs = () => {
           )}
           </div>
           )
+
         })}
       </div>
     ));

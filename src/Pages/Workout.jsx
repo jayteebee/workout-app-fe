@@ -14,6 +14,7 @@ import { useLocation } from "react-router-dom";
 
 const Workout = ({weekly, custom, routineFrequency}) => {
   const [workout, setWorkout] = useState([]);
+  console.log('workout', workout)
   const [workoutToggle, setWorkoutToggle] = useState(false);
   const [routineID, setRoutineID] = useState(Number);
   const [workoutCreated, setWorkoutCreated] = useState(false);
@@ -226,11 +227,12 @@ const handleWorkoutViewOptions = (e) => {
 
       <div className={viewExistingWorkouts ? "hidden" : "finaliseDaysButtons"}> 
       {/** These Two classes were rendered on the isButtonHidden being true as well */}
-      <div className={routineFrequencyExists ? "hidden" : null}>
+     
+      <div className={routineFrequencyExists || workout.length < 1 ? "hidden" : null}>
         <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Finalise Days </MDBBtn>
       </div>
 
-      <div className={routineFrequencyExists  ? "" : "hidden"}>
+      <div className={routineFrequencyExists || workout.length < 1 ? "" : "hidden"}>
       <MDBBtn onClick={customFrequencyWorkoutDaysAPICall} >Finalise Custom Days</MDBBtn>
       </div>
       </div>

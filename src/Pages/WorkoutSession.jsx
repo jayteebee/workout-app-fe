@@ -107,6 +107,7 @@ const WorkoutSession = () => {
       setStartRestTimer(true);
       setMetricForm(true);
       setSetTimer(false);
+    setExpandDiv(true);
     }
 
     if (value === "red") {
@@ -117,9 +118,9 @@ const WorkoutSession = () => {
     setButtonColor(value);
   };
 
-  const moreExerciseInfo = () => {
-    setExpandDiv((prevState) => !prevState);
-  };
+  // const moreExerciseInfo = () => {
+  //   setExpandDiv(true);
+  // };
 
   const workoutName = <h2>Workout: {exercisesInWorkout[0].workout_name}</h2>;
 
@@ -189,6 +190,8 @@ const WorkoutSession = () => {
       setExercisesCompleted(0);
     }
     setSetTimerCount(0);
+    setExpandDiv(false);
+
   };
 
   const workoutSessionId = workoutSession.id;
@@ -224,15 +227,14 @@ const WorkoutSession = () => {
               ? "exerciseSessionBorderExpanded"
               : "exerciseSessionBorder"
           }
-          onClick={moreExerciseInfo}
-        >
+          // onClick={moreExerciseInfo}
+         >
 
         <div className="exerciseDetails">
           <p>{exercise.exercise.name}</p>
           <p>S {exercise.sets}</p>
           <p>R {exercise.reps}</p>
           <p>Weight: {exercise.weight}kg</p>
-
 
           {buttonColor === "green" && id === exercise.id ? (
             <button
@@ -292,7 +294,7 @@ const WorkoutSession = () => {
           {(buttonColor === "purple" || buttonColor === "green") &&
             setsComplete > 0 &&
             id === exercise.id &&
-            metricForm && (
+            metricForm && expandDiv && (
               <div>
                 <form
                   className="metricForm"
