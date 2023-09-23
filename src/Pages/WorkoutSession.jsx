@@ -15,6 +15,7 @@ import { MDBBtn, MDBInput } from "mdb-react-ui-kit";
 import { createExerciseSession } from "../API/ExerciseSession/ExerciseSession";
 import { createSessionLogs } from "../API/SessionLogs/SessionLogs";
 import SetTimer from "../Components/WorkoutSession/SetTimer";
+import "../CSS/WorkoutSession.css"
 
 
 const WorkoutSession = () => {
@@ -310,12 +311,17 @@ const WorkoutSession = () => {
   ));
 
   return (
-    <div>
+    <div className="grid-container">
+
+    <div className="stopWatch">
       <StopWatch
         active={active}
         stopWatchCount={stopWatchCount}
         setStopWatchCount={setStopWatchCount}
       />
+      </div>
+
+    <div className="restTimer">
       <RestTimer
         restTimerExercise={restTimerExercise}
         startRestTimer={startRestTimer}
@@ -323,13 +329,24 @@ const WorkoutSession = () => {
         count={count}
         setCount={setCount}
       />
+      </div>
+
+    <div className="setTimer">
       <SetTimer
         setTimer={setTimer}
         setSetTimerCount={setSetTimerCount}
         setTimerCount={setTimerCount}
       />
+</div>
+
+      <div className="workoutName">
       {workoutName}
-      {displayWorkoutData}
+      </div>
+
+      <div className="displayWorkoutData">
+      {displayWorkoutData}      
+      </div>
+
       <ToastContainer />
 
     </div>
