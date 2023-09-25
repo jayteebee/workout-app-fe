@@ -94,7 +94,7 @@ const editDetails = () => {
         <MDBInput
           className="mb-4"
           type="text"
-          label="Height"
+          label="Height (cm)"
           value={formInput.height}
           name="height"
           onChange={handleChange}
@@ -104,7 +104,7 @@ const editDetails = () => {
         <MDBInput
           className="mb-4"
           type="text"
-          label="Weight"
+          label="Weight (kg)"
           value={formInput.weight}
           name="weight"
           onChange={handleChange}
