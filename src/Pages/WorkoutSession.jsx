@@ -340,7 +340,7 @@ const WorkoutSession = () => {
         />
       </div>
 
-      <div className="restTimer">
+      <div className={startRestTimer ? "restTimer" : "hidden"}>
         <RestTimer
           restTimerExercise={restTimerExercise}
           startRestTimer={startRestTimer}
@@ -350,7 +350,7 @@ const WorkoutSession = () => {
         />
       </div>
 
-      <div className="setTimer">
+      <div className={ setTimer ? "setTimer" : "hidden"}>
         <SetTimer
           setTimer={setTimer}
           setSetTimerCount={setSetTimerCount}
