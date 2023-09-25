@@ -191,6 +191,9 @@ const handleWorkoutViewOptions = (e) => {
   </MDBBtn>
 </div>
 
+<div className={viewExistingWorkouts && workout.length === 0 ? "noWorkouts" : "hidden"}>
+<p>No Workouts Created...</p>
+</div>
       <div className={createNewWorkout ? "hidden" : "fetchWorkoutByID"}>
         <FetchWorkoutByID
           workoutToggle={workoutToggle}
@@ -232,7 +235,8 @@ const handleWorkoutViewOptions = (e) => {
         <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Finalise Days </MDBBtn>
       </div>
 
-      <div className={routineFrequencyExists || workout.length < 1 ? "" : "hidden"}>
+
+      <div className={routineFrequencyExists && workout.length > 0 ? "" : "hidden"}>
       <MDBBtn onClick={customFrequencyWorkoutDaysAPICall} >Finalise Custom Days</MDBBtn>
       </div>
       </div>

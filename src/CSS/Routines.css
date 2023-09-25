@@ -96,3 +96,8 @@
     display: flex;
     justify-content: center;
 }
+
+.noRoutines {
+    grid-row: 3;
+    grid-column:3 /span 2;
+}

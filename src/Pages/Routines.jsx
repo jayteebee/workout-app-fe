@@ -17,6 +17,8 @@ const Routines = ({
   const [createRoutineToggle, setCreateRoutineToggle] = useState(false);
   const [viewExistingRoutines, setViewExistingRoutines] = useState(false);
   const [createNewRoutine, setCreateNewRoutine] = useState(false);
+  const [allRoutines, setAllRoutines] = useState([]);
+
 
   const toggleCreateRoutine = () => {
     setCreateRoutineToggle((prevState) => !prevState);
@@ -44,6 +46,12 @@ const Routines = ({
       setViewExistingRoutines(true);
     }
   };
+
+  useEffect(() => {
+    if (allRoutines.length === 0) {
+      setCreateNewRoutine(true)
+    }
+  }, [])
 
   return (
     <div className="grid-container">
@@ -88,6 +96,10 @@ const Routines = ({
         </MDBBtn>
       </div>
 
+        <div className={viewExistingRoutines && allRoutines.length === 0 ? "noRoutines" : "hidden"}>
+        <p>No Routines Created...</p>
+        </div>
+
       <div className={viewExistingRoutines ? "fetchAllRoutines" : "hidden"}>
         <div className="fetchAllRoutines">
           <FetchAllRoutines
@@ -95,6 +107,8 @@ const Routines = ({
             setRoutineFrequency={setRoutineFrequency}
             weekly={weekly}
             createNewRoutine={createNewRoutine}
+            allRoutines={allRoutines}
+            setAllRoutines={setAllRoutines}
           />
         </div>
       </div>

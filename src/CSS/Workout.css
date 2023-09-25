@@ -69,10 +69,10 @@
     color: #FFF; 
   }
 
-
-
-
-
+.noWorkouts {
+    grid-row: 3;
+    grid-column: 3 /span 2;
+}
   
   
   

@@ -11,8 +11,8 @@ import deleteIcon from "../../CSS/Icons/deleteIcon.png";
 import editIcon from "../../CSS/Icons/editIcon.png";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 
-const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, createNewRoutine}) => {
-  const [allRoutines, setAllRoutines] = useState([]);
+const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, createNewRoutine, allRoutines, setAllRoutines}) => {
+  // const [allRoutines, setAllRoutines] = useState([]);
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
   const [routineToEdit, setRoutineToEdit] = useState(null);
   const [editToggle, setEditToggle] = useState(false);
