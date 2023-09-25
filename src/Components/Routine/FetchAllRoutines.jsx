@@ -48,15 +48,6 @@ useEffect(() => {
       });
   }, [routineToggle, editToggle, deleteToggle]);
 
-useEffect(() => {
-  getAllRoutines()
-  .then((data) => {
-    setAllRoutines(data);
-  })
-  .catch((err) => {
-    console.log("getAllRoutines API Call Failed", err);
-  });
-}, [deleteToggle])
 
   const displayWorkouts = (routineID, routineFreq) => {
     setSelectedRoutineID(routineID);
