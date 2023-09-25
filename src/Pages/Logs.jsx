@@ -56,7 +56,7 @@ const sortedSessionLogs = sessionLogs.sort((a, b) =>
       return (
       <div key={index} className="workoutLog">
         <h2 className="workoutName">Workout: {filteredWorkout && filteredWorkout[0].name}</h2>
-        <h4>Date Completed: {dateToWords} {formattedTime} </h4>
+        <h4 style={{textDecoration: "underline"}}>Date Completed: {dateToWords} {formattedTime} </h4>
 
         {log.details.exercise_sessions.map((exercise, exerciseIndex) => {
           const filteredExercise = allExercises.length > 0 && allExercises.filter((ex) => ex.id === exercise.exercise_id)
