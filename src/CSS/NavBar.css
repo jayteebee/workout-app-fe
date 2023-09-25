@@ -15,7 +15,9 @@
 
 .hamburgerMenu h2 {
     color: #66fcf1;
-  font-family: "League Gothic", sans-serif;
+  /* font-family: "League Gothic", sans-serif; */
+  font-size: 1.75rem ;
+
 }
 
 .navigationBar {

@@ -6,12 +6,12 @@
   height: 100vh;
 }
 
-.grid-container {
+/* .grid-container {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr); 
   gap: 10px; 
-}
+} */
 
 .App-inner {
   background-color:#001F3F;
@@ -30,8 +30,9 @@
   font-size: 2.5rem;
 }
 
-p {
-  font-family: "Oswald", sans-serif;
+p, h3, h2 {
+  /* font-family: "Oswald", sans-serif; */
+  font-family: 'Fjalla One', sans-serif;
   font-size: 1.5rem;
 }
 

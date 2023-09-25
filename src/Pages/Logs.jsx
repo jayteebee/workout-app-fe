@@ -55,7 +55,7 @@ const Logs = () => {
 
   return (
     <div>
-      <h2>Logs</h2>
+      <h2 style={{textDecoration: "underline"}}>Logs</h2>
       {workoutLogs}
 
     </div>
