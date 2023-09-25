@@ -1,0 +1,42 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr); 
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .pageHeader.logs {
+    grid-column: 3 / span 2;
+    text-align: center; 
+    padding: 10px; 
+  }
+
+.workoutLogs {
+    grid-column: 2 / span 4;
+    grid-row: 2/ span 5;
+    justify-self: center;
+
+}
+
+.exerciseLog {
+    /* background-color: yellowgreen; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.exerciseLog p {
+    margin: 1rem;
+}
+
+.workoutLog {
+    border: #66fcf1 1px solid;
+    border-radius: 2%;
+    padding: 5px;
+    margin: 10px;
+}
+
+  /* .workoutName {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+  } */
