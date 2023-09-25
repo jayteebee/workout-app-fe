@@ -173,6 +173,12 @@ const handleWorkoutViewOptions = (e) => {
   }
 };
 
+useEffect(() => {
+ if (workout.length === 0) {
+  setCreateNewWorkout(true)
+ }
+}, [])
+
   return (
     <div className="grid-container">
       <h3 className="pageHeader workout">Workout</h3>
@@ -182,11 +188,11 @@ const handleWorkoutViewOptions = (e) => {
   </div>*/}
 
   <div className="workoutViewOptions">
-  <MDBBtn name="createNewWorkout" onClick={handleWorkoutViewOptions}>
+  <MDBBtn color={createNewWorkout ? "info" : ""} name="createNewWorkout" onClick={handleWorkoutViewOptions}>
     Create New Workout
   </MDBBtn>
 
-  <MDBBtn name="viewExistingWorkouts" onClick={handleWorkoutViewOptions}>
+  <MDBBtn color={viewExistingWorkouts ? "info" : ""} name="viewExistingWorkouts" onClick={handleWorkoutViewOptions}>
     View Existing Workouts
   </MDBBtn>
 </div>

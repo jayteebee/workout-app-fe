@@ -87,11 +87,11 @@ const Routines = ({
         className="routineViewOptions"
         
       >
-        <MDBBtn name="createNewRoutine" onClick={handleRoutineViewOptions}>
+        <MDBBtn color={createNewRoutine ? "info" : ""} name="createNewRoutine" onClick={handleRoutineViewOptions}>
           Create New Routine
         </MDBBtn>
 
-        <MDBBtn name="viewExistingRoutines" onClick={handleRoutineViewOptions}>
+        <MDBBtn color={viewExistingRoutines ? "info" : ""} name="viewExistingRoutines" onClick={handleRoutineViewOptions}>
           View Existing Routines
         </MDBBtn>
       </div>
