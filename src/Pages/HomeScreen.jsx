@@ -6,6 +6,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import { useNavigate } from "react-router-dom";
 import { getExercisesInWorkout } from "../API/Workout/Workout";
 import "../App.css";
+import { ToastContainer, toast } from "react-toastify";
+
 
 const HomeScreen = ({ routineID }) => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
@@ -73,6 +75,18 @@ const HomeScreen = ({ routineID }) => {
   };
 
   const handleEventClick = async (eventClickInfo) => {
+if (exercisesInWorkout.length === 0) {
+  toast.success("Add exercises to workout before beginning your session!", {
+    position: "bottom-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  });
+}
     const routineWorkoutId =
       eventClickInfo.event.extendedProps.routineWorkoutId;
     // console.log("routineWorkoutId", routineWorkoutId);
@@ -119,6 +133,7 @@ const HomeScreen = ({ routineID }) => {
 </div>
       {/*<MDBBtn onClick={startWorkout}>Start Workout</MDBBtn>*/}
 
+      <ToastContainer />
     </div>
   );
 };
