@@ -238,12 +238,12 @@ useEffect(() => {
       {/** These Two classes were rendered on the isButtonHidden being true as well */}
      
       <div className={routineFrequencyExists || workout.length < 1 ? "hidden" : null}>
-        <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Finalise Days </MDBBtn>
+        <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Create Weekly Workout Schedule </MDBBtn>
       </div>
 
 
       <div className={routineFrequencyExists && workout.length > 0 ? "" : "hidden"}>
-      <MDBBtn onClick={customFrequencyWorkoutDaysAPICall} >Finalise Custom Days</MDBBtn>
+      <MDBBtn onClick={customFrequencyWorkoutDaysAPICall} > Create Custom Workout Schedule </MDBBtn>
       </div>
       </div>
       <ToastContainer />
