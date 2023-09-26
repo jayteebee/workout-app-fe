@@ -12,7 +12,7 @@ import editIcon from "../../CSS/Icons/editIcon.png";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import Workout from "../../Pages/Workout";
 
-const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, createNewRoutine, allRoutines, setAllRoutines, setActiveRoutine}) => {
+const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, createNewRoutine, allRoutines, setAllRoutines, activeRoutine, setActiveRoutine, setRoutineChange}) => {
   // const [allRoutines, setAllRoutines] = useState([]);
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
   const [routineToEdit, setRoutineToEdit] = useState(null);
@@ -82,6 +82,12 @@ useEffect(() => {
     setRoutineToEdit(null)
   }
 }, [createNewRoutine])
+
+useEffect(() => {
+  if (activeRoutine) {
+    setRoutineChange(true)
+  }
+}, [activeRoutine])
 
   return (
     <div>

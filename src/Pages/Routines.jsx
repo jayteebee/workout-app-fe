@@ -12,7 +12,9 @@ const Routines = ({
   weekly,
   setWeekly,
   setRoutineFrequency,
-  setActiveRoutine
+  setActiveRoutine,
+  activeRoutine,
+  setRoutineChange
 }) => {
   const [routineToggle, setRoutineToggle] = useState(false);
   const [createRoutineToggle, setCreateRoutineToggle] = useState(false);
@@ -111,6 +113,8 @@ const Routines = ({
             allRoutines={allRoutines}
             setAllRoutines={setAllRoutines}
             setActiveRoutine={setActiveRoutine}
+            activeRoutine={activeRoutine}
+            setRoutineChange={setRoutineChange}
           />
         </div>
       </div>

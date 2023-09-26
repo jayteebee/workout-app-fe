@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 import { deleteWorkoutScheduleByID, getAllWorkoutSchedules } from "../API/WorkoutSchedule/WorkoutSchedule";
 
 
-const Workout = ({weekly, custom, routineFrequency, activeRoutine}) => {
+const Workout = ({weekly, custom, routineFrequency, activeRoutine, routineChange}) => {
   const [workout, setWorkout] = useState([]);
   // console.log('workout', workout)
   const [workoutToggle, setWorkoutToggle] = useState(false);
@@ -207,8 +207,6 @@ useEffect(() => {
 
 
 const regenerateWorkoutDaysForRoutineChange = (routineToChangeTo) => {
-  console.log('CALLED')
-  console.log('routineToChangeTo', routineToChangeTo)
   let updatedDaysOfWeek = []
   // Ensure workoutDays is always an array
   const workoutDaysArray = Array.isArray(workoutDays) ? workoutDays : [workoutDays];
@@ -247,11 +245,11 @@ if (arrOfWorkoutScheduleIds.length > 0) {
   }
 }}
 
-console.log('activeRoutine', activeRoutine)
 
-const routineChangeHandler = async (activeRoutineValue) => {
-console.log('activeRoutine INSIDE', activeRoutineValue)
-
+useEffect(() => {
+  console.log('routineChange', routineChange)
+debugger;
+    const routineChangeHandler = async (activeRoutineValue) => {
   try {
     await deleteWorkoutSchedules()
     regenerateWorkoutDaysForRoutineChange(activeRoutineValue)
@@ -260,14 +258,30 @@ console.log('activeRoutine INSIDE', activeRoutineValue)
   }
 }
 
+if (routineChange) {
+  routineChangeHandler(activeRoutine)
+}
+
+}, [routineChange])
+
+
+// const routineChangeHandler = async (activeRoutineValue) => {
+//   try {
+//     await deleteWorkoutSchedules()
+//     regenerateWorkoutDaysForRoutineChange(activeRoutineValue)
+//   } catch (err) {
+//     console.log('Error in routineChangeHandler', err)
+//   }
+// }
+
   return (
     <div className="grid-container">
       <h3 className="pageHeader workout">Workout</h3>
 
       {/*<div className='fetchAllWorkouts'>
     <FetchAllWorkouts workoutToggle={workoutToggle}/>
-  </div>*/}
-<button onClick={() => routineChangeHandler(activeRoutine)}>both test</button>
+  </div>
+<button onClick={() => routineChangeHandler(activeRoutine)}>both test</button>   */}
 
 
   <div className="workoutViewOptions">
