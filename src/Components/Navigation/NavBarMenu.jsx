@@ -13,9 +13,7 @@ const NavBarMenu = ({ setShowMenu }) => {
     <Link to="/" onClick={toggleMenu}>
         <h2>Home</h2>
       </Link>
-      <Link to="/Routines" onClick={toggleMenu}>
-        <h2>Routines</h2>
-      </Link>
+
       <Link to="/Profile" onClick={toggleMenu}>
         <h2>Profile</h2>
       </Link>

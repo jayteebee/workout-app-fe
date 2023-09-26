@@ -25,6 +25,19 @@
     justify-content: space-between;
   }
 
+  .routineLink {
+    display: flex;
+  justify-content: space-around;
+align-items: center;
+width: 20vw;
+  }
+
+.routineLink p {
+  display: flex;
+  color: #66fcf1;
+
+  }
+
 /* .navbar {
     grid-column: 3;
     display: flex;
