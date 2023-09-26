@@ -10,6 +10,7 @@ import FetchWorkoutByID from "../Components/Workout/FetchWorkoutByID";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
+import { deleteWorkoutScheduleByID, getAllWorkoutSchedules } from "../API/WorkoutSchedule/WorkoutSchedule";
 
 
 const Workout = ({weekly, custom, routineFrequency}) => {
@@ -17,6 +18,7 @@ const Workout = ({weekly, custom, routineFrequency}) => {
   console.log('workout', workout)
   const [workoutToggle, setWorkoutToggle] = useState(false);
   const [routineID, setRoutineID] = useState(Number);
+  console.log('routineID', routineID)
   const [workoutCreated, setWorkoutCreated] = useState(false);
   const [toggleCreateWorkout, setToggleCreateWorkout] = useState(false);
 
@@ -40,7 +42,8 @@ const Workout = ({weekly, custom, routineFrequency}) => {
 
 const [createNewWorkout, setCreateNewWorkout] = useState(false)
 const [viewExistingWorkouts, setViewExistingWorkouts] = useState(false)
-
+const [workoutSchedules, setWorkoutSchedules] = useState([])
+console.log('workoutSchedules', workoutSchedules)
 
 const location = useLocation();
   const routineFrequencyExists = location.state?.routineFrequencyExists;
@@ -179,6 +182,33 @@ useEffect(() => {
  }
 }, [])
 
+useEffect(() => {
+  getAllWorkoutSchedules()
+  .then((data) => {
+    setWorkoutSchedules(data)
+  })
+  .catch((err) => console.log("Error with getAllWorkoutSchedules API Call: ", err))
+}, [])
+
+const deleteWorkoutSchedules = () => {
+  let arrOfWorkoutScheduleIds = []
+if (workoutSchedules) {
+workoutSchedules.forEach((schedule) => {
+arrOfWorkoutScheduleIds.push(schedule.id)
+  })
+  console.log('arrOfWorkoutScheduleIds', arrOfWorkoutScheduleIds)
+}
+if (arrOfWorkoutScheduleIds.length > 0) {
+  arrOfWorkoutScheduleIds.forEach((workoutScheduleID) => {
+    deleteWorkoutScheduleByID(workoutScheduleID)
+  })
+  console.log('deleted Workout Schedules!')
+}
+
+}
+
+
+
   return (
     <div className="grid-container">
       <h3 className="pageHeader workout">Workout</h3>
@@ -186,7 +216,7 @@ useEffect(() => {
       {/*<div className='fetchAllWorkouts'>
     <FetchAllWorkouts workoutToggle={workoutToggle}/>
   </div>*/}
-
+<button onClick={deleteWorkoutSchedules}>test</button>
   <div className="workoutViewOptions">
   <MDBBtn color={createNewWorkout ? "info" : ""} name="createNewWorkout" onClick={handleWorkoutViewOptions}>
     Create New Workout
