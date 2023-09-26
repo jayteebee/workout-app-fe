@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 import { deleteWorkoutScheduleByID, getAllWorkoutSchedules } from "../API/WorkoutSchedule/WorkoutSchedule";
 
 
-const Workout = ({weekly, custom, routineFrequency}) => {
+const Workout = ({weekly, custom, routineFrequency, activeRoutine}) => {
   const [workout, setWorkout] = useState([]);
   // console.log('workout', workout)
   const [workoutToggle, setWorkoutToggle] = useState(false);
@@ -52,6 +52,9 @@ console.log('workoutDays', workoutDays)
 const location = useLocation();
   const routineFrequencyExists = location.state?.routineFrequencyExists;
 // console.log('routineFrequencyExists', routineFrequencyExists)
+
+
+
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -203,19 +206,20 @@ useEffect(() => {
 }, [])
 
 
-const regenerateWorkoutDaysForRoutineChange = () => {
+const regenerateWorkoutDaysForRoutineChange = (routineToChangeTo) => {
   console.log('CALLED')
+  console.log('routineToChangeTo', routineToChangeTo)
   let updatedDaysOfWeek = []
   // Ensure workoutDays is always an array
   const workoutDaysArray = Array.isArray(workoutDays) ? workoutDays : [workoutDays];
-  if (workoutDaysArray.length > 0 && routineID) {
-    let filteredWorkoutDays = workoutDaysArray.filter((workoutDay) => (workoutDay.routine_id === routineID));
+  if (workoutDaysArray.length > 0 && routineToChangeTo) {
+    let filteredWorkoutDays = workoutDaysArray.filter((workoutDay) => (workoutDay.routine_id === routineToChangeTo));
         updatedDaysOfWeek.push(filteredWorkoutDays[0].days_of_week)
   }
 
   setCreateWorkoutDayData((prevState) => ({
     ...prevState,
-    routine_id: routineID,
+    routine_id: routineToChangeTo,
     days_of_week: updatedDaysOfWeek[0]
   }));
   setCreateWorkoutDayToggle((prevState) => !prevState);
@@ -243,10 +247,14 @@ if (arrOfWorkoutScheduleIds.length > 0) {
   }
 }}
 
-const routineChangeHandler = async () => {
+console.log('activeRoutine', activeRoutine)
+
+const routineChangeHandler = async (activeRoutineValue) => {
+console.log('activeRoutine INSIDE', activeRoutineValue)
+
   try {
     await deleteWorkoutSchedules()
-    regenerateWorkoutDaysForRoutineChange()
+    regenerateWorkoutDaysForRoutineChange(activeRoutineValue)
   } catch (err) {
     console.log('Error in routineChangeHandler', err)
   }
@@ -259,9 +267,7 @@ const routineChangeHandler = async () => {
       {/*<div className='fetchAllWorkouts'>
     <FetchAllWorkouts workoutToggle={workoutToggle}/>
   </div>*/}
-<button onClick={deleteWorkoutSchedules}>delete test</button>
-<button onClick={regenerateWorkoutDaysForRoutineChange}>filter test</button>
-<button onClick={routineChangeHandler}>both test</button>
+<button onClick={() => routineChangeHandler(activeRoutine)}>both test</button>
 
 
   <div className="workoutViewOptions">

@@ -10,8 +10,9 @@ import FetchWorkoutsInRoutine from "./FetchWorkoutsInRoutine";
 import deleteIcon from "../../CSS/Icons/deleteIcon.png";
 import editIcon from "../../CSS/Icons/editIcon.png";
 import { parseJwt } from "../../API/Authentication/parseJwt";
+import Workout from "../../Pages/Workout";
 
-const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, createNewRoutine, allRoutines, setAllRoutines}) => {
+const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, createNewRoutine, allRoutines, setAllRoutines, setActiveRoutine}) => {
   // const [allRoutines, setAllRoutines] = useState([]);
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
   const [routineToEdit, setRoutineToEdit] = useState(null);
@@ -30,6 +31,7 @@ useEffect(() => {
 
 
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -98,6 +100,11 @@ useEffect(() => {
               <button className="utilityButton" onClick={() => setRoutineToDelete(routine.id)}>
                 <img src={deleteIcon} alt="delete" className="deleteIcon" />
               </button>
+
+              <button  onClick={() => setActiveRoutine(routine.id)}>
+              Routine To Change To
+            </button>
+
             </div>
           ))
        }

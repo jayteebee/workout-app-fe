@@ -31,6 +31,8 @@ const [routineID, setRoutineID] = useState(0)
 const [allRoutines, setAllRoutines] = useState([])
 const [userID, setUserID] = useState(0)
 const [filteredRoutines, setFilteredRoutines] = useState([])
+const [activeRoutine, setActiveRoutine] = useState()
+
 
 
   useEffect(() => {
@@ -100,12 +102,14 @@ useEffect(() => {
               setWeekly={setWeekly}
               weekly={weekly}
               setRoutineFrequency={setRoutineFrequency}
+              setActiveRoutine={setActiveRoutine}
               />} />
 
             <Route path="/Workout" element={<Workout
               weekly={weekly}
               custom={custom}
               routineFrequency={routineFrequency}
+              activeRoutine={activeRoutine}
               />} />
 
             <Route path="/CreateExercise" element={<ExerciseCreation />} />
