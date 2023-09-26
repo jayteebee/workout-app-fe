@@ -11,7 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const HomeScreen = ({ routineID }) => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
-  // console.log('workoutSchedule', workoutSchedule)
+  console.log('workoutSchedule in home screen', workoutSchedule)
   const [calendarEvents, setCalendarEvents] = useState(null);
   const [sortedSchedule, setSortedSchedule] = useState([]);
   const [exercisesInWorkout, setExercisesInWorkout] = useState([]);

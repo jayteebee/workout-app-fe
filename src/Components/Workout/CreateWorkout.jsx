@@ -19,6 +19,8 @@ const CreateWorkout = ({
   setDayOfWeek,
   weekly,
   custom,
+  logOfRoutineDaysOfWeek,
+  setLogOfRoutineDaysOfWeek
 }) => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -49,7 +51,8 @@ const CreateWorkout = ({
     "friday",
     "saturday",
   ];
-
+const [updatedDays, setUpdatedDays] = useState([])
+// console.log('updatedDays state', updatedDays)
   useEffect(() => {
     if (workoutDayIndex !== false) {
       toggleDaysOfWeekBoolean(workoutDayIndex);
@@ -70,7 +73,12 @@ const CreateWorkout = ({
     });
 
     setDayOfWeek(updatedDaysOfWeek);
+    setUpdatedDays(updatedDaysOfWeek)
   };
+
+useEffect(() => {
+  setLogOfRoutineDaysOfWeek({routineID: routineID, daysOfWeek: updatedDays})
+}, [updatedDays])
 
   // console.log("dayOfWeek ***", dayOfWeek);
 
