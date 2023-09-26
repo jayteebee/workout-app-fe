@@ -58,6 +58,7 @@ const HomeScreen = ({ routineID }) => {
   // className="calendar"
 
   const startWorkout = (rwID) => {
+
     const currentDate = new Date();
     const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
 
