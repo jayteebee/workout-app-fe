@@ -126,7 +126,7 @@ const Workout = ({
       "Workout Schedule Created! Head to the homepage to see your workouts on the calendar",
       {
         position: "bottom-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -168,7 +168,7 @@ const Workout = ({
       "Workout Schedule Created! Head to the homepage to see your workouts on the calendar",
       {
         position: "bottom-center",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
