@@ -33,7 +33,7 @@ const [userID, setUserID] = useState(0)
 const [filteredRoutines, setFilteredRoutines] = useState([])
 const [activeRoutine, setActiveRoutine] = useState()
 const [routineChange, setRoutineChange] = useState(false)
-console.log('activeRoutine', activeRoutine, "routineChange", routineChange)
+// console.log('activeRoutine', activeRoutine, "routineChange", routineChange)
 
 
   useEffect(() => {

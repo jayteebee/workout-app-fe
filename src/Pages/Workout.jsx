@@ -59,7 +59,6 @@ const Workout = ({
   const [logOfRoutineDaysOfWeek, setLogOfRoutineDaysOfWeek] = useState([]);
   // console.log('logOfRoutineDaysOfWeek', logOfRoutineDaysOfWeek)
   const [workoutDays, setWorkoutDays] = useState([]);
-  console.log("workoutDays", workoutDays);
 
   const location = useLocation();
   const routineFrequencyExists = location.state?.routineFrequencyExists;
@@ -75,7 +74,7 @@ const Workout = ({
       routine_id: routineID,
       frequency: routineFrequency,
     }));
-  }, [workoutToggle]);
+  }, [workoutToggle, routineChange]);
 
   const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false);
 
@@ -216,8 +215,12 @@ const Workout = ({
       );
   }, []);
 
-  const regenerateWorkoutDaysForRoutineChange = (routineToChangeTo) => {
-    let updatedDaysOfWeek = [];
+  const regenerateWorkoutDaysForRoutineChange = async (routineToChangeTo, rFreq) => {
+if (rFreq) {
+  customFrequencyWorkoutDaysAPICall()
+  return;
+} else {
+      let updatedDaysOfWeek = [];
     const workoutDaysArray = Array.isArray(workoutDays)
       ? workoutDays
       : [workoutDays];
@@ -234,6 +237,7 @@ const Workout = ({
       days_of_week: updatedDaysOfWeek[0],
     }));
     setCreateWorkoutDayToggle((prevState) => !prevState);
+}
   };
 
   const deleteWorkoutSchedules = async () => {
@@ -256,18 +260,23 @@ const Workout = ({
     }
   };
 
-  const routineChangeHandler = async (activeRoutineValue) => {
+  const routineChangeHandler = async (activeRoutineValue, rFreq) => {
     try {
       await deleteWorkoutSchedules();
-      regenerateWorkoutDaysForRoutineChange(activeRoutineValue);
+      regenerateWorkoutDaysForRoutineChange(activeRoutineValue, rFreq);
     } catch (err) {
       console.log("Error in routineChangeHandler", err);
     }
   };
 
   useEffect(() => {
+    setCreateWorkoutDayData((prevState) => ({
+      ...prevState,
+      routine_id: activeRoutine,
+    }));
+
     if (workoutDays.length > 0 && workoutSchedules.length > 0) {
-      routineChangeHandler(activeRoutine);
+      routineChangeHandler(activeRoutine, routineFrequency);
     }
   }, [routineChange, activeRoutine, workoutDays, workoutSchedules]);
 

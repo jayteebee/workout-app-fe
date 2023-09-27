@@ -90,6 +90,7 @@ useEffect(() => {
 // }, [activeRoutine])
 
 const initiateRoutineChange = async (routineID, routineFrequency) => {
+  console.log('routineFrequency', routineFrequency)
  await setActiveRoutine(routineID);
   await setRoutineChange(prevState => !prevState)
 displayWorkouts(routineID,routineFrequency )
