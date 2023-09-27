@@ -1,7 +1,11 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 import { parseJwt } from "../API/Authentication/parseJwt";
-import { createWorkoutDay, frequency, getAllWorkoutDays } from "../API/WorkoutDays/WorkoutDays";
+import {
+  createWorkoutDay,
+  frequency,
+  getAllWorkoutDays,
+} from "../API/WorkoutDays/WorkoutDays";
 import FetchAllExercises from "../Components/Exercises/FetchAllExercises";
 import CreateWorkout from "../Components/Workout/CreateWorkout";
 import FetchAllWorkouts from "../Components/Workout/FetchAllWorkouts";
@@ -10,10 +14,18 @@ import FetchWorkoutByID from "../Components/Workout/FetchWorkoutByID";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
-import { deleteWorkoutScheduleByID, getAllWorkoutSchedules } from "../API/WorkoutSchedule/WorkoutSchedule";
+import {
+  deleteWorkoutScheduleByID,
+  getAllWorkoutSchedules,
+} from "../API/WorkoutSchedule/WorkoutSchedule";
 
-
-const Workout = ({weekly, custom, routineFrequency, activeRoutine, routineChange}) => {
+const Workout = ({
+  weekly,
+  custom,
+  routineFrequency,
+  activeRoutine,
+  routineChange,
+}) => {
   const [workout, setWorkout] = useState([]);
   // console.log('workout', workout)
   const [workoutToggle, setWorkoutToggle] = useState(false);
@@ -31,30 +43,27 @@ const Workout = ({weekly, custom, routineFrequency, activeRoutine, routineChange
     { friday: false, value: 5 },
     { saturday: false, value: 6 },
   ]);
-// console.log('dayOfWeek', dayOfWeek)
+  // console.log('dayOfWeek', dayOfWeek)
   const [createWorkoutDayData, setCreateWorkoutDayData] = useState({
     user_id: "",
     days_of_week: [],
     routine_id: 0,
-    frequency: null
+    frequency: null,
   });
-// console.log("createWorkoutDayData", createWorkoutDayData)
+  // console.log("createWorkoutDayData", createWorkoutDayData)
 
-const [createNewWorkout, setCreateNewWorkout] = useState(false)
-const [viewExistingWorkouts, setViewExistingWorkouts] = useState(false)
-const [workoutSchedules, setWorkoutSchedules] = useState([])
-// console.log('workoutSchedules', workoutSchedules)
-const [logOfRoutineDaysOfWeek, setLogOfRoutineDaysOfWeek] = useState([])
-// console.log('logOfRoutineDaysOfWeek', logOfRoutineDaysOfWeek)
-const [workoutDays, setWorkoutDays] = useState([])
-console.log('workoutDays', workoutDays)
+  const [createNewWorkout, setCreateNewWorkout] = useState(false);
+  const [viewExistingWorkouts, setViewExistingWorkouts] = useState(false);
+  const [workoutSchedules, setWorkoutSchedules] = useState([]);
+  // console.log('workoutSchedules', workoutSchedules)
+  const [logOfRoutineDaysOfWeek, setLogOfRoutineDaysOfWeek] = useState([]);
+  // console.log('logOfRoutineDaysOfWeek', logOfRoutineDaysOfWeek)
+  const [workoutDays, setWorkoutDays] = useState([]);
+  console.log("workoutDays", workoutDays);
 
-const location = useLocation();
+  const location = useLocation();
   const routineFrequencyExists = location.state?.routineFrequencyExists;
-// console.log('routineFrequencyExists', routineFrequencyExists)
-
-
-
+  // console.log('routineFrequencyExists', routineFrequencyExists)
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -64,7 +73,7 @@ const location = useLocation();
       ...prevState,
       user_id: userID,
       routine_id: routineID,
-      frequency: routineFrequency
+      frequency: routineFrequency,
     }));
   }, [workoutToggle]);
 
@@ -89,8 +98,8 @@ const location = useLocation();
     "friday",
     "saturday",
   ];
-  
-// used for conditionally rendering the createWorkout Button
+
+  // used for conditionally rendering the createWorkout Button
   const createWorkoutToggle = () => {
     setToggleCreateWorkout((prevState) => !prevState);
   };
@@ -98,14 +107,14 @@ const location = useLocation();
   // used for conditionally rendering the createWorkout form after it has been filled out and submitted
   useEffect(() => {
     setToggleCreateWorkout((prevState) => !prevState);
-  }, [workoutToggle])
+  }, [workoutToggle]);
 
   const createDataForCreateWorkoutDayApiCall = () => {
     // console.log("createDataForCreateWorkoutDayApiCall CALLED");
     const newWorkoutDays = dayOfWeek
       .filter((day) => day[daysOfWeekArray[day.value]]) // check if the boolean is true
       .map((day) => day.value); // create array with true values
-    console.log("newWorkoutDays: ", newWorkoutDays); 
+    console.log("newWorkoutDays: ", newWorkoutDays);
 
     setCreateWorkoutDayData((prevData) => ({
       ...prevData,
@@ -132,163 +141,135 @@ const location = useLocation();
   // console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
-    console.log('createWorkoutDayData in useEffect', createWorkoutDayData)
+    console.log("createWorkoutDayData in useEffect", createWorkoutDayData);
     if (createWorkoutDayData) {
-       createWorkoutDay(createWorkoutDayData)
-       .then((workoutDayData) => {
-        setWorkoutDays(workoutDayData)
-      })
-      .catch((err) => {
-        console.log("createWorkoutDay API Call Failed", err);
-      });
+      createWorkoutDay(createWorkoutDayData)
+        .then((workoutDayData) => {
+          setWorkoutDays(workoutDayData);
+        })
+        .catch((err) => {
+          console.log("createWorkoutDay API Call Failed", err);
+        });
     }
   }, [createWorkoutDayToggle]);
 
   const storedHiddenState = localStorage.getItem("hiddenState");
   const isButtonHidden = workout.length < 1 || storedHiddenState === "true";
 
-const customFrequencyWorkoutDaysAPICall = async () => {
- await frequency(createWorkoutDayData)
-  .then((response) => {
-    console.log("Response: ", response);
-  })
-  .catch((err) => {
-    console.log("customFrequencyWorkoutDaysAPICall Failed", err);
-  });
+  const customFrequencyWorkoutDaysAPICall = async () => {
+    await frequency(createWorkoutDayData)
+      .then((response) => {
+        console.log("Response: ", response);
+      })
+      .catch((err) => {
+        console.log("customFrequencyWorkoutDaysAPICall Failed", err);
+      });
 
-  toast.success(
-    "Workout Schedule Created! Head to the homepage to see your workouts on the calendar",
-    {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    }
-  );
-
-}
-
-const handleWorkoutViewOptions = (e) => {
-  let name = e.target.name;
-  if (name === "createNewWorkout") {
-    setViewExistingWorkouts(false);
-    setCreateNewWorkout(true);
-  }
-  if (name === "viewExistingWorkouts") {
-    setCreateNewWorkout(false);
-    setViewExistingWorkouts(true);
-  }
-};
-
-useEffect(() => {
- if (workout.length === 0) {
-  setViewExistingWorkouts(true)
- }
-}, [])
-
-useEffect(() => {
-  getAllWorkoutSchedules()
-  .then((data) => {
-    setWorkoutSchedules(data)
-  })
-  .catch((err) => console.log("Error with getAllWorkoutSchedules API Call: ", err))
-
-  getAllWorkoutDays()
-  .then((workoutDayData) => {
-    setWorkoutDays(workoutDayData)
-  })
-  .catch((err) => console.log("Error with getAllWorkoutDays API Call: ", err))
-  
-}, [])
-
-
-const regenerateWorkoutDaysForRoutineChange = (routineToChangeTo) => {
-  // debugger;
-
-  console.log('routineToChangeTo in regen', routineToChangeTo)
-
-  let updatedDaysOfWeek = []
-  // Ensure workoutDays is always an array
-  const workoutDaysArray = Array.isArray(workoutDays) ? workoutDays : [workoutDays];
-  if (workoutDaysArray.length > 0 && routineToChangeTo) {
-    let filteredWorkoutDays = workoutDaysArray.filter((workoutDay) => (workoutDay.routine_id === routineToChangeTo));
-        updatedDaysOfWeek.push(filteredWorkoutDays[0].days_of_week)
-        console.log('filteredWorkoutDays', filteredWorkoutDays)
-
+    toast.success(
+      "Workout Schedule Created! Head to the homepage to see your workouts on the calendar",
+      {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
       }
+    );
+  };
 
-  setCreateWorkoutDayData((prevState) => ({
-    ...prevState,
-    routine_id: routineToChangeTo,
-    days_of_week: updatedDaysOfWeek[0]
-  }));
-  setCreateWorkoutDayToggle((prevState) => !prevState);
-};
-
-
-
-
-const deleteWorkoutSchedules = async  () => {
-  // debugger;
-
-  let arrOfWorkoutScheduleIds = []
-if (workoutSchedules) {
-workoutSchedules.forEach((schedule) => {
-arrOfWorkoutScheduleIds.push(schedule.id)
-  })
-}
-
-if (arrOfWorkoutScheduleIds.length > 0) {
-  try {
-    for (const workoutScheduleID of arrOfWorkoutScheduleIds) {
-    await deleteWorkoutScheduleByID(workoutScheduleID)
+  const handleWorkoutViewOptions = (e) => {
+    let name = e.target.name;
+    if (name === "createNewWorkout") {
+      setViewExistingWorkouts(false);
+      setCreateNewWorkout(true);
     }
-    console.log('deleted Workout Schedules!')
-  } catch (err) {
-    console.log("Error deleting workout schedules: ", err)
-  }
-}}
+    if (name === "viewExistingWorkouts") {
+      setCreateNewWorkout(false);
+      setViewExistingWorkouts(true);
+    }
+  };
 
+  useEffect(() => {
+    if (workout.length === 0) {
+      setViewExistingWorkouts(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    getAllWorkoutSchedules()
+      .then((data) => {
+        setWorkoutSchedules(data);
+      })
+      .catch((err) =>
+        console.log("Error with getAllWorkoutSchedules API Call: ", err)
+      );
+
+    getAllWorkoutDays()
+      .then((workoutDayData) => {
+        setWorkoutDays(workoutDayData);
+      })
+      .catch((err) =>
+        console.log("Error with getAllWorkoutDays API Call: ", err)
+      );
+  }, []);
+
+  const regenerateWorkoutDaysForRoutineChange = (routineToChangeTo) => {
+    let updatedDaysOfWeek = [];
+    const workoutDaysArray = Array.isArray(workoutDays)
+      ? workoutDays
+      : [workoutDays];
+    if (workoutDaysArray.length > 0 && routineToChangeTo) {
+      let filteredWorkoutDays = workoutDaysArray.filter(
+        (workoutDay) => workoutDay.routine_id === routineToChangeTo
+      );
+      updatedDaysOfWeek.push(filteredWorkoutDays[0].days_of_week);
+    }
+
+    setCreateWorkoutDayData((prevState) => ({
+      ...prevState,
+      routine_id: routineToChangeTo,
+      days_of_week: updatedDaysOfWeek[0],
+    }));
+    setCreateWorkoutDayToggle((prevState) => !prevState);
+  };
+
+  const deleteWorkoutSchedules = async () => {
+    let arrOfWorkoutScheduleIds = [];
+    if (workoutSchedules) {
+      workoutSchedules.forEach((schedule) => {
+        arrOfWorkoutScheduleIds.push(schedule.id);
+      });
+    }
+
+    if (arrOfWorkoutScheduleIds.length > 0) {
+      try {
+        for (const workoutScheduleID of arrOfWorkoutScheduleIds) {
+          await deleteWorkoutScheduleByID(workoutScheduleID);
+        }
+        console.log("deleted Workout Schedules!");
+      } catch (err) {
+        console.log("Error deleting workout schedules: ", err);
+      }
+    }
+  };
 
   const routineChangeHandler = async (activeRoutineValue) => {
-    // debugger;
-    console.log('routineChange', routineChange)
-    console.log('activeRoutine inside use effect', activeRoutine)
-  try {
-    await deleteWorkoutSchedules()
-    regenerateWorkoutDaysForRoutineChange(activeRoutineValue)
-  } catch (err) {
-    console.log('Error in routineChangeHandler', err)
-  }
-}
+    try {
+      await deleteWorkoutSchedules();
+      regenerateWorkoutDaysForRoutineChange(activeRoutineValue);
+    } catch (err) {
+      console.log("Error in routineChangeHandler", err);
+    }
+  };
 
-useEffect(() => {
-  if (workoutDays.length > 0 && workoutSchedules.length > 0) {
-    routineChangeHandler(activeRoutine)
-  }
-}, [routineChange, activeRoutine, workoutDays, workoutSchedules])
-
-
-// const routineChangeHandler = async (activeRoutineValue) => {
-//   console.log('called CALLED')
-//   console.log('activeRoutineValue', activeRoutineValue)
-//   try {
-//     await deleteWorkoutSchedules()
-//     regenerateWorkoutDaysForRoutineChange(activeRoutineValue)
-//   } catch (err) {
-//     console.log('Error in routineChangeHandler', err)
-//   }
-// }
-
-// if (routineChange || activeRoutine) {
-//   routineChangeHandler(activeRoutine)
-// } 
-
-
+  useEffect(() => {
+    if (workoutDays.length > 0 && workoutSchedules.length > 0) {
+      routineChangeHandler(activeRoutine);
+    }
+  }, [routineChange, activeRoutine, workoutDays, workoutSchedules]);
 
   return (
     <div className="grid-container">
@@ -299,20 +280,31 @@ useEffect(() => {
   </div>
 <button onClick={() => routineChangeHandler(activeRoutine)}>both test</button>   */}
 
+      <div className="workoutViewOptions">
+        <MDBBtn
+          color={createNewWorkout ? "info" : ""}
+          name="createNewWorkout"
+          onClick={handleWorkoutViewOptions}
+        >
+          Create New Workout
+        </MDBBtn>
 
-  <div className="workoutViewOptions">
-  <MDBBtn color={createNewWorkout ? "info" : ""} name="createNewWorkout" onClick={handleWorkoutViewOptions}>
-    Create New Workout
-  </MDBBtn>
+        <MDBBtn
+          color={viewExistingWorkouts ? "info" : ""}
+          name="viewExistingWorkouts"
+          onClick={handleWorkoutViewOptions}
+        >
+          View Existing Workouts
+        </MDBBtn>
+      </div>
 
-  <MDBBtn color={viewExistingWorkouts ? "info" : ""} name="viewExistingWorkouts" onClick={handleWorkoutViewOptions}>
-    View Existing Workouts
-  </MDBBtn>
-</div>
-
-<div className={viewExistingWorkouts && workout.length === 0 ? "noWorkouts" : "hidden"}>
-<p>No Workouts Created...</p>
-</div>
+      <div
+        className={
+          viewExistingWorkouts && workout.length === 0 ? "noWorkouts" : "hidden"
+        }
+      >
+        <p>No Workouts Created...</p>
+      </div>
       <div className={createNewWorkout ? "hidden" : "fetchWorkoutByID"}>
         <FetchWorkoutByID
           workoutToggle={workoutToggle}
@@ -327,42 +319,54 @@ useEffect(() => {
         <FetchExercisesInWorkout />
       </div>
 
-      { /*<MDBBtn onClick={createWorkoutToggle}>
+      {/*<MDBBtn onClick={createWorkoutToggle}>
         {toggleCreateWorkout ? "Hide Create Workout" : "Create Workout"}
 </MDBBtn> */}
 
-      <div className={createNewWorkout ? "createWorkout" : "hidden"} >
+      <div className={createNewWorkout ? "createWorkout" : "hidden"}>
         {/*<div className={toggleCreateWorkout ? "createWorkout" : "hidden"}>*/}
-          <CreateWorkout
-            setWorkoutToggle={setWorkoutToggle}
-            workoutToggle={workoutToggle}
-            routineID={routineID}
-            setWorkoutCreated={setWorkoutCreated}
-            setToggleCreateWorkout={setToggleCreateWorkout}
-            setDayOfWeek={setDayOfWeek}
-            dayOfWeek={dayOfWeek}
-            weekly={weekly}
-            custom={custom}
-            logOfRoutineDaysOfWeek={logOfRoutineDaysOfWeek}
-            setLogOfRoutineDaysOfWeek={setLogOfRoutineDaysOfWeek}
-          />
+        <CreateWorkout
+          setWorkoutToggle={setWorkoutToggle}
+          workoutToggle={workoutToggle}
+          routineID={routineID}
+          setWorkoutCreated={setWorkoutCreated}
+          setToggleCreateWorkout={setToggleCreateWorkout}
+          setDayOfWeek={setDayOfWeek}
+          dayOfWeek={dayOfWeek}
+          weekly={weekly}
+          custom={custom}
+          logOfRoutineDaysOfWeek={logOfRoutineDaysOfWeek}
+          setLogOfRoutineDaysOfWeek={setLogOfRoutineDaysOfWeek}
+        />
         {/*</div>*/}
       </div>
 
-      <div className={viewExistingWorkouts ? "finaliseDaysButtons" : "hidden"}> 
-      {/** These Two classes were rendered on the isButtonHidden being true as well */}
-     
-      <div className={routineFrequencyExists || workout.length < 1 ? "hidden" : null}>
-        <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}> Create Weekly Workout Schedule </MDBBtn>
-      </div>
+      <div className={viewExistingWorkouts ? "finaliseDaysButtons" : "hidden"}>
+        {/** These Two classes were rendered on the isButtonHidden being true as well */}
 
+        <div
+          className={
+            routineFrequencyExists || workout.length < 1 ? "hidden" : null
+          }
+        >
+          <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}>
+            {" "}
+            Create Weekly Workout Schedule{" "}
+          </MDBBtn>
+        </div>
 
-      <div className={routineFrequencyExists && workout.length > 0 ? "" : "hidden"}>
-      <MDBBtn onClick={customFrequencyWorkoutDaysAPICall} > Create Custom Workout Schedule </MDBBtn>
-      </div>
+        <div
+          className={
+            routineFrequencyExists && workout.length > 0 ? "" : "hidden"
+          }
+        >
+          <MDBBtn onClick={customFrequencyWorkoutDaysAPICall}>
+            {" "}
+            Create Custom Workout Schedule{" "}
+          </MDBBtn>
+        </div>
       </div>
       <ToastContainer />
-
     </div>
   );
 };
