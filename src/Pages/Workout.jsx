@@ -132,7 +132,7 @@ const location = useLocation();
   // console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
-    console.log('createWorkoutDayData', createWorkoutDayData)
+    console.log('createWorkoutDayData in useEffect', createWorkoutDayData)
     if (createWorkoutDayData) {
        createWorkoutDay(createWorkoutDayData)
        .then((workoutDayData) => {
@@ -186,7 +186,7 @@ const handleWorkoutViewOptions = (e) => {
 
 useEffect(() => {
  if (workout.length === 0) {
-  setCreateNewWorkout(true)
+  setViewExistingWorkouts(true)
  }
 }, [])
 
@@ -207,13 +207,19 @@ useEffect(() => {
 
 
 const regenerateWorkoutDaysForRoutineChange = (routineToChangeTo) => {
+  // debugger;
+
+  console.log('routineToChangeTo in regen', routineToChangeTo)
+
   let updatedDaysOfWeek = []
   // Ensure workoutDays is always an array
   const workoutDaysArray = Array.isArray(workoutDays) ? workoutDays : [workoutDays];
   if (workoutDaysArray.length > 0 && routineToChangeTo) {
     let filteredWorkoutDays = workoutDaysArray.filter((workoutDay) => (workoutDay.routine_id === routineToChangeTo));
         updatedDaysOfWeek.push(filteredWorkoutDays[0].days_of_week)
-  }
+        console.log('filteredWorkoutDays', filteredWorkoutDays)
+
+      }
 
   setCreateWorkoutDayData((prevState) => ({
     ...prevState,
@@ -227,6 +233,8 @@ const regenerateWorkoutDaysForRoutineChange = (routineToChangeTo) => {
 
 
 const deleteWorkoutSchedules = async  () => {
+  // debugger;
+
   let arrOfWorkoutScheduleIds = []
 if (workoutSchedules) {
 workoutSchedules.forEach((schedule) => {
@@ -246,10 +254,10 @@ if (arrOfWorkoutScheduleIds.length > 0) {
 }}
 
 
-useEffect(() => {
-  console.log('routineChange', routineChange)
-debugger;
-    const routineChangeHandler = async (activeRoutineValue) => {
+  const routineChangeHandler = async (activeRoutineValue) => {
+    // debugger;
+    console.log('routineChange', routineChange)
+    console.log('activeRoutine inside use effect', activeRoutine)
   try {
     await deleteWorkoutSchedules()
     regenerateWorkoutDaysForRoutineChange(activeRoutineValue)
@@ -258,14 +266,16 @@ debugger;
   }
 }
 
-if (routineChange) {
-  routineChangeHandler(activeRoutine)
-}
-
-}, [routineChange])
+useEffect(() => {
+  if (workoutDays.length > 0 && workoutSchedules.length > 0) {
+    routineChangeHandler(activeRoutine)
+  }
+}, [routineChange, activeRoutine, workoutDays, workoutSchedules])
 
 
 // const routineChangeHandler = async (activeRoutineValue) => {
+//   console.log('called CALLED')
+//   console.log('activeRoutineValue', activeRoutineValue)
 //   try {
 //     await deleteWorkoutSchedules()
 //     regenerateWorkoutDaysForRoutineChange(activeRoutineValue)
@@ -273,6 +283,12 @@ if (routineChange) {
 //     console.log('Error in routineChangeHandler', err)
 //   }
 // }
+
+// if (routineChange || activeRoutine) {
+//   routineChangeHandler(activeRoutine)
+// } 
+
+
 
   return (
     <div className="grid-container">

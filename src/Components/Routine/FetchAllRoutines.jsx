@@ -83,11 +83,17 @@ useEffect(() => {
   }
 }, [createNewRoutine])
 
-useEffect(() => {
-  if (activeRoutine) {
-    setRoutineChange(true)
-  }
-}, [activeRoutine])
+// useEffect(() => {
+//   if (activeRoutine) {
+//     setRoutineChange(true)
+//   }
+// }, [activeRoutine])
+
+const initiateRoutineChange = async (routineID, routineFrequency) => {
+ await setActiveRoutine(routineID);
+  await setRoutineChange(prevState => !prevState)
+displayWorkouts(routineID,routineFrequency )
+}
 
   return (
     <div>
@@ -107,9 +113,10 @@ useEffect(() => {
                 <img src={deleteIcon} alt="delete" className="deleteIcon" />
               </button>
 
-              <button  onClick={() => setActiveRoutine(routine.id)}>
-              Routine To Change To
-            </button>
+
+    <MDBBtn color="warning" onClick={() => {initiateRoutineChange(routine.id, routine.frequency)} }>  {/** setActiveRoutine(routine.id); setRoutineChange(prevState => !prevState) */}
+              Make Active Routine
+            </MDBBtn>
 
             </div>
           ))
