@@ -140,8 +140,9 @@ const Workout = ({
   // console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
+    debugger;
     console.log("createWorkoutDayData in useEffect", createWorkoutDayData);
-    if (createWorkoutDayData.id) {
+    if (createWorkoutDayData.user_id) {
       createWorkoutDay(createWorkoutDayData)
         .then((workoutDayData) => {
           setWorkoutDays(workoutDayData);

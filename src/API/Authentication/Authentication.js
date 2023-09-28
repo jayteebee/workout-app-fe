@@ -58,7 +58,9 @@ export const currentUser = async () => {
 // LOG OUT
 
 export const logOut = async () => {
-  try {
+  const token = window.localStorage.getItem("token");
+if (token) {
+    try {
     const response = await axiosInstanceWithToken.delete(`/logout`);
     console.log("Successful Log Out");
     window.localStorage.removeItem("token");
@@ -67,6 +69,7 @@ export const logOut = async () => {
     console.error(error);
     throw error;
   }
+}
 };
 
 // console.log("LogOut : ", logOut())
