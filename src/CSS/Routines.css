@@ -3,6 +3,7 @@
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(6, 1fr); 
   /* gap: 10px;  */
+
 }
 
 .pageHeader.routines {
@@ -57,6 +58,11 @@
 
 }
 
+.routineButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
 .createRoutine {
     grid-row: 3 / span 3;
     grid-column: 3 /span 2;
@@ -67,7 +73,9 @@
 
 .fetchAllRoutines {
     grid-row: 3/ span 4;
-    grid-column:3 /span 2;
+    grid-column: 2 /span 4;
+    display: flex;
+    justify-content: center;
 }
 
 .editRoutine {

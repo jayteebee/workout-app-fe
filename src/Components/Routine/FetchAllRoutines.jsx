@@ -12,7 +12,16 @@ import editIcon from "../../CSS/Icons/editIcon.png";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import Workout from "../../Pages/Workout";
 
-const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, createNewRoutine, allRoutines, setAllRoutines, activeRoutine, setActiveRoutine, setRoutineChange}) => {
+const FetchAllRoutines = ({
+  routineToggle,
+  setRoutineFrequency,
+  createNewRoutine,
+  allRoutines,
+  setAllRoutines,
+  activeRoutine,
+  setActiveRoutine,
+  setRoutineChange,
+}) => {
   // const [allRoutines, setAllRoutines] = useState([]);
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
   const [routineToEdit, setRoutineToEdit] = useState(null);
@@ -22,16 +31,15 @@ const FetchAllRoutines = ({ routineToggle, setRoutineFrequency, createNewRoutine
   const [userID, setUserID] = useState(null);
   const [filteredRoutines, setFilteredRoutines] = useState(null);
   // console.log("filteredRoutines", filteredRoutines)
-  const [editingFrequencyRoutine, setEditingFrequencyRoutine] = useState(false)
+  const [editingFrequencyRoutine, setEditingFrequencyRoutine] = useState(false);
 
-useEffect(() => {
-  const routineFrequency = filteredRoutines && filteredRoutines.map((f) => (f.frequency))
-  routineFrequency && setRoutineFrequency(routineFrequency[0])
-}, [filteredRoutines])
-
+  useEffect(() => {
+    const routineFrequency =
+      filteredRoutines && filteredRoutines.map((f) => f.frequency);
+    routineFrequency && setRoutineFrequency(routineFrequency[0]);
+  }, [filteredRoutines]);
 
   const navigate = useNavigate();
-
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -50,11 +58,15 @@ useEffect(() => {
       });
   }, [routineToggle, editToggle, deleteToggle]);
 
-
   const displayWorkouts = (routineID, routineFreq) => {
     setSelectedRoutineID(routineID);
     if (routineFreq) {
-    navigate("/Workout", { state: { selectedRoutineID: routineID, routineFrequencyExists: routineFreq } });
+      navigate("/Workout", {
+        state: {
+          selectedRoutineID: routineID,
+          routineFrequencyExists: routineFreq,
+        },
+      });
     } else {
       navigate("/Workout", { state: { selectedRoutineID: routineID } });
     }
@@ -64,8 +76,9 @@ useEffect(() => {
     routineToEdit === null
       ? setRoutineToEdit(routineID)
       : setRoutineToEdit(null);
-      routineFreq ? setEditingFrequencyRoutine(true) :
-      setEditingFrequencyRoutine(false)
+    routineFreq
+      ? setEditingFrequencyRoutine(true)
+      : setEditingFrequencyRoutine(false);
   };
 
   useEffect(() => {
@@ -77,63 +90,75 @@ useEffect(() => {
     setFilteredRoutines(routinesFilteredForID);
   }, [allRoutines]);
 
-useEffect(() => {
-  if (createNewRoutine) {
-    setRoutineToEdit(null)
-  }
-}, [createNewRoutine])
+  useEffect(() => {
+    if (createNewRoutine) {
+      setRoutineToEdit(null);
+    }
+  }, [createNewRoutine]);
 
-// useEffect(() => {
-//   if (activeRoutine) {
-//     setRoutineChange(true)
-//   }
-// }, [activeRoutine])
+  // useEffect(() => {
+  //   if (activeRoutine) {
+  //     setRoutineChange(true)
+  //   }
+  // }, [activeRoutine])
 
-const initiateRoutineChange = async (routineID, routineFrequency) => {
-  console.log('routineFrequency', routineFrequency)
- await setActiveRoutine(routineID);
-  await setRoutineChange(prevState => !prevState)
-displayWorkouts(routineID,routineFrequency )
-}
+  const initiateRoutineChange = async (routineID, routineFrequency) => {
+    console.log("routineFrequency", routineFrequency);
+    await setActiveRoutine(routineID);
+    await setRoutineChange((prevState) => !prevState);
+    displayWorkouts(routineID, routineFrequency);
+  };
 
   return (
     <div>
-      {filteredRoutines
-        && filteredRoutines.map((routine) => (
-            <div key={routine.id}>
-            {localStorage.setItem("routineID", routine.id)} 
-              <MDBBtn onClick={() => displayWorkouts(routine.id, routine.frequency)}>
-                <strong>{routine.name}</strong>: View / Create Workouts
-              </MDBBtn>
+      {filteredRoutines &&
+        filteredRoutines.map((routine) => (
+          <div key={routine.id} className="routineButtons">
+            {localStorage.setItem("routineID", routine.id)}
+            <MDBBtn
+              onClick={() => displayWorkouts(routine.id, routine.frequency)}
+            >
+              <strong>{routine.name}</strong>: View / Create Workouts
+            </MDBBtn>
 
-              <button className="utilityButton" onClick={() => editRoutineToggle(routine.id, routine.frequency)} >
-                <img src={editIcon} alt="edit" className="editIcon" />
-              </button>
+            <button
+              className="utilityButton"
+              onClick={() => editRoutineToggle(routine.id, routine.frequency)}
+            >
+              <img src={editIcon} alt="edit" className="editIcon" />
+            </button>
 
-              <button className="utilityButton" onClick={() => setRoutineToDelete(routine.id)}>
-                <img src={deleteIcon} alt="delete" className="deleteIcon" />
-              </button>
+            <button
+              className="utilityButton"
+              onClick={() => setRoutineToDelete(routine.id)}
+            >
+              <img src={deleteIcon} alt="delete" className="deleteIcon" />
+            </button>
 
-
-    <MDBBtn color="warning" onClick={() => {initiateRoutineChange(routine.id, routine.frequency)} }>  {/** setActiveRoutine(routine.id); setRoutineChange(prevState => !prevState) */}
+            <MDBBtn
+              color="warning"
+              onClick={() => {
+                initiateRoutineChange(routine.id, routine.frequency);
+              }}
+              className={filteredRoutines.length > 1 ? "" : "hidden"}
+            >
               Make Active Routine
             </MDBBtn>
 
-            </div>
-          ))
-       }
+          </div>
+        ))}
       {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />}
-      
+
       <div className="editRoutine">
-      {routineToEdit && (
-        <EditRoutine
-          eID={routineToEdit}
-          editToggle={editToggle}
-          setEditToggle={setEditToggle}
-          setRoutineToEdit={setRoutineToEdit}
-          editingFrequencyRoutine={editingFrequencyRoutine}
-        />
-      )}
+        {routineToEdit && (
+          <EditRoutine
+            eID={routineToEdit}
+            editToggle={editToggle}
+            setEditToggle={setEditToggle}
+            setRoutineToEdit={setRoutineToEdit}
+            editingFrequencyRoutine={editingFrequencyRoutine}
+          />
+        )}
       </div>
 
       {routineToDelete && (
