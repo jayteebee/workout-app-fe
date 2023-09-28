@@ -131,7 +131,7 @@ useEffect(() => {
 
   useEffect(() => {
     if (createdWorkout.id) {
-      console.log("workoutDay", workoutDay);
+      // console.log("workoutDay", workoutDay);
       addWorkoutToRoutine(routineID, {
         workout_id: createdWorkout.id,
         order: order,

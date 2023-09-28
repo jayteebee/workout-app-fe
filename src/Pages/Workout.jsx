@@ -141,7 +141,7 @@ const Workout = ({
 
   useEffect(() => {
     console.log("createWorkoutDayData in useEffect", createWorkoutDayData);
-    if (createWorkoutDayData) {
+    if (createWorkoutDayData.id) {
       createWorkoutDay(createWorkoutDayData)
         .then((workoutDayData) => {
           setWorkoutDays(workoutDayData);
@@ -158,7 +158,7 @@ const Workout = ({
   const customFrequencyWorkoutDaysAPICall = async () => {
     await frequency(createWorkoutDayData)
       .then((response) => {
-        console.log("Response: ", response);
+        console.log("frequency Response: ", response);
       })
       .catch((err) => {
         console.log("customFrequencyWorkoutDaysAPICall Failed", err);
@@ -270,12 +270,15 @@ if (rFreq) {
   };
 
   useEffect(() => {
-    setCreateWorkoutDayData((prevState) => ({
+    // debugger;
+    if (activeRoutine) {
+          setCreateWorkoutDayData((prevState) => ({
       ...prevState,
       routine_id: activeRoutine,
     }));
+    }
 
-    if (workoutDays.length > 0 && workoutSchedules.length > 0) {
+    if (workoutDays.length > 0 && workoutSchedules.length > 0 && activeRoutine) {
       routineChangeHandler(activeRoutine, routineFrequency);
     }
   }, [routineChange, activeRoutine, workoutDays, workoutSchedules]);
@@ -350,7 +353,7 @@ if (rFreq) {
         {/*</div>*/}
       </div>
 
-      <div className={viewExistingWorkouts ? "finaliseDaysButtons" : "hidden"}>
+      <div className={createNewWorkout ? "finaliseDaysButtons" : "hidden"}>
         {/** These Two classes were rendered on the isButtonHidden being true as well */}
 
         <div
@@ -359,8 +362,7 @@ if (rFreq) {
           }
         >
           <MDBBtn onClick={createDataForCreateWorkoutDayApiCall}>
-            {" "}
-            Create Weekly Workout Schedule{" "}
+            Create Weekly Workout Schedule
           </MDBBtn>
         </div>
 
@@ -370,8 +372,7 @@ if (rFreq) {
           }
         >
           <MDBBtn onClick={customFrequencyWorkoutDaysAPICall}>
-            {" "}
-            Create Custom Workout Schedule{" "}
+            Create Custom Workout Schedule
           </MDBBtn>
         </div>
       </div>
