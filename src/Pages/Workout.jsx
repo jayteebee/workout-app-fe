@@ -30,7 +30,7 @@ const Workout = ({
   // console.log('workout', workout)
   const [workoutToggle, setWorkoutToggle] = useState(false);
   const [routineID, setRoutineID] = useState(Number);
-  // console.log('routineID', routineID)
+  console.log('routineID state', routineID)
   const [workoutCreated, setWorkoutCreated] = useState(false);
   const [toggleCreateWorkout, setToggleCreateWorkout] = useState(false);
 
@@ -62,19 +62,24 @@ const Workout = ({
 
   const location = useLocation();
   const routineFrequencyExists = location.state?.routineFrequencyExists;
-  // console.log('routineFrequencyExists', routineFrequencyExists)
+  const selectedRoutineID = location.state?.selectedRoutineID
+  console.log('routineFrequencyExists', routineFrequencyExists)
+console.log('routineFrequency', routineFrequency)
+console.log('selectedRoutineID', selectedRoutineID)
 
   useEffect(() => {
+    // debugger;
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
     const userID = decodedToken.sub;
+    console.log('userID', userID, "routine id", routineID, "frequency", routineFrequencyExists)
     setCreateWorkoutDayData((prevState) => ({
       ...prevState,
       user_id: userID,
       routine_id: routineID,
-      frequency: routineFrequency,
+      frequency: routineFrequencyExists,
     }));
-  }, [workoutToggle, routineChange]);
+  }, [workoutToggle, routineFrequencyExists]);
 
   const [createWorkoutDayToggle, setCreateWorkoutDayToggle] = useState(false);
 
@@ -109,6 +114,7 @@ const Workout = ({
   }, [workoutToggle]);
 
   const createDataForCreateWorkoutDayApiCall = () => {
+    debugger;
     // console.log("createDataForCreateWorkoutDayApiCall CALLED");
     const newWorkoutDays = dayOfWeek
       .filter((day) => day[daysOfWeekArray[day.value]]) // check if the boolean is true
@@ -120,7 +126,7 @@ const Workout = ({
       days_of_week: newWorkoutDays,
     }));
     setCreateWorkoutDayToggle((prevState) => !prevState);
-    localStorage.setItem("hiddenState", true);
+    // localStorage.setItem("hiddenState", true);
 
     toast.success(
       "Workout Schedule Created! Head to the homepage to see your workouts on the calendar",
@@ -140,7 +146,7 @@ const Workout = ({
   // console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
-    debugger;
+    // debugger;
     console.log("createWorkoutDayData in useEffect", createWorkoutDayData);
     if (createWorkoutDayData.user_id) {
       createWorkoutDay(createWorkoutDayData)
@@ -157,6 +163,8 @@ const Workout = ({
   const isButtonHidden = workout.length < 1 || storedHiddenState === "true";
 
   const customFrequencyWorkoutDaysAPICall = async () => {
+    debugger;
+    console.log('createWorkoutDayData in freq', createWorkoutDayData)
     await frequency(createWorkoutDayData)
       .then((response) => {
         console.log("frequency Response: ", response);
@@ -217,6 +225,8 @@ const Workout = ({
   }, []);
 
   const regenerateWorkoutDaysForRoutineChange = async (routineToChangeTo, rFreq) => {
+    debugger;
+
 if (rFreq) {
   customFrequencyWorkoutDaysAPICall()
   return;
@@ -231,7 +241,7 @@ if (rFreq) {
       );
       updatedDaysOfWeek.push(filteredWorkoutDays[0].days_of_week);
     }
-
+console.log('routineToChangeTo', routineToChangeTo)
     setCreateWorkoutDayData((prevState) => ({
       ...prevState,
       routine_id: routineToChangeTo,
@@ -242,6 +252,7 @@ if (rFreq) {
   };
 
   const deleteWorkoutSchedules = async () => {
+    debugger;
     let arrOfWorkoutScheduleIds = [];
     if (workoutSchedules) {
       workoutSchedules.forEach((schedule) => {
@@ -262,6 +273,9 @@ if (rFreq) {
   };
 
   const routineChangeHandler = async (activeRoutineValue, rFreq) => {
+
+    debugger;
+    console.log('activeRoutineValue', activeRoutineValue, "rFreq", rFreq)
     try {
       await deleteWorkoutSchedules();
       regenerateWorkoutDaysForRoutineChange(activeRoutineValue, rFreq);
@@ -271,18 +285,30 @@ if (rFreq) {
   };
 
   useEffect(() => {
-    // debugger;
+    console.log('routineChange', routineChange)
+    debugger;
+    if (routineChange) {
+    console.log('activeRoutine', activeRoutine)
     if (activeRoutine) {
           setCreateWorkoutDayData((prevState) => ({
       ...prevState,
-      routine_id: activeRoutine,
+      routine_id: selectedRoutineID,
     }));
+    }
+console.log('routineFrequencyExists', routineFrequencyExists)
+    if (routineFrequencyExists) {
+      setCreateWorkoutDayData((prevState) => ({
+        ...prevState,
+        frequency: routineFrequencyExists
+      }));
     }
 
     if (workoutDays.length > 0 && workoutSchedules.length > 0 && activeRoutine) {
-      routineChangeHandler(activeRoutine, routineFrequency);
+      routineChangeHandler(activeRoutine, routineFrequencyExists);
     }
-  }, [routineChange, activeRoutine, workoutDays, workoutSchedules]);
+    }
+
+  }, [routineChange, activeRoutine, workoutDays, workoutSchedules, routineFrequencyExists]);
 
   return (
     <div className="grid-container">

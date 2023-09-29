@@ -50,6 +50,7 @@ const LogIn = ({ setShowRegister, setLoggedIn }) => {
           value={formInput.email}
           name="email"
           onChange={handleChange}
+          autoComplete="username"
           contrast
         />
         <MDBInput
@@ -59,6 +60,7 @@ const LogIn = ({ setShowRegister, setLoggedIn }) => {
           value={formInput.password}
           name="password"
           onChange={handleChange}
+          autoComplete="current-password"
           contrast
         />
 
