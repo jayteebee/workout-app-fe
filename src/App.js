@@ -59,13 +59,15 @@ const externalNavToggle = () => {
 
 
 useEffect(() => {
-  getAllRoutines()
+if (loggedIn) {
+    getAllRoutines()
     .then((data) => {
       setAllRoutines(data);
     })
     .catch((err) => {
       console.log("getAllRoutines API Call Failed", err);
     });
+}
 }, []);
 
 useEffect(() => {
@@ -95,6 +97,7 @@ useEffect(() => {
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<HomeScreen
               routineID={routineID}
+              loggedIn={loggedIn}
               />} />
 
             <Route path="/Routines" element={<Routines

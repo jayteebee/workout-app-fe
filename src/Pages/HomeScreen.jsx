@@ -9,7 +9,7 @@ import "../App.css";
 import { ToastContainer, toast } from "react-toastify";
 
 
-const HomeScreen = ({ routineID }) => {
+const HomeScreen = ({ loggedIn }) => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
   // console.log('workoutSchedule in home screen', workoutSchedule)
   const [calendarEvents, setCalendarEvents] = useState(null);
@@ -21,14 +21,16 @@ const HomeScreen = ({ routineID }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAllWorkoutSchedules()
+    if (loggedIn) {
+          getAllWorkoutSchedules()
       .then((data) => {
         setWorkoutSchedule(data);
       })
       .catch((err) => {
         console.log("getAllWorkoutSchedules API Call Failed", err);
       });
-  }, []);
+    }
+  }, [loggedIn]);
 
   // console.log("workoutSchedule", workoutSchedule);
 
