@@ -22,8 +22,11 @@ import { parseJwt } from "./API/Authentication/parseJwt";
 // foreman start -p 4000
 
 function App() {
+  // used for toggling certain useEffects and the navBar
   const [loggedIn, setLoggedIn] = useState(false);
+  // for navbar
 const [showMenu, setShowMenu] = useState(false)
+// conditionally renders certain fields in create routine
 const [custom, setCustom] = useState(false)
 const [weekly, setWeekly] = useState(false)
 const [routineFrequency, setRoutineFrequency] = useState([])
@@ -31,6 +34,7 @@ const [routineID, setRoutineID] = useState(0)
 const [allRoutines, setAllRoutines] = useState([])
 const [userID, setUserID] = useState(0)
 const [filteredRoutines, setFilteredRoutines] = useState([])
+// for the active routine feature
 const [activeRoutine, setActiveRoutine] = useState()
 const [routineChange, setRoutineChange] = useState(false)
 // console.log('activeRoutine', activeRoutine, "routineChange", routineChange)
@@ -117,7 +121,7 @@ useEffect(() => {
               routineFrequency={routineFrequency}
               activeRoutine={activeRoutine}
               routineChange={routineChange}
-              />} />
+            />} /> 
 
             <Route path="/CreateExercise" element={<ExerciseCreation />} />
 
