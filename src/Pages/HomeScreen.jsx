@@ -8,7 +8,7 @@ import { getExercisesInWorkout } from "../API/Workout/Workout";
 import "../App.css";
 import { ToastContainer, toast } from "react-toastify";
 
-
+// manages the calender and events that users can click on to view their workouts
 const HomeScreen = ({ loggedIn }) => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
   // console.log('workoutSchedule in home screen', workoutSchedule)
