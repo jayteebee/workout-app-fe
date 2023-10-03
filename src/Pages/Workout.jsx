@@ -66,6 +66,7 @@ const Workout = ({
   const [workoutDays, setWorkoutDays] = useState([]);
 
   const location = useLocation();
+  // this comes from FetchAllRoutines.jsx
   const routineFrequencyExists = location.state?.routineFrequencyExists;
   const selectedRoutineID = location.state?.selectedRoutineID
   console.log('routineFrequencyExists', routineFrequencyExists)

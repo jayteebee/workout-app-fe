@@ -96,7 +96,7 @@ useEffect(() => {
         setShowMenu={setShowMenu}
         showMenu={showMenu}
         /> : null }
-        
+
         <Routes>
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<HomeScreen

@@ -12,6 +12,8 @@ import editIcon from "../../CSS/Icons/editIcon.png";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import Workout from "../../Pages/Workout";
 
+// responsible for displaying the routines and their options such as edit/delete/add workouts
+
 const FetchAllRoutines = ({
   routineToggle,
   setRoutineFrequency,
