@@ -146,7 +146,7 @@ console.log('selectedRoutineID', selectedRoutineID)
   // console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
-    // debugger;
+    debugger;
     console.log("createWorkoutDayData in useEffect", createWorkoutDayData);
     if (createWorkoutDayData.user_id) {
       createWorkoutDay(createWorkoutDayData)
