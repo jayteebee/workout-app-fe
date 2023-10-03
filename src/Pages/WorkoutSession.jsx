@@ -17,6 +17,8 @@ import { createSessionLogs } from "../API/SessionLogs/SessionLogs";
 import SetTimer from "../Components/WorkoutSession/SetTimer";
 import "../CSS/WorkoutSession.css";
 
+// takes a user through the workout set by set, logs final outcomes via exercise/workout_Sesssion to the logs component
+
 const WorkoutSession = () => {
   const [buttonColor, setButtonColor] = useState("green");
   const [stopWatchCount, setStopWatchCount] = useState(0);

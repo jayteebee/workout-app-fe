@@ -6,6 +6,7 @@ import format from "date-fns/format";
 import { getTime, parseISO } from 'date-fns'
 import "../CSS/Logs.css"
 
+// stores the workout logs
 
 const Logs = () => {
   const [sessionLogs, setSessionLogs] = useState([]);
