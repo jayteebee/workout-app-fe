@@ -19,6 +19,8 @@ import {
   getAllWorkoutSchedules,
 } from "../API/WorkoutSchedule/WorkoutSchedule";
 
+// this component manages creating the workout day data that is used to generate workout schedules
+
 const Workout = ({
   weekly,
   custom,
@@ -26,6 +28,7 @@ const Workout = ({
   activeRoutine,
   routineChange,
 }) => {
+// above props come from App
   const [workout, setWorkout] = useState([]);
   // console.log('workout', workout)
   const [workoutToggle, setWorkoutToggle] = useState(false);
@@ -34,6 +37,8 @@ const Workout = ({
   const [workoutCreated, setWorkoutCreated] = useState(false);
   const [toggleCreateWorkout, setToggleCreateWorkout] = useState(false);
 
+  // used for the weekly frequent workoutDays api call
+  // workoutDays api call triggers the workoutScheduleGenerator
   const [dayOfWeek, setDayOfWeek] = useState([
     { sunday: false, value: 0 },
     { monday: false, value: 1 },
@@ -284,6 +289,8 @@ console.log('routineToChangeTo', routineToChangeTo)
     }
   };
 
+
+  // manages the active routine feature, calls routine change handler at the bottom
   useEffect(() => {
     console.log('routineChange', routineChange)
     debugger;
