@@ -69,9 +69,10 @@ const Workout = ({
   // this comes from FetchAllRoutines.jsx
   const routineFrequencyExists = location.state?.routineFrequencyExists;
   const selectedRoutineID = location.state?.selectedRoutineID
-  console.log('routineFrequencyExists', routineFrequencyExists)
-console.log('routineFrequency', routineFrequency)
-console.log('selectedRoutineID', selectedRoutineID)
+//   console.log('routineFrequencyExists', routineFrequencyExists)
+// console.log('routineFrequency', routineFrequency)
+// console.log('selectedRoutineID', selectedRoutineID)
+
 
   useEffect(() => {
     // debugger;
@@ -120,7 +121,7 @@ console.log('selectedRoutineID', selectedRoutineID)
   }, [workoutToggle]);
 
   const createDataForCreateWorkoutDayApiCall = () => {
-    debugger;
+    // debugger;
     // console.log("createDataForCreateWorkoutDayApiCall CALLED");
     const newWorkoutDays = dayOfWeek
       .filter((day) => day[daysOfWeekArray[day.value]]) // check if the boolean is true
@@ -152,7 +153,7 @@ console.log('selectedRoutineID', selectedRoutineID)
   // console.log("createWorkoutDayData", createWorkoutDayData);
 
   useEffect(() => {
-    debugger;
+    // debugger;
     console.log("createWorkoutDayData in useEffect", createWorkoutDayData);
     if (createWorkoutDayData.user_id) {
       createWorkoutDay(createWorkoutDayData)
@@ -169,7 +170,7 @@ console.log('selectedRoutineID', selectedRoutineID)
   const isButtonHidden = workout.length < 1 || storedHiddenState === "true";
 
   const customFrequencyWorkoutDaysAPICall = async () => {
-    debugger;
+    // debugger;
     console.log('createWorkoutDayData in freq', createWorkoutDayData)
     await frequency(createWorkoutDayData)
       .then((response) => {
@@ -231,7 +232,7 @@ console.log('selectedRoutineID', selectedRoutineID)
   }, []);
 
   const regenerateWorkoutDaysForRoutineChange = async (routineToChangeTo, rFreq) => {
-    debugger;
+    // debugger;
 
 if (rFreq) {
   customFrequencyWorkoutDaysAPICall()
@@ -258,7 +259,7 @@ console.log('routineToChangeTo', routineToChangeTo)
   };
 
   const deleteWorkoutSchedules = async () => {
-    debugger;
+    // debugger;
     let arrOfWorkoutScheduleIds = [];
     if (workoutSchedules) {
       workoutSchedules.forEach((schedule) => {
@@ -280,7 +281,7 @@ console.log('routineToChangeTo', routineToChangeTo)
 
   const routineChangeHandler = async (activeRoutineValue, rFreq) => {
 
-    debugger;
+    // debugger;
     console.log('activeRoutineValue', activeRoutineValue, "rFreq", rFreq)
     try {
       await deleteWorkoutSchedules();
@@ -294,7 +295,7 @@ console.log('routineToChangeTo', routineToChangeTo)
   // manages the active routine feature, calls routine change handler at the bottom
   useEffect(() => {
     console.log('routineChange', routineChange)
-    debugger;
+    // debugger;
     if (routineChange) {
     console.log('activeRoutine', activeRoutine)
     if (activeRoutine) {
