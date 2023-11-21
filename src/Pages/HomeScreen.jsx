@@ -79,7 +79,7 @@ const HomeScreen = ({ loggedIn }) => {
 
   const handleEventClick = async (eventClickInfo) => {
 if (exercisesInWorkout.length === 0) {
-  toast.success("Add exercises to workout before beginning your session!", {
+  toast.info("Add exercises to workout before beginning your session.", {
     position: "bottom-center",
     autoClose: 3000,
     hideProgressBar: false,
