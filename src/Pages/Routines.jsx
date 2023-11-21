@@ -23,7 +23,7 @@ const Routines = ({
   const [viewExistingRoutines, setViewExistingRoutines] = useState(false);
   const [createNewRoutine, setCreateNewRoutine] = useState(false);
   const [allRoutines, setAllRoutines] = useState([]);
-
+console.log('allRoutines', allRoutines)
 
   const toggleCreateRoutine = () => {
     setCreateRoutineToggle((prevState) => !prevState);

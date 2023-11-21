@@ -57,7 +57,6 @@ const HomeScreen = ({ loggedIn }) => {
 
   // console.log("CALENDAR EVENTS: ", calendarEvents);
 
-  // className="calendar"
 
   const startWorkout = (rwID) => {
 
