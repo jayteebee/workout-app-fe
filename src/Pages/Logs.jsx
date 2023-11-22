@@ -5,12 +5,13 @@ import { getAllWorkouts } from "../API/Workout/Workout";
 import format from "date-fns/format";
 import { getTime, parseISO } from 'date-fns'
 import "../CSS/Logs.css"
+import Analytics from "../Components/Workout Logs/Analytics";
 
 // stores the workout logs
 
 const Logs = () => {
   const [sessionLogs, setSessionLogs] = useState([]);
-  console.log("sessionLogs", sessionLogs);
+  // console.log("sessionLogs", sessionLogs);
   const [allExercises, setAllExercises] = useState([])
   // console.log("allExercises", allExercises);
   const [allWorkouts, setAllWorkouts] = useState([])
@@ -48,16 +49,19 @@ const sortedSessionLogs = sessionLogs.sort((a, b) =>
   sortedSessionLogs.length > 0 &&
   sortedSessionLogs.map((log, index) => {
       const filteredWorkout = allWorkouts.length > 0 && allWorkouts.filter((workout) => workout.id === log.details.routine_workout_id );
+
       const inputDate = new Date(`${log.details.date}`);
       const formattedDate = format(inputDate, "yyyy-MM-dd");
       const formattedTime = format(inputDate, "HH:mm:ss");
       const parsedDate = parseISO(formattedDate);
       const dateToWords = format(parsedDate, "EEEE, do MMMM yyyy");
 
+      const currentWorkout = filteredWorkout && sortedSessionLogs.filter(log => log.details.routine_workout_id === filteredWorkout[0].id)
+     console.log('currentWorkout',currentWorkout)
       return (
       <div key={index} className="workoutLog">
         <h2 className="workoutName">Workout: {filteredWorkout && filteredWorkout[0].name}</h2>
-        <h4 style={{textDecoration: "underline"}}>Date Completed: {dateToWords} {formattedTime} </h4>
+        <h4 style={{textDecoration: "underline"}}>Date Completed: {dateToWords}, {formattedTime}. </h4>
 
         {log.details.exercise_sessions.map((exercise, exerciseIndex) => {
           const filteredExercise = allExercises.length > 0 && allExercises.filter((ex) => ex.id === exercise.exercise_id)
@@ -75,8 +79,16 @@ const sortedSessionLogs = sessionLogs.sort((a, b) =>
           )}
           </div>
           )
-
+          
         })}
+            {currentWorkout &&
+                    <Analytics
+                    currentWorkout={currentWorkout}
+                    allExercises={allExercises}
+                    />
+            }
+
+
       </div>
     )
 
