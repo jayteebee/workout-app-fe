@@ -57,7 +57,7 @@ const sortedSessionLogs = sessionLogs.sort((a, b) =>
       const dateToWords = format(parsedDate, "EEEE, do MMMM yyyy");
 
       const currentWorkout = filteredWorkout && sortedSessionLogs.filter(log => log.details.routine_workout_id === filteredWorkout[0].id)
-     console.log('currentWorkout',currentWorkout)
+    //  console.log('currentWorkout',currentWorkout)
       return (
       <div key={index} className="workoutLog">
         <h2 className="workoutName">Workout: {filteredWorkout && filteredWorkout[0].name}</h2>
