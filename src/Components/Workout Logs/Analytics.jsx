@@ -1,83 +1,91 @@
 import React, { useState } from "react";
+import "../../CSS/Analytics.css"
 
 const Analytics = ({ currentWorkout, allExercises }) => {
   const [allExercisesState, setAllExercisesState] = useState(allExercises);
 
-  const analysis = currentWorkout.map((log, index) => {
+  let valueTrackerArray = [];
+  let totalVolumePerExercise = []
 
-    return (
-        
-      <div key={index}>
-        <h2 style={{ textDecoration: "underline" }}>Analytics</h2>
+  const analysis = currentWorkout.map((log) => {
+    const sets = log.details.exercise_sessions;
 
-        {log.details.exercise_sessions.map((exercise, exIndex) => {
+    // an accumulation of each exercises data. This includes multiple sets of the same exercise
+    const valueTracker = {};
 
-            // each set in a workout, multiple exercises 
-          const sets = log.details.exercise_sessions;
-          console.log("sets", sets);
+    sets.forEach((set) => {
+      if (!valueTracker[set.exercise_id]) {
+        valueTracker[set.exercise_id] = {
+          id: set.exercise_id,
+          totalWeight: 0,
+          totalReps: 0,
+          totalTimeUnderTension: 0,
+          totalSets: 0
+        };
+      }
+      valueTracker[set.exercise_id].totalWeight += set.weight_used;
+      valueTracker[set.exercise_id].totalReps += set.reps_completed;
+      valueTracker[set.exercise_id].totalTimeUnderTension += set.set_timer;
+      valueTracker[set.exercise_id].totalSets += 1
+    });
 
-          // an accumulation of each exercises data. This includes multiple sets of the same exercise
-          const valueTracker = {};
+    valueTrackerArray = Object.values(valueTracker);
 
-          sets.forEach((set) => {
-            if (!valueTracker[set.exercise_id]) {
-              valueTracker[set.exercise_id] = {
-                id: set.exercise_id,
-                totalWeight: 0,
-                totalReps: 0,
-                totalTimeUnderTension: 0,
-              };
-            }
-            valueTracker[set.exercise_id].totalWeight += set.weight_used;
-            valueTracker[set.exercise_id].totalReps += set.reps_completed;
-            valueTracker[set.exercise_id].totalTimeUnderTension +=
-              set.set_timer;
-          });
+    // as var name suggests
+    totalVolumePerExercise = valueTrackerArray.map((exercise) => {
+      return {
+        id: exercise.id,
+        volume: exercise.totalWeight * exercise.totalReps,
+      };
+    });
+});
 
-          const valueTrackerArray = Object.values(valueTracker);
-          console.log("valueTrackerArray", valueTrackerArray);
+const exerciseIdToName = (exerciseID) => {
+        const exercise = allExercisesState.filter((exercise) => exercise.id === exerciseID)
+        return exercise[0].name 
+}
 
-          // as var name suggests
-          const totalVolumePerExercise = valueTrackerArray.map((exercise) => {
-            return {
-              id: exercise.id,
-              volume: exercise.totalWeight * exercise.totalReps,
-            };
-          });
-          console.log("totalVolumePerExercise", totalVolumePerExercise);
+const exerciseIdToVolume = (exerciseID) => {
+    const volume = totalVolumePerExercise.filter((exercise) => exercise.id === exerciseID)
+    return volume[0].volume
+}
 
-          // this return belongs to the initial map
-          return (
-            <div>
-             <p>hi</p>
-            </div>
-          );
-        })}
-      </div>
-    );
-  });
+// overall return
+return (
+    <div className="tableContainer">
 
-  return <div>{analysis}</div>;
+    <div className="tableWrapper">
+
+      <table className="customTable">
+
+        <thead>
+          <tr>
+            <th>Exercise</th>
+            <th>Total Weight Volume Lifted</th>
+            <th>Total Time Under Tension</th>
+            <th>Total Reps</th>
+            <th>Total Sets</th>
+          </tr>
+        </thead>
+    {valueTrackerArray  && 
+        valueTrackerArray.map((exercise) => (
+
+
+          <tbody>
+            <tr>
+              <td>{exerciseIdToName(exercise.id)}</td>
+              <td>{exerciseIdToVolume(exercise.id)}kg</td>
+              <td>{exercise.totalTimeUnderTension}s</td>
+              <td>{exercise.totalReps}</td>
+              <td>{exercise.totalSets}</td>
+            </tr>
+          </tbody>
+          ))}
+          </table>
+        </div>
+  </div>
+)
 };
 
 export default Analytics;
 
-
-// <table>
-// <thead>
-//   <tr>
-//     <th>Exercise</th>
-//     <th>Total Weight Volume Lifted</th>
-//     <th>Total Time Under Tension</th>
-//     <th>Total Reps</th>
-//   </tr>
-// </thead>
-// <tbody>
-//   <tr>
-//     <td>Bench</td>
-//     <td>Volume</td>
-//     <td>TUT</td>
-//     <td>Reps</td>
-//   </tr>
-// </tbody>
-// </table>
