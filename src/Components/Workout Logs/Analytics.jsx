@@ -53,9 +53,29 @@ const Analytics = ({ currentWorkout, allExercises }) => {
     );
     return volume[0].volume;
   };
+  console.log('valueTrackerArray',valueTrackerArray)
+  console.log('totalVolumePerExercise',totalVolumePerExercise)
 
+  let totalWorkoutVolume = totalVolumePerExercise.reduce((acc, exercise) => {
+    return acc + exercise.volume
+  }, 0)
+
+console.log('totalWorkoutVolume',totalWorkoutVolume)
+
+let totalWorkoutTimeUnderTension = 0
+let totalWorkoutReps = 0
+let totalWorkoutSets = 0
+
+ valueTrackerArray.forEach((exercise) => {
+    totalWorkoutTimeUnderTension += exercise.totalTimeUnderTension
+    totalWorkoutReps += exercise.totalReps
+    totalWorkoutSets += exercise.totalSets
+
+})
+console.log('totalWorkoutTimeUnderTension',totalWorkoutTimeUnderTension, totalWorkoutReps, totalWorkoutSets)
   // overall return
   return (
+    <div>
     <div className="tableContainer">
       <div className="tableWrapper">
         <table className="customTable">
@@ -69,8 +89,8 @@ const Analytics = ({ currentWorkout, allExercises }) => {
             </tr>
           </thead>
           {valueTrackerArray &&
-            valueTrackerArray.map((exercise) => (
-              <tbody>
+            valueTrackerArray.map((exercise, index) => (
+              <tbody key={index}>
                 <tr>
                   <td>{exerciseIdToName(exercise.id)}</td>
                   <td>{exerciseIdToVolume(exercise.id)}kg</td>
@@ -80,9 +100,18 @@ const Analytics = ({ currentWorkout, allExercises }) => {
                 </tr>
               </tbody>
             ))}
+            <tfoot>
+            <th>Workout Totals</th>
+            <th>{totalWorkoutVolume}kg</th>
+            <th>{totalWorkoutTimeUnderTension}'s</th>
+            <th>{totalWorkoutReps}</th>
+            <th>{totalWorkoutSets}</th>
+            </tfoot>
         </table>
       </div>
     </div>
+
+  </div>
   );
 };
 
