@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "../../CSS/Analytics.css";
+import "../../CSS/Summary.css";
 
-const Analytics = ({ currentWorkout, allExercises }) => {
+const Summary = ({ currentWorkout, allExercises }) => {
   const [allExercisesState, setAllExercisesState] = useState(allExercises);
 
   let valueTrackerArray = [];
@@ -120,4 +120,4 @@ let totalWorkoutSets = 0
   );
 };
 
-export default Analytics;
+export default Summary;

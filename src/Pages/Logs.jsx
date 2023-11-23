@@ -5,7 +5,7 @@ import { getAllWorkouts } from "../API/Workout/Workout";
 import format from "date-fns/format";
 import { getTime, parseISO } from "date-fns";
 import "../CSS/Logs.css";
-import Analytics from "../Components/Workout Logs/Analytics";
+import Summary from "../Components/Workout Logs/Summary";
 
 // stores the workout logs
 
@@ -110,7 +110,7 @@ const Logs = () => {
           </table>
           </div>
           {currentWorkout && (
-            <Analytics
+            <Summary
               currentWorkout={currentWorkout}
               allExercises={allExercises}
             />
