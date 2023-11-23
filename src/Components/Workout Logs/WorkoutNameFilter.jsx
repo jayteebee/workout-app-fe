@@ -1,8 +1,12 @@
+import { MDBBtn } from 'mdb-react-ui-kit'
 import React from 'react'
 
 const WorkoutNameFilter = ({sortedSessionLogs,allWorkouts }) => {
   return (
-    <div>WorkoutNameFilter</div>
+    <div>
+    <MDBBtn>Workout Name</MDBBtn>
+    
+    </div>
   )
 }
 
