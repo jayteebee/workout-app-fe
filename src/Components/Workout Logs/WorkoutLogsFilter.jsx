@@ -6,8 +6,7 @@ import WorkoutTimeFilter from './WorkoutTimeFilter'
 const WorkoutLogsFilter = ({allExercises, sortedSessionLogs, allWorkouts  }) => {
 
   return (
-    <div>
-    <h3>--- Filter By ---</h3>
+    <div style={{ display: 'flex', gap: '10px', justifyContent: "center", marginBottom: "10vh" }}>
     <WorkoutNameFilter
     sortedSessionLogs={sortedSessionLogs}
     allWorkouts={allWorkouts}

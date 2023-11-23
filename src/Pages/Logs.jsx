@@ -129,12 +129,15 @@ const Logs = () => {
       <div className="workoutLogs">
       {sortedSessionLogs && 
         allWorkouts &&
+        <div>
+    <h3>--- Filter By ---</h3>
+
         <WorkoutLogsFilter
         allExercises={allExercises}
         sortedSessionLogs={sortedSessionLogs}
         allWorkouts={allWorkouts}
         />
-      
+      </div>
       }
       {workoutLogs}
       </div>
