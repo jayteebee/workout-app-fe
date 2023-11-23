@@ -39,3 +39,7 @@
     grid-column: 3 / span 2;
     grid-row: 1;
   } */
+
+  .individualLog {
+    margin-bottom: 20vh;
+  }

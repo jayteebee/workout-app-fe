@@ -78,6 +78,7 @@ let totalWorkoutSets = 0
   // overall return
   return (
     <div>
+    <h2>Summary</h2>
     <div className="tableContainer">
       <div className="tableWrapper">
         <table className="customTable">
