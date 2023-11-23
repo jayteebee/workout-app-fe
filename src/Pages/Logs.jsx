@@ -6,6 +6,7 @@ import format from "date-fns/format";
 import { getTime, parseISO } from "date-fns";
 import "../CSS/Logs.css";
 import Summary from "../Components/Workout Logs/Summary";
+import WorkoutLogsFilter from "../Components/Workout Logs/WorkoutLogsFilter";
 
 // stores the workout logs
 
@@ -125,7 +126,10 @@ const Logs = () => {
   return (
     <div className="grid-container">
       <h2 className="pageHeader logs">Logs</h2>
-      <div className="workoutLogs">{workoutLogs}</div>
+      <div className="workoutLogs">
+      <WorkoutLogsFilter />
+      {workoutLogs}
+      </div>
     </div>
   );
 };
