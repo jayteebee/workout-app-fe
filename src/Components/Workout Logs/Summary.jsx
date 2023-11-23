@@ -57,7 +57,7 @@ const Summary = ({ currentWorkout, allExercises }) => {
     );
     return volume[0].volume;
   };
-  console.log('valueTrackerArray',valueTrackerArray)
+  // console.log('valueTrackerArray',valueTrackerArray)
 //   console.log('totalVolumePerExercise',totalVolumePerExercise)
 
   let totalWorkoutVolume = totalVolumePerExercise.reduce((acc, exercise) => {
