@@ -99,7 +99,7 @@ const Logs = () => {
 
                     return (
                       filteredExercise && (
-                        <tr>
+                        <tr key={exerciseIndex}>
                           <td>{filteredExercise[0].name}</td>
                           <td>{exercise.sets_completed}</td>
                           <td>{exercise.reps_completed}</td>
