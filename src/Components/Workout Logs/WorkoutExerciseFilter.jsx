@@ -1,6 +1,6 @@
 import React from 'react'
 
-const WorkoutExerciseFilter = () => {
+const WorkoutExerciseFilter = ({sortedSessionLogs,allExercises }) => {
   return (
     <div>WorkoutExerciseFilter</div>
   )

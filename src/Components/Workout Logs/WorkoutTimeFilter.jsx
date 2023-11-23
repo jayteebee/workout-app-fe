@@ -1,6 +1,6 @@
 import React from 'react'
 
-const WorkoutTimeFilter = () => {
+const WorkoutTimeFilter = ({sortedSessionLogs}) => {
   return (
     <div>WorkoutTimeFilter</div>
   )
