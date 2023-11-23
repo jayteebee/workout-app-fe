@@ -127,7 +127,15 @@ const Logs = () => {
     <div className="grid-container">
       <h2 className="pageHeader logs">Logs</h2>
       <div className="workoutLogs">
-      <WorkoutLogsFilter />
+      {sortedSessionLogs && 
+        allWorkouts &&
+        <WorkoutLogsFilter
+        allExercises={allExercises}
+        sortedSessionLogs={sortedSessionLogs}
+        allWorkouts={allWorkouts}
+        />
+      
+      }
       {workoutLogs}
       </div>
     </div>
