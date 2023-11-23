@@ -68,7 +68,6 @@ const Logs = () => {
       //  console.log('currentWorkout',currentWorkout)
       return (
         <div key={index} className="tableContainer individualLog">
-
           <h2 className="workoutName">
             Workout: {filteredWorkout && filteredWorkout[0].name}
           </h2>
@@ -76,38 +75,42 @@ const Logs = () => {
             Date Completed: {dateToWords}, {formattedTime}.{" "}
           </h4>
 
-<div className="tableWrapper">
-          <table className="customTable">
-            <thead>
-              <tr>
-                <th>Exercise</th>
-                <th>Set</th>
-                <th>Reps</th>
-                <th>Weight</th>
-                <th>Set Duration</th>
-              </tr>
-            </thead>
+          <div className="tableWrapper">
+            <table className="customTable">
+              <thead>
+                <tr>
+                  <th>Exercise</th>
+                  <th>Set</th>
+                  <th>Reps</th>
+                  <th>Weight</th>
+                  <th>Set Duration</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {log.details.exercise_sessions.map((exercise, exerciseIndex) => {
-                const filteredExercise =
-                  allExercises.length > 0 &&
-                  allExercises.filter((ex) => ex.id === exercise.exercise_id);
+              <tbody>
+                {log.details.exercise_sessions.map(
+                  (exercise, exerciseIndex) => {
+                    const filteredExercise =
+                      allExercises.length > 0 &&
+                      allExercises.filter(
+                        (ex) => ex.id === exercise.exercise_id
+                      );
 
-                return (
-                  filteredExercise && (
-                    <tr>
-                      <td>{filteredExercise[0].name}</td>
-                      <td>{exercise.sets_completed}</td>
-                      <td>{exercise.reps_completed}</td>
-                      <td>{exercise.weight_used}kg</td>
-                      <td>{exercise.set_timer} s</td>
-                    </tr>
-                  )
-                );
-              })}
-            </tbody>
-          </table>
+                    return (
+                      filteredExercise && (
+                        <tr>
+                          <td>{filteredExercise[0].name}</td>
+                          <td>{exercise.sets_completed}</td>
+                          <td>{exercise.reps_completed}</td>
+                          <td>{exercise.weight_used}kg</td>
+                          <td>{exercise.set_timer} s</td>
+                        </tr>
+                      )
+                    );
+                  }
+                )}
+              </tbody>
+            </table>
           </div>
           {currentWorkout && (
             <Summary
@@ -128,9 +131,3 @@ const Logs = () => {
 };
 
 export default Logs;
-
-//  <p>{filteredExercise[0].name}:</p>
-//     <p>Set: {exercise.sets_completed}</p>
-//     <p>Reps: {exercise.reps_completed}</p>
-//     <p>Weight: {exercise.weight_used}kg</p>
-//   <p>Set Duration: {exercise.set_timer} seconds</p>
