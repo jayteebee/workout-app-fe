@@ -41,10 +41,14 @@ const Analytics = ({ currentWorkout, allExercises }) => {
   });
 
   const exerciseIdToName = (exerciseID) => {
-    const exercise = allExercisesState.filter(
-      (exercise) => exercise.id === exerciseID
-    );
-    return exercise[0].name;
+    // console.log('allExercisesState in faulty ', allExercisesState)
+    if (allExercisesState.length > 0) {
+        const exercise = allExercisesState.filter(
+          (exercise) => exercise.id === exerciseID
+        );
+        // console.log('exercise',exercise, "ex 0 name", exercise[0].name)
+            return exercise[0].name;
+    }
   };
 
   const exerciseIdToVolume = (exerciseID) => {
@@ -54,13 +58,11 @@ const Analytics = ({ currentWorkout, allExercises }) => {
     return volume[0].volume;
   };
   console.log('valueTrackerArray',valueTrackerArray)
-  console.log('totalVolumePerExercise',totalVolumePerExercise)
+//   console.log('totalVolumePerExercise',totalVolumePerExercise)
 
   let totalWorkoutVolume = totalVolumePerExercise.reduce((acc, exercise) => {
     return acc + exercise.volume
   }, 0)
-
-console.log('totalWorkoutVolume',totalWorkoutVolume)
 
 let totalWorkoutTimeUnderTension = 0
 let totalWorkoutReps = 0
@@ -72,7 +74,7 @@ let totalWorkoutSets = 0
     totalWorkoutSets += exercise.totalSets
 
 })
-console.log('totalWorkoutTimeUnderTension',totalWorkoutTimeUnderTension, totalWorkoutReps, totalWorkoutSets)
+
   // overall return
   return (
     <div>
@@ -101,11 +103,13 @@ console.log('totalWorkoutTimeUnderTension',totalWorkoutTimeUnderTension, totalWo
               </tbody>
             ))}
             <tfoot>
+            <tr>
             <th>Workout Totals</th>
-            <th>{totalWorkoutVolume}kg</th>
-            <th>{totalWorkoutTimeUnderTension}'s</th>
-            <th>{totalWorkoutReps}</th>
-            <th>{totalWorkoutSets}</th>
+            <td>{totalWorkoutVolume}kg</td>
+            <td>{totalWorkoutTimeUnderTension}'s</td>
+            <td>{totalWorkoutReps}</td>
+            <td>{totalWorkoutSets}</td>
+            </tr>
             </tfoot>
         </table>
       </div>
