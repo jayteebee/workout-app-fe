@@ -64,6 +64,8 @@ const WorkoutSession = () => {
 
   const location = useLocation();
   const exercisesInWorkout = location.state?.exercisesInWorkout;
+  // const workoutName = <h2>Workout: {exercisesInWorkout[0].workout_name}</h2>;
+
   // console.log("exercisesInWorkout", exercisesInWorkout);
   const routineWorkoutID = location.state?.rwID;
 
@@ -71,7 +73,17 @@ const WorkoutSession = () => {
     user_id: null,
     routine_workout_id: routineWorkoutID,
     date: new Date(),
+    workout_name: "",
   });
+
+useEffect(() => {
+  if (exercisesInWorkout) {
+    setWorkoutSessionData((prevData) => ({
+      ...prevData,
+      workout_name: exercisesInWorkout[0].workout_name
+    }))
+  }
+}, [exercisesInWorkout])
 
   useEffect(() => {
     setId(exercisesInWorkout[0].id);
@@ -177,7 +189,7 @@ const WorkoutSession = () => {
       (value === "green" || "purple")
     ) {
       setWorkoutComplete(true);
-      toast.success("Workout Complete!!", {
+      toast.success("Workout Complete. Head to the Logs page to see your data.", {
         position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -202,14 +214,18 @@ const WorkoutSession = () => {
     if (workoutSessionId) {
       editWorkoutSessionByID(workoutSessionId, {
         total_duration: stopWatchCount,
+      workout_name: exercisesInWorkout[0].workout_name
       });
     }
+
   }, [workoutComplete]);
 
   useEffect(() => {
     if (workoutSession.total_duration > 0) {
-      createSessionLogs(workoutSession).then((data) =>
-        console.log("data", data)
+      createSessionLogs(workoutSession)
+      .then((data) =>
+        console.log("data", data),
+        console.log('SessionLogsCREATED')
       );
     }
   }, [workoutComplete]);
