@@ -11,6 +11,7 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts }) => {
   console.log("allWorkouts", allWorkouts);
 
 const [filteredWorkoutNameChosen, setFilteredWorkoutNameChosen] = useState("")
+console.log('filteredWorkoutNameChosen',filteredWorkoutNameChosen)
 
   const namesOfWorkouts = allWorkouts.map((workout) => {
     return workout.name;
@@ -23,7 +24,11 @@ const [filteredWorkoutNameChosen, setFilteredWorkoutNameChosen] = useState("")
         <MDBDropdownToggle>Workout Name</MDBDropdownToggle>
         <MDBDropdownMenu>
           {workoutNameArrayWithNoDuplicates.map((name, index) => (
-            <MDBDropdownItem key={index} link>
+            <MDBDropdownItem 
+            key={index} 
+            link
+            onClick={() => setFilteredWorkoutNameChosen(name)}
+            >
               {name}
             </MDBDropdownItem>
           ))}
