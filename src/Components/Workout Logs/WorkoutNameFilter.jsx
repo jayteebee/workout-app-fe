@@ -7,12 +7,12 @@ import {
 import React, { useEffect, useState } from "react";
 
 const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByChosenName }) => {
-  console.log("sortedSessionLogs", sortedSessionLogs);
-  console.log("allWorkouts", allWorkouts);
+//   console.log("sortedSessionLogs", sortedSessionLogs);
+//   console.log("allWorkouts", allWorkouts);
 
   const [filteredWorkoutNameChosen, setFilteredWorkoutNameChosen] =
     useState("");
-  console.log("filteredWorkoutNameChosen", filteredWorkoutNameChosen);
+//   console.log("filteredWorkoutNameChosen", filteredWorkoutNameChosen);
 
 
   const namesOfWorkouts = allWorkouts.map((workout) => {
