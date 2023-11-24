@@ -12,6 +12,9 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts }) => {
 
 const [filteredWorkoutNameChosen, setFilteredWorkoutNameChosen] = useState("")
 console.log('filteredWorkoutNameChosen',filteredWorkoutNameChosen)
+const [sessionLogsByChosenName, setSessionLogsByChosenName] = useState()
+console.log('sessionLogsByChosenName',sessionLogsByChosenName)
+
 
   const namesOfWorkouts = allWorkouts.map((workout) => {
     return workout.name;
@@ -20,9 +23,9 @@ console.log('filteredWorkoutNameChosen',filteredWorkoutNameChosen)
 
   useEffect(() => {
     if (filteredWorkoutNameChosen) {
-        
+        const sessionLogsByChosenNameFilter = sortedSessionLogs.filter((log) => log.workout_name === filteredWorkoutNameChosen)
+        setSessionLogsByChosenName(sessionLogsByChosenNameFilter)
     }
-
   }, [filteredWorkoutNameChosen])
   
 
