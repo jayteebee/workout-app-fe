@@ -48,6 +48,7 @@ const Logs = () => {
 
   const workoutLogs =
     sortedSessionLogs.length > 0 &&
+    // matches the session log with the workout id, this gives us access to the name of the workout
     sortedSessionLogs.map((log, index) => {
       const filteredWorkout =
         allWorkouts.length > 0 &&
