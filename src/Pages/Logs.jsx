@@ -130,7 +130,70 @@ const Logs = () => {
       );
     });
 
-const workoutLogsFilteredByName = <p>Hello</p>
+const workoutLogsFilteredByName = sessionLogsByChosenName && sessionLogsByChosenName.length > 0 &&
+sessionLogsByChosenName.map((log, index) => {
+
+        const inputDate = new Date(`${log.details.date}`);
+      const formattedDate = format(inputDate, "yyyy-MM-dd");
+      const formattedTime = format(inputDate, "HH:mm:ss");
+      const parsedDate = parseISO(formattedDate);
+      const dateToWords = format(parsedDate, "EEEE, do MMMM yyyy");
+
+      const currentWorkout = sessionLogsByChosenName
+
+      return (
+        <div key={index} className="tableContainer individualLog">
+          <h2 className="workoutName">{log.workout_name}</h2>
+            <h4 style={{ textDecoration: "underline" }}>
+              Date Completed: {dateToWords}, {formattedTime}.
+            </h4>
+
+            <div className="tableWrapper">
+            <table className="customTable">
+              <thead>
+                <tr>
+                  <th>Exercise</th>
+                  <th>Set</th>
+                  <th>Reps</th>
+                  <th>Weight</th>
+                  <th>Set Duration</th>
+                </tr>
+              </thead>
+                <tbody>
+                                  {log.details.exercise_sessions.map(
+                  (exercise, exerciseIndex) => {
+                    const filteredExercise =
+                      allExercises.length > 0 &&
+                      allExercises.filter(
+                        (ex) => ex.id === exercise.exercise_id
+                      );
+
+                    return (
+                      filteredExercise && (
+                        <tr key={exerciseIndex}>
+                          <td>{filteredExercise[0].name}</td>
+                          <td>{exercise.sets_completed}</td>
+                          <td>{exercise.reps_completed}</td>
+                          <td>{exercise.weight_used}kg</td>
+                          <td>{exercise.set_timer} s</td>
+                        </tr>
+                      )
+                    );
+                  }
+                )}
+                </tbody>
+              </table>
+        </div>
+
+        {currentWorkout && (
+          <Summary
+            currentWorkout={currentWorkout}
+            allExercises={allExercises}
+          />
+        )}
+        </div>
+      )
+})
 
   return (
     <div className="grid-container">
@@ -149,8 +212,7 @@ const workoutLogsFilteredByName = <p>Hello</p>
         />
       </div>
       }
-      {workoutLogs}
-      {workoutLogsFilteredByName}
+      {sessionLogsByChosenName ? workoutLogsFilteredByName :  workoutLogs}
       </div>
     </div>
   );

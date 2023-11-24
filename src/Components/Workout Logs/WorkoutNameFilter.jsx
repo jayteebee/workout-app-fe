@@ -45,6 +45,14 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByCho
               {name}
             </MDBDropdownItem>
           ))}
+          <MDBDropdownItem
+          link
+          onClick={() => 
+            {
+                setSessionLogsByChosenName(null)
+                setFilteredWorkoutNameChosen("")}
+            }
+          >-- Clear --</MDBDropdownItem>
         </MDBDropdownMenu>
       </MDBDropdown>
 
