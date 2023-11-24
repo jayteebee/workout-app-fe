@@ -10,11 +10,11 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts }) => {
   console.log("sortedSessionLogs", sortedSessionLogs);
   console.log("allWorkouts", allWorkouts);
 
-const [filteredWorkoutNameChosen, setFilteredWorkoutNameChosen] = useState("")
-console.log('filteredWorkoutNameChosen',filteredWorkoutNameChosen)
-const [sessionLogsByChosenName, setSessionLogsByChosenName] = useState()
-console.log('sessionLogsByChosenName',sessionLogsByChosenName)
-
+  const [filteredWorkoutNameChosen, setFilteredWorkoutNameChosen] =
+    useState("");
+  console.log("filteredWorkoutNameChosen", filteredWorkoutNameChosen);
+  const [sessionLogsByChosenName, setSessionLogsByChosenName] = useState();
+  console.log("sessionLogsByChosenName", sessionLogsByChosenName);
 
   const namesOfWorkouts = allWorkouts.map((workout) => {
     return workout.name;
@@ -23,11 +23,12 @@ console.log('sessionLogsByChosenName',sessionLogsByChosenName)
 
   useEffect(() => {
     if (filteredWorkoutNameChosen) {
-        const sessionLogsByChosenNameFilter = sortedSessionLogs.filter((log) => log.workout_name === filteredWorkoutNameChosen)
-        setSessionLogsByChosenName(sessionLogsByChosenNameFilter)
+      const sessionLogsByChosenNameFilter = sortedSessionLogs.filter(
+        (log) => log.workout_name === filteredWorkoutNameChosen
+      );
+      setSessionLogsByChosenName(sessionLogsByChosenNameFilter);
     }
-  }, [filteredWorkoutNameChosen])
-  
+  }, [filteredWorkoutNameChosen]);
 
   return (
     <div>
@@ -35,10 +36,10 @@ console.log('sessionLogsByChosenName',sessionLogsByChosenName)
         <MDBDropdownToggle>Workout Name</MDBDropdownToggle>
         <MDBDropdownMenu>
           {workoutNameArrayWithNoDuplicates.map((name, index) => (
-            <MDBDropdownItem 
-            key={index} 
-            link
-            onClick={() => setFilteredWorkoutNameChosen(name)}
+            <MDBDropdownItem
+              key={index}
+              link
+              onClick={() => setFilteredWorkoutNameChosen(name)}
             >
               {name}
             </MDBDropdownItem>
