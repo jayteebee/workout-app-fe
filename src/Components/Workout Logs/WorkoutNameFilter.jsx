@@ -4,11 +4,13 @@ import {
   MDBDropdownToggle,
   MDBDropdownItem,
 } from "mdb-react-ui-kit";
-import React from "react";
+import React, { useState } from "react";
 
 const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts }) => {
   console.log("sortedSessionLogs", sortedSessionLogs);
   console.log("allWorkouts", allWorkouts);
+
+const [filteredWorkoutNameChosen, setFilteredWorkoutNameChosen] = useState("")
 
   const namesOfWorkouts = allWorkouts.map((workout) => {
     return workout.name;
