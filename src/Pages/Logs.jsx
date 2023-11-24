@@ -50,6 +50,7 @@ const Logs = () => {
     sortedSessionLogs.length > 0 &&
     // matches the session log with the workout id, this gives us access to the name of the workout
     sortedSessionLogs.map((log, index) => {
+
       const filteredWorkout =
         allWorkouts.length > 0 &&
         allWorkouts.filter(
@@ -68,6 +69,7 @@ const Logs = () => {
           (log) => log.details.routine_workout_id === filteredWorkout[0].id
         );
       //  console.log('currentWorkout',currentWorkout)
+      
       return (
         <div key={index} className="tableContainer individualLog">
           <h2 className="workoutName">
@@ -114,12 +116,14 @@ const Logs = () => {
               </tbody>
             </table>
           </div>
+
           {currentWorkout && (
             <Summary
               currentWorkout={currentWorkout}
               allExercises={allExercises}
             />
           )}
+
         </div>
       );
     });

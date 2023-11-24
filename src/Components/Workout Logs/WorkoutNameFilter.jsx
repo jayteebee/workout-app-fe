@@ -4,7 +4,7 @@ import {
   MDBDropdownToggle,
   MDBDropdownItem,
 } from "mdb-react-ui-kit";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts }) => {
   console.log("sortedSessionLogs", sortedSessionLogs);
@@ -17,6 +17,14 @@ console.log('filteredWorkoutNameChosen',filteredWorkoutNameChosen)
     return workout.name;
   });
   const workoutNameArrayWithNoDuplicates = [...new Set(namesOfWorkouts)];
+
+  useEffect(() => {
+    if (filteredWorkoutNameChosen) {
+        
+    }
+
+  }, [filteredWorkoutNameChosen])
+  
 
   return (
     <div>
