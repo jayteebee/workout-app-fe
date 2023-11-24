@@ -17,6 +17,8 @@ const Logs = () => {
   // console.log("allExercises", allExercises);
   const [allWorkouts, setAllWorkouts] = useState([]);
   // console.log('allWorkouts', allWorkouts)
+  const [sessionLogsByChosenName, setSessionLogsByChosenName] = useState();
+  console.log("sessionLogsByChosenName", sessionLogsByChosenName);
 
   const sortedSessionLogs = sessionLogs.sort(
     (a, b) => new Date(b.details.date) - new Date(a.details.date)
@@ -69,7 +71,7 @@ const Logs = () => {
           (log) => log.details.routine_workout_id === filteredWorkout[0].id
         );
       //  console.log('currentWorkout',currentWorkout)
-      
+
       return (
         <div key={index} className="tableContainer individualLog">
           <h2 className="workoutName">
@@ -128,6 +130,8 @@ const Logs = () => {
       );
     });
 
+const workoutLogsFilteredByName = <p>Hello</p>
+
   return (
     <div className="grid-container">
       <h2 className="pageHeader logs">Logs</h2>
@@ -141,10 +145,12 @@ const Logs = () => {
         allExercises={allExercises}
         sortedSessionLogs={sortedSessionLogs}
         allWorkouts={allWorkouts}
+        setSessionLogsByChosenName={setSessionLogsByChosenName}
         />
       </div>
       }
       {workoutLogs}
+      {workoutLogsFilteredByName}
       </div>
     </div>
   );

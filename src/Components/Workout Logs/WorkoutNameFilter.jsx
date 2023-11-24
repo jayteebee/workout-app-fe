@@ -6,15 +6,14 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 
-const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts }) => {
+const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByChosenName }) => {
   console.log("sortedSessionLogs", sortedSessionLogs);
   console.log("allWorkouts", allWorkouts);
 
   const [filteredWorkoutNameChosen, setFilteredWorkoutNameChosen] =
     useState("");
   console.log("filteredWorkoutNameChosen", filteredWorkoutNameChosen);
-  const [sessionLogsByChosenName, setSessionLogsByChosenName] = useState();
-  console.log("sessionLogsByChosenName", sessionLogsByChosenName);
+
 
   const namesOfWorkouts = allWorkouts.map((workout) => {
     return workout.name;
@@ -29,6 +28,8 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts }) => {
       setSessionLogsByChosenName(sessionLogsByChosenNameFilter);
     }
   }, [filteredWorkoutNameChosen]);
+
+
 
   return (
     <div>
@@ -46,6 +47,7 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts }) => {
           ))}
         </MDBDropdownMenu>
       </MDBDropdown>
+
     </div>
   );
 };
