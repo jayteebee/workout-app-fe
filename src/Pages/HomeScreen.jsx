@@ -13,6 +13,7 @@ const HomeScreen = ({ loggedIn }) => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
   // console.log('workoutSchedule in home screen', workoutSchedule)
   const [calendarEvents, setCalendarEvents] = useState(null);
+  // console.log('calendarEvents',calendarEvents)
   const [sortedSchedule, setSortedSchedule] = useState([]);
   const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
   // console.log("exercisesInWorkout", exercisesInWorkout);
