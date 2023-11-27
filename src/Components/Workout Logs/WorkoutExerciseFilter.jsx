@@ -1,11 +1,12 @@
 import { MDBBtn } from "mdb-react-ui-kit";
 import ReactSelect from "react-select";
 
-import React from "react";
+import React, { useState } from "react";
 
 const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises }) => {
   console.log("sortedSessionLogs", sortedSessionLogs);
   // console.log('allExercises',allExercises)
+  const [chosenExerciseToFilter, setChosenExerciseToFilter] = useState("")
 
   const allExerciseNames = allExercises.map((exercise) => ({
     value: exercise.name,
@@ -15,7 +16,10 @@ const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises }) => {
 
   return (
     <div>
-      <ReactSelect options={allExerciseNames} />
+      <ReactSelect 
+      options={allExerciseNames}
+      
+      />
     </div>
   );
 };
