@@ -6,7 +6,7 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 
-const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByChosenName }) => {
+const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByChosenName, setSessionLogsByChosenExercise }) => {
 //   console.log("sortedSessionLogs", sortedSessionLogs);
 //   console.log("allWorkouts", allWorkouts);
 
@@ -38,6 +38,15 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByCho
       <MDBDropdown>
         <MDBDropdownToggle>{filteredWorkoutNameChosen ? `${filteredWorkoutNameChosen} Workouts` : "Workout Name"}</MDBDropdownToggle>
         <MDBDropdownMenu>
+        <MDBDropdownItem
+        link
+        onClick={() => 
+          {
+              setSessionLogsByChosenExercise(null)
+              setSessionLogsByChosenName(null)
+              setFilteredWorkoutNameChosen("")}
+          }
+        >-- Clear --</MDBDropdownItem>
           {workoutNameArrayWithNoDuplicates.map((name, index) => (
             <MDBDropdownItem
               key={index}
@@ -47,14 +56,6 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByCho
               {name}
             </MDBDropdownItem>
           ))}
-          <MDBDropdownItem
-          link
-          onClick={() => 
-            {
-                setSessionLogsByChosenName(null)
-                setFilteredWorkoutNameChosen("")}
-            }
-          >-- Clear --</MDBDropdownItem>
         </MDBDropdownMenu>
       </MDBDropdown>
 

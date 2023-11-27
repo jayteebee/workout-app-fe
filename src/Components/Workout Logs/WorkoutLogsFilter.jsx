@@ -12,12 +12,15 @@ const WorkoutLogsFilter = ({allExercises, sortedSessionLogs, allWorkouts, setSes
     sortedSessionLogs={sortedSessionLogs}
     allWorkouts={allWorkouts}
     setSessionLogsByChosenName={setSessionLogsByChosenName}
+    setSessionLogsByChosenExercise={setSessionLogsByChosenExercise}
     />
 
     <WorkoutExerciseFilter
     sortedSessionLogs={sortedSessionLogs}
     allExercises={allExercises}
     setSessionLogsByChosenExercise={setSessionLogsByChosenExercise}
+    setSessionLogsByChosenName={setSessionLogsByChosenName}
+
     />
     <WorkoutTimeFilter
     sortedSessionLogs={sortedSessionLogs}

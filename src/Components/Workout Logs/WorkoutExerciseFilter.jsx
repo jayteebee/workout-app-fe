@@ -3,7 +3,7 @@ import ReactSelect from "react-select";
 
 import React, { useEffect, useState } from "react";
 
-const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises, setSessionLogsByChosenExercise }) => {
+const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises, setSessionLogsByChosenExercise, setSessionLogsByChosenName }) => {
   console.log("sortedSessionLogs", sortedSessionLogs);
   // console.log('allExercises',allExercises)
   const [chosenExerciseToFilter, setChosenExerciseToFilter] = useState("")
@@ -32,7 +32,10 @@ const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises, setSessionLogs
     <div>
       <ReactSelect 
       options={allExerciseNames}
-      onChange={(e) => setChosenExerciseToFilter(e.value)}
+      onChange={(e) => {
+        setSessionLogsByChosenName(null);
+        setChosenExerciseToFilter(e.value);
+      }}
       />
     </div>
   );
