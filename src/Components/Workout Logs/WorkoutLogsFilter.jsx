@@ -7,11 +7,13 @@ const WorkoutLogsFilter = ({allExercises, sortedSessionLogs, allWorkouts, setSes
 
   return (
     <div style={{ display: 'flex', gap: '10px', justifyContent: "center", marginBottom: "10vh" }}>
+
     <WorkoutNameFilter
     sortedSessionLogs={sortedSessionLogs}
     allWorkouts={allWorkouts}
     setSessionLogsByChosenName={setSessionLogsByChosenName}
     />
+    
     <WorkoutExerciseFilter
     sortedSessionLogs={sortedSessionLogs}
     allExercises={allExercises}
