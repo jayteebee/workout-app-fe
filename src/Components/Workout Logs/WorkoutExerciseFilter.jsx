@@ -7,6 +7,8 @@ const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises }) => {
   console.log("sortedSessionLogs", sortedSessionLogs);
   // console.log('allExercises',allExercises)
   const [chosenExerciseToFilter, setChosenExerciseToFilter] = useState("")
+console.log('chosenExerciseToFilter',chosenExerciseToFilter)
+
 
   const allExerciseNames = allExercises.map((exercise) => ({
     value: exercise.name,
@@ -18,7 +20,7 @@ const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises }) => {
     <div>
       <ReactSelect 
       options={allExerciseNames}
-      
+      onChange={(e) => setChosenExerciseToFilter(e.value)}
       />
     </div>
   );
