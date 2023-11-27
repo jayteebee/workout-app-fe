@@ -23,7 +23,6 @@ const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises, setSessionLogs
           (exerciseSession) => exerciseSession.id === chosenExerciseToFilter
         )
       );
-      console.log('sessionLogsByChosenExerciseFilter', sessionLogsByChosenExerciseFilter);
       setSessionLogsByChosenExercise(sessionLogsByChosenExerciseFilter);
 
     }
