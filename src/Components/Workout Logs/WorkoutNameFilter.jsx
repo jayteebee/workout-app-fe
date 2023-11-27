@@ -34,7 +34,7 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByCho
   return (
     <div>
       <MDBDropdown>
-        <MDBDropdownToggle>Workout Name</MDBDropdownToggle>
+        <MDBDropdownToggle>{filteredWorkoutNameChosen ? `${filteredWorkoutNameChosen} Workouts` : "Workout Name"}</MDBDropdownToggle>
         <MDBDropdownMenu>
           {workoutNameArrayWithNoDuplicates.map((name, index) => (
             <MDBDropdownItem
