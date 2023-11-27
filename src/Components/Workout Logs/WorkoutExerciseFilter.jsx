@@ -3,7 +3,7 @@ import ReactSelect from "react-select";
 
 import React, { useEffect, useState } from "react";
 
-const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises }) => {
+const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises, setSessionLogsByChosenExercise }) => {
   console.log("sortedSessionLogs", sortedSessionLogs);
   // console.log('allExercises',allExercises)
   const [chosenExerciseToFilter, setChosenExerciseToFilter] = useState("")
@@ -24,7 +24,7 @@ const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises }) => {
         )
       );
       console.log('sessionLogsByChosenExerciseFilter', sessionLogsByChosenExerciseFilter);
-      setSessionLogsByChosenName(sessionLogsByChosenExerciseFilter);
+      setSessionLogsByChosenExercise(sessionLogsByChosenExerciseFilter);
 
     }
   }, [chosenExerciseToFilter]);
