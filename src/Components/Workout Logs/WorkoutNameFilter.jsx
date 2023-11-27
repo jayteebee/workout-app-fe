@@ -14,12 +14,14 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByCho
     useState("");
 //   console.log("filteredWorkoutNameChosen", filteredWorkoutNameChosen);
 
-
+// Create an array of all workout names with no duplicates
   const namesOfWorkouts = allWorkouts.map((workout) => {
     return workout.name;
   });
   const workoutNameArrayWithNoDuplicates = [...new Set(namesOfWorkouts)];
 
+
+// filter the existing session logs by the workout name chosen by the user
   useEffect(() => {
     if (filteredWorkoutNameChosen) {
       const sessionLogsByChosenNameFilter = sortedSessionLogs.filter(
