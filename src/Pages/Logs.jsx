@@ -3,11 +3,11 @@ import { getAllSessionLogs } from "../API/SessionLogs/SessionLogs";
 import { getAllExercises } from "../API/Exercise/Exercise";
 import { getAllWorkouts } from "../API/Workout/Workout";
 import format from "date-fns/format";
-import { getTime, parseISO } from "date-fns";
+import { parseISO } from "date-fns";
 import "../CSS/Logs.css";
 import Summary from "../Components/Workout Logs/Summary";
 import WorkoutLogsFilter from "../Components/Workout Logs/WorkoutLogsFilter";
-import { MDBBtn } from "mdb-react-ui-kit";
+
 
 // stores the workout logs
 
