@@ -13,16 +13,20 @@ const WorkoutExerciseFilter = ({ sortedSessionLogs, allExercises, setSessionLogs
     value: exercise.id,
     label: exercise.name,
   }));
-  // console.log('allExerciseNames',allExerciseNames)
+  console.log('allExerciseNames',allExerciseNames) 
 
+const [temp, setTemp] = useState([])
+console.log('temp',temp)
 
   useEffect(() => {
     if (chosenExerciseToFilter) {
       const sessionLogsByChosenExerciseFilter = sortedSessionLogs.filter((log) =>
         log.details.exercise_sessions.some(
-          (exerciseSession) => exerciseSession.id === chosenExerciseToFilter
+          (exerciseSession) => exerciseSession.exercise_id === chosenExerciseToFilter
         )
       );
+      console.log('sessionLogsByChosenExerciseFilter',sessionLogsByChosenExerciseFilter)
+      setTemp(sessionLogsByChosenExerciseFilter)
       setSessionLogsByChosenExercise(sessionLogsByChosenExerciseFilter);
 
     }
