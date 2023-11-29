@@ -7,7 +7,7 @@ const WorkoutTimeFilter = ({
   sortedSessionLogs,
   setSessionLogsByChosenDate,
   setSessionLogsByChosenExercise,
-  setSessionLogsByChosenName
+  setSessionLogsByChosenName,
 }) => {
   const [chosenDate, setChosenDate] = useState(new Date());
   const [monthChosenByUser, setMonthChosenByUser] = useState("");
@@ -39,8 +39,8 @@ const WorkoutTimeFilter = ({
   }, [monthChosenByUser]);
 
   useEffect(() => {
-    setSessionLogsByChosenName(null)
-    setSessionLogsByChosenExercise(null)
+    setSessionLogsByChosenName(null);
+    setSessionLogsByChosenExercise(null);
     setSessionLogsByChosenDate(filteredLogsByMonth);
   }, [filteredLogsByMonth]);
 
@@ -49,10 +49,8 @@ const WorkoutTimeFilter = ({
       <DatePicker
         selected={chosenDate}
         onChange={(date) => {
-          setChosenDate(date)
-        } 
-        
-        }
+          setChosenDate(date);
+        }}
         dateFormat="MMMM/yyyy"
         showMonthYearPicker
         showFullMonthYearPicker

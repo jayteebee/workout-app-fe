@@ -20,12 +20,12 @@ const Logs = () => {
   // console.log('allWorkouts', allWorkouts)
   const [sessionLogsByChosenName, setSessionLogsByChosenName] = useState();
   console.log("sessionLogsByChosenName", sessionLogsByChosenName);
-  const [sessionLogsByChosenExercise, setSessionLogsByChosenExercise] = useState();
-console.log('sessionLogsByChosenExercise',sessionLogsByChosenExercise)
-const [sessionLogsByChosenDate, setSessionLogsByChosenDate] = useState();
-console.log('sessionLogsByChosenDate',sessionLogsByChosenDate)
-const [activeFilter, setActiveFilter] = useState('workoutLogs');
-
+  const [sessionLogsByChosenExercise, setSessionLogsByChosenExercise] =
+    useState();
+  console.log("sessionLogsByChosenExercise", sessionLogsByChosenExercise);
+  const [sessionLogsByChosenDate, setSessionLogsByChosenDate] = useState();
+  console.log("sessionLogsByChosenDate", sessionLogsByChosenDate);
+  const [activeFilter, setActiveFilter] = useState("workoutLogs");
 
   const sortedSessionLogs = sessionLogs.sort(
     (a, b) => new Date(b.details.date) - new Date(a.details.date)
@@ -59,7 +59,6 @@ const [activeFilter, setActiveFilter] = useState('workoutLogs');
     sortedSessionLogs.length > 0 &&
     // matches the session log with the workout id, this gives us access to the name of the workout
     sortedSessionLogs.map((log, index) => {
-
       const filteredWorkout =
         allWorkouts.length > 0 &&
         allWorkouts.filter(
@@ -132,30 +131,30 @@ const [activeFilter, setActiveFilter] = useState('workoutLogs');
               allExercises={allExercises}
             />
           )}
-
         </div>
       );
     });
 
-const workoutLogsFilteredByName = sessionLogsByChosenName && sessionLogsByChosenName.length > 0 &&
-sessionLogsByChosenName.map((log, index) => {
-
-        const inputDate = new Date(`${log.details.date}`);
+  const workoutLogsFilteredByName =
+    sessionLogsByChosenName &&
+    sessionLogsByChosenName.length > 0 &&
+    sessionLogsByChosenName.map((log, index) => {
+      const inputDate = new Date(`${log.details.date}`);
       const formattedDate = format(inputDate, "yyyy-MM-dd");
       const formattedTime = format(inputDate, "HH:mm:ss");
       const parsedDate = parseISO(formattedDate);
       const dateToWords = format(parsedDate, "EEEE, do MMMM yyyy");
 
-      const currentWorkout = sessionLogsByChosenName
+      const currentWorkout = sessionLogsByChosenName;
 
       return (
         <div key={index} className="tableContainer individualLog">
           <h2 className="workoutName">{log.workout_name}</h2>
-            <h4 style={{ textDecoration: "underline" }}>
-              Date Completed: {dateToWords}, {formattedTime}.
-            </h4>
+          <h4 style={{ textDecoration: "underline" }}>
+            Date Completed: {dateToWords}, {formattedTime}.
+          </h4>
 
-            <div className="tableWrapper">
+          <div className="tableWrapper">
             <table className="customTable">
               <thead>
                 <tr>
@@ -166,8 +165,8 @@ sessionLogsByChosenName.map((log, index) => {
                   <th>Set Duration</th>
                 </tr>
               </thead>
-                <tbody>
-                                  {log.details.exercise_sessions.map(
+              <tbody>
+                {log.details.exercise_sessions.map(
                   (exercise, exerciseIndex) => {
                     const filteredExercise =
                       allExercises.length > 0 &&
@@ -188,39 +187,40 @@ sessionLogsByChosenName.map((log, index) => {
                     );
                   }
                 )}
-                </tbody>
-              </table>
+              </tbody>
+            </table>
+          </div>
+
+          {currentWorkout && (
+            <Summary
+              currentWorkout={currentWorkout}
+              allExercises={allExercises}
+            />
+          )}
         </div>
+      );
+    });
 
-        {currentWorkout && (
-          <Summary
-            currentWorkout={currentWorkout}
-            allExercises={allExercises}
-          />
-        )}
-        </div>
-      )
-})
-
-const workoutLogsFilteredByExercise = sessionLogsByChosenExercise && sessionLogsByChosenExercise.length > 0 &&
-sessionLogsByChosenExercise.map((log, index) => {
-
-        const inputDate = new Date(`${log.details.date}`);
+  const workoutLogsFilteredByExercise =
+    sessionLogsByChosenExercise &&
+    sessionLogsByChosenExercise.length > 0 &&
+    sessionLogsByChosenExercise.map((log, index) => {
+      const inputDate = new Date(`${log.details.date}`);
       const formattedDate = format(inputDate, "yyyy-MM-dd");
       const formattedTime = format(inputDate, "HH:mm:ss");
       const parsedDate = parseISO(formattedDate);
       const dateToWords = format(parsedDate, "EEEE, do MMMM yyyy");
 
-      const currentWorkout = sessionLogsByChosenExercise
+      const currentWorkout = sessionLogsByChosenExercise;
 
       return (
         <div key={index} className="tableContainer individualLog">
           <h2 className="workoutName">{log.workout_name}</h2>
-            <h4 style={{ textDecoration: "underline" }}>
-              Date Completed: {dateToWords}, {formattedTime}.
-            </h4>
+          <h4 style={{ textDecoration: "underline" }}>
+            Date Completed: {dateToWords}, {formattedTime}.
+          </h4>
 
-            <div className="tableWrapper">
+          <div className="tableWrapper">
             <table className="customTable">
               <thead>
                 <tr>
@@ -231,8 +231,8 @@ sessionLogsByChosenExercise.map((log, index) => {
                   <th>Set Duration</th>
                 </tr>
               </thead>
-                <tbody>
-                                  {log.details.exercise_sessions.map(
+              <tbody>
+                {log.details.exercise_sessions.map(
                   (exercise, exerciseIndex) => {
                     const filteredExercise =
                       allExercises.length > 0 &&
@@ -253,39 +253,40 @@ sessionLogsByChosenExercise.map((log, index) => {
                     );
                   }
                 )}
-                </tbody>
-              </table>
+              </tbody>
+            </table>
+          </div>
+
+          {currentWorkout && (
+            <Summary
+              currentWorkout={currentWorkout}
+              allExercises={allExercises}
+            />
+          )}
         </div>
+      );
+    });
 
-        {currentWorkout && (
-          <Summary
-            currentWorkout={currentWorkout}
-            allExercises={allExercises}
-          />
-        )}
-        </div>
-      )
-})
-
-const workoutLogsFilteredByDate = sessionLogsByChosenDate && sessionLogsByChosenDate.length > 0 &&
-sessionLogsByChosenDate.map((log, index) => {
-
-        const inputDate = new Date(`${log.details.date}`);
+  const workoutLogsFilteredByDate =
+    sessionLogsByChosenDate &&
+    sessionLogsByChosenDate.length > 0 &&
+    sessionLogsByChosenDate.map((log, index) => {
+      const inputDate = new Date(`${log.details.date}`);
       const formattedDate = format(inputDate, "yyyy-MM-dd");
       const formattedTime = format(inputDate, "HH:mm:ss");
       const parsedDate = parseISO(formattedDate);
       const dateToWords = format(parsedDate, "EEEE, do MMMM yyyy");
 
-      const currentWorkout = sessionLogsByChosenDate
+      const currentWorkout = sessionLogsByChosenDate;
 
       return (
         <div key={index} className="tableContainer individualLog">
           <h2 className="workoutName">{log.workout_name}</h2>
-            <h4 style={{ textDecoration: "underline" }}>
-              Date Completed: {dateToWords}, {formattedTime}.
-            </h4>
+          <h4 style={{ textDecoration: "underline" }}>
+            Date Completed: {dateToWords}, {formattedTime}.
+          </h4>
 
-            <div className="tableWrapper">
+          <div className="tableWrapper">
             <table className="customTable">
               <thead>
                 <tr>
@@ -296,8 +297,8 @@ sessionLogsByChosenDate.map((log, index) => {
                   <th>Set Duration</th>
                 </tr>
               </thead>
-                <tbody>
-                                  {log.details.exercise_sessions.map(
+              <tbody>
+                {log.details.exercise_sessions.map(
                   (exercise, exerciseIndex) => {
                     const filteredExercise =
                       allExercises.length > 0 &&
@@ -318,78 +319,69 @@ sessionLogsByChosenDate.map((log, index) => {
                     );
                   }
                 )}
-                </tbody>
-              </table>
+              </tbody>
+            </table>
+          </div>
+
+          {currentWorkout && (
+            <Summary
+              currentWorkout={currentWorkout}
+              allExercises={allExercises}
+            />
+          )}
         </div>
+      );
+    });
 
-        {currentWorkout && (
-          <Summary
-            currentWorkout={currentWorkout}
-            allExercises={allExercises}
-          />
-        )}
-        </div>
-      )
-})
+  const filteredLogs = {
+    workoutLogsFilteredByName,
+    workoutLogsFilteredByExercise,
+    workoutLogsFilteredByDate,
+    workoutLogs,
+  };
 
+  useEffect(() => {
+    if (sessionLogsByChosenName) {
+      setActiveFilter("workoutLogsFilteredByName");
+    }
+    if (sessionLogsByChosenExercise) {
+      setActiveFilter("workoutLogsFilteredByExercise");
+    }
+    if (sessionLogsByChosenDate && sessionLogsByChosenDate.length > 0) {
+      setActiveFilter("workoutLogsFilteredByDate");
+    }
+  }, [
+    sessionLogsByChosenName,
+    workoutLogsFilteredByExercise,
+    workoutLogsFilteredByDate,
+  ]);
 
-const filteredLogs = {
-  workoutLogsFilteredByName,
-  workoutLogsFilteredByExercise,
-  workoutLogsFilteredByDate,
-  workoutLogs
-};
-
-useEffect(() => {
-  if (sessionLogsByChosenName) {
-    setActiveFilter("workoutLogsFilteredByName")
-  }
-  if (sessionLogsByChosenExercise) {
-    setActiveFilter("workoutLogsFilteredByExercise")
-  }
-  if (sessionLogsByChosenDate) {
-    setActiveFilter("workoutLogsFilteredByDate")
-  }
-}, [sessionLogsByChosenName, workoutLogsFilteredByExercise, workoutLogsFilteredByDate])
-
-console.log('activeFilter', activeFilter)
+  console.log("activeFilter", activeFilter);
 
   return (
     <div className="grid-container">
       <h2 className="pageHeader logs">Logs</h2>
       <div className="workoutLogs">
-      {sortedSessionLogs && 
-        allWorkouts &&
-        <div>
-    <h3>--- Filter By ---</h3>
+        {sortedSessionLogs && allWorkouts && (
+          <div>
+            <h3>--- Filter By ---</h3>
 
-        <WorkoutLogsFilter
-        allExercises={allExercises}
-        sortedSessionLogs={sortedSessionLogs}
-        allWorkouts={allWorkouts}
-        setSessionLogsByChosenName={setSessionLogsByChosenName}
-        setSessionLogsByChosenExercise={setSessionLogsByChosenExercise}
-        setSessionLogsByChosenDate={setSessionLogsByChosenDate}
+            <WorkoutLogsFilter
+              allExercises={allExercises}
+              sortedSessionLogs={sortedSessionLogs}
+              allWorkouts={allWorkouts}
+              setSessionLogsByChosenName={setSessionLogsByChosenName}
+              setSessionLogsByChosenExercise={setSessionLogsByChosenExercise}
+              setSessionLogsByChosenDate={setSessionLogsByChosenDate}
+            />
+          </div>
+        )}
 
-        />
-
+        {filteredLogs[activeFilter]}
       </div>
-      }
+    </div>
+  );
+};
 
-      {
-        filteredLogs[activeFilter]
-      }
+export default Logs;
 
-
-      </div>
-      </div>
-      );
-    };
-    
-    export default Logs;
-    
-    // {
-    //   sessionLogsByChosenName ? workoutLogsFilteredByName :
-    //    sessionLogsByChosenExercise ? workoutLogsFilteredByExercise :
-    //     sessionLogsByChosenDate ? workoutLogsFilteredByDate :
-    //    workoutLogs}

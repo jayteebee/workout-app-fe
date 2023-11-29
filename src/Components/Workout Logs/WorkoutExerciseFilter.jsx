@@ -8,7 +8,7 @@ const WorkoutExerciseFilter = ({
   allExercises,
   setSessionLogsByChosenExercise,
   setSessionLogsByChosenName,
-  setSessionLogsByChosenDate
+  setSessionLogsByChosenDate,
 }) => {
   const [chosenExerciseToFilter, setChosenExerciseToFilter] = useState("");
 
@@ -28,12 +28,11 @@ const WorkoutExerciseFilter = ({
               exerciseSession.exercise_id === chosenExerciseToFilter
           )
       );
-      setSessionLogsByChosenDate(null)
-      setSessionLogsByChosenName(null)
+      setSessionLogsByChosenDate(null);
+      setSessionLogsByChosenName(null);
       setSessionLogsByChosenExercise(sessionLogsByChosenExerciseFilter);
     }
   }, [chosenExerciseToFilter]);
-
 
   // filter
   return (
