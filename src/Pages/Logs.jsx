@@ -363,7 +363,7 @@ const Logs = () => {
     workoutLogsFilteredByDate,
   ]);
 
-  console.log("activeFilter", activeFilter);
+  // console.log("activeFilter", activeFilter);
 
   return (
     <div className="grid-container">
