@@ -3,7 +3,7 @@ import WorkoutExerciseFilter from './WorkoutExerciseFilter'
 import WorkoutNameFilter from './WorkoutNameFilter'
 import WorkoutTimeFilter from './WorkoutTimeFilter'
 
-const WorkoutLogsFilter = ({allExercises, sortedSessionLogs, allWorkouts, setSessionLogsByChosenName, setSessionLogsByChosenExercise  }) => {
+const WorkoutLogsFilter = ({allExercises, sortedSessionLogs, allWorkouts, setSessionLogsByChosenName, setSessionLogsByChosenExercise, setSessionLogsByChosenDate  }) => {
 
   return (
     <div style={{ display: 'flex', gap: '10px', justifyContent: "center", marginBottom: "10vh" }}>
@@ -24,6 +24,7 @@ const WorkoutLogsFilter = ({allExercises, sortedSessionLogs, allWorkouts, setSes
     />
     <WorkoutTimeFilter
     sortedSessionLogs={sortedSessionLogs}
+    setSessionLogsByChosenDate={setSessionLogsByChosenDate}
     />
     </div>
   )

@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const WorkoutTimeFilter = ({sortedSessionLogs}) => {
+const WorkoutTimeFilter = ({sortedSessionLogs, setSessionLogsByChosenDate}) => {
 
 const [chosenDate, setChosenDate] = useState("");
 const [monthChosenByUser, setMonthChosenByUser] = useState("")
@@ -36,6 +36,10 @@ useEffect(() => {
     setFilteredLogsByMonth(filterLogsByMonth)
   }
 }, [monthChosenByUser])
+
+useEffect(() => {
+  setSessionLogsByChosenDate(filteredLogsByMonth)
+}, [filteredLogsByMonth])
 
   return (
     <div>
