@@ -19,12 +19,12 @@ const Logs = () => {
   const [allWorkouts, setAllWorkouts] = useState([]);
   // console.log('allWorkouts', allWorkouts)
   const [sessionLogsByChosenName, setSessionLogsByChosenName] = useState();
-  console.log("sessionLogsByChosenName", sessionLogsByChosenName);
+  // console.log("sessionLogsByChosenName", sessionLogsByChosenName);
   const [sessionLogsByChosenExercise, setSessionLogsByChosenExercise] =
     useState();
-  console.log("sessionLogsByChosenExercise", sessionLogsByChosenExercise);
+  // console.log("sessionLogsByChosenExercise", sessionLogsByChosenExercise);
   const [sessionLogsByChosenDate, setSessionLogsByChosenDate] = useState();
-  console.log("sessionLogsByChosenDate", sessionLogsByChosenDate);
+  // console.log("sessionLogsByChosenDate", sessionLogsByChosenDate);
   const [activeFilter, setActiveFilter] = useState("workoutLogs");
 
   const sortedSessionLogs = sessionLogs.sort(
@@ -55,6 +55,7 @@ const Logs = () => {
       );
   }, []);
 
+  // *** The return used when no filter has been interacted with
   const workoutLogs =
     sortedSessionLogs.length > 0 &&
     // matches the session log with the workout id, this gives us access to the name of the workout
@@ -135,6 +136,8 @@ const Logs = () => {
       );
     });
 
+// *** The return used when the name filter has been interacted with
+  
   const workoutLogsFilteredByName =
     sessionLogsByChosenName &&
     sessionLogsByChosenName.length > 0 &&
@@ -201,6 +204,7 @@ const Logs = () => {
       );
     });
 
+// *** The return used when the exercise filter has been interacted with
   const workoutLogsFilteredByExercise =
     sessionLogsByChosenExercise &&
     sessionLogsByChosenExercise.length > 0 &&
@@ -267,6 +271,7 @@ const Logs = () => {
       );
     });
 
+// *** The return used when the date filter has been interacted with
   const workoutLogsFilteredByDate =
     sessionLogsByChosenDate &&
     sessionLogsByChosenDate.length > 0 &&
@@ -333,6 +338,7 @@ const Logs = () => {
       );
     });
 
+    // responsible for controlling the rendered data
   const filteredLogs = {
     workoutLogsFilteredByName,
     workoutLogsFilteredByExercise,
@@ -340,6 +346,7 @@ const Logs = () => {
     workoutLogs,
   };
 
+  // if the referenced filter has been engaged with, set the activeFilter to that format.
   useEffect(() => {
     if (sessionLogsByChosenName) {
       setActiveFilter("workoutLogsFilteredByName");
