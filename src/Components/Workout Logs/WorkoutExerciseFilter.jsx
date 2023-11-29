@@ -11,11 +11,13 @@ const WorkoutExerciseFilter = ({
 }) => {
   const [chosenExerciseToFilter, setChosenExerciseToFilter] = useState("");
 
+  // create an object for the reactSelect component to cycle through
   const allExerciseNames = allExercises.map((exercise) => ({
     value: exercise.id,
     label: exercise.name,
   }));
 
+  // match the existing session logs with the id of the chosen exercise in the drop down
   useEffect(() => {
     if (chosenExerciseToFilter) {
       const sessionLogsByChosenExerciseFilter = sortedSessionLogs.filter(
@@ -29,6 +31,8 @@ const WorkoutExerciseFilter = ({
     }
   }, [chosenExerciseToFilter]);
 
+
+  // filter
   return (
     <div>
       <ReactSelect
