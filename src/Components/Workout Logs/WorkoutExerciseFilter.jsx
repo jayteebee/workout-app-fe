@@ -8,6 +8,7 @@ const WorkoutExerciseFilter = ({
   allExercises,
   setSessionLogsByChosenExercise,
   setSessionLogsByChosenName,
+  setSessionLogsByChosenDate
 }) => {
   const [chosenExerciseToFilter, setChosenExerciseToFilter] = useState("");
 
@@ -27,6 +28,8 @@ const WorkoutExerciseFilter = ({
               exerciseSession.exercise_id === chosenExerciseToFilter
           )
       );
+      setSessionLogsByChosenDate(null)
+      setSessionLogsByChosenName(null)
       setSessionLogsByChosenExercise(sessionLogsByChosenExerciseFilter);
     }
   }, [chosenExerciseToFilter]);
@@ -38,7 +41,6 @@ const WorkoutExerciseFilter = ({
       <ReactSelect
         options={allExerciseNames}
         onChange={(e) => {
-          setSessionLogsByChosenName(null);
           setChosenExerciseToFilter(e.value);
         }}
       />

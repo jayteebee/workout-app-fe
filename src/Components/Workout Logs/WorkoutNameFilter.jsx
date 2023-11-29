@@ -6,7 +6,7 @@ import {
 } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 
-const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByChosenName, setSessionLogsByChosenExercise }) => {
+const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByChosenName, setSessionLogsByChosenExercise, setSessionLogsByChosenDate, setActiveFilter }) => {
 //   console.log("sortedSessionLogs", sortedSessionLogs);
 //   console.log("allWorkouts", allWorkouts);
 
@@ -27,7 +27,10 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByCho
       const sessionLogsByChosenNameFilter = sortedSessionLogs.filter(
         (log) => log.workout_name === filteredWorkoutNameChosen
       );
+      setSessionLogsByChosenDate(null)
+      setSessionLogsByChosenExercise(null)
       setSessionLogsByChosenName(sessionLogsByChosenNameFilter);
+      setFilteredWorkoutNameChosen("")
     }
   }, [filteredWorkoutNameChosen]);
 
@@ -42,8 +45,6 @@ const WorkoutNameFilter = ({ sortedSessionLogs, allWorkouts, setSessionLogsByCho
         link
         onClick={() => 
           {
-              setSessionLogsByChosenExercise(null)
-              setSessionLogsByChosenName(null)
               setFilteredWorkoutNameChosen("")}
           }
         >-- Clear --</MDBDropdownItem>

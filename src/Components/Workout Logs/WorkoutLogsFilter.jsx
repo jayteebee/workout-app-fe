@@ -1,9 +1,10 @@
+import { MDBBtn } from 'mdb-react-ui-kit'
 import React from 'react'
 import WorkoutExerciseFilter from './WorkoutExerciseFilter'
 import WorkoutNameFilter from './WorkoutNameFilter'
 import WorkoutTimeFilter from './WorkoutTimeFilter'
 
-const WorkoutLogsFilter = ({allExercises, sortedSessionLogs, allWorkouts, setSessionLogsByChosenName, setSessionLogsByChosenExercise, setSessionLogsByChosenDate  }) => {
+const WorkoutLogsFilter = ({allExercises, sortedSessionLogs, allWorkouts, setSessionLogsByChosenName, setSessionLogsByChosenExercise, setSessionLogsByChosenDate, setActiveFilter  }) => {
 
   return (
     <div style={{ display: 'flex', gap: '10px', justifyContent: "center", marginBottom: "10vh" }}>
@@ -13,6 +14,8 @@ const WorkoutLogsFilter = ({allExercises, sortedSessionLogs, allWorkouts, setSes
     allWorkouts={allWorkouts}
     setSessionLogsByChosenName={setSessionLogsByChosenName}
     setSessionLogsByChosenExercise={setSessionLogsByChosenExercise}
+    setSessionLogsByChosenDate={setSessionLogsByChosenDate}
+
     />
 
     <WorkoutExerciseFilter
@@ -20,11 +23,14 @@ const WorkoutLogsFilter = ({allExercises, sortedSessionLogs, allWorkouts, setSes
     allExercises={allExercises}
     setSessionLogsByChosenExercise={setSessionLogsByChosenExercise}
     setSessionLogsByChosenName={setSessionLogsByChosenName}
+    setSessionLogsByChosenDate={setSessionLogsByChosenDate}
 
     />
     <WorkoutTimeFilter
     sortedSessionLogs={sortedSessionLogs}
     setSessionLogsByChosenDate={setSessionLogsByChosenDate}
+    setSessionLogsByChosenName={setSessionLogsByChosenName}
+    setSessionLogsByChosenExercise={setSessionLogsByChosenExercise}
     />
     </div>
   )
