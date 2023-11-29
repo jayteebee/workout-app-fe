@@ -20,7 +20,7 @@ const Logs = () => {
   const [sessionLogsByChosenName, setSessionLogsByChosenName] = useState();
   // console.log("sessionLogsByChosenName", sessionLogsByChosenName);
   const [sessionLogsByChosenExercise, setSessionLogsByChosenExercise] = useState();
-console.log('sessionLogsByChosenExercise',sessionLogsByChosenExercise)
+// console.log('sessionLogsByChosenExercise',sessionLogsByChosenExercise)
 
   const sortedSessionLogs = sessionLogs.sort(
     (a, b) => new Date(b.details.date) - new Date(a.details.date)
