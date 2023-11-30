@@ -66,7 +66,7 @@ const WorkoutSession = () => {
   const exercisesInWorkout = location.state?.exercisesInWorkout;
   // const workoutName = <h2>Workout: {exercisesInWorkout[0].workout_name}</h2>;
 
-  // console.log("exercisesInWorkout", exercisesInWorkout);
+  console.log("exercisesInWorkout", exercisesInWorkout);
   const routineWorkoutID = location.state?.rwID;
 
   const [workoutSessionData, setWorkoutSessionData] = useState({
@@ -89,12 +89,13 @@ useEffect(() => {
     setId(exercisesInWorkout[0].id);
   }, [exercisesInWorkout]);
 
-  const exerciseButton = (value, eID, sets, exerciseID) => {
+  const exerciseButton = (value, eID, sets, exerciseID, exerciseName) => {
     setCurrentExerciseButton({
       value: value,
       eID: eID,
       sets: sets,
       exerciseID: exerciseID,
+      exerciseName: exerciseName
     });
 
     let restTimerExerciseFilter = exercisesInWorkout.filter(
@@ -151,7 +152,7 @@ useEffect(() => {
   };
 
   useEffect(() => {
-    const { value, eID, sets, exerciseID } = currentExerciseButton;
+    const { value, eID, sets, exerciseID, exerciseName } = currentExerciseButton;
     setExerciseSessionData({
       workout_session_id: workoutSession.id,
       exercise_id: exerciseID,
@@ -159,6 +160,7 @@ useEffect(() => {
       reps_completed: repsAchieved,
       weight_used: weightAchieved,
       set_timer: setTimerCount,
+      exercise_name: exerciseName
     });
   }, [weightAchieved, setsComplete, repsAchieved, id, setTimerCount]);
 
@@ -263,7 +265,8 @@ useEffect(() => {
                   "red",
                   exercise.id,
                   exercise.sets,
-                  exercise.exercise.id
+                  exercise.exercise.id,
+                  exercise.exercise.name
                 )
               }
             >
@@ -279,7 +282,8 @@ useEffect(() => {
                   "purple",
                   exercise.id,
                   exercise.sets,
-                  exercise.exercise.id
+                  exercise.exercise.id,
+                  exercise.exercise.name
                 )
               }
             >
@@ -295,7 +299,8 @@ useEffect(() => {
                   "green",
                   exercise.id,
                   exercise.sets,
-                  exercise.exercise.id
+                  exercise.exercise.id,
+                  exercise.exercise.name
                 ))}
             >
               <img
