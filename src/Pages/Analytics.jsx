@@ -24,9 +24,6 @@ const Analytics = () => {
   // register the en-GB locale for the date picker (prevents console error)
   useEffect(() => {
     registerLocale("en-GB", enGB);
-  }, []);
-
-  useEffect(() => {
     getAllSessionLogs()
       .then((data) => setAllSessionLogs(data))
       .catch((err) => console.log("Error Fetching All Session Logs", err));
@@ -112,6 +109,9 @@ const Analytics = () => {
   const renderDatePicker = () => {
     return filterToRender[chosenFilter] || null;
   };
+
+
+
 
   return (
     <div>
