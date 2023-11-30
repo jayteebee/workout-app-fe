@@ -17,7 +17,8 @@ const Analytics = () => {
   });
   console.log("chosenDate", chosenDate);
 
-  const [chosenFilter, setChosenFilter] = useState("");
+  // this controls the time frame that is being shown. Default is "All", but the user changes this via the dropdown (Week, Month, Quarter, Year)
+  const [chosenFilter, setChosenFilter] = useState("All");
   console.log("chosenFilter", chosenFilter);
 
   // register the en-GB locale for the date picker (prevents console error)
