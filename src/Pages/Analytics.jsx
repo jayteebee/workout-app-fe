@@ -146,6 +146,7 @@ const Analytics = () => {
       });
     });
   console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
+  
   return (
     <div>
       <select onChange={(e) => setChosenFilter(e.target.value)}>
