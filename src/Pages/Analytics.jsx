@@ -17,6 +17,10 @@ const sortedSessionLogs = allSessionLogs && allSessionLogs.length > 0 && allSess
 )
 console.log('sortedSessionLogs',sortedSessionLogs)
 
+const [analytics, setAnalytics] = useState([])
+console.log('analytics',analytics)
+
+
 
   return (
     <div>Analytics</div>
