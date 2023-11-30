@@ -71,6 +71,10 @@ const Analytics = () => {
         <DatePicker
           selected={startDate}
           onChange={(date) => {
+            setChosenDate({
+              format: "Month",
+              date: date,
+            });
             setStartDate(date);
           }}
           dateFormat="MMMM yyyy"
@@ -84,6 +88,10 @@ const Analytics = () => {
         <DatePicker
           selected={startDate}
           onChange={(date) => {
+            setChosenDate({
+              format: "Quarter",
+              date: date,
+            });
             setStartDate(date);
           }}
           showQuarterYearPicker
@@ -97,6 +105,10 @@ const Analytics = () => {
         <DatePicker
           selected={startDate}
           onChange={(date) => {
+            setChosenDate({
+              format: "Year",
+              date: date,
+            });
             setStartDate(date);
           }}
           dateFormat="yyyy"
@@ -146,7 +158,7 @@ const Analytics = () => {
       });
     });
   console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
-  
+
   return (
     <div>
       <select onChange={(e) => setChosenFilter(e.target.value)}>
