@@ -8,7 +8,7 @@ import NavBar from "./Components/Navigation/NavBar";
 import Routines from "./Pages/Routines";
 import Workout from "./Pages/Workout";
 import Knowledge from "./Pages/Knowledge";
-import PersonalBests from "./Pages/PersonalBests";
+import Analytics from "./Pages/Analytics";
 import Logs from "./Pages/Logs";
 import { useEffect, useState } from "react";
 import ExerciseCreation from "./Pages/ExerciseCreation";
@@ -135,7 +135,7 @@ function App() {
 
             <Route path="/Knowledge" element={<Knowledge />} />
 
-            <Route path="/PersonalBests" element={<PersonalBests />} />
+            <Route path="/Analytics" element={<Analytics />} />
 
             <Route path="/Logs" element={<Logs />} />
 
