@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const Analytics = () => {
   const [allSessionLogs, setAllSessionLogs] = useState();
-  console.log('allSessionLogs',allSessionLogs)
+  console.log("allSessionLogs", allSessionLogs);
   const [startDate, setStartDate] = useState(new Date());
   console.log("startDate", startDate);
 
@@ -110,43 +110,42 @@ const Analytics = () => {
     return filterToRender[chosenFilter] || null;
   };
 
-let arrayOfExerciseObjects = []
+  let arrayOfExerciseObjects = [];
 
-sortedSessionLogs && sortedSessionLogs.length > 0 && sortedSessionLogs.forEach((log) => {
-  const exerciseSessions = log.details.exercise_sessions
-console.log('exerciseSessions',exerciseSessions)
-console.log('log',log)
-  // const exerciseValueTracker = {}
+  sortedSessionLogs &&
+    sortedSessionLogs.length > 0 &&
+    sortedSessionLogs.forEach((log) => {
+      const exerciseSessions = log.details.exercise_sessions;
 
-  exerciseSessions.forEach((exercise) => {
-    console.log('exercise',exercise)
-    const existingExerciseIndex = arrayOfExerciseObjects.findIndex(
-      (item) => item.exercise_id === exercise.exercise_id
-    )
-    console.log('existingExerciseIndex',existingExerciseIndex)
-    if (existingExerciseIndex !== -1) {
+      exerciseSessions.forEach((exercise) => {
+        const existingExerciseIndex = arrayOfExerciseObjects.findIndex(
+          (item) => item.exercise_id === exercise.exercise_id
+        );
+
+        if (existingExerciseIndex !== -1) {
           const currentExercise = arrayOfExerciseObjects[existingExerciseIndex];
-          
+
           currentExercise.totalWeight += exercise.weight_used;
           currentExercise.totalReps += exercise.reps_completed;
           currentExercise.totalTimeUnderTension += exercise.set_timer;
           currentExercise.totalSets += 1;
-          currentExercise.totalVolume = currentExercise.totalWeight * currentExercise.totalReps;
-    } else {
-      const newExercise = {
-          exercise_id: exercise.exercise_id,
-          exercise_name: exercise.exercise_name,
-          totalWeight: exercise.weight_used,
-          totalVolume: exercise.weight_used * exercise.reps_completed,
-          totalReps: exercise.reps_completed,
-          totalTimeUnderTension: exercise.set_timer,
-          totalSets: 1,
-      }
-      arrayOfExerciseObjects.push(newExercise)
-    }
-  });
-})
-console.log('arrayOfExerciseObjects',arrayOfExerciseObjects)
+          currentExercise.totalVolume =
+            currentExercise.totalWeight * currentExercise.totalReps;
+        } else {
+          const newExercise = {
+            exercise_id: exercise.exercise_id,
+            exercise_name: exercise.exercise_name,
+            totalWeight: exercise.weight_used,
+            totalVolume: exercise.weight_used * exercise.reps_completed,
+            totalReps: exercise.reps_completed,
+            totalTimeUnderTension: exercise.set_timer,
+            totalSets: 1,
+          };
+          arrayOfExerciseObjects.push(newExercise);
+        }
+      });
+    });
+  console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
   return (
     <div>
       <select onChange={(e) => setChosenFilter(e.target.value)}>
