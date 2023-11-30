@@ -40,6 +40,8 @@ const Analytics = () => {
   const [analytics, setAnalytics] = useState([]);
   // console.log("analytics", analytics);
 
+
+  // this variable contains 4 different DatePicker components, each uniquely updating the chosenDate state 
   const filterToRender = {
     All: (
       <div>
@@ -118,12 +120,15 @@ const Analytics = () => {
     ),
   };
 
+  //this function is called in the return render statement, and controls which filter option is displayed. Defaults to All: "No Filter Applied"
   const renderDatePicker = () => {
     return filterToRender[chosenFilter] || null;
   };
 
+// stores data for charts/graphs
   let arrayOfExerciseObjects = [];
 
+// loops over every session log and collates exercise data. EG: bench done twice, sums the reps/sets etc into one object.
   sortedSessionLogs &&
     sortedSessionLogs.length > 0 &&
     sortedSessionLogs.forEach((log) => {
