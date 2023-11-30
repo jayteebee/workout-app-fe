@@ -44,6 +44,11 @@ const Analytics = () => {
   console.log("analytics", analytics);
 
   const filterToRender = {
+    All: (
+      <div>
+        <h2>No Filter Applied</h2>
+      </div>
+    ),
     Week: (
       <div>
         <h2>Filter By Week</h2>
