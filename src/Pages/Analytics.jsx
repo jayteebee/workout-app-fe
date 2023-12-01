@@ -39,8 +39,11 @@ const Analytics = () => {
     );
   console.log("sortedSessionLogs", sortedSessionLogs);
 
-  const [analytics, setAnalytics] = useState([]);
-  // console.log("analytics", analytics);
+ useEffect(() => {
+  if (sortedSessionLogs && sortedSessionLogs.length > 0) {
+    setFilteredSessionLogs(sortedSessionLogs)
+  }
+ }, [sortedSessionLogs])
 
 
   // this variable contains 4 different DatePicker components, each uniquely updating the chosenDate state 
@@ -131,9 +134,9 @@ const Analytics = () => {
   let arrayOfExerciseObjects = [];
 
 // loops over every session log and collates exercise data. EG: bench done twice, sums the reps/sets etc into one object.
-  sortedSessionLogs &&
-    sortedSessionLogs.length > 0 &&
-    sortedSessionLogs.forEach((log) => {
+  filteredSessionLogs &&
+    filteredSessionLogs.length > 0 &&
+    filteredSessionLogs.forEach((log) => {
       const exerciseSessions = log.details.exercise_sessions;
 
       exerciseSessions.forEach((exercise) => {
