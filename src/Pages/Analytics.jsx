@@ -167,25 +167,37 @@ const Analytics = () => {
   console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
 
 
-useEffect(() => {
-  if (chosenDate.format) {
-    const format = chosenDate.format
-
-    if (format === "Week") {
-      const startDate = new Date(chosenDate.date)
-      const endDate = new Date(startDate.getTime())
-      endDate.setDate(endDate.getDate() + 7)
-
-      const startTimestamp = startDate.getTime()
-      const endTimestamp = endDate.getTime()
-
-      const logsFilteredForDate = sortedSessionLogs.filter((log) => new Date(log.details.date).getTime() >= startTimestamp && new Date(log.details.date).getTime() <= endTimestamp)
-      console.log('logsFilteredForDate',logsFilteredForDate)
-      setFilteredSessionLogs(logsFilteredForDate)
+  useEffect(() => {
+    if (chosenDate.format) {
+      const format = chosenDate.format;
+      const startDate = new Date(chosenDate.date);
+      const endDate = new Date(startDate.getTime());
+      const startTimestamp = startDate.getTime();
+      let endTimestamp;
+  
+      if (format === "Week") {
+        endDate.setDate(endDate.getDate() + 7);
+      } else if (format === "Month") {
+        endDate.setDate(endDate.getDate() + 30);
+      } else if (format === "Quarter") {
+        endDate.setDate(endDate.getDate() + 90);
+      } else if (format === "Year") {
+        endDate.setDate(endDate.getDate() + 365);
+      }
+  
+      endTimestamp = endDate.getTime();
+  
+      const logsFilteredForDate = sortedSessionLogs.filter(
+        (log) =>
+          new Date(log.details.date).getTime() >= startTimestamp &&
+          new Date(log.details.date).getTime() <= endTimestamp
+      );
+  
+      console.log('logsFilteredForDate', logsFilteredForDate);
+      setFilteredSessionLogs(logsFilteredForDate);
     }
-  }
-
-}, [chosenDate])
+  }, [chosenDate]);
+  
 
   return (
     <div>
