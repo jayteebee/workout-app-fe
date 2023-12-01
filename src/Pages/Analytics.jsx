@@ -202,15 +202,14 @@ const Analytics = () => {
   }, [chosenDate]);
   
 
-
+const dropdownTimeframeArray = ["Week", "Month", "Quarter", "Year"]
 
   return (
     <div>
       <select onChange={(e) => setChosenFilter(e.target.value)}>
-        <option value="Week">Week</option>
-        <option value="Month">Month</option>
-        <option value="Quarter">Quarter</option>
-        <option value="Year">Year</option>
+      {dropdownTimeframeArray.map((timeframe) => (
+        <option value={timeframe}>{timeframe}</option>
+      ))}
       </select>
 
       {renderDatePicker()}
