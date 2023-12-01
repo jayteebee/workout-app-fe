@@ -21,6 +21,8 @@ const Analytics = () => {
   const [chosenFilter, setChosenFilter] = useState("All");
   console.log("chosenFilter", chosenFilter);
 
+  const [filteredSessionLogs, setFilteredSessionLogs] = useState([])
+  console.log('filteredSessionLogs',filteredSessionLogs)
   // register the en-GB locale for the date picker (prevents console error)
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -163,6 +165,27 @@ const Analytics = () => {
       });
     });
   console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
+
+
+useEffect(() => {
+  if (chosenDate.format) {
+    const format = chosenDate.format
+
+    if (format === "Week") {
+      const startDate = new Date(chosenDate.date)
+      const endDate = new Date(startDate.getTime())
+      endDate.setDate(endDate.getDate() + 7)
+
+      const startTimestamp = startDate.getTime()
+      const endTimestamp = endDate.getTime()
+
+      const logsFilteredForDate = sortedSessionLogs.filter((log) => new Date(log.details.date).getTime() >= startTimestamp && new Date(log.details.date).getTime() <= endTimestamp)
+      console.log('logsFilteredForDate',logsFilteredForDate)
+      setFilteredSessionLogs(logsFilteredForDate)
+    }
+  }
+
+}, [chosenDate])
 
   return (
     <div>
