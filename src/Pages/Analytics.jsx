@@ -212,6 +212,8 @@ const Analytics = () => {
       </select>
 
       {renderDatePicker()}
+
+      {filteredSessionLogs.length === 0 ? <p>No Workout Data to display for this time period</p> : <p>Nice</p>}
     </div>
   );
 };
