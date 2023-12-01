@@ -31,7 +31,12 @@ const ExerciseMetricTotalsByChosenTimeFrame = ({ arrayOfExerciseObjects }) => {
       </div>
     </div>
   ));
-  return <div>{table}</div>;
+  return (
+    <div>
+    <h2>Exercise Metric Totals By Chosen Time Frame</h2>
+    {table}
+    </div>
+  ) 
 };
 
 export default ExerciseMetricTotalsByChosenTimeFrame;
