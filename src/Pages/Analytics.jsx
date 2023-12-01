@@ -4,6 +4,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
 
 import "react-datepicker/dist/react-datepicker.css";
+import MetricTotalsByChosenTimeFrame from "../Components/Analytics/MetricTotalsByChosenTimeFrame";
 
 const Analytics = () => {
   const [allSessionLogs, setAllSessionLogs] = useState();
@@ -201,6 +202,8 @@ const Analytics = () => {
   }, [chosenDate]);
   
 
+
+
   return (
     <div>
       <select onChange={(e) => setChosenFilter(e.target.value)}>
@@ -212,7 +215,13 @@ const Analytics = () => {
 
       {renderDatePicker()}
 
-      {filteredSessionLogs.length === 0 ? <p>No Workout Data to display for this time period</p> : <p>Nice</p>}
+      {filteredSessionLogs.length === 0 ? 
+        <p>No Workout Data to display for this time period</p> :
+        <MetricTotalsByChosenTimeFrame
+        arrayOfExerciseObjects={arrayOfExerciseObjects}
+        />
+      }
+
     </div>
   );
 };
