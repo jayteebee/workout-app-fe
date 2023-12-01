@@ -196,7 +196,6 @@ const Analytics = () => {
           new Date(log.details.date).getTime() <= endTimestamp
       );
   
-      console.log('logsFilteredForDate', logsFilteredForDate);
       setFilteredSessionLogs(logsFilteredForDate);
     }
   }, [chosenDate]);
