@@ -4,7 +4,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
 
 import "react-datepicker/dist/react-datepicker.css";
-import MetricTotalsByChosenTimeFrame from "../Components/Analytics/MetricTotalsByChosenTimeFrame";
+import ExerciseMetricTotalsByChosenTimeFrame from "../Components/Analytics/ExerciseMetricTotalsByChosenTimeFrame";
 
 const Analytics = () => {
   const [allSessionLogs, setAllSessionLogs] = useState();
@@ -217,7 +217,7 @@ const Analytics = () => {
 
       {filteredSessionLogs.length === 0 ? 
         <p>No Workout Data to display for this time period</p> :
-        <MetricTotalsByChosenTimeFrame
+        <ExerciseMetricTotalsByChosenTimeFrame
         arrayOfExerciseObjects={arrayOfExerciseObjects}
         />
       }

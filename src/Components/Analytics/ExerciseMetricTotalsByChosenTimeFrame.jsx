@@ -1,6 +1,6 @@
 import React from "react";
 
-const MetricTotalsByChosenTimeFrame = ({ arrayOfExerciseObjects }) => {
+const ExerciseMetricTotalsByChosenTimeFrame = ({ arrayOfExerciseObjects }) => {
   console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
   const table = arrayOfExerciseObjects.map((data, index) => (
     <div key={index} className="tableContainer individualLog">
@@ -34,4 +34,4 @@ const MetricTotalsByChosenTimeFrame = ({ arrayOfExerciseObjects }) => {
   return <div>{table}</div>;
 };
 
-export default MetricTotalsByChosenTimeFrame;
+export default ExerciseMetricTotalsByChosenTimeFrame;
