@@ -224,7 +224,7 @@ const dropdownTimeframeArray = ["All", "Week", "Month", "Quarter", "Year"]
       }
       
       <DataVisualisation
-      
+      sortedSessionLogs={sortedSessionLogs}
       />
     </div>
   );

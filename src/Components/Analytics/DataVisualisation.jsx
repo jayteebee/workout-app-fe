@@ -3,7 +3,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
 import { MDBBtn } from "mdb-react-ui-kit";
 
-const DataVisualisation = () => {
+const DataVisualisation = ({sortedSessionLogs}) => {
   const [fromDate, setFromDate] = useState(new Date());
   console.log("fromDate", fromDate);
   const [untilDate, setUntilDate] = useState(new Date());
@@ -15,6 +15,8 @@ const DataVisualisation = () => {
     frequency: ""
   });
   console.log("dataVisForm", dataVisForm);
+
+console.log('sortedSessionLogs',sortedSessionLogs)
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
