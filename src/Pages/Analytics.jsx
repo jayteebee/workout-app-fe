@@ -11,20 +11,20 @@ const Analytics = () => {
   const [allSessionLogs, setAllSessionLogs] = useState();
   console.log("allSessionLogs", allSessionLogs);
   const [startDate, setStartDate] = useState(new Date());
-  console.log("startDate", startDate);
+  // console.log("startDate", startDate);
 
   const [chosenDate, setChosenDate] = useState({
     format: "",
     date: "",
   });
-  console.log("chosenDate", chosenDate);
+  // console.log("chosenDate", chosenDate);
 
   // this controls the time frame that is being shown. Default is "All", but the user changes this via the dropdown (Week, Month, Quarter, Year)
   const [chosenFilter, setChosenFilter] = useState("All");
-  console.log("chosenFilter", chosenFilter);
+  // console.log("chosenFilter", chosenFilter);
 
   const [filteredSessionLogs, setFilteredSessionLogs] = useState([])
-  console.log('filteredSessionLogs',filteredSessionLogs)
+  // console.log('filteredSessionLogs',filteredSessionLogs)
   // register the en-GB locale for the date picker (prevents console error)
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -39,7 +39,7 @@ const Analytics = () => {
     allSessionLogs.sort(
       (a, b) => new Date(b.details.date) - new Date(a.details.date)
     );
-  console.log("sortedSessionLogs", sortedSessionLogs);
+  // console.log("sortedSessionLogs", sortedSessionLogs);
 
  useEffect(() => {
   if (sortedSessionLogs && sortedSessionLogs.length > 0) {
@@ -223,7 +223,9 @@ const dropdownTimeframeArray = ["All", "Week", "Month", "Quarter", "Year"]
         />
       }
       
-      <DataVisualisation />
+      <DataVisualisation
+      
+      />
     </div>
   );
 };
