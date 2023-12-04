@@ -5,6 +5,7 @@ import enGB from "date-fns/locale/en-GB";
 
 import "react-datepicker/dist/react-datepicker.css";
 import ExerciseMetricTotalsByChosenTimeFrame from "../Components/Analytics/ExerciseMetricTotalsByChosenTimeFrame";
+import DataVisualisation from "../Components/Analytics/DataVisualisation";
 
 const Analytics = () => {
   const [allSessionLogs, setAllSessionLogs] = useState();
@@ -206,21 +207,23 @@ const dropdownTimeframeArray = ["All", "Week", "Month", "Quarter", "Year"]
 
   return (
     <div>
-      <select onChange={(e) => setChosenFilter(e.target.value)}>
-      {dropdownTimeframeArray.map((timeframe) => (
-        <option value={timeframe}>{timeframe}</option>
+
+    <select onChange={(e) => setChosenFilter(e.target.value)}>
+    {dropdownTimeframeArray.map((timeframe) => (
+      <option value={timeframe}>{timeframe}</option>
       ))}
       </select>
-
+      
       {renderDatePicker()}
-
+      
       {filteredSessionLogs.length === 0 ? 
         <p>No Workout Data to display for this time period</p> :
         <ExerciseMetricTotalsByChosenTimeFrame
         arrayOfExerciseObjects={arrayOfExerciseObjects}
         />
       }
-
+      
+      <DataVisualisation />
     </div>
   );
 };
