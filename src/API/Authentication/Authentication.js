@@ -29,7 +29,7 @@ export const logIn = async (logInData) => {
     const response = await axiosInstance.post("/login", { user: logInData });
     if (response.headers.authorization) {
       window.localStorage.setItem("token", response.headers.authorization);
-      console.log("User Logged In Successfully");
+      // console.log("User Logged In Successfully");
     }
     return response.data;
   }
