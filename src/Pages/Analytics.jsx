@@ -202,7 +202,7 @@ const Analytics = () => {
   }, [chosenDate]);
   
 
-const dropdownTimeframeArray = ["Week", "Month", "Quarter", "Year"]
+const dropdownTimeframeArray = ["All", "Week", "Month", "Quarter", "Year"]
 
   return (
     <div>
