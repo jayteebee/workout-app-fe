@@ -15,6 +15,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     frequency: "",
     workoutToMeasure: "",
     exerciseToMeasure: "",
+    metric: "",
   });
   console.log("dataVisForm", dataVisForm);
 
@@ -60,6 +61,8 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     "workoutNamesArrayWithNoDuplicates",
     workoutNamesArrayWithNoDuplicates
   );
+
+  const metricToMeasure = ["Total Volume", "Total Reps", "Total Sets", "Total Time Under Tension"]
 
   return (
     <div>
@@ -143,6 +146,26 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
               </option>
             ))}
           </select>
+        </div>
+
+        <div style={{border: "2px solid black"}}>
+        <h3>Metric To Measure</h3>
+        <select
+            onChange={(e) => {
+              setDataVisForm((prevForm) => ({
+                ...prevForm,
+                metric: e.target.value,
+              }));
+            }}
+          >
+          <option>---Select---</option>
+            {metricToMeasure.map((metric) => (
+              <option value={metric} key={`key:${metric}`}>
+                {metric}
+              </option>
+            ))}
+          </select>
+        
         </div>
 
         <MDBBtn type="submit">Submit!</MDBBtn>
