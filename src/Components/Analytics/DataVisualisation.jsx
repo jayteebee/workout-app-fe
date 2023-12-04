@@ -13,6 +13,8 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     startDate: "",
     endDate: "",
     frequency: "",
+    workoutToMeasure: "",
+    exerciseToMeasure: "",
   });
   console.log("dataVisForm", dataVisForm);
 
@@ -39,8 +41,8 @@ const exerciseNamesFromWorkoutLogsArray = sortedSessionLogs && sortedSessionLogs
     )
 })
 
-const workoutNameArrayWithNoDuplicates = [...new Set(exerciseNamesFromWorkoutLogsArray)]
-console.log('workoutNameArrayWithNoDuplicates',workoutNameArrayWithNoDuplicates)
+const exerciseNameArrayWithNoDuplicates = [...new Set(exerciseNamesFromWorkoutLogsArray)]
+console.log('workoutNameArrayWithNoDuplicates',exerciseNameArrayWithNoDuplicates)
 
 const workoutNamesFromWorkoutLogsArray = sortedSessionLogs && sortedSessionLogs.length > 0 && sortedSessionLogs.map((log) => (
     log.workout_name
@@ -95,6 +97,43 @@ console.log('workoutNamesArrayWithNoDuplicates',workoutNamesArrayWithNoDuplicate
               </option>
             ))}
           </select>
+        </div>
+
+        <div style={{ border: "2px solid green"}}>
+        <h3> Workout / Exercise To Measure</h3>
+
+        <select
+        onChange={(e) => {
+          setDataVisForm((prevForm) => ({
+            ...prevForm,
+            workoutToMeasure: e.target.value,
+          }));
+        }}
+      >
+    <option>---Select---</option>
+        {workoutNamesArrayWithNoDuplicates.map((workout) => (
+          <option value={workout} key={`key:${workout}`}>
+            {workout}
+          </option>
+        ))}
+      </select>
+
+      <select
+      onChange={(e) => {
+        setDataVisForm((prevForm) => ({
+          ...prevForm,
+          exerciseToMeasure: e.target.value,
+        }));
+      }}
+    >
+    <option>---Select---</option>
+      {exerciseNameArrayWithNoDuplicates.map((exercise) => (
+        <option value={exercise} key={`key:${exercise}`}>
+          {exercise}
+        </option>
+      ))}
+    </select>
+
         </div>
 
         <MDBBtn type="submit">Submit!</MDBBtn>
