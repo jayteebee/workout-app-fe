@@ -12,6 +12,7 @@ const DataVisualisation = () => {
   const [dataVisForm, setDataVisForm] = useState({
     startDate: "",
     endDate: "",
+    frequency: ""
   });
   console.log("dataVisForm", dataVisForm);
 
@@ -23,11 +24,16 @@ const DataVisualisation = () => {
     e.preventDefault();
     console.log("submitted");
   };
+
+  const dataViewFrequency = ["Week", "Month", "Quarter", "Year"]
+
   return (
     <div>
       <h2> Data Vis.</h2>
 
       <form onSubmit={handleFormSubmit}>
+      <div style={{border: "2px solid red" }}>
+        <h3>Start / End Date</h3>
         <DatePicker
           selected={fromDate}
           onChange={(date) => {
@@ -49,6 +55,27 @@ const DataVisualisation = () => {
             setUntilDate(date);
           }}
         />
+        </div>
+
+        <div style={{border: "2px solid blue"}}>
+        <h3>Frequency</h3>
+        <select onChange={(e) => {
+            setDataVisForm((prevForm) => ({
+                ...prevForm,
+                frequency: e.target.value
+            }))
+        }}>
+          {dataViewFrequency.map((freq) => (
+            <option
+            value={freq}
+            key={`key:${freq}`}
+            >
+                {freq}
+            </option>
+          ))}
+        </select>
+        
+        </div>
 
         <MDBBtn type="submit">Submit!</MDBBtn>
       </form>
