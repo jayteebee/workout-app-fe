@@ -30,7 +30,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   // array for the drop down enabling the user to change the time segments they can see on the chart
   const dataViewFrequency = ["Week", "Month", "Quarter", "Year"];
 
-const exercisenamesFromWorkoutLogsArray = sortedSessionLogs && sortedSessionLogs.length > 0 && sortedSessionLogs.flatMap((log) => {
+const exerciseNamesFromWorkoutLogsArray = sortedSessionLogs && sortedSessionLogs.length > 0 && sortedSessionLogs.flatMap((log) => {
     const exerciseSession = log.details.exercise_sessions
     return (
         exerciseSession.map((session) => (
@@ -39,7 +39,7 @@ const exercisenamesFromWorkoutLogsArray = sortedSessionLogs && sortedSessionLogs
     )
 })
 
-const workoutNameArrayWithNoDuplicates = [...new Set(exercisenamesFromWorkoutLogsArray)]
+const workoutNameArrayWithNoDuplicates = [...new Set(exerciseNamesFromWorkoutLogsArray)]
 console.log('workoutNameArrayWithNoDuplicates',workoutNameArrayWithNoDuplicates)
 
 
