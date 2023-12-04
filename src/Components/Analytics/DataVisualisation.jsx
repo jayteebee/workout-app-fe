@@ -32,24 +32,34 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   // array for the drop down enabling the user to change the time segments they can see on the chart
   const dataViewFrequency = ["Week", "Month", "Quarter", "Year"];
 
-const exerciseNamesFromWorkoutLogsArray = sortedSessionLogs && sortedSessionLogs.length > 0 && sortedSessionLogs.flatMap((log) => {
-    const exerciseSession = log.details.exercise_sessions
-    return (
-        exerciseSession.map((session) => (
-            session.exercise_name 
-        ))
-    )
-})
+  const exerciseNamesFromWorkoutLogsArray =
+    sortedSessionLogs &&
+    sortedSessionLogs.length > 0 &&
+    sortedSessionLogs.flatMap((log) => {
+      const exerciseSession = log.details.exercise_sessions;
+      return exerciseSession.map((session) => session.exercise_name);
+    });
 
-const exerciseNameArrayWithNoDuplicates = [...new Set(exerciseNamesFromWorkoutLogsArray)]
-console.log('workoutNameArrayWithNoDuplicates',exerciseNameArrayWithNoDuplicates)
+  const exerciseNameArrayWithNoDuplicates = [
+    ...new Set(exerciseNamesFromWorkoutLogsArray),
+  ];
+  console.log(
+    "workoutNameArrayWithNoDuplicates",
+    exerciseNameArrayWithNoDuplicates
+  );
 
-const workoutNamesFromWorkoutLogsArray = sortedSessionLogs && sortedSessionLogs.length > 0 && sortedSessionLogs.map((log) => (
-    log.workout_name
-))
+  const workoutNamesFromWorkoutLogsArray =
+    sortedSessionLogs &&
+    sortedSessionLogs.length > 0 &&
+    sortedSessionLogs.map((log) => log.workout_name);
 
-const workoutNamesArrayWithNoDuplicates = [...new Set(workoutNamesFromWorkoutLogsArray)]
-console.log('workoutNamesArrayWithNoDuplicates',workoutNamesArrayWithNoDuplicates)
+  const workoutNamesArrayWithNoDuplicates = [
+    ...new Set(workoutNamesFromWorkoutLogsArray),
+  ];
+  console.log(
+    "workoutNamesArrayWithNoDuplicates",
+    workoutNamesArrayWithNoDuplicates
+  );
 
   return (
     <div>
@@ -99,41 +109,40 @@ console.log('workoutNamesArrayWithNoDuplicates',workoutNamesArrayWithNoDuplicate
           </select>
         </div>
 
-        <div style={{ border: "2px solid green"}}>
-        <h3> Workout / Exercise To Measure</h3>
+        <div style={{ border: "2px solid green" }}>
+          <h3> Workout / Exercise To Measure</h3>
 
-        <select
-        onChange={(e) => {
-          setDataVisForm((prevForm) => ({
-            ...prevForm,
-            workoutToMeasure: e.target.value,
-          }));
-        }}
-      >
-    <option>---Select---</option>
-        {workoutNamesArrayWithNoDuplicates.map((workout) => (
-          <option value={workout} key={`key:${workout}`}>
-            {workout}
-          </option>
-        ))}
-      </select>
+          <select
+            onChange={(e) => {
+              setDataVisForm((prevForm) => ({
+                ...prevForm,
+                workoutToMeasure: e.target.value,
+              }));
+            }}
+          >
+            <option>---Select---</option>
+            {workoutNamesArrayWithNoDuplicates.map((workout) => (
+              <option value={workout} key={`key:${workout}`}>
+                {workout}
+              </option>
+            ))}
+          </select>
 
-      <select
-      onChange={(e) => {
-        setDataVisForm((prevForm) => ({
-          ...prevForm,
-          exerciseToMeasure: e.target.value,
-        }));
-      }}
-    >
-    <option>---Select---</option>
-      {exerciseNameArrayWithNoDuplicates.map((exercise) => (
-        <option value={exercise} key={`key:${exercise}`}>
-          {exercise}
-        </option>
-      ))}
-    </select>
-
+          <select
+            onChange={(e) => {
+              setDataVisForm((prevForm) => ({
+                ...prevForm,
+                exerciseToMeasure: e.target.value,
+              }));
+            }}
+          >
+            <option>---Select---</option>
+            {exerciseNameArrayWithNoDuplicates.map((exercise) => (
+              <option value={exercise} key={`key:${exercise}`}>
+                {exercise}
+              </option>
+            ))}
+          </select>
         </div>
 
         <MDBBtn type="submit">Submit!</MDBBtn>
