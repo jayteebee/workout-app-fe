@@ -42,6 +42,12 @@ const exerciseNamesFromWorkoutLogsArray = sortedSessionLogs && sortedSessionLogs
 const workoutNameArrayWithNoDuplicates = [...new Set(exerciseNamesFromWorkoutLogsArray)]
 console.log('workoutNameArrayWithNoDuplicates',workoutNameArrayWithNoDuplicates)
 
+const workoutNamesFromWorkoutLogsArray = sortedSessionLogs && sortedSessionLogs.length > 0 && sortedSessionLogs.map((log) => (
+    log.workout_name
+))
+
+const workoutNamesArrayWithNoDuplicates = [...new Set(workoutNamesFromWorkoutLogsArray)]
+console.log('workoutNamesArrayWithNoDuplicates',workoutNamesArrayWithNoDuplicates)
 
   return (
     <div>
