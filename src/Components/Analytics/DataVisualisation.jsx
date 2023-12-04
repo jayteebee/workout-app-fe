@@ -27,6 +27,7 @@ console.log('sortedSessionLogs',sortedSessionLogs)
     console.log("submitted");
   };
 
+  // array for the drop down enabling the user to change the time segments they can see on the chart
   const dataViewFrequency = ["Week", "Month", "Quarter", "Year"]
 
   return (
