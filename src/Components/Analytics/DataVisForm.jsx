@@ -3,7 +3,8 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
 import { MDBBtn } from "mdb-react-ui-kit";
 
-const DataVisForm = ({ sortedSessionLogs, setDataVisForm }) => {
+const DataVisForm = ({ sortedSessionLogs, setDataVisForm, sessionLogsSegmentedByFrequency }) => {
+  console.log('sortedSessionLogs',sortedSessionLogs)
   const [fromDate, setFromDate] = useState(new Date());
 //   console.log("fromDate", fromDate);
   const [untilDate, setUntilDate] = useState(new Date());
@@ -33,22 +34,26 @@ const DataVisForm = ({ sortedSessionLogs, setDataVisForm }) => {
     ...new Set(exerciseNamesFromWorkoutLogsArray),
   ];
 //   console.log(
-//     "workoutNameArrayWithNoDuplicates",
+//     "exerciseNameArrayWithNoDuplicates",
 //     exerciseNameArrayWithNoDuplicates
 //   );
 
-  const workoutNamesFromWorkoutLogsArray =
-    sortedSessionLogs &&
-    sortedSessionLogs.length > 0 &&
-    sortedSessionLogs.map((log) => log.workout_name);
+  const workoutNamesFromSegmentedLogs =
+  sessionLogsSegmentedByFrequency &&
+  sessionLogsSegmentedByFrequency.length > 0 &&
+  sessionLogsSegmentedByFrequency.flatMap((segment) => {
+    const logs = segment.log;
+    const workoutNames = logs.map((log) => log.workout_name);
+    return workoutNames; 
+  });
 
   const workoutNamesArrayWithNoDuplicates = [
-    ...new Set(workoutNamesFromWorkoutLogsArray),
+    ...new Set(workoutNamesFromSegmentedLogs),
   ];
-//   console.log(
-//     "workoutNamesArrayWithNoDuplicates",
-//     workoutNamesArrayWithNoDuplicates
-//   );
+  // console.log(
+  //   "workoutNamesArrayWithNoDuplicates",
+  //   workoutNamesArrayWithNoDuplicates
+  // );
 
   const metricToMeasure = [
     "Total Volume",

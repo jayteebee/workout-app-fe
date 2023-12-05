@@ -97,6 +97,7 @@ useEffect(() => {
       <DataVisForm
         sortedSessionLogs={sortedSessionLogs}
         setDataVisForm={setDataVisForm}
+        sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
       />
     </div>
   );
