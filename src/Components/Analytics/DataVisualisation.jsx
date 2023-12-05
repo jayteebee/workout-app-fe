@@ -99,7 +99,7 @@ useEffect(() => {
     }
 }, [datesSegmentedByChosenFrequency])
 
-
+// this useEffect will take the workout logs that have been broken up into segments, and filter them to keep only the workouts/exercises that the user selects
 useEffect(() => {
 if (sessionLogsSegmentedByFrequency && sessionLogsSegmentedByFrequency.length > 0 && (dataVisForm.exerciseToMeasure || dataVisForm.workoutToMeasure)) {
     const exercise = dataVisForm.exerciseToMeasure;
