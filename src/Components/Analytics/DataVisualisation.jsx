@@ -14,6 +14,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     metric: "",
   });
   console.log("dataVisForm", dataVisForm);
+  
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
   console.log(
