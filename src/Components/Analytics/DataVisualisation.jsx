@@ -17,15 +17,20 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
-//   console.log(
-//     "datesSegmentedByChosenFrequency",
-//     datesSegmentedByChosenFrequency
-//   );
-  const [sessionLogsSegmentedByFrequency, setSessionLogsSegmentedByFrequency] = useState([])
-console.log('sessionLogsSegmentedByFrequency',sessionLogsSegmentedByFrequency)
+  //   console.log(
+  //     "datesSegmentedByChosenFrequency",
+  //     datesSegmentedByChosenFrequency
+  //   );
+  const [sessionLogsSegmentedByFrequency, setSessionLogsSegmentedByFrequency] =
+    useState([]);
+  console.log(
+    "sessionLogsSegmentedByFrequency",
+    sessionLogsSegmentedByFrequency
+  );
 
-const [segmentedLogsFilteredByType, setSegmentedLogsFilteredByType] = useState([])
-console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
+  const [segmentedLogsFilteredByType, setSegmentedLogsFilteredByType] =
+    useState([]);
+  console.log("segmentedLogsFilteredByType", segmentedLogsFilteredByType);
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -49,10 +54,10 @@ console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
         // const formatter = new Intl.DateTimeFormat('en-GB', options);
 
         for (let i = startDate; i <= endDate; i += millisecondsInWeek) {
-            // *** same reason as above
-            // const formattedDate = formatter.format(new Date(i));
-            // arrayOfDates.push(formattedDate);
-            arrayOfDates.push(new Date(i))
+          // *** same reason as above
+          // const formattedDate = formatter.format(new Date(i));
+          // arrayOfDates.push(formattedDate);
+          arrayOfDates.push(new Date(i));
         }
       }
       setDatesSegmentedByChosenFrequency(arrayOfDates);
@@ -61,68 +66,80 @@ console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
 
   // this useEffect will look at each time period in the datesSegmented... state and search for logs which fall between each pair of dates (index 0 and 1, 1 and 2 etc)
   // it pushes those logs in an object to state
-useEffect(() => {
-    if (datesSegmentedByChosenFrequency && datesSegmentedByChosenFrequency.length > 0) {
- 
-        let segmentedSessionLogs = []
-        const millisecondsInDay = 24 * 60 * 60 * 1000;
+  useEffect(() => {
+    if (
+      datesSegmentedByChosenFrequency &&
+      datesSegmentedByChosenFrequency.length > 0
+    ) {
+      let segmentedSessionLogs = [];
+      const millisecondsInDay = 24 * 60 * 60 * 1000;
 
-        for (let i=0; i <datesSegmentedByChosenFrequency.length - 1; i++) {
-            const currentDate = datesSegmentedByChosenFrequency[i]
-            const nextDate = datesSegmentedByChosenFrequency[i+1]
+      for (let i = 0; i < datesSegmentedByChosenFrequency.length - 1; i++) {
+        const currentDate = datesSegmentedByChosenFrequency[i];
+        const nextDate = datesSegmentedByChosenFrequency[i + 1];
 
-            const currentDateTimeStamp = currentDate.getTime()
-            const nextDateTimeStamp = nextDate.getTime()
+        const currentDateTimeStamp = currentDate.getTime();
+        const nextDateTimeStamp = nextDate.getTime();
 
-            const sessionLogsFilter = sortedSessionLogs.filter(
-                (log) =>
-                new Date(log.details.date).getTime() >= currentDateTimeStamp &&
-                new Date(log.details.date).getTime() <= nextDateTimeStamp
-            )
-                segmentedSessionLogs.push({
-                    week: `Week ${i+1}`,
-                    log: sessionLogsFilter
-                })
-        }
-                // Filter logs falling within the final segment but not in prior segments
-                const finalLogsFilter = sortedSessionLogs.filter(
-                    (log) =>
-                        new Date(log.details.date).getTime() >= datesSegmentedByChosenFrequency[datesSegmentedByChosenFrequency.length - 1].getTime() &&
-                        new Date(log.details.date).getTime() <= dataVisForm.endDate.getTime() + millisecondsInDay
-                );
+        const sessionLogsFilter = sortedSessionLogs.filter(
+          (log) =>
+            new Date(log.details.date).getTime() >= currentDateTimeStamp &&
+            new Date(log.details.date).getTime() <= nextDateTimeStamp
+        );
+        segmentedSessionLogs.push({
+          week: `Week ${i + 1}`,
+          log: sessionLogsFilter,
+        });
+      }
+      // Filter logs falling within the final segment but not in prior segments
+      const finalLogsFilter = sortedSessionLogs.filter(
+        (log) =>
+          new Date(log.details.date).getTime() >=
+            datesSegmentedByChosenFrequency[
+              datesSegmentedByChosenFrequency.length - 1
+            ].getTime() &&
+          new Date(log.details.date).getTime() <=
+            dataVisForm.endDate.getTime() + millisecondsInDay
+      );
 
-                if (finalLogsFilter.length > 0) {
-                    segmentedSessionLogs.push({ week: "Final", log: finalLogsFilter });
-                }
-        
-        setSessionLogsSegmentedByFrequency(segmentedSessionLogs)
+      if (finalLogsFilter.length > 0) {
+        segmentedSessionLogs.push({ week: "Final", log: finalLogsFilter });
+      }
+
+      setSessionLogsSegmentedByFrequency(segmentedSessionLogs);
     }
-}, [datesSegmentedByChosenFrequency])
+  }, [datesSegmentedByChosenFrequency]);
 
-// this useEffect will take the workout logs that have been broken up into segments, and filter them to keep only the workouts/exercises that the user selects
-useEffect(() => {
-if (sessionLogsSegmentedByFrequency && sessionLogsSegmentedByFrequency.length > 0 && (dataVisForm.exerciseToMeasure || dataVisForm.workoutToMeasure)) {
-    const exercise = dataVisForm.exerciseToMeasure;
-    const workout = dataVisForm.workoutToMeasure;
+  // this useEffect will take the workout logs that have been broken up into segments, and filter them to keep only the workouts/exercises that the user selects
+  useEffect(() => {
+    if (
+      sessionLogsSegmentedByFrequency &&
+      sessionLogsSegmentedByFrequency.length > 0 &&
+      (dataVisForm.exerciseToMeasure || dataVisForm.workoutToMeasure)
+    ) {
+      const exercise = dataVisForm.exerciseToMeasure;
+      const workout = dataVisForm.workoutToMeasure;
 
-   const matchingSegments = sessionLogsSegmentedByFrequency.map((segment) => {
-        const week = segment.week
-        const sessionLog = segment.log
-        console.log('sessionLog', sessionLog)
+      const matchingSegments = sessionLogsSegmentedByFrequency.map(
+        (segment) => {
+          const week = segment.week;
+          const sessionLog = segment.log;
+          console.log("sessionLog", sessionLog);
 
-        if (workout) {
-           const logsThatMatchChosenWorkoutName = sessionLog.filter((log) => (
-                log.workout_name === workout
-            ))
+          if (workout) {
+            const logsThatMatchChosenWorkoutName = sessionLog.filter(
+              (log) => log.workout_name === workout
+            );
             if (logsThatMatchChosenWorkoutName.length > 0) {
-                return {week: week, log: logsThatMatchChosenWorkoutName}
+              return { week: week, log: logsThatMatchChosenWorkoutName };
             }
+          }
+          return { week: week, log: [] };
         }
-        return {week: week, log: []}
-    })
-    setSegmentedLogsFilteredByType(matchingSegments)
-}
-}, [sessionLogsSegmentedByFrequency])
+      );
+      setSegmentedLogsFilteredByType(matchingSegments);
+    }
+  }, [sessionLogsSegmentedByFrequency]);
 
   return (
     <div>
