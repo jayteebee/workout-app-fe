@@ -13,16 +13,17 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     exerciseToMeasure: "",
     metric: "",
   });
-  console.log("dataVisForm", dataVisForm);
+//   console.log("dataVisForm", dataVisForm);
 
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
-  console.log(
-    "datesSegmentedByChosenFrequency",
-    datesSegmentedByChosenFrequency
-  );
+//   console.log(
+//     "datesSegmentedByChosenFrequency",
+//     datesSegmentedByChosenFrequency
+//   );
   const [sessionLogsSegmentedByFrequency, setSessionLogsSegmentedByFrequency] = useState([])
 console.log('sessionLogsSegmentedByFrequency',sessionLogsSegmentedByFrequency)
+
   useEffect(() => {
     registerLocale("en-GB", enGB);
   }, []);
@@ -71,7 +72,10 @@ useEffect(() => {
                 new Date(log.details.date).getTime() >= currentDateTimeStamp &&
                 new Date(log.details.date).getTime() <= nextDateTimeStamp
             )
-                segmentedSessionLogs.push({week: `Week ${i+1}`, log: sessionLogsFilter})
+                segmentedSessionLogs.push({
+                    week: `Week ${i+1}`,
+                    log: sessionLogsFilter
+                })
         }
                 // Filter logs falling within the final segment but not in prior segments
                 const finalLogsFilter = sortedSessionLogs.filter(
@@ -79,7 +83,7 @@ useEffect(() => {
                         new Date(log.details.date).getTime() >= datesSegmentedByChosenFrequency[datesSegmentedByChosenFrequency.length - 1].getTime() &&
                         new Date(log.details.date).getTime() <= dataVisForm.endDate.getTime() + millisecondsInDay
                 );
-        console.log('finalLogsFilter',finalLogsFilter)
+
                 if (finalLogsFilter.length > 0) {
                     segmentedSessionLogs.push({ week: "Final", log: finalLogsFilter });
                 }
