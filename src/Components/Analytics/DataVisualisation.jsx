@@ -14,13 +14,17 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     metric: "",
   });
   console.log("dataVisForm", dataVisForm);
-  
+
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
   console.log(
     "datesSegmentedByChosenFrequency",
     datesSegmentedByChosenFrequency
   );
+
+  useEffect(() => {
+    registerLocale("en-GB", enGB);
+  }, []);
 
   useEffect(() => {
     if (dataVisForm.startDate && dataVisForm.endDate && dataVisForm.frequency) {
@@ -33,8 +37,12 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
       let arrayOfDates = [];
       if (freq === "Week") {
+        const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
+        const formatter = new Intl.DateTimeFormat('en-GB', options);
+
         for (let i = startDate; i <= endDate; i += millisecondsInWeek) {
-          arrayOfDates.push(new Date(i));
+            const formattedDate = formatter.format(new Date(i));
+            arrayOfDates.push(formattedDate);
         }
       }
       setDatesSegmentedByChosenFrequency(arrayOfDates);
