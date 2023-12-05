@@ -15,6 +15,15 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   });
   console.log("dataVisForm", dataVisForm);
 
+useEffect(() => {
+    if (dataVisForm.startDate && dataVisForm.endDate && dataVisForm.frequency) {
+        const startDate = dataVisForm.startDate.getTime()
+        const endDate = dataVisForm.endDate.getTime()
+console.log('startDate',startDate, "endDate",endDate )
+
+    }
+}, [dataVisForm])
+
   return (
     <div>
       <DataVisForm
