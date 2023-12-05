@@ -3,12 +3,16 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
 import { MDBBtn } from "mdb-react-ui-kit";
 
-const DataVisForm = ({ sortedSessionLogs, setDataVisForm, sessionLogsSegmentedByFrequency }) => {
-  console.log('sortedSessionLogs',sortedSessionLogs)
+const DataVisForm = ({
+  sortedSessionLogs,
+  setDataVisForm,
+  sessionLogsSegmentedByFrequency,
+}) => {
+  console.log("sortedSessionLogs", sortedSessionLogs);
   const [fromDate, setFromDate] = useState(new Date());
-//   console.log("fromDate", fromDate);
+  //   console.log("fromDate", fromDate);
   const [untilDate, setUntilDate] = useState(new Date());
-//   console.log("untilDate", untilDate);
+  //   console.log("untilDate", untilDate);
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -31,41 +35,43 @@ const DataVisForm = ({ sortedSessionLogs, setDataVisForm, sessionLogsSegmentedBy
   //   });
 
   const exerciseNamesFromSegmentedLogs =
-  sessionLogsSegmentedByFrequency &&
-  sessionLogsSegmentedByFrequency.length > 0 &&
-  sessionLogsSegmentedByFrequency.flatMap((segment) => {
-    // Access the 'log' array within each segment
-    const logs = segment.log;
-    
-    // Extract exercise names from each log
-    return logs.flatMap((log) => {
-      const exerciseSession = log.details.exercise_sessions;
-      return exerciseSession.map((session) => session.exercise_name);
-    });
-  });
-// console.log('exerciseNamesFromSegmentedLogs',exerciseNamesFromSegmentedLogs)
+    sessionLogsSegmentedByFrequency &&
+    sessionLogsSegmentedByFrequency.length > 0 &&
+    sessionLogsSegmentedByFrequency.flatMap((segment) => {
+      // Access the 'log' array within each segment
+      const logs = segment.log;
 
-  const exerciseNameArrayWithNoDuplicates = exerciseNamesFromSegmentedLogs && exerciseNamesFromSegmentedLogs.length > 0 && [
-    ...new Set(exerciseNamesFromSegmentedLogs),
-  ];
+      // Extract exercise names from each log
+      return logs.flatMap((log) => {
+        const exerciseSession = log.details.exercise_sessions;
+        return exerciseSession.map((session) => session.exercise_name);
+      });
+    });
+  // console.log('exerciseNamesFromSegmentedLogs',exerciseNamesFromSegmentedLogs)
+
+  const exerciseNameArrayWithNoDuplicates = exerciseNamesFromSegmentedLogs &&
+    exerciseNamesFromSegmentedLogs.length > 0 && [
+      ...new Set(exerciseNamesFromSegmentedLogs),
+    ];
   // console.log(
   //   "exerciseNameArrayWithNoDuplicates",
   //   exerciseNameArrayWithNoDuplicates
   // );
 
   const workoutNamesFromSegmentedLogs =
-  sessionLogsSegmentedByFrequency &&
-  sessionLogsSegmentedByFrequency.length > 0 &&
-  sessionLogsSegmentedByFrequency.flatMap((segment) => {
-    const logs = segment.log;
-    const workoutNames = logs.map((log) => log.workout_name);
-    return workoutNames; 
-  });
-// console.log('workoutNamesFromSegmentedLogs',workoutNamesFromSegmentedLogs)
+    sessionLogsSegmentedByFrequency &&
+    sessionLogsSegmentedByFrequency.length > 0 &&
+    sessionLogsSegmentedByFrequency.flatMap((segment) => {
+      const logs = segment.log;
+      const workoutNames = logs.map((log) => log.workout_name);
+      return workoutNames;
+    });
+  // console.log('workoutNamesFromSegmentedLogs',workoutNamesFromSegmentedLogs)
 
-  const workoutNamesArrayWithNoDuplicates = workoutNamesFromSegmentedLogs && workoutNamesFromSegmentedLogs.length > 0 && [
-    ...new Set(workoutNamesFromSegmentedLogs),
-  ];
+  const workoutNamesArrayWithNoDuplicates = workoutNamesFromSegmentedLogs &&
+    workoutNamesFromSegmentedLogs.length > 0 && [
+      ...new Set(workoutNamesFromSegmentedLogs),
+    ];
   // console.log(
   //   "workoutNamesArrayWithNoDuplicates",
   //   workoutNamesArrayWithNoDuplicates
@@ -138,12 +144,13 @@ const DataVisForm = ({ sortedSessionLogs, setDataVisForm, sessionLogsSegmentedBy
             }}
           >
             <option>---Select---</option>
-            {workoutNamesArrayWithNoDuplicates && workoutNamesArrayWithNoDuplicates.length > 0 && 
+            {workoutNamesArrayWithNoDuplicates &&
+              workoutNamesArrayWithNoDuplicates.length > 0 &&
               workoutNamesArrayWithNoDuplicates.map((workout) => (
-              <option value={workout} key={`key:${workout}`}>
-                {workout}
-              </option>
-            ))}
+                <option value={workout} key={`key:${workout}`}>
+                  {workout}
+                </option>
+              ))}
           </select>
 
           <select
@@ -155,12 +162,13 @@ const DataVisForm = ({ sortedSessionLogs, setDataVisForm, sessionLogsSegmentedBy
             }}
           >
             <option>---Select---</option>
-            {exerciseNameArrayWithNoDuplicates && exerciseNameArrayWithNoDuplicates.length > 0 && 
+            {exerciseNameArrayWithNoDuplicates &&
+              exerciseNameArrayWithNoDuplicates.length > 0 &&
               exerciseNameArrayWithNoDuplicates.map((exercise) => (
-              <option value={exercise} key={`key:${exercise}`}>
-                {exercise}
-              </option>
-            ))}
+                <option value={exercise} key={`key:${exercise}`}>
+                  {exercise}
+                </option>
+              ))}
           </select>
         </div>
 
