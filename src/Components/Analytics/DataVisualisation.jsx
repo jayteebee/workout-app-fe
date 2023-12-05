@@ -57,6 +57,8 @@ useEffect(() => {
     if (datesSegmentedByChosenFrequency && datesSegmentedByChosenFrequency.length > 0) {
  
         let segmentedSessionLogs = []
+        const millisecondsInDay = 24 * 60 * 60 * 1000;
+
         for (let i=0; i <datesSegmentedByChosenFrequency.length - 1; i++) {
             const currentDate = datesSegmentedByChosenFrequency[i]
             const nextDate = datesSegmentedByChosenFrequency[i+1]
@@ -71,6 +73,17 @@ useEffect(() => {
             )
                 segmentedSessionLogs.push({week: `Week ${i+1}`, log: sessionLogsFilter})
         }
+                // Filter logs falling within the final segment but not in prior segments
+                const finalLogsFilter = sortedSessionLogs.filter(
+                    (log) =>
+                        new Date(log.details.date).getTime() >= datesSegmentedByChosenFrequency[datesSegmentedByChosenFrequency.length - 1].getTime() &&
+                        new Date(log.details.date).getTime() <= dataVisForm.endDate.getTime() + millisecondsInDay
+                );
+        console.log('finalLogsFilter',finalLogsFilter)
+                if (finalLogsFilter.length > 0) {
+                    segmentedSessionLogs.push({ week: "Final", log: finalLogsFilter });
+                }
+        
         setSessionLogsSegmentedByFrequency(segmentedSessionLogs)
     }
 }, [datesSegmentedByChosenFrequency])
