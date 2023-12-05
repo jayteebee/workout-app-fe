@@ -28,6 +28,8 @@ console.log('sessionLogsSegmentedByFrequency',sessionLogsSegmentedByFrequency)
     registerLocale("en-GB", enGB);
   }, []);
 
+  // This useEffect will take the user chosen start/end dates and push the dates which divide the segments to state
+  // EG: Jan segmented by weeks = Jan 1st, Jan 8th, Jan 15th etc
   useEffect(() => {
     if (dataVisForm.startDate && dataVisForm.endDate && dataVisForm.frequency) {
       const millisecondsInDay = 24 * 60 * 60 * 1000;
@@ -54,6 +56,8 @@ console.log('sessionLogsSegmentedByFrequency',sessionLogsSegmentedByFrequency)
     }
   }, [dataVisForm]);
 
+  // this useEffect will look at each time period in the datesSegmented... state and search for logs which fall between each pair of dates (index 0 and 1, 1 and 2 etc)
+  // it pushes those logs in an object to state
 useEffect(() => {
     if (datesSegmentedByChosenFrequency && datesSegmentedByChosenFrequency.length > 0) {
  
@@ -91,6 +95,13 @@ useEffect(() => {
         setSessionLogsSegmentedByFrequency(segmentedSessionLogs)
     }
 }, [datesSegmentedByChosenFrequency])
+
+
+useEffect(() => {
+if (sessionLogsSegmentedByFrequency && sessionLogsSegmentedByFrequency.length > 0) {
+    
+}
+}, [sessionLogsSegmentedByFrequency])
 
   return (
     <div>
