@@ -37,17 +37,30 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
       let arrayOfDates = [];
       if (freq === "Week") {
-        const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
-        const formatter = new Intl.DateTimeFormat('en-GB', options);
+        // *** have to comment out date formatting for data transformation purposes. Reuse this later on
+        // const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
+        // const formatter = new Intl.DateTimeFormat('en-GB', options);
 
         for (let i = startDate; i <= endDate; i += millisecondsInWeek) {
-            const formattedDate = formatter.format(new Date(i));
-            arrayOfDates.push(formattedDate);
+            // *** same reason as above
+            // const formattedDate = formatter.format(new Date(i));
+            // arrayOfDates.push(formattedDate);
+            arrayOfDates.push(new Date(i))
         }
       }
       setDatesSegmentedByChosenFrequency(arrayOfDates);
     }
   }, [dataVisForm]);
+
+useEffect(() => {
+    if (datesSegmentedByChosenFrequency && datesSegmentedByChosenFrequency.length > 0) {
+        for (let i=0; i <datesSegmentedByChosenFrequency.length - 1; i++) {
+            const currentDate = datesSegmentedByChosenFrequency[i]
+            const nextDate = datesSegmentedByChosenFrequency[i+1]
+            console.log('current',currentDate.getTime(), "next", nextDate.getTime())
+        }
+    }
+}, [datesSegmentedByChosenFrequency])
 
   return (
     <div>
