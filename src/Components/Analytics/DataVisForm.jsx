@@ -5,9 +5,9 @@ import { MDBBtn } from "mdb-react-ui-kit";
 
 const DataVisForm = ({ sortedSessionLogs, setDataVisForm }) => {
   const [fromDate, setFromDate] = useState(new Date());
-  console.log("fromDate", fromDate);
+//   console.log("fromDate", fromDate);
   const [untilDate, setUntilDate] = useState(new Date());
-  console.log("untilDate", untilDate);
+//   console.log("untilDate", untilDate);
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -32,10 +32,10 @@ const DataVisForm = ({ sortedSessionLogs, setDataVisForm }) => {
   const exerciseNameArrayWithNoDuplicates = [
     ...new Set(exerciseNamesFromWorkoutLogsArray),
   ];
-  console.log(
-    "workoutNameArrayWithNoDuplicates",
-    exerciseNameArrayWithNoDuplicates
-  );
+//   console.log(
+//     "workoutNameArrayWithNoDuplicates",
+//     exerciseNameArrayWithNoDuplicates
+//   );
 
   const workoutNamesFromWorkoutLogsArray =
     sortedSessionLogs &&
@@ -45,10 +45,10 @@ const DataVisForm = ({ sortedSessionLogs, setDataVisForm }) => {
   const workoutNamesArrayWithNoDuplicates = [
     ...new Set(workoutNamesFromWorkoutLogsArray),
   ];
-  console.log(
-    "workoutNamesArrayWithNoDuplicates",
-    workoutNamesArrayWithNoDuplicates
-  );
+//   console.log(
+//     "workoutNamesArrayWithNoDuplicates",
+//     workoutNamesArrayWithNoDuplicates
+//   );
 
   const metricToMeasure = [
     "Total Volume",
