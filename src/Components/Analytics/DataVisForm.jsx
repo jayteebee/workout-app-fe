@@ -8,7 +8,6 @@ const DataVisForm = ({
   setDataVisForm,
   sessionLogsSegmentedByFrequency,
 }) => {
-  console.log("sortedSessionLogs", sortedSessionLogs);
   const [fromDate, setFromDate] = useState(new Date());
   //   console.log("fromDate", fromDate);
   const [untilDate, setUntilDate] = useState(new Date());
