@@ -210,7 +210,7 @@ const dropdownTimeframeArray = ["All", "Week", "Month", "Quarter", "Year"]
 
     <select onChange={(e) => setChosenFilter(e.target.value)}>
     {dropdownTimeframeArray.map((timeframe) => (
-      <option value={timeframe}>{timeframe}</option>
+      <option key={`key:${timeframe}`}value={timeframe}>{timeframe}</option>
       ))}
       </select>
       
