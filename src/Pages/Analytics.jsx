@@ -9,7 +9,7 @@ import DataVisualisation from "../Components/Analytics/DataVisualisation";
 
 const Analytics = () => {
   const [allSessionLogs, setAllSessionLogs] = useState();
-  console.log("allSessionLogs", allSessionLogs);
+  // console.log("allSessionLogs", allSessionLogs);
   const [startDate, setStartDate] = useState(new Date());
   // console.log("startDate", startDate);
 
@@ -169,7 +169,7 @@ const Analytics = () => {
         }
       });
     });
-  console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
+  // console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
 
 
   useEffect(() => {

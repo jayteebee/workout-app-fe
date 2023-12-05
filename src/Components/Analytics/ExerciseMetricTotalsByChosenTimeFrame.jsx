@@ -1,7 +1,7 @@
 import React from "react";
 
 const ExerciseMetricTotalsByChosenTimeFrame = ({ arrayOfExerciseObjects }) => {
-  console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
+  // console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
   const table = arrayOfExerciseObjects.map((data, index) => (
     <div key={index} className="tableContainer individualLog">
       <div className="tableWrapper">
