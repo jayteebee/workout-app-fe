@@ -21,7 +21,8 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     "datesSegmentedByChosenFrequency",
     datesSegmentedByChosenFrequency
   );
-
+  const [sessionLogsSegmentedByFrequency, setSessionLogsSegmentedByFrequency] = useState([])
+console.log('sessionLogsSegmentedByFrequency',sessionLogsSegmentedByFrequency)
   useEffect(() => {
     registerLocale("en-GB", enGB);
   }, []);
@@ -54,11 +55,23 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
 useEffect(() => {
     if (datesSegmentedByChosenFrequency && datesSegmentedByChosenFrequency.length > 0) {
+ 
+        let segmentedSessionLogs = []
         for (let i=0; i <datesSegmentedByChosenFrequency.length - 1; i++) {
             const currentDate = datesSegmentedByChosenFrequency[i]
             const nextDate = datesSegmentedByChosenFrequency[i+1]
-            console.log('current',currentDate.getTime(), "next", nextDate.getTime())
+
+            const currentDateTimeStamp = currentDate.getTime()
+            const nextDateTimeStamp = nextDate.getTime()
+
+            const sessionLogsFilter = sortedSessionLogs.filter(
+                (log) =>
+                new Date(log.details.date).getTime() >= currentDateTimeStamp &&
+                new Date(log.details.date).getTime() <= nextDateTimeStamp
+            )
+                segmentedSessionLogs.push({week: `Week ${i+1}`, log: sessionLogsFilter})
         }
+        setSessionLogsSegmentedByFrequency(segmentedSessionLogs)
     }
 }, [datesSegmentedByChosenFrequency])
 
