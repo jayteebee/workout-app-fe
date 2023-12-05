@@ -88,7 +88,7 @@ const DataVisForm = ({
       <h2> Data Vis.</h2>
 
       <form onSubmit={handleFormSubmit}>
-        <div style={{ border: "2px solid red" }}>
+        <div >
           <h3>Start / End Date</h3>
           <DatePicker
             selected={fromDate}
@@ -113,7 +113,7 @@ const DataVisForm = ({
           />
         </div>
 
-        <div style={{ border: "2px solid blue" }}>
+        <div >
           <h3>Frequency</h3>
           <select
             onChange={(e) => {
@@ -131,7 +131,7 @@ const DataVisForm = ({
           </select>
         </div>
 
-        <div style={{ border: "2px solid green" }}>
+        <div >
           <h3> Workout / Exercise To Measure</h3>
 
           <select
@@ -171,7 +171,7 @@ const DataVisForm = ({
           </select>
         </div>
 
-        <div style={{ border: "2px solid black" }}>
+        <div >
           <h3>Metric To Measure</h3>
           <select
             onChange={(e) => {
