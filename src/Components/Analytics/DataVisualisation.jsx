@@ -14,6 +14,8 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     metric: "",
   });
   console.log("dataVisForm", dataVisForm);
+const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] = useState([])
+console.log('datesSegmentedByChosenFrequency',datesSegmentedByChosenFrequency)
 
 useEffect(() => {
     if (dataVisForm.startDate && dataVisForm.endDate && dataVisForm.frequency) {
@@ -25,14 +27,13 @@ useEffect(() => {
         const freq = dataVisForm.frequency
         console.log('',startDate, endDate)
 
+        let arrayOfDates = []
         if (freq === "Week") {
             for (let i = startDate; i <= endDate; i += millisecondsInWeek) {
-                console.log('yes!', new Date(i))
+                arrayOfDates.push(new Date(i))
             }
         }
-
-// console.log('startDate',startDate, "endDate",endDate )
-
+        setDatesSegmentedByChosenFrequency(arrayOfDates)
     }
 }, [dataVisForm])
 
