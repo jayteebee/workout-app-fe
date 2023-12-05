@@ -13,7 +13,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     exerciseToMeasure: "",
     metric: "",
   });
-//   console.log("dataVisForm", dataVisForm);
+  console.log("dataVisForm", dataVisForm);
 
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
@@ -23,6 +23,9 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 //   );
   const [sessionLogsSegmentedByFrequency, setSessionLogsSegmentedByFrequency] = useState([])
 console.log('sessionLogsSegmentedByFrequency',sessionLogsSegmentedByFrequency)
+
+const [segmentedLogsFilteredByType, setSegmentedLogsFilteredByType] = useState([])
+console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -98,8 +101,26 @@ useEffect(() => {
 
 
 useEffect(() => {
-if (sessionLogsSegmentedByFrequency && sessionLogsSegmentedByFrequency.length > 0) {
-    
+if (sessionLogsSegmentedByFrequency && sessionLogsSegmentedByFrequency.length > 0 && (dataVisForm.exerciseToMeasure || dataVisForm.workoutToMeasure)) {
+    const exercise = dataVisForm.exerciseToMeasure;
+    const workout = dataVisForm.workoutToMeasure;
+
+   const matchingSegments = sessionLogsSegmentedByFrequency.map((segment) => {
+        const week = segment.week
+        const sessionLog = segment.log
+        console.log('sessionLog', sessionLog)
+
+        if (workout) {
+           const logsThatMatchChosenWorkoutName = sessionLog.filter((log) => (
+                log.workout_name === workout
+            ))
+            if (logsThatMatchChosenWorkoutName.length > 0) {
+                return {week: week, log: logsThatMatchChosenWorkoutName}
+            }
+        }
+        return {week: week, log: []}
+    })
+    setSegmentedLogsFilteredByType(matchingSegments)
 }
 }, [sessionLogsSegmentedByFrequency])
 
