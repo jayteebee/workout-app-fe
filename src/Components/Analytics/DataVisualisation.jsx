@@ -56,14 +56,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
       let arrayOfDates = [];
       if (freq === "Week") {
-        // *** have to comment out date formatting for data transformation purposes. Reuse this later on
-        // const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
-        // const formatter = new Intl.DateTimeFormat('en-GB', options);
-
         for (let i = startDate; i <= endDate; i += millisecondsInWeek) {
-          // *** same reason as above
-            // const formattedDate = formatter.format(new Date(i));
-          // arrayOfDates.push(formattedDate);
           arrayOfDates.push(new Date(i));
         }
       } else if (freq === "Month") {
