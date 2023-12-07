@@ -144,13 +144,24 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         (segment) => {
           const timePeriod = segment.timePeriod;
           const sessionLog = segment.log;
+console.log('sessionLog',sessionLog)
 
-          if (workout) {
-            const logsThatMatchChosenWorkoutName = sessionLog.filter(
-              (log) => log.workout_name === workout
-            );
-            if (logsThatMatchChosenWorkoutName.length > 0) {
-              return { timePeriod: timePeriod, log: logsThatMatchChosenWorkoutName };
+                if (workout) {
+                    const logsThatMatchChosenWorkoutName = sessionLog.filter(
+                    (log) => log.workout_name === workout
+                    );
+                    
+                    if (logsThatMatchChosenWorkoutName.length > 0) {
+                    return { timePeriod: timePeriod, log: logsThatMatchChosenWorkoutName };
+                    }
+                } else if (exercise) {
+
+            const logsThatMatchChosenExerciseName = sessionLog.forEach((log) => (
+                log.details.exercise_sessions.filter((exerciseSession) => exerciseSession.exercise_name === exercise)
+            ))
+
+            if (logsThatMatchChosenExerciseName.length > 0) {
+              return { timePeriod: timePeriod, log: logsThatMatchChosenExerciseName };
             }
           }
           return { timePeriod: timePeriod, log: [] };
