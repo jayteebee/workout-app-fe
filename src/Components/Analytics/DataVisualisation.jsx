@@ -191,21 +191,22 @@ console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
         const metric = dataVisForm.metric;
         const totalMetricPerSegment = [];
   
-        // if (metric === "Total Reps") {
           segmentedLogsFilteredByType.forEach((segment) => {
             const timePeriod = segment.timePeriod;
             const logs = segment.log;
   
             let metricTotal = 0
-  
+            // if the time segment has workouts associated with it, then cycle through them and sum the various metrics
             if (Array.isArray(logs) && logs.length > 0) {
               logs.forEach((log) => {
-                console.log('log',log)
+
                 if (
                   log.details &&
                   log.details.exercise_sessions &&
                   log.details.exercise_sessions.length > 0
                 ) {
+                    // need to add the clause for if they've chosen an exercise rather than workout
+                    // so if they want bench, do if exSession.name === bench then..
                     if (metric === "Total Reps") {
                   log.details.exercise_sessions.forEach((exSession) => {
                     if (exSession["reps_completed"]) {
@@ -241,7 +242,6 @@ console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
               metric: metric,
             });
           });
-        // }
   
         setDataForChart(totalMetricPerSegment);
       }
