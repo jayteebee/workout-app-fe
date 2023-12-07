@@ -14,14 +14,14 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     exerciseToMeasure: "",
     metric: "",
   });
-    // console.log("dataVisForm", dataVisForm);
+  // console.log("dataVisForm", dataVisForm);
 
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
-    // console.log(
-    //   "datesSegmentedByChosenFrequency",
-    //   datesSegmentedByChosenFrequency
-    // );
+  // console.log(
+  //   "datesSegmentedByChosenFrequency",
+  //   datesSegmentedByChosenFrequency
+  // );
   const [sessionLogsSegmentedByFrequency, setSessionLogsSegmentedByFrequency] =
     useState([]);
   //   console.log(
@@ -46,7 +46,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     if (dataVisForm.startDate && dataVisForm.endDate && dataVisForm.frequency) {
       const millisecondsInDay = 24 * 60 * 60 * 1000;
       const millisecondsInWeek = 7 * millisecondsInDay;
-      const millisecondsInMonth = 30 * millisecondsInDay
+      const millisecondsInMonth = 30 * millisecondsInDay;
       const millisecondsInQuarter = 13 * millisecondsInWeek;
       const millisecondsInYear = 365 * millisecondsInDay;
 
@@ -62,22 +62,22 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
         for (let i = startDate; i <= endDate; i += millisecondsInWeek) {
           // *** same reason as above
-        //   const formattedDate = formatter.format(new Date(i));
+          //   const formattedDate = formatter.format(new Date(i));
           // arrayOfDates.push(formattedDate);
           arrayOfDates.push(new Date(i));
         }
       } else if (freq === "Month") {
         for (let i = startDate; i <= endDate; i += millisecondsInMonth) {
-            arrayOfDates.push(new Date(i));
-          }
+          arrayOfDates.push(new Date(i));
+        }
       } else if (freq === "Quarter") {
         for (let i = startDate; i <= endDate; i += millisecondsInQuarter) {
-            arrayOfDates.push(new Date(i));
-          }
+          arrayOfDates.push(new Date(i));
+        }
       } else if (freq === "Year") {
         for (let i = startDate; i <= endDate; i += millisecondsInYear) {
-            arrayOfDates.push(new Date(i));
-          }
+          arrayOfDates.push(new Date(i));
+        }
       }
 
       setDatesSegmentedByChosenFrequency(arrayOfDates);
@@ -107,7 +107,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
             new Date(log.details.date).getTime() <= nextDateTimeStamp
         );
         segmentedSessionLogs.push({
-            timePeriod: `${dataVisForm.frequency} ${i + 1}`,
+          timePeriod: `${dataVisForm.frequency} ${i + 1}`,
           log: sessionLogsFilter,
         });
       }
@@ -123,7 +123,10 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       );
 
       if (finalLogsFilter.length > 0) {
-        segmentedSessionLogs.push({ timePeriod: "Final", log: finalLogsFilter });
+        segmentedSessionLogs.push({
+          timePeriod: "Final",
+          log: finalLogsFilter,
+        });
       }
 
       setSessionLogsSegmentedByFrequency(segmentedSessionLogs);
@@ -144,24 +147,31 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         (segment) => {
           const timePeriod = segment.timePeriod;
           const sessionLog = segment.log;
-console.log('sessionLog',sessionLog)
+          console.log("sessionLog", sessionLog);
 
-                if (workout) {
-                    const logsThatMatchChosenWorkoutName = sessionLog.filter(
-                    (log) => log.workout_name === workout
-                    );
-                    
-                    if (logsThatMatchChosenWorkoutName.length > 0) {
-                    return { timePeriod: timePeriod, log: logsThatMatchChosenWorkoutName };
-                    }
-                } else if (exercise) {
+          if (workout) {
+            const logsThatMatchChosenWorkoutName = sessionLog.filter(
+              (log) => log.workout_name === workout
+            );
 
-            const logsThatMatchChosenExerciseName = sessionLog.forEach((log) => (
-                log.details.exercise_sessions.filter((exerciseSession) => exerciseSession.exercise_name === exercise)
-            ))
+            if (logsThatMatchChosenWorkoutName.length > 0) {
+              return {
+                timePeriod: timePeriod,
+                log: logsThatMatchChosenWorkoutName,
+              };
+            }
+          } else if (exercise) {
+            const logsThatMatchChosenExerciseName = sessionLog.forEach((log) =>
+              log.details.exercise_sessions.filter(
+                (exerciseSession) => exerciseSession.exercise_name === exercise
+              )
+            );
 
             if (logsThatMatchChosenExerciseName.length > 0) {
-              return { timePeriod: timePeriod, log: logsThatMatchChosenExerciseName };
+              return {
+                timePeriod: timePeriod,
+                log: logsThatMatchChosenExerciseName,
+              };
             }
           }
           return { timePeriod: timePeriod, log: [] };
@@ -205,7 +215,7 @@ console.log('sessionLog',sessionLog)
           }
 
           totalMetricPerSegment.push({
-        timePeriod,
+            timePeriod,
             totalReps: totalReps,
             metric: metric,
           });
