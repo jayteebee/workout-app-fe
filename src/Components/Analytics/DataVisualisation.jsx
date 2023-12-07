@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import DatePicker, { registerLocale } from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
-import { MDBBtn } from "mdb-react-ui-kit";
 import DataVisForm from "./DataVisForm";
 import "chart.js/auto";
 import { CategoryScale, Chart, Bar } from "react-chartjs-2";
@@ -35,7 +34,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   //   console.log("segmentedLogsFilteredByType", segmentedLogsFilteredByType);
 
   const [dataForChart, setDataForChart] = useState([]);
-  console.log("dataForChart", dataForChart);
+  //   console.log("dataForChart", dataForChart);
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -178,10 +177,11 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
             });
           }
 
-          totalMetricPerSegment.push({ week, 
+          totalMetricPerSegment.push({
+            week,
             totalReps: totalReps,
-            metric: metric
-        });
+            metric: metric,
+          });
         });
       }
 
@@ -200,7 +200,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         },
       ],
     };
-  console.log("data", data);
+  //   console.log("data", data);
   return (
     <div>
       <DataVisForm
@@ -209,13 +209,11 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
       />
 
-      {data &&
-        <div style={{ width: '50vw', height: '50vh' }}> 
-        <Bar
-         data={data}
-         />
-         </div>
-        }
+      {data && (
+        <div style={{ width: "50vw", height: "50vh" }}>
+          <Bar data={data} />
+        </div>
+      )}
     </div>
   );
 };
