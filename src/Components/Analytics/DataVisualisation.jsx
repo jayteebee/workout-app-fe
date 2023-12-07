@@ -161,12 +161,12 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
               };
             }
           } else if (exercise) {
-            const logsThatMatchChosenExerciseName = sessionLog.forEach((log) =>
+            const logsThatMatchChosenExerciseName = sessionLog.filter((log) =>
               log.details.exercise_sessions.filter(
                 (exerciseSession) => exerciseSession.exercise_name === exercise
               )
             );
-
+                console.log('logsThatMatchChosenExerciseName',logsThatMatchChosenExerciseName)
             if (logsThatMatchChosenExerciseName.length > 0) {
               return {
                 timePeriod: timePeriod,
