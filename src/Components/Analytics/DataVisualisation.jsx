@@ -107,7 +107,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
             new Date(log.details.date).getTime() <= nextDateTimeStamp
         );
         segmentedSessionLogs.push({
-          week: `Week ${i + 1}`,
+            timePeriod: `${dataVisForm.frequency} ${i + 1}`,
           log: sessionLogsFilter,
         });
       }
@@ -123,14 +123,14 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       );
 
       if (finalLogsFilter.length > 0) {
-        segmentedSessionLogs.push({ week: "Final", log: finalLogsFilter });
+        segmentedSessionLogs.push({ timePeriod: "Final", log: finalLogsFilter });
       }
 
       setSessionLogsSegmentedByFrequency(segmentedSessionLogs);
     }
   }, [datesSegmentedByChosenFrequency]);
 
-  // this useEffect will take the workout logs that have been broken up into segments, and filter them to keep only the workouts/exercises that the user selects
+  // this useEffect will take the workout logs that have been broken up into segments, and filter them to keep only the logs which contain the workouts/exercises that the user selects
   useEffect(() => {
     if (
       sessionLogsSegmentedByFrequency &&
@@ -142,7 +142,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
       const matchingSegments = sessionLogsSegmentedByFrequency.map(
         (segment) => {
-          const week = segment.week;
+          const timePeriod = segment.timePeriod;
           const sessionLog = segment.log;
 
           if (workout) {
@@ -150,10 +150,10 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
               (log) => log.workout_name === workout
             );
             if (logsThatMatchChosenWorkoutName.length > 0) {
-              return { week: week, log: logsThatMatchChosenWorkoutName };
+              return { timePeriod: timePeriod, log: logsThatMatchChosenWorkoutName };
             }
           }
-          return { week: week, log: [] };
+          return { timePeriod: timePeriod, log: [] };
         }
       );
       setSegmentedLogsFilteredByType(matchingSegments);
@@ -172,7 +172,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
       if (metric === "Total Reps") {
         segmentedLogsFilteredByType.forEach((segment) => {
-          const week = segment.week;
+          const timePeriod = segment.timePeriod;
           const logs = segment.log;
 
           let totalReps = 0;
@@ -194,7 +194,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
           }
 
           totalMetricPerSegment.push({
-            week,
+        timePeriod,
             totalReps: totalReps,
             metric: metric,
           });
@@ -208,7 +208,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
   const data = dataForChart &&
     dataForChart.length > 0 && {
-      labels: dataForChart.map((segment) => segment.week),
+      labels: dataForChart.map((segment) => segment.timePeriod),
       datasets: [
         {
           label: dataForChart.map((segment) => segment.metric)[0],
