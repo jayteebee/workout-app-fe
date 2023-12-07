@@ -41,7 +41,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   }, []);
 
   // This useEffect will take the user chosen start/end dates and push the dates which divide the segments to state
-  // EG: Jan segmented by weeks = Jan 1st, Jan 8th, Jan 15th etc
+  // EG: Jan segmented by weeks = [Jan 1st, Jan 8th, Jan 15th] etc
   useEffect(() => {
     if (dataVisForm.startDate && dataVisForm.endDate && dataVisForm.frequency) {
       const millisecondsInDay = 24 * 60 * 60 * 1000;
