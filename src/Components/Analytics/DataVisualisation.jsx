@@ -223,7 +223,6 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       }
 
       setDataForChart(totalMetricPerSegment);
-      // Return totalMetricPerSegment or set it to state
     }
   }, [segmentedLogsFilteredByType, dataVisForm]);
 
