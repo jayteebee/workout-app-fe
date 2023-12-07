@@ -3,13 +3,10 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
 import { MDBBtn } from "mdb-react-ui-kit";
 import DataVisForm from "./DataVisForm";
-import 'chart.js/auto';
-import { CategoryScale, Chart, Bar } from 'react-chartjs-2';
-
+import "chart.js/auto";
+import { CategoryScale, Chart, Bar } from "react-chartjs-2";
 
 const DataVisualisation = ({ sortedSessionLogs }) => {
-
-
   const [dataVisForm, setDataVisForm] = useState({
     startDate: "",
     endDate: "",
@@ -18,7 +15,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     exerciseToMeasure: "",
     metric: "",
   });
-//   console.log("dataVisForm", dataVisForm);
+  //   console.log("dataVisForm", dataVisForm);
 
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
@@ -28,17 +25,17 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   //   );
   const [sessionLogsSegmentedByFrequency, setSessionLogsSegmentedByFrequency] =
     useState([]);
-//   console.log(
-//     "sessionLogsSegmentedByFrequency",
-//     sessionLogsSegmentedByFrequency
-//   );
+  //   console.log(
+  //     "sessionLogsSegmentedByFrequency",
+  //     sessionLogsSegmentedByFrequency
+  //   );
 
   const [segmentedLogsFilteredByType, setSegmentedLogsFilteredByType] =
     useState([]);
-//   console.log("segmentedLogsFilteredByType", segmentedLogsFilteredByType);
+  //   console.log("segmentedLogsFilteredByType", segmentedLogsFilteredByType);
 
-  const [dataForChart, setDataForChart] = useState([])
-  console.log('dataForChart',dataForChart)
+  const [dataForChart, setDataForChart] = useState([]);
+  console.log("dataForChart", dataForChart);
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -148,51 +145,62 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     }
   }, [sessionLogsSegmentedByFrequency]);
 
+  // this useEffect will calculate the total user specified metric
+  useEffect(() => {
+    if (
+      segmentedLogsFilteredByType &&
+      segmentedLogsFilteredByType.length > 0 &&
+      dataVisForm.metric
+    ) {
+      const metric = dataVisForm.metric;
+      const totalMetricPerSegment = [];
 
-// this useEffect will calculate the total user specified metric
-useEffect(() => {
-    if (segmentedLogsFilteredByType && segmentedLogsFilteredByType.length > 0 && dataVisForm.metric) {
-        const metric = dataVisForm.metric;
-        const totalMetricPerSegment = [];
+      if (metric === "Total Reps") {
+        segmentedLogsFilteredByType.forEach((segment) => {
+          const week = segment.week;
+          const logs = segment.log;
 
-        if (metric === "Total Reps") {
-            segmentedLogsFilteredByType.forEach((segment) => {
-                const week = segment.week;
-                const logs = segment.log;
+          let totalReps = 0;
 
-                let totalReps = 0;
-
-                if (Array.isArray(logs) && logs.length > 0) {
-                    logs.forEach((log) => {
-                        if (log.details && log.details.exercise_sessions && log.details.exercise_sessions.length > 0) {
-                            log.details.exercise_sessions.forEach((exSession) => {
-                                if (exSession['reps_completed']) {
-                                    totalReps += exSession['reps_completed'];
-                                }
-                            });
-                        }
-                    });
-                }
-
-                totalMetricPerSegment.push({ week, 'totalReps': totalReps });
+          if (Array.isArray(logs) && logs.length > 0) {
+            logs.forEach((log) => {
+              if (
+                log.details &&
+                log.details.exercise_sessions &&
+                log.details.exercise_sessions.length > 0
+              ) {
+                log.details.exercise_sessions.forEach((exSession) => {
+                  if (exSession["reps_completed"]) {
+                    totalReps += exSession["reps_completed"];
+                  }
+                });
+              }
             });
-        }
+          }
 
-        setDataForChart(totalMetricPerSegment);
-        // Return totalMetricPerSegment or set it to state
+          totalMetricPerSegment.push({ week, 
+            totalReps: totalReps,
+            metric: metric
+        });
+        });
+      }
+
+      setDataForChart(totalMetricPerSegment);
+      // Return totalMetricPerSegment or set it to state
     }
-}, [segmentedLogsFilteredByType, dataVisForm]);
+  }, [segmentedLogsFilteredByType, dataVisForm]);
 
-const data = dataForChart && dataForChart.length > 0 && {
-    labels: dataForChart.map((segment) => (segment.week)),
-    datasets: [
+  const data = dataForChart &&
+    dataForChart.length > 0 && {
+      labels: dataForChart.map((segment) => segment.week),
+      datasets: [
         {
-            label: "Total Reps",
-            data: dataForChart.map((segment) => (segment.totalReps))
-        }
-    ]
-}
-console.log('data',data)
+          label: dataForChart.map((segment) => segment.metric)[0],
+          data: dataForChart.map((segment) => segment.totalReps),
+        },
+      ],
+    };
+  console.log("data", data);
   return (
     <div>
       <DataVisForm
@@ -201,12 +209,9 @@ console.log('data',data)
         sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
       />
 
-      {data && 
-        <Bar data={data} />
-    }
-      </div>
-      );
-    };
-    
-    export default DataVisualisation;
-    
+      {data && <Bar data={data} />}
+    </div>
+  );
+};
+
+export default DataVisualisation;
