@@ -14,7 +14,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     exerciseToMeasure: "",
     metric: "",
   });
-  // console.log("dataVisForm", dataVisForm);
+  console.log("dataVisForm", dataVisForm);
 
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
@@ -182,47 +182,53 @@ console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
 
   // this useEffect will calculate the total user specified metric
   useEffect(() => {
-    if (
-      segmentedLogsFilteredByType &&
-      segmentedLogsFilteredByType.length > 0 &&
-      dataVisForm.metric
-    ) {
-      const metric = dataVisForm.metric;
-      const totalMetricPerSegment = [];
-
-      if (metric === "Total Reps") {
-        segmentedLogsFilteredByType.forEach((segment) => {
-          const timePeriod = segment.timePeriod;
-          const logs = segment.log;
-
-          let totalReps = 0;
-
-          if (Array.isArray(logs) && logs.length > 0) {
-            logs.forEach((log) => {
-              if (
-                log.details &&
-                log.details.exercise_sessions &&
-                log.details.exercise_sessions.length > 0
-              ) {
-                log.details.exercise_sessions.forEach((exSession) => {
-                  if (exSession["reps_completed"]) {
-                    totalReps += exSession["reps_completed"];
-                  }
-                });
-              }
+  if (dataVisForm.workoutToMeasure) {
+      if (
+        segmentedLogsFilteredByType &&
+        segmentedLogsFilteredByType.length > 0 &&
+        dataVisForm.metric
+      ) {
+        const metric = dataVisForm.metric;
+        const totalMetricPerSegment = [];
+  
+        if (metric === "Total Reps") {
+          segmentedLogsFilteredByType.forEach((segment) => {
+            const timePeriod = segment.timePeriod;
+            const logs = segment.log;
+  
+            let totalReps = 0;
+  
+            if (Array.isArray(logs) && logs.length > 0) {
+              logs.forEach((log) => {
+                if (
+                  log.details &&
+                  log.details.exercise_sessions &&
+                  log.details.exercise_sessions.length > 0
+                ) {
+                  log.details.exercise_sessions.forEach((exSession) => {
+                    if (exSession["reps_completed"]) {
+                      totalReps += exSession["reps_completed"];
+                    }
+                  });
+                }
+              });
+            }
+  
+            totalMetricPerSegment.push({
+              timePeriod,
+              totalReps: totalReps,
+              metric: metric,
             });
-          }
-
-          totalMetricPerSegment.push({
-            timePeriod,
-            totalReps: totalReps,
-            metric: metric,
           });
-        });
+        }
+  
+        setDataForChart(totalMetricPerSegment);
       }
+  } else if (dataVisForm.exerciseToMeasure) {
+    
+  }
 
-      setDataForChart(totalMetricPerSegment);
-    }
+
   }, [segmentedLogsFilteredByType, dataVisForm]);
 
   const data = dataForChart &&
