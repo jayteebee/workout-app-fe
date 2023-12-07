@@ -18,10 +18,10 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
-    console.log(
-      "datesSegmentedByChosenFrequency",
-      datesSegmentedByChosenFrequency
-    );
+    // console.log(
+    //   "datesSegmentedByChosenFrequency",
+    //   datesSegmentedByChosenFrequency
+    // );
   const [sessionLogsSegmentedByFrequency, setSessionLogsSegmentedByFrequency] =
     useState([]);
   //   console.log(
