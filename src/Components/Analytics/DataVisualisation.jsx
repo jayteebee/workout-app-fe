@@ -14,14 +14,14 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     exerciseToMeasure: "",
     metric: "",
   });
-  //   console.log("dataVisForm", dataVisForm);
+    // console.log("dataVisForm", dataVisForm);
 
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
-  //   console.log(
-  //     "datesSegmentedByChosenFrequency",
-  //     datesSegmentedByChosenFrequency
-  //   );
+    console.log(
+      "datesSegmentedByChosenFrequency",
+      datesSegmentedByChosenFrequency
+    );
   const [sessionLogsSegmentedByFrequency, setSessionLogsSegmentedByFrequency] =
     useState([]);
   //   console.log(
@@ -46,6 +46,9 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     if (dataVisForm.startDate && dataVisForm.endDate && dataVisForm.frequency) {
       const millisecondsInDay = 24 * 60 * 60 * 1000;
       const millisecondsInWeek = 7 * millisecondsInDay;
+      const millisecondsInMonth = 30 * millisecondsInDay
+      const millisecondsInQuarter = 13 * millisecondsInWeek;
+      const millisecondsInYear = 365 * millisecondsInDay;
 
       const startDate = dataVisForm.startDate.getTime();
       const endDate = dataVisForm.endDate.getTime();
@@ -59,11 +62,24 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
         for (let i = startDate; i <= endDate; i += millisecondsInWeek) {
           // *** same reason as above
-          // const formattedDate = formatter.format(new Date(i));
+        //   const formattedDate = formatter.format(new Date(i));
           // arrayOfDates.push(formattedDate);
           arrayOfDates.push(new Date(i));
         }
+      } else if (freq === "Month") {
+        for (let i = startDate; i <= endDate; i += millisecondsInMonth) {
+            arrayOfDates.push(new Date(i));
+          }
+      } else if (freq === "Quarter") {
+        for (let i = startDate; i <= endDate; i += millisecondsInQuarter) {
+            arrayOfDates.push(new Date(i));
+          }
+      } else if (freq === "Year") {
+        for (let i = startDate; i <= endDate; i += millisecondsInYear) {
+            arrayOfDates.push(new Date(i));
+          }
       }
+
       setDatesSegmentedByChosenFrequency(arrayOfDates);
     }
   }, [dataVisForm]);
