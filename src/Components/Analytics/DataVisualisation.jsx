@@ -84,7 +84,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     }
   }, [dataVisForm]);
 
-  // this useEffect will look at each time period in the datesSegmented... state and search for logs which fall between each pair of dates (index 0 and 1, 1 and 2 etc)
+  // this useEffect will look at each time period in the setDatesSegmentedByChosenFrequency state and search for logs which fall between each pair of dates (index 0 and 1, 1 and 2 etc)
   // it pushes those logs in an object to state
   useEffect(() => {
     if (
