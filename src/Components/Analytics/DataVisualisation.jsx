@@ -196,7 +196,7 @@ console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
             const timePeriod = segment.timePeriod;
             const logs = segment.log;
   
-            let totalReps = 0;
+            let metricTotal = 0
   
             if (Array.isArray(logs) && logs.length > 0) {
               logs.forEach((log) => {
@@ -207,7 +207,7 @@ console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
                 ) {
                   log.details.exercise_sessions.forEach((exSession) => {
                     if (exSession["reps_completed"]) {
-                      totalReps += exSession["reps_completed"];
+                      metricTotal += exSession["reps_completed"];
                     }
                   });
                 }
@@ -216,7 +216,7 @@ console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
   
             totalMetricPerSegment.push({
               timePeriod,
-              totalReps: totalReps,
+              totalMetric: metricTotal,
               metric: metric,
             });
           });
@@ -225,19 +225,19 @@ console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
         setDataForChart(totalMetricPerSegment);
       }
   } else if (dataVisForm.exerciseToMeasure) {
-    
+
   }
 
 
   }, [segmentedLogsFilteredByType, dataVisForm]);
-
+console.log('dataForChart',dataForChart)
   const data = dataForChart &&
     dataForChart.length > 0 && {
       labels: dataForChart.map((segment) => segment.timePeriod),
       datasets: [
         {
           label: dataForChart.map((segment) => segment.metric)[0],
-          data: dataForChart.map((segment) => segment.totalReps),
+          data: dataForChart.map((segment) => segment.totalMetric),
         },
       ],
     };
