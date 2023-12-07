@@ -62,7 +62,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
         for (let i = startDate; i <= endDate; i += millisecondsInWeek) {
           // *** same reason as above
-          //   const formattedDate = formatter.format(new Date(i));
+            // const formattedDate = formatter.format(new Date(i));
           // arrayOfDates.push(formattedDate);
           arrayOfDates.push(new Date(i));
         }
@@ -106,8 +106,13 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
             new Date(log.details.date).getTime() >= currentDateTimeStamp &&
             new Date(log.details.date).getTime() <= nextDateTimeStamp
         );
+        const options = {day: 'numeric', month: 'short' };
+        const formatter = new Intl.DateTimeFormat('en-GB', options);
+        const formattedCurrentDate = formatter.format(new Date(currentDate));
+        const formattedNextDate = formatter.format(new Date(nextDate));
+
         segmentedSessionLogs.push({
-          timePeriod: `${dataVisForm.frequency} ${i + 1}`,
+          timePeriod: `${formattedCurrentDate} to ${formattedNextDate}`,
           log: sessionLogsFilter,
         });
       }
@@ -147,7 +152,6 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         (segment) => {
           const timePeriod = segment.timePeriod;
           const sessionLog = segment.log;
-          console.log("sessionLog", sessionLog);
 
           if (workout) {
             const logsThatMatchChosenWorkoutName = sessionLog.filter(
@@ -180,6 +184,8 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       setSegmentedLogsFilteredByType(matchingSegments);
     }
   }, [sessionLogsSegmentedByFrequency]);
+
+console.log('segmentedLogsFilteredByType',segmentedLogsFilteredByType)
 
   // this useEffect will calculate the total user specified metric
   useEffect(() => {
@@ -246,7 +252,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       />
 
       {data && (
-        <div style={{ width: "50vw", height: "50vh" }}>
+        <div style={{ width: "75vw", height: "75vh" }}>
           <Bar data={data} />
         </div>
       )}
