@@ -209,7 +209,13 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
       />
 
-      {data && <Bar data={data} />}
+      {data &&
+        <div style={{ width: '50vw', height: '50vh' }}> 
+        <Bar
+         data={data}
+         />
+         </div>
+        }
     </div>
   );
 };
