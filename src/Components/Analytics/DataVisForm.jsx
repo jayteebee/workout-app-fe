@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
 import { MDBBtn } from "mdb-react-ui-kit";
+import "../../CSS/DataVisForm.css"
 
 const DataVisForm = ({
   sortedSessionLogs,
@@ -84,12 +85,10 @@ const DataVisForm = ({
   ];
 
   return (
-    <div>
-      <h2> Data Vis.</h2>
-
+    <div className="form-container">
       <form onSubmit={handleFormSubmit}>
-        <div >
-          <h3>Start / End Date</h3>
+      <h3>Start / End Date</h3>
+      <div className="datePicker">
           <DatePicker
             selected={fromDate}
             onChange={(date) => {
@@ -116,6 +115,7 @@ const DataVisForm = ({
         <div >
           <h3>Frequency</h3>
           <select
+
             onChange={(e) => {
               setDataVisForm((prevForm) => ({
                 ...prevForm,
