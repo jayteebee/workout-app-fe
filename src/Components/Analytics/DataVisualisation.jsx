@@ -33,7 +33,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     useState([]);
   //   console.log("segmentedLogsFilteredByType", segmentedLogsFilteredByType);
 
-  const [dataForChart, setDataForChart] = useState([]);
+  const [dataForWorkoutOrExerciseBarChart, setDataForWorkoutOrExerciseBarChart] = useState([]);
   //   console.log("dataForChart", dataForChart);
 
   useEffect(() => {
@@ -207,7 +207,6 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         // if the time segment has workouts associated with it, then cycle through them and sum the various metrics
         if (Array.isArray(logs) && logs.length > 0) {
           logs.forEach((log) => {
-            console.log("log", log);
             if (workout) {
               if (
                 log.details &&
@@ -270,22 +269,22 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         });
       });
 
-      setDataForChart(totalMetricPerSegment);
+      setDataForWorkoutOrExerciseBarChart(totalMetricPerSegment);
     }
     //   } else if (dataVisForm.exerciseToMeasure) {
 
     //   }
   }, [segmentedLogsFilteredByType, dataVisForm]);
 
-  console.log("dataForChart", dataForChart);
+  console.log("dataForWorkoutOrExerciseBarChart", dataForWorkoutOrExerciseBarChart);
 
-  const data = dataForChart &&
-    dataForChart.length > 0 && {
-      labels: dataForChart.map((segment) => segment.timePeriod),
+  const workoutOrExerciseBarChartData = dataForWorkoutOrExerciseBarChart &&
+    dataForWorkoutOrExerciseBarChart.length > 0 && {
+      labels: dataForWorkoutOrExerciseBarChart.map((segment) => segment.timePeriod),
       datasets: [
         {
-          label: dataForChart.map((segment) => segment.metric)[0],
-          data: dataForChart.map((segment) => segment.totalMetric),
+          label: dataForWorkoutOrExerciseBarChart.map((segment) => segment.metric)[0],
+          data: dataForWorkoutOrExerciseBarChart.map((segment) => segment.totalMetric),
         },
       ],
     };
@@ -298,9 +297,9 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
       />
 
-      {data && (
+      {workoutOrExerciseBarChartData && (
         <div style={{ width: "75vw", height: "75vh" }}>
-          <Bar data={data} />
+          <Bar data={workoutOrExerciseBarChartData} />
         </div>
       )}
     </div>
