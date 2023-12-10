@@ -254,7 +254,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
               if (log && log.length > 0) {
                 if (metric === "Total Reps") {
                   metricTotal += log[0].reps_completed;
-                    // debugger;
+                    // *** Find if an exercise object already exists, if it does, update the metric
                   const existingExerciseId = exerciseIdsAndMetricHolder.filter(
                     (item) => {
                         console.log('item',item, "log[0].exercise_id", log[0].exercise_id )
@@ -268,7 +268,7 @@ console.log('existingExerciseId',existingExerciseId)
                          existingExerciseId[0].metricTotal += log[0].reps_completed
 
                     } else {
-
+                        // *** create a new exercise object
                         const newExerciseId = {
                             exerciseId: log[0].exercise_id,
                             exerciseName: log[0].exercise_name,
