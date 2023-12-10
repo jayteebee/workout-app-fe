@@ -213,9 +213,6 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
                 log.details.exercise_sessions &&
                 log.details.exercise_sessions.length > 0
               ) {
-                // need to add the clause for if they've chosen an exercise rather than workout
-                // so if they want bench, do if dataVisForm.exerciseToMeasure === exSession.exercise_name then..
-
                 if (metric === "Total Reps") {
                   log.details.exercise_sessions.forEach((exSession) => {
                     if (exSession["reps_completed"]) {
