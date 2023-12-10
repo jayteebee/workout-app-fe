@@ -35,6 +35,8 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
   const [dataForWorkoutOrExerciseBarChart, setDataForWorkoutOrExerciseBarChart] = useState([]);
   //   console.log("dataForChart", dataForChart);
+  const [dataForMuscleGroupPieChart, setDataForMuscleGroupPieChart] = useState()
+  console.log('dataForMuscleGroupPieChart',dataForMuscleGroupPieChart[dataForMuscleGroupPieChart.length -1])
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -183,7 +185,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     }
   }, [sessionLogsSegmentedByFrequency]);
 
-  console.log("segmentedLogsFilteredByType", segmentedLogsFilteredByType);
+//   console.log("segmentedLogsFilteredByType", segmentedLogsFilteredByType);
 
   // this useEffect will calculate the total user specified metric
   useEffect(() => {
@@ -195,17 +197,19 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     ) {
       const metric = dataVisForm.metric;
       const totalMetricPerSegment = [];
+      const exerciseIdsAndTotalMetricDataForPieChart = []
 
       const exercise = dataVisForm.exerciseToMeasure;
       const workout = dataVisForm.workoutToMeasure;
+      let exerciseIdsAndMetricHolder = []
+      console.log('exerciseIdsAndMetricHolder',exerciseIdsAndMetricHolder)
 
       segmentedLogsFilteredByType.forEach((segment) => {
         const timePeriod = segment.timePeriod;
         const logs = segment.log;
 
         let metricTotal = 0;
-        let exerciseIdsAndMetricHolder = {}
-        
+
         // if the time segment has workouts associated with it, then cycle through them and sum the various metrics
         if (Array.isArray(logs) && logs.length > 0) {
           logs.forEach((log) => {
@@ -250,6 +254,29 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
               if (log && log.length > 0) {
                 if (metric === "Total Reps") {
                   metricTotal += log[0].reps_completed;
+                    // debugger;
+                  const existingExerciseId = exerciseIdsAndMetricHolder.filter(
+                    (item) => {
+                        console.log('item',item, "log[0].exercise_id", log[0].exercise_id )
+                       return item.exerciseId === log[0].exercise_id
+
+                    } 
+                  )
+console.log('existingExerciseId',existingExerciseId)
+                    if (existingExerciseId.length > 0) {
+                        console.log('triggered',)
+                         existingExerciseId[0].metricTotal += log[0].reps_completed
+
+                    } else {
+
+                        const newExerciseId = {
+                            exerciseId: log[0].exercise_id,
+                            exerciseName: log[0].exercise_name,
+                            metricTotal: log[0].reps_completed
+                        }
+                        console.log('newExerciseId',newExerciseId)
+                        exerciseIdsAndMetricHolder.push(newExerciseId)
+                    }
                 } else if (metric === "Total Sets") {
                   metricTotal += log[0].sets_completed;
                 } else if (metric === "Total Time Under Tension") {
@@ -259,6 +286,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
                 }
               }
             }
+            exerciseIdsAndTotalMetricDataForPieChart.push(exerciseIdsAndMetricHolder)
           });
         }
 
@@ -268,15 +296,16 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
           metric: metric,
         });
       });
-
+console.log('exerciseIdsAndTotalMetricDataForPieChart',exerciseIdsAndTotalMetricDataForPieChart)
       setDataForWorkoutOrExerciseBarChart(totalMetricPerSegment);
+      setDataForMuscleGroupPieChart(exerciseIdsAndTotalMetricDataForPieChart)
     }
     //   } else if (dataVisForm.exerciseToMeasure) {
 
     //   }
   }, [segmentedLogsFilteredByType, dataVisForm]);
 
-  console.log("dataForWorkoutOrExerciseBarChart", dataForWorkoutOrExerciseBarChart);
+//   console.log("dataForWorkoutOrExerciseBarChart", dataForWorkoutOrExerciseBarChart);
 
   const workoutOrExerciseBarChartData = dataForWorkoutOrExerciseBarChart &&
     dataForWorkoutOrExerciseBarChart.length > 0 && {
