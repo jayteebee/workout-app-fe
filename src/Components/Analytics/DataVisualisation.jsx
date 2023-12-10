@@ -204,9 +204,12 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         const logs = segment.log;
 
         let metricTotal = 0;
+        let exerciseIdsAndMetricHolder = {}
+        
         // if the time segment has workouts associated with it, then cycle through them and sum the various metrics
         if (Array.isArray(logs) && logs.length > 0) {
           logs.forEach((log) => {
+          console.log('log',log)
             if (workout) {
               if (
                 log.details &&
