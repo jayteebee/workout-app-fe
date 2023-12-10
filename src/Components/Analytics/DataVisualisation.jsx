@@ -14,7 +14,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     exerciseToMeasure: "",
     metric: "",
   });
-//   console.log("dataVisForm", dataVisForm);
+  //   console.log("dataVisForm", dataVisForm);
 
   const [datesSegmentedByChosenFrequency, setDatesSegmentedByChosenFrequency] =
     useState([]);
@@ -141,7 +141,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       const exercise = dataVisForm.exerciseToMeasure;
       const workout = dataVisForm.workoutToMeasure;
 
-    //   debugger
+      //   debugger
       const matchingSegments = sessionLogsSegmentedByFrequency.map(
         (segment) => {
           const timePeriod = segment.timePeriod;
@@ -169,7 +169,6 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
               logsThatMatchChosenExerciseName &&
               logsThatMatchChosenExerciseName.length > 0
             ) {
-
               return {
                 timePeriod: timePeriod,
                 log: logsThatMatchChosenExerciseName,
@@ -200,7 +199,6 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       const exercise = dataVisForm.exerciseToMeasure;
       const workout = dataVisForm.workoutToMeasure;
 
-
       segmentedLogsFilteredByType.forEach((segment) => {
         const timePeriod = segment.timePeriod;
         const logs = segment.log;
@@ -209,68 +207,68 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         // if the time segment has workouts associated with it, then cycle through them and sum the various metrics
         if (Array.isArray(logs) && logs.length > 0) {
           logs.forEach((log) => {
-            console.log('log',log)
+            console.log("log", log);
             if (workout) {
-                if (
-                  log.details &&
-                  log.details.exercise_sessions &&
-                  log.details.exercise_sessions.length > 0
-                ) {
-                  // need to add the clause for if they've chosen an exercise rather than workout
-                  // so if they want bench, do if dataVisForm.exerciseToMeasure === exSession.exercise_name then..
-    
-                      if (metric === "Total Reps") {
-                        log.details.exercise_sessions.forEach((exSession) => {
-                          if (exSession["reps_completed"]) {
-                            metricTotal += exSession["reps_completed"];
-                          }
-                        });
-                      } else if (metric === "Total Sets") {
-                        log.details.exercise_sessions.forEach((exSession) => {
-                          if (exSession["sets_completed"]) {
-                            metricTotal += exSession["sets_completed"];
-                          }
-                        });
-                      } else if (metric === "Total Time Under Tension") {
-                        log.details.exercise_sessions.forEach((exSession) => {
-                          if (exSession["set_timer"]) {
-                            metricTotal += exSession["set_timer"];
-                          }
-                        });
-                      } else if (metric === "Total Volume") {
-                        log.details.exercise_sessions.forEach((exSession) => {
-                          if (exSession["reps_completed"] && exSession["weight_used"]) {
-                            metricTotal +=
-                              exSession["reps_completed"] * exSession["weight_used"];
-                          }
-                        });
-                      }
-                  }
-            } else if (exercise) {
-                if (log && log.length > 0) {
+              if (
+                log.details &&
+                log.details.exercise_sessions &&
+                log.details.exercise_sessions.length > 0
+              ) {
+                // need to add the clause for if they've chosen an exercise rather than workout
+                // so if they want bench, do if dataVisForm.exerciseToMeasure === exSession.exercise_name then..
 
-                    if (metric === "Total Reps") {
-                        metricTotal += log[0].reps_completed;
-                    } else if (metric === "Total Sets") {
-                        metricTotal += log[0].sets_completed;
-                    } else if (metric === "Total Time Under Tension") {
-                        metricTotal += log[0].set_timer;
-                    } else if (metric === "Total Volume") {
-                        metricTotal += log[0].reps_completed * log[0].weight_used;
+                if (metric === "Total Reps") {
+                  log.details.exercise_sessions.forEach((exSession) => {
+                    if (exSession["reps_completed"]) {
+                      metricTotal += exSession["reps_completed"];
                     }
+                  });
+                } else if (metric === "Total Sets") {
+                  log.details.exercise_sessions.forEach((exSession) => {
+                    if (exSession["sets_completed"]) {
+                      metricTotal += exSession["sets_completed"];
+                    }
+                  });
+                } else if (metric === "Total Time Under Tension") {
+                  log.details.exercise_sessions.forEach((exSession) => {
+                    if (exSession["set_timer"]) {
+                      metricTotal += exSession["set_timer"];
+                    }
+                  });
+                } else if (metric === "Total Volume") {
+                  log.details.exercise_sessions.forEach((exSession) => {
+                    if (
+                      exSession["reps_completed"] &&
+                      exSession["weight_used"]
+                    ) {
+                      metricTotal +=
+                        exSession["reps_completed"] * exSession["weight_used"];
+                    }
+                  });
                 }
+              }
+            } else if (exercise) {
+              if (log && log.length > 0) {
+                if (metric === "Total Reps") {
+                  metricTotal += log[0].reps_completed;
+                } else if (metric === "Total Sets") {
+                  metricTotal += log[0].sets_completed;
+                } else if (metric === "Total Time Under Tension") {
+                  metricTotal += log[0].set_timer;
+                } else if (metric === "Total Volume") {
+                  metricTotal += log[0].reps_completed * log[0].weight_used;
+                }
+              }
             }
           });
         }
-console.log('metric total',metricTotal)
+
         totalMetricPerSegment.push({
           timePeriod,
           totalMetric: metricTotal,
           metric: metric,
         });
       });
-
-console.log('totalMetricPerSegment',totalMetricPerSegment)
 
       setDataForChart(totalMetricPerSegment);
     }
