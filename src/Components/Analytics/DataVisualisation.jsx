@@ -4,6 +4,7 @@ import enGB from "date-fns/locale/en-GB";
 import DataVisForm from "./DataVisForm";
 import "chart.js/auto";
 import { CategoryScale, Chart, Bar } from "react-chartjs-2";
+import { getAllExercises } from "../../API/Exercise/Exercise";
 
 const DataVisualisation = ({ sortedSessionLogs }) => {
   const [dataVisForm, setDataVisForm] = useState({
@@ -36,10 +37,16 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   const [dataForWorkoutOrExerciseBarChart, setDataForWorkoutOrExerciseBarChart] = useState([]);
   //   console.log("dataForChart", dataForChart);
   const [dataForMuscleGroupPieChart, setDataForMuscleGroupPieChart] = useState()
-  console.log('dataForMuscleGroupPieChart',dataForMuscleGroupPieChart[dataForMuscleGroupPieChart.length -1])
+  console.log('dataForMuscleGroupPieChart',dataForMuscleGroupPieChart && dataForMuscleGroupPieChart[dataForMuscleGroupPieChart.length -1])
+
+const [allExercises, setAllExercises] = useState()
+// console.log('allExercises',allExercises)
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
+    getAllExercises()
+    .then((data) => setAllExercises(data))
+    .catch((err) => console.log('Error fetching all exercises:', err))
   }, []);
 
   // This useEffect will take the user chosen start/end dates and push the dates which divide the segments to state
