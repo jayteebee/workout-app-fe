@@ -5,6 +5,7 @@ import DataVisForm from "./DataVisForm";
 import "chart.js/auto";
 import { CategoryScale, Chart, Bar, Pie } from "react-chartjs-2";
 import { getAllExercises } from "../../API/Exercise/Exercise";
+import PersonalRecords from "./PersonalRecords";
 
 const DataVisualisation = ({ sortedSessionLogs }) => {
   const [dataVisForm, setDataVisForm] = useState({
@@ -466,6 +467,10 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
           <Pie data={muscleGroupPieChartData} />
         </div>
       )}
+
+      <PersonalRecords 
+      sortedSessionLogs={sortedSessionLogs}
+      />
     </div>
   );
 };
