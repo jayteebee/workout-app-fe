@@ -3,7 +3,7 @@ import { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
 import DataVisForm from "./DataVisForm";
 import "chart.js/auto";
-import { CategoryScale, Chart, Bar } from "react-chartjs-2";
+import { CategoryScale, Chart, Bar, Pie } from "react-chartjs-2";
 import { getAllExercises } from "../../API/Exercise/Exercise";
 
 const DataVisualisation = ({ sortedSessionLogs }) => {
@@ -37,10 +37,13 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   const [dataForWorkoutOrExerciseBarChart, setDataForWorkoutOrExerciseBarChart] = useState([]);
   //   console.log("dataForChart", dataForChart);
   const [dataForMuscleGroupPieChart, setDataForMuscleGroupPieChart] = useState()
-  console.log('dataForMuscleGroupPieChart',dataForMuscleGroupPieChart && dataForMuscleGroupPieChart[dataForMuscleGroupPieChart.length -1])
+  console.log('dataForMuscleGroupPieChart',dataForMuscleGroupPieChart)
 
 const [allExercises, setAllExercises] = useState()
 // console.log('allExercises',allExercises)
+
+const [pieChartMuscleGroupData, setPieChartMuscleGroupData] = useState()
+console.log('pieChartMuscleGroupData',pieChartMuscleGroupData)
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -212,6 +215,7 @@ const [allExercises, setAllExercises] = useState()
       console.log('exerciseIdsAndMetricHolder',exerciseIdsAndMetricHolder)
 
       segmentedLogsFilteredByType.forEach((segment) => {
+        // *** SCOPE 1
         const timePeriod = segment.timePeriod;
         const logs = segment.log;
 
@@ -220,6 +224,7 @@ const [allExercises, setAllExercises] = useState()
         // if the time segment has workouts associated with it, then cycle through them and sum the various metrics
         if (Array.isArray(logs) && logs.length > 0) {
           logs.forEach((log) => {
+            // *** SCOPE 2
           console.log('log',log)
             if (workout) {
               if (
@@ -264,14 +269,14 @@ const [allExercises, setAllExercises] = useState()
                     // *** Find if an exercise object already exists, if it does, update the metric
                   const existingExerciseId = exerciseIdsAndMetricHolder.filter(
                     (item) => {
-                        console.log('item',item, "log[0].exercise_id", log[0].exercise_id )
+                        // console.log('item',item, "log[0].exercise_id", log[0].exercise_id )
                        return item.exerciseId === log[0].exercise_id
 
                     } 
                   )
 console.log('existingExerciseId',existingExerciseId)
                     if (existingExerciseId.length > 0) {
-                        console.log('triggered',)
+                        // console.log('triggered',)
                          existingExerciseId[0].metricTotal += log[0].reps_completed
 
                     } else {
@@ -281,7 +286,7 @@ console.log('existingExerciseId',existingExerciseId)
                             exerciseName: log[0].exercise_name,
                             metricTotal: log[0].reps_completed
                         }
-                        console.log('newExerciseId',newExerciseId)
+                        // console.log('newExerciseId',newExerciseId)
                         exerciseIdsAndMetricHolder.push(newExerciseId)
                     }
                 } else if (metric === "Total Sets") {
@@ -303,7 +308,7 @@ console.log('existingExerciseId',existingExerciseId)
           metric: metric,
         });
       });
-console.log('exerciseIdsAndTotalMetricDataForPieChart',exerciseIdsAndTotalMetricDataForPieChart)
+// console.log('exerciseIdsAndTotalMetricDataForPieChart',exerciseIdsAndTotalMetricDataForPieChart)
       setDataForWorkoutOrExerciseBarChart(totalMetricPerSegment);
       setDataForMuscleGroupPieChart(exerciseIdsAndTotalMetricDataForPieChart)
     }
@@ -313,6 +318,35 @@ console.log('exerciseIdsAndTotalMetricDataForPieChart',exerciseIdsAndTotalMetric
   }, [segmentedLogsFilteredByType, dataVisForm]);
 
 //   console.log("dataForWorkoutOrExerciseBarChart", dataForWorkoutOrExerciseBarChart);
+
+useEffect(() => {
+if (dataForMuscleGroupPieChart && dataForMuscleGroupPieChart.length > 0 && 
+    allExercises && allExercises.length > 0) {
+
+    const muscleGroupsUsedFilter = allExercises.filter((exercise) => {
+        const allExerciseId = exercise.id
+        const pieChartData = dataForMuscleGroupPieChart[dataForMuscleGroupPieChart.length -1]
+         const pieChartExerciseId = pieChartData[0].exerciseId
+        // console.log('allExerciseId',allExerciseId, "dataForMuscleGroupPieChart[0].exerciseId", dataForMuscleGroupPieChart )
+        return (allExerciseId === pieChartExerciseId)
+    })
+    // console.log('muscleGroupsUsedFilter',muscleGroupsUsedFilter)
+
+    const primaryMuscleGroups = muscleGroupsUsedFilter[0].primary_muscles
+    const secondaryMuscleGroups = muscleGroupsUsedFilter[0].secondary_muscles
+    // console.log('muscleGroups',primaryMuscleGroups, "secondaryMuscleGroups", secondaryMuscleGroups )
+    
+    
+    const pieChartDataObjectToAmend = dataForMuscleGroupPieChart[dataForMuscleGroupPieChart.length -1]
+
+    pieChartDataObjectToAmend[0].primaryMuscleGroups = primaryMuscleGroups;
+    pieChartDataObjectToAmend[0].secondaryMuscleGroups = secondaryMuscleGroups;
+
+    console.log('pieChartDataObjectToAmend',pieChartDataObjectToAmend)
+    setPieChartMuscleGroupData(pieChartDataObjectToAmend)
+}
+}, [dataForMuscleGroupPieChart, allExercises])
+
 
   const workoutOrExerciseBarChartData = dataForWorkoutOrExerciseBarChart &&
     dataForWorkoutOrExerciseBarChart.length > 0 && {
@@ -325,6 +359,42 @@ console.log('exerciseIdsAndTotalMetricDataForPieChart',exerciseIdsAndTotalMetric
       ],
     };
   //   console.log("data", data);
+
+let arrForPieChartDatasetData = []
+
+if (pieChartMuscleGroupData &&
+    pieChartMuscleGroupData.length > 0) {
+        for (let i=0; i<pieChartMuscleGroupData[0].primaryMuscleGroups.length; i++) {
+            arrForPieChartDatasetData.push(pieChartMuscleGroupData[0].metricTotal)
+        }
+    }
+  
+console.log('arrForPieChartDatasetData',arrForPieChartDatasetData)
+
+  const muscleGroupPieChartData = pieChartMuscleGroupData &&
+  pieChartMuscleGroupData.length > 0 && arrForPieChartDatasetData && arrForPieChartDatasetData.length > 0 && {
+    labels: pieChartMuscleGroupData[0].primaryMuscleGroups.map((segment) => segment),
+    datasets: [
+      {
+        label: pieChartMuscleGroupData[0].exerciseName + ", " + dataVisForm.metric,
+        data: arrForPieChartDatasetData.map((data) => data),
+      },
+    ],
+  };
+
+// const muscleGroupPieChartData = pieChartMuscleGroupData &&
+// pieChartMuscleGroupData.length > 0 && pieChartMuscleGroupData.map((object) => (
+//     console.log('object',object),
+    
+//     {
+//     labels: object.primaryMuscleGroups.map((muscle) => muscle),
+//     datasets: [{
+//         label:object.primaryMuscleGroups.map((muscle) => muscle),
+//         data: object.metricTotal
+//     }]
+// }))
+
+
   return (
     <div>
       <DataVisForm
@@ -333,9 +403,11 @@ console.log('exerciseIdsAndTotalMetricDataForPieChart',exerciseIdsAndTotalMetric
         sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
       />
 
-      {workoutOrExerciseBarChartData && (
+      {workoutOrExerciseBarChartData && pieChartMuscleGroupData && (
         <div style={{ width: "75vw", height: "75vh" }}>
           <Bar data={workoutOrExerciseBarChartData} />
+          <Pie data={muscleGroupPieChartData} />
+
         </div>
       )}
     </div>
