@@ -41,13 +41,13 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   //   console.log("dataForChart", dataForChart);
   const [dataForMuscleGroupPieChart, setDataForMuscleGroupPieChart] =
     useState();
-  console.log("dataForMuscleGroupPieChart", dataForMuscleGroupPieChart);
+//   console.log("dataForMuscleGroupPieChart", dataForMuscleGroupPieChart);
 
   const [allExercises, setAllExercises] = useState();
   // console.log('allExercises',allExercises)
 
   const [pieChartMuscleGroupData, setPieChartMuscleGroupData] = useState();
-  console.log("pieChartMuscleGroupData", pieChartMuscleGroupData);
+//   console.log("pieChartMuscleGroupData", pieChartMuscleGroupData);
 
   useEffect(() => {
     registerLocale("en-GB", enGB);
@@ -216,7 +216,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       const exercise = dataVisForm.exerciseToMeasure;
       const workout = dataVisForm.workoutToMeasure;
       let exerciseIdsAndMetricHolder = [];
-      console.log("exerciseIdsAndMetricHolder", exerciseIdsAndMetricHolder);
+    //   console.log("exerciseIdsAndMetricHolder", exerciseIdsAndMetricHolder);
 
       segmentedLogsFilteredByType.forEach((segment) => {
         // *** SCOPE 1
@@ -315,7 +315,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
                     }
                   );
                   if (existingExerciseId.length > 0) {
-                    // console.log('triggered',)
+
                     existingExerciseId[0].metricTotal += log[0].set_timer;
                   } else {
                     // *** create a new exercise object
@@ -334,7 +334,6 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
                     }
                   );
                   if (existingExerciseId.length > 0) {
-                    // console.log('triggered',)
                     existingExerciseId[0].metricTotal += log[0].reps_completed * log[0].weight_used;
                   } else {
                     // *** create a new exercise object
@@ -399,7 +398,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       pieChartDataObjectToAmend[0].secondaryMuscleGroups =
         secondaryMuscleGroups;
 
-      console.log("pieChartDataObjectToAmend", pieChartDataObjectToAmend);
+    //   console.log("pieChartDataObjectToAmend", pieChartDataObjectToAmend);
       setPieChartMuscleGroupData(pieChartDataObjectToAmend);
     }
   }, [dataForMuscleGroupPieChart, allExercises]);
@@ -434,7 +433,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     }
   }
 
-  console.log("arrForPieChartDatasetData", arrForPieChartDatasetData);
+//   console.log("arrForPieChartDatasetData", arrForPieChartDatasetData);
 
   const muscleGroupPieChartData = pieChartMuscleGroupData &&
     pieChartMuscleGroupData.length > 0 &&
