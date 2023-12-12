@@ -290,10 +290,61 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
                   }
                 } else if (metric === "Total Sets") {
                   metricTotal += log[0].sets_completed;
+                  const existingExerciseId = exerciseIdsAndMetricHolder.filter(
+                    (item) => {
+                      return item.exerciseId === log[0].exercise_id;
+                    }
+                  );
+                  if (existingExerciseId.length > 0) {
+                    // console.log('triggered',)
+                    existingExerciseId[0].metricTotal += log[0].sets_completed;
+                  } else {
+                    // *** create a new exercise object
+                    const newExerciseId = {
+                      exerciseId: log[0].exercise_id,
+                      exerciseName: log[0].exercise_name,
+                      metricTotal: log[0].sets_completed,
+                    };
+                    exerciseIdsAndMetricHolder.push(newExerciseId);
+                  }
                 } else if (metric === "Total Time Under Tension") {
                   metricTotal += log[0].set_timer;
+                  const existingExerciseId = exerciseIdsAndMetricHolder.filter(
+                    (item) => {
+                      return item.exerciseId === log[0].exercise_id;
+                    }
+                  );
+                  if (existingExerciseId.length > 0) {
+                    // console.log('triggered',)
+                    existingExerciseId[0].metricTotal += log[0].set_timer;
+                  } else {
+                    // *** create a new exercise object
+                    const newExerciseId = {
+                      exerciseId: log[0].exercise_id,
+                      exerciseName: log[0].exercise_name,
+                      metricTotal: log[0].set_timer,
+                    };
+                    exerciseIdsAndMetricHolder.push(newExerciseId);
+                  }
                 } else if (metric === "Total Volume") {
                   metricTotal += log[0].reps_completed * log[0].weight_used;
+                  const existingExerciseId = exerciseIdsAndMetricHolder.filter(
+                    (item) => {
+                      return item.exerciseId === log[0].exercise_id;
+                    }
+                  );
+                  if (existingExerciseId.length > 0) {
+                    // console.log('triggered',)
+                    existingExerciseId[0].metricTotal += log[0].reps_completed * log[0].weight_used;
+                  } else {
+                    // *** create a new exercise object
+                    const newExerciseId = {
+                      exerciseId: log[0].exercise_id,
+                      exerciseName: log[0].exercise_name,
+                      metricTotal: log[0].reps_completed * log[0].weight_used,
+                    };
+                    exerciseIdsAndMetricHolder.push(newExerciseId);
+                  }
                 }
               }
             }
