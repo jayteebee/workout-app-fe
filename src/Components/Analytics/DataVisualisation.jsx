@@ -230,7 +230,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         if (Array.isArray(logs) && logs.length > 0) {
           logs.forEach((log) => {
             // *** SCOPE 2
-            console.log("log", log);
+            // console.log("log", log);
             if (workout) {
               if (
                 log.details &&
