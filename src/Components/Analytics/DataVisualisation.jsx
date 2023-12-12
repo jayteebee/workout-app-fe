@@ -450,19 +450,8 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
           data: arrForPieChartDatasetData.map((data) => data),
         },
       ],
-    };
+    }
 
-  // const muscleGroupPieChartData = pieChartMuscleGroupData &&
-  // pieChartMuscleGroupData.length > 0 && pieChartMuscleGroupData.map((object) => (
-  //     console.log('object',object),
-
-  //     {
-  //     labels: object.primaryMuscleGroups.map((muscle) => muscle),
-  //     datasets: [{
-  //         label:object.primaryMuscleGroups.map((muscle) => muscle),
-  //         data: object.metricTotal
-  //     }]
-  // }))
 
   return (
     <div>
