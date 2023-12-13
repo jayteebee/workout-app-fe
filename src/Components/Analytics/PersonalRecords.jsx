@@ -114,17 +114,15 @@ const PersonalRecords = ({ sortedSessionLogs }) => {
 
               if (exerciseID === 1 || exerciseID === 14 || exerciseID === 15) {
                 if (estimated1RM > currentExerciseObject.estimatedOneRepMax) {
- 
-                      const updatedArrayOfExercises = arrayOfExerciseObjects.map(
-                        (item) =>
-                          item.exerciseId === exerciseID
-                            ? { ...item, estimatedOneRepMax: estimated1RM }
-                            : item
-                      );
-                      setArrayOfExerciseObjects(updatedArrayOfExercises);
+                  const updatedArrayOfExercises = arrayOfExerciseObjects.map(
+                    (item) =>
+                      item.exerciseId === exerciseID
+                        ? { ...item, estimatedOneRepMax: estimated1RM }
+                        : item
+                  );
+                  setArrayOfExerciseObjects(updatedArrayOfExercises);
                 }
               }
-
             }
           });
         });
@@ -133,36 +131,44 @@ const PersonalRecords = ({ sortedSessionLogs }) => {
   }, [arrayOfExerciseObjects]);
 
   return (
-      <div className="tableContainer individualLog">
+    <div className="tableContainer individualLog">
       <div className="tableWrapper">
-      <table className="customTable">
-      <thead>
-      <tr>
-      <th>Exercise</th>
-      <th>One Rep Max</th>
-      <th>Estimated One Rep Max</th>
-      <th>Highest Volume Single Set</th>
-      <th>Strongest Time Under Tension</th>
-      </tr>
-      </thead>
-      
-      {arrayOfExerciseObjects && arrayOfExerciseObjects.length > 0 &&
-      arrayOfExerciseObjects.map((exerciseObject) => (
-      <tbody>
-      <tr>
-                            <td>{exerciseObject.exerciseName}</td>
-                            <td>{exerciseObject.oneRepMax ? exerciseObject.oneRepMax : "N/A"}</td>
-                            <td>{exerciseObject.estimatedOneRepMax ? exerciseObject.estimatedOneRepMax : "N/A"}</td>
-                            <td>{exerciseObject.highestVolumeSingleSet}</td>
-                            <td>{exerciseObject.strongestTimeUnderTension}</td>
-                            </tr>
-                            </tbody>
-                            ))
-                        }
-                </table>
-            </div>
+        <table className="customTable">
+          <thead>
+            <tr>
+              <th>Exercise</th>
+              <th>One Rep Max</th>
+              <th>Estimated One Rep Max</th>
+              <th>Highest Volume Single Set</th>
+              <th>Strongest Time Under Tension</th>
+            </tr>
+          </thead>
+
+          {arrayOfExerciseObjects &&
+            arrayOfExerciseObjects.length > 0 &&
+            arrayOfExerciseObjects.map((exerciseObject) => (
+              <tbody>
+                <tr>
+                  <td>{exerciseObject.exerciseName}</td>
+                  <td>
+                    {exerciseObject.oneRepMax
+                      ? exerciseObject.oneRepMax
+                      : "N/A"}
+                  </td>
+                  <td>
+                    {exerciseObject.estimatedOneRepMax
+                      ? exerciseObject.estimatedOneRepMax
+                      : "N/A"}
+                  </td>
+                  <td>{exerciseObject.highestVolumeSingleSet}</td>
+                  <td>{exerciseObject.strongestTimeUnderTension}</td>
+                </tr>
+              </tbody>
+            ))}
+        </table>
       </div>
-  ) 
+    </div>
+  );
 };
 
 export default PersonalRecords;
