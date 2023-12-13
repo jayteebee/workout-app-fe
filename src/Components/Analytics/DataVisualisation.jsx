@@ -376,7 +376,8 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       dataForMuscleGroupPieChart &&
       dataForMuscleGroupPieChart.length > 0 &&
       allExercises &&
-      allExercises.length > 0
+      allExercises.length > 0 &&
+      dataVisForm.exerciseToMeasure
     ) {
       const muscleGroupsUsedFilter = allExercises.filter((exercise) => {
         const allExerciseId = exercise.id;
@@ -461,12 +462,16 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
       />
 
-      {workoutOrExerciseBarChartData && pieChartMuscleGroupData && (
+      {workoutOrExerciseBarChartData &&  (
         <div style={{ width: "75vw", height: "75vh" }}>
           <Bar data={workoutOrExerciseBarChartData} />
-          <Pie data={muscleGroupPieChartData} />
-        </div>
-      )}
+          </div>
+          )}
+          {pieChartMuscleGroupData && 
+            <div style={{ width: "75vw", height: "75vh" }}>
+            <Pie data={muscleGroupPieChartData} />
+    </div>
+        }
 
       <PersonalRecords 
       sortedSessionLogs={sortedSessionLogs}
