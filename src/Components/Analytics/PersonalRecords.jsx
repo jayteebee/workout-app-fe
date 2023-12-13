@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 const PersonalRecords = ({ sortedSessionLogs }) => {
-  console.log("sortedSessionLogs", sortedSessionLogs);
+//   console.log("sortedSessionLogs", sortedSessionLogs);
   const [arrayOfExerciseObjects, setArrayOfExerciseObjects] = useState([]);
-  console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
+//   console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
   useEffect(() => {
     let exerciseIds = new Set();
 
@@ -71,7 +71,7 @@ const PersonalRecords = ({ sortedSessionLogs }) => {
           )
         );
 
-        console.log("matchingExercise", matchingExercise);
+        // console.log("matchingExercise", matchingExercise);
 
         matchingExercise.forEach((exObj) => {
           exObj.details.exercise_sessions.forEach((exercise) => {
@@ -137,10 +137,10 @@ const PersonalRecords = ({ sortedSessionLogs }) => {
           <thead>
             <tr>
               <th>Exercise</th>
-              <th>One Rep Max</th>
-              <th>Estimated One Rep Max</th>
-              <th>Highest Volume Single Set</th>
-              <th>Strongest Time Under Tension</th>
+              <th>One Rep Max (kg)</th>
+              <th>Estimated One Rep Max (kg)</th>
+              <th>Highest Volume Single Set (kg)</th>
+              <th>Strongest Time Under Tension (kg)</th>
             </tr>
           </thead>
 
@@ -152,12 +152,12 @@ const PersonalRecords = ({ sortedSessionLogs }) => {
                   <td>{exerciseObject.exerciseName}</td>
                   <td>
                     {exerciseObject.oneRepMax
-                      ? exerciseObject.oneRepMax
+                      ? Number(exerciseObject.oneRepMax.toFixed(2))
                       : "N/A"}
                   </td>
                   <td>
                     {exerciseObject.estimatedOneRepMax
-                      ? exerciseObject.estimatedOneRepMax
+                      ? Number(exerciseObject.estimatedOneRepMax.toFixed(2))
                       : "N/A"}
                   </td>
                   <td>{exerciseObject.highestVolumeSingleSet}</td>
