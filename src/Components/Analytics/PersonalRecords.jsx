@@ -146,8 +146,8 @@ const PersonalRecords = ({ sortedSessionLogs }) => {
 
           {arrayOfExerciseObjects &&
             arrayOfExerciseObjects.length > 0 &&
-            arrayOfExerciseObjects.map((exerciseObject) => (
-              <tbody>
+            arrayOfExerciseObjects.map((exerciseObject, index) => (
+              <tbody key={index}>
                 <tr>
                   <td>{exerciseObject.exerciseName}</td>
                   <td>
