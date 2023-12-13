@@ -455,6 +455,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
 
   return (
     <div>
+    <h2>Custom Chart Data</h2>
       <DataVisForm
         sortedSessionLogs={sortedSessionLogs}
         setDataVisForm={setDataVisForm}
@@ -472,9 +473,10 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         </div>
       )}
 
-      <PersonalRecords sortedSessionLogs={sortedSessionLogs} />
-    </div>
-  );
-};
-
-export default DataVisualisation;
+      </div>
+      );
+    };
+    
+    export default DataVisualisation;
+    
+    // <PersonalRecords sortedSessionLogs={sortedSessionLogs} />

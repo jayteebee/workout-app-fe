@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { getAllSessionLogs } from "../API/SessionLogs/SessionLogs";
 import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
-
+import "../CSS/Analytics.css"
+import { MDBCheckbox } from 'mdb-react-ui-kit';
 import "react-datepicker/dist/react-datepicker.css";
 import ExerciseMetricTotalsByChosenTimeFrame from "../Components/Analytics/ExerciseMetricTotalsByChosenTimeFrame";
 import DataVisualisation from "../Components/Analytics/DataVisualisation";
+import PersonalRecords from "../Components/Analytics/PersonalRecords";
 
 const Analytics = () => {
   const [allSessionLogs, setAllSessionLogs] = useState();
@@ -24,6 +26,9 @@ const Analytics = () => {
   // console.log("chosenFilter", chosenFilter);
 
   const [filteredSessionLogs, setFilteredSessionLogs] = useState([])
+
+  const [chosenDataRepresentation, setChosenDataRepresentation] = useState("")
+console.log('chosenDataRepresentation',chosenDataRepresentation)
   // console.log('filteredSessionLogs',filteredSessionLogs)
   // register the en-GB locale for the date picker (prevents console error)
   useEffect(() => {
@@ -204,10 +209,21 @@ const Analytics = () => {
   
 
 const dropdownTimeframeArray = ["All", "Week", "Month", "Quarter", "Year"]
-
+const dataRepresentationArray = ["--Select--","Single Time Frame", "Custom Chart Data", "Personal Records"]
   return (
     <div>
+    
+    <h3>Data Display Filters</h3>
+<div style={{marginBottom: "10vh"}}>
+<select onChange={(e) => setChosenDataRepresentation(e.target.value)}>
+{dataRepresentationArray.map((item) => (
+  <option key={`key: ${item}`} value={item} >{item}</option>
+))}
+</select>
+</div>
 
+{chosenDataRepresentation === "Single Time Frame" ? 
+<div className="dataBySingleTimeFrame">
     <select onChange={(e) => setChosenFilter(e.target.value)}>
     {dropdownTimeframeArray.map((timeframe) => (
       <option key={`key:${timeframe}`}value={timeframe}>{timeframe}</option>
@@ -222,10 +238,15 @@ const dropdownTimeframeArray = ["All", "Week", "Month", "Quarter", "Year"]
         arrayOfExerciseObjects={arrayOfExerciseObjects}
         />
       }
-      
-      <DataVisualisation
-      sortedSessionLogs={sortedSessionLogs}
-      />
+      </div> 
+ : chosenDataRepresentation === "Custom Chart Data" ? 
+ <DataVisualisation
+ sortedSessionLogs={sortedSessionLogs}
+ />
+ : chosenDataRepresentation === "Personal Records" ? 
+ <PersonalRecords sortedSessionLogs={sortedSessionLogs} />
+: "Choose a option above to display your analytical data"
+}
     </div>
   );
 };

@@ -132,6 +132,7 @@ const PersonalRecords = ({ sortedSessionLogs }) => {
 
   return (
     <div className="tableContainer individualLog">
+    <h2>Personal Records</h2>
       <div className="tableWrapper">
         <table className="customTable">
           <thead>
