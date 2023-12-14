@@ -16,14 +16,14 @@ const Routines = ({
   setRoutineFrequency,
   setActiveRoutine,
   activeRoutine,
-  setRoutineChange
+  setRoutineChange,
 }) => {
   const [routineToggle, setRoutineToggle] = useState(false);
   const [createRoutineToggle, setCreateRoutineToggle] = useState(false);
   const [viewExistingRoutines, setViewExistingRoutines] = useState(false);
   const [createNewRoutine, setCreateNewRoutine] = useState(false);
   const [allRoutines, setAllRoutines] = useState([]);
-console.log('allRoutines', allRoutines)
+  console.log("allRoutines", allRoutines);
 
   const toggleCreateRoutine = () => {
     setCreateRoutineToggle((prevState) => !prevState);
@@ -37,14 +37,14 @@ console.log('allRoutines', allRoutines)
   }, []);
 
   const handleRoutineViewOptions = (e) => {
-    setCreateRoutineToggle(false)
+    setCreateRoutineToggle(false);
 
     let name = e.target.name;
     if (name === "createNewRoutine") {
       setViewExistingRoutines(false);
       setCreateNewRoutine(true);
-      setCustom(false)
-      setWeekly(false)
+      setCustom(false);
+      setWeekly(false);
     }
     if (name === "viewExistingRoutines") {
       setCreateNewRoutine(false);
@@ -54,9 +54,9 @@ console.log('allRoutines', allRoutines)
 
   useEffect(() => {
     if (allRoutines.length === 0) {
-      setCreateNewRoutine(true)
+      setCreateNewRoutine(true);
     }
-  }, [])
+  }, []);
 
   return (
     <div className="grid-container">
@@ -66,7 +66,9 @@ console.log('allRoutines', allRoutines)
         className={createNewRoutine ? "createNewRoutineOptionChosen" : "hidden"}
       >
         <p className={weekly || custom ? "hidden" : "routineQuestion"}>
-        Do you prefer a fixed weekly schedule (e.g., Monday, Wednesday, Friday) <br /> or a flexible routine (e.g., every 4 days) for your workouts?
+          Do you prefer a fixed weekly schedule (e.g., Monday, Wednesday,
+          Friday) <br /> or a flexible routine (e.g., every 4 days) for your
+          workouts?
         </p>
         <MDBBtn
           onClick={() => {
@@ -88,22 +90,33 @@ console.log('allRoutines', allRoutines)
         </MDBBtn>
       </div>
 
-      <div
-        className="routineViewOptions"
-        
-      >
-        <MDBBtn  color={createNewRoutine ? "info" : ""} name="createNewRoutine" onClick={handleRoutineViewOptions}>
+      <div className="routineViewOptions">
+        <MDBBtn
+          color={createNewRoutine ? "info" : ""}
+          name="createNewRoutine"
+          onClick={handleRoutineViewOptions}
+        >
           Create New Routine
         </MDBBtn>
 
-        <MDBBtn color={viewExistingRoutines ? "info" : ""} name="viewExistingRoutines" onClick={handleRoutineViewOptions}>
+        <MDBBtn
+          color={viewExistingRoutines ? "info" : ""}
+          name="viewExistingRoutines"
+          onClick={handleRoutineViewOptions}
+        >
           View Existing Routines
         </MDBBtn>
       </div>
 
-        <div className={viewExistingRoutines && allRoutines.length === 0 ? "noRoutines" : "hidden"}>
+      <div
+        className={
+          viewExistingRoutines && allRoutines.length === 0
+            ? "noRoutines"
+            : "hidden"
+        }
+      >
         <p>No Routines Created...</p>
-        </div>
+      </div>
 
       <div className={viewExistingRoutines ? "fetchAllRoutines" : "hidden"}>
         <div className="fetchAllRoutines">
@@ -120,9 +133,7 @@ console.log('allRoutines', allRoutines)
           />
         </div>
       </div>
-      <div>
-
-      </div>
+      <div></div>
 
       {/*<div className="fetchRoutineByID">
         <FetchRoutineByID />
@@ -132,30 +143,35 @@ console.log('allRoutines', allRoutines)
       </div>
 
       <div
-        className={ viewExistingRoutines ? "hidden createRoutineToggleButton" :
-          custom || weekly
+        className={
+          viewExistingRoutines
+            ? "hidden createRoutineToggleButton"
+            : custom || weekly
             ? "createRoutineToggleButton"
             : "hidden createRoutineToggleButton"
         }
       >
-       {/* <MDBBtn
+        {/* <MDBBtn
           onClick={toggleCreateRoutine}
         >
           {createRoutineToggle ? "Hide Create Routine" : "Create Routine"}
        </MDBBtn>*/}
       </div>
 
-    {/*  {createRoutineToggle && ( */}
-        <div className={createNewRoutine && (custom || weekly) ? "createRoutine" : "hidden"}>
-          <CreateRoutine
-            custom={custom}
-            weekly={weekly}
-            routineToggle={routineToggle}
-            setRoutineToggle={setRoutineToggle}
-            setCreateRoutineToggle={setCreateRoutineToggle}
-          />
-        </div>
-
+      {/*  {createRoutineToggle && ( */}
+      <div
+        className={
+          createNewRoutine && (custom || weekly) ? "createRoutine" : "hidden"
+        }
+      >
+        <CreateRoutine
+          custom={custom}
+          weekly={weekly}
+          routineToggle={routineToggle}
+          setRoutineToggle={setRoutineToggle}
+          setCreateRoutineToggle={setCreateRoutineToggle}
+        />
+      </div>
     </div>
   );
 };
