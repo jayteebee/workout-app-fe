@@ -61,7 +61,7 @@ const FetchAllRoutines = ({
   }, [routineToggle, editToggle, deleteToggle]);
 
   const displayWorkouts = (routineID, routineFreq) => {
-    console.log('routineFreq', routineFreq, "routineID", routineID)
+    // console.log('routineFreq', routineFreq, "routineID", routineID)
     setSelectedRoutineID(routineID);
     if (routineFreq) {
       navigate("/Workout", {
@@ -106,7 +106,7 @@ const FetchAllRoutines = ({
   // }, [activeRoutine])
 
   const initiateRoutineChange = async (routineID, routineFrequency) => {
-    console.log("routineFrequency", routineFrequency, "routineID", routineID);
+    // console.log("routineFrequency", routineFrequency, "routineID", routineID);
     await setActiveRoutine(routineID);
     await setRoutineChange(true);
     displayWorkouts(routineID, routineFrequency);
