@@ -1,58 +1,82 @@
 /* Basic styling for the form container */
 .form-container {
-    display: flex;
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    justify-content:space-around;
-  }
-  
-  /* Style for form headings */
-  .form-container h2,
-  .form-container h3 {
-    margin-bottom: 10px;
-    color: #333;
-    font-size: 1.5rem;
-  }
-  
-  /* Style for input elements */
-  .form-container input,
-  .form-container select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 14px;
-  }
-  
-  /* Style for submit button */
-  /* .form-container button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  } */
-  
-  /* Style for select dropdown arrow */
-  .form-container select {
-    padding-right: 30px; /* Adjust based on arrow icon size */
-  }
-  
-  /* Style for select dropdown options */
-  .form-container select option {
-    background-color: #fff;
-    color: #333;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #323B66; /* Darker shade for the border */
+  border-radius: 5px;
+  background-color: #B9C1EA; /* Lighter shade for background */
+  justify-content: space-around;
+}
+
+/* Style for form headings */
+.form-container h2,
+.form-container h3 {
+  margin-bottom: 10px;
+  color: #5766B2; /* Mid-tone for the headings */
+  font-size: 1.5rem;
+}
+
+/* Style for input elements */
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #7084E6; /* Slightly darker shade for input borders */
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+  background-color: #E3E6F0; /* Very light shade for input background */
+  color: #2C3A65; /* Dark shade for input text */
+}
+
+/* Style for submit button */
+.form-container .MDBBtn {
+  padding: 10px 20px;
+  background-color: #51466; /* Mid-tone for button background */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Style for select dropdown arrow */
+.form-container select {
+  -webkit-appearance: none; /* Remove default styling */
+  -moz-appearance: none;   /* Remove default styling */
+  appearance: none;        /* Remove default styling */
+
+  background-color: #E3E6F0; /* Very light shade for select background */
+}
+
+/* Style for select dropdown options */
+.form-container select option {
+  background-color: #fff;
+  color: #333;
+}
+
+.datePicker {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Add a gap between the date pickers */
+}
+
+/* Additional style to ensure the form elements align properly */
+.form-container > div {
+  margin-bottom: 20px;
+}
+
+/* Additional responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .form-container {
+      flex-direction: column;
   }
 
   .datePicker {
-    display: flex;
-    align-items: center;
+      flex-direction: column;
   }
+}
