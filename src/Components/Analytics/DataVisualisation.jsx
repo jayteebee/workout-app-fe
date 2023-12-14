@@ -405,6 +405,22 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     }
   }, [dataForMuscleGroupPieChart, allExercises]);
 
+
+const randomHexGenerator = () => {
+  const alphabetArray = Array.from({length: 6}, (_, i) => String.fromCharCode(i + 65));
+  const numbersArray = Array.from({length: 10}, (_,i) => (i))
+  const hexadecimalBaseArray = [...alphabetArray, ...numbersArray]
+  
+  let generatedHex = ["#"]
+  for (let i=0; i<6; i++) {
+    const randomNumberFromHexBaseArr = hexadecimalBaseArray[Math.floor(Math.random() * hexadecimalBaseArray.length)]
+    generatedHex.push(randomNumberFromHexBaseArr)
+  }
+const generatedHexString = generatedHex.join("")
+return generatedHexString
+
+}
+
   const workoutOrExerciseBarChartData = dataForWorkoutOrExerciseBarChart &&
     dataForWorkoutOrExerciseBarChart.length > 0 && {
       labels: dataForWorkoutOrExerciseBarChart.map(
@@ -418,6 +434,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
           data: dataForWorkoutOrExerciseBarChart.map(
             (segment) => segment.totalMetric
           ),
+          backgroundColor: dataForWorkoutOrExerciseBarChart.map(() => randomHexGenerator())
         },
       ],
     };
@@ -452,31 +469,55 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
         },
       ],
     };
-
-  return (
-    <div>
-    <h2>Custom Chart Data</h2>
-      <DataVisForm
-        sortedSessionLogs={sortedSessionLogs}
-        setDataVisForm={setDataVisForm}
-        sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
-      />
-
-      {workoutOrExerciseBarChartData && (
-        <div style={{ width: "75vw", height: "75vh", backgroundColor: "white" }}>
-          <Bar 
-          data={workoutOrExerciseBarChartData}
-          />
+    return (
+      <div className="customCharts">
+        <h2>Custom Chart Data</h2>
+        <DataVisForm
+          sortedSessionLogs={sortedSessionLogs}
+          setDataVisForm={setDataVisForm}
+          sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
+        />
+    
+        <div className="chart-container">
+          {workoutOrExerciseBarChartData && (
+            <div className="bar-chart" style={{ backgroundColor: "#b9c1ea", color: "#FFF" }}>
+              <Bar 
+                data={workoutOrExerciseBarChartData}
+              />
+            </div>
+          )}
+          {pieChartMuscleGroupData && (
+            <div className="pie-chart">
+              <Pie data={muscleGroupPieChartData} />
+            </div>
+          )}
         </div>
-      )}
-      {pieChartMuscleGroupData && (
-        <div style={{ width: "75vw", height: "75vh" }}>
-          <Pie data={muscleGroupPieChartData} />
-        </div>
-      )}
-
       </div>
-      );
+    );
+  // return (
+  //   <div className="customCharts">
+  //   <h2>Custom Chart Data</h2>
+  //     <DataVisForm
+  //       sortedSessionLogs={sortedSessionLogs}
+  //       setDataVisForm={setDataVisForm}
+  //       sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
+  //     />
+
+  //     {workoutOrExerciseBarChartData && (
+  //       <div style={{ width: "60vw", height: "75vh", backgroundColor: "#b9c1ea", color: "#FFF" }}>
+  //         <Bar 
+  //         data={workoutOrExerciseBarChartData}
+  //         />
+  //       </div>
+  //     )}
+  //     {pieChartMuscleGroupData && (
+  //       <div style={{ width: "75vw", height: "75vh" }}>
+  //         <Pie data={muscleGroupPieChartData} />
+  //       </div>
+  //     )}
+
+  //     </div>
+  //     );
     };
     
     export default DataVisualisation;
