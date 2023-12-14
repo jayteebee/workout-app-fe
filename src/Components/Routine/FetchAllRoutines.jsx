@@ -23,6 +23,7 @@ const FetchAllRoutines = ({
   activeRoutine,
   setActiveRoutine,
   setRoutineChange,
+  checkboxToggle
 }) => {
   // const [allRoutines, setAllRoutines] = useState([]);
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
@@ -113,7 +114,7 @@ const FetchAllRoutines = ({
   };
 
   return (
-    <div>
+    <div className="routineContainer">
       {filteredRoutines &&
         filteredRoutines.map((routine) => (
           <div key={routine.id} className="routineButtons">
@@ -123,7 +124,8 @@ const FetchAllRoutines = ({
             >
               <strong>{routine.name}</strong>: View / Create Workouts
             </MDBBtn>
-
+<div className={checkboxToggle ? "editAndDelete" : "hidden"}
+>
             <button
               className="utilityButton"
               onClick={() => editRoutineToggle(routine.id, routine.frequency)}
@@ -137,7 +139,7 @@ const FetchAllRoutines = ({
             >
               <img src={deleteIcon} alt="delete" className="deleteIcon" />
             </button>
-
+</div>
             <MDBBtn
               color="warning"
               onClick={() => {

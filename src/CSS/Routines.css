@@ -74,8 +74,8 @@
 .fetchAllRoutines {
     grid-row: 3/ span 4;
     grid-column: 2 /span 4;
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
 }
 
 .editRoutine {

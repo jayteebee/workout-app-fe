@@ -23,8 +23,9 @@ const Routines = ({
   const [viewExistingRoutines, setViewExistingRoutines] = useState(false);
   const [createNewRoutine, setCreateNewRoutine] = useState(false);
   const [allRoutines, setAllRoutines] = useState([]);
-  console.log("allRoutines", allRoutines);
-
+  // console.log("allRoutines", allRoutines);
+const [checkboxToggle, setCheckboxToggle] = useState(false)
+console.log('checkboxToggle',checkboxToggle)
   const toggleCreateRoutine = () => {
     setCreateRoutineToggle((prevState) => !prevState);
   };
@@ -106,6 +107,13 @@ const Routines = ({
         >
           View Existing Routines
         </MDBBtn>
+
+        <div className={viewExistingRoutines ? "" : "hidden"}>
+         <input type="checkbox"
+         onClick={() => setCheckboxToggle(!checkboxToggle)}
+         />Edit/Delete Routines?
+          </div>
+
       </div>
 
       <div
@@ -130,6 +138,7 @@ const Routines = ({
             setActiveRoutine={setActiveRoutine}
             activeRoutine={activeRoutine}
             setRoutineChange={setRoutineChange}
+            checkboxToggle={checkboxToggle}
           />
         </div>
       </div>
