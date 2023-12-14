@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { getAllSessionLogs } from "../API/SessionLogs/SessionLogs";
 import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
-import "../CSS/Analytics.css"
-import { MDBCheckbox } from 'mdb-react-ui-kit';
+import "../CSS/Analytics.css";
+import { MDBCheckbox } from "mdb-react-ui-kit";
 import "react-datepicker/dist/react-datepicker.css";
 import ExerciseMetricTotalsByChosenTimeFrame from "../Components/Analytics/ExerciseMetricTotalsByChosenTimeFrame";
 import DataVisualisation from "../Components/Analytics/DataVisualisation";
@@ -25,10 +25,11 @@ const Analytics = () => {
   const [chosenFilter, setChosenFilter] = useState("All");
   // console.log("chosenFilter", chosenFilter);
 
-  const [filteredSessionLogs, setFilteredSessionLogs] = useState([])
+  const [filteredSessionLogs, setFilteredSessionLogs] = useState([]);
 
-  const [chosenDataRepresentation, setChosenDataRepresentation] = useState("")
-console.log('chosenDataRepresentation',chosenDataRepresentation)
+  const [chosenDataRepresentation, setChosenDataRepresentation] =
+    useState("Custom Chart Data");
+  console.log("chosenDataRepresentation", chosenDataRepresentation);
   // console.log('filteredSessionLogs',filteredSessionLogs)
   // register the en-GB locale for the date picker (prevents console error)
   useEffect(() => {
@@ -46,14 +47,13 @@ console.log('chosenDataRepresentation',chosenDataRepresentation)
     );
   // console.log("sortedSessionLogs", sortedSessionLogs);
 
- useEffect(() => {
-  if (sortedSessionLogs && sortedSessionLogs.length > 0) {
-    setFilteredSessionLogs(sortedSessionLogs)
-  }
- }, [sortedSessionLogs])
+  useEffect(() => {
+    if (sortedSessionLogs && sortedSessionLogs.length > 0) {
+      setFilteredSessionLogs(sortedSessionLogs);
+    }
+  }, [sortedSessionLogs]);
 
-
-  // this variable contains 4 different DatePicker components, each uniquely updating the chosenDate state 
+  // this variable contains 4 different DatePicker components, each uniquely updating the chosenDate state
   const filterToRender = {
     All: (
       <div>
@@ -137,10 +137,10 @@ console.log('chosenDataRepresentation',chosenDataRepresentation)
     return filterToRender[chosenFilter] || null;
   };
 
-// stores data for charts/graphs
+  // stores data for charts/graphs
   let arrayOfExerciseObjects = [];
 
-// loops over every session log and collates exercise data. EG: bench done twice, sums the reps/sets etc into one object.
+  // loops over every session log and collates exercise data. EG: bench done twice, sums the reps/sets etc into one object.
   filteredSessionLogs &&
     filteredSessionLogs.length > 0 &&
     filteredSessionLogs.forEach((log) => {
@@ -176,7 +176,6 @@ console.log('chosenDataRepresentation',chosenDataRepresentation)
     });
   // console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
 
-
   useEffect(() => {
     if (chosenDate.format) {
       const format = chosenDate.format;
@@ -184,7 +183,7 @@ console.log('chosenDataRepresentation',chosenDataRepresentation)
       const endDate = new Date(startDate.getTime());
       const startTimestamp = startDate.getTime();
       let endTimestamp;
-  
+
       if (format === "Week") {
         endDate.setDate(endDate.getDate() + 7);
       } else if (format === "Month") {
@@ -194,59 +193,66 @@ console.log('chosenDataRepresentation',chosenDataRepresentation)
       } else if (format === "Year") {
         endDate.setDate(endDate.getDate() + 365);
       }
-  
+
       endTimestamp = endDate.getTime();
-  
+
       const logsFilteredForDate = sortedSessionLogs.filter(
         (log) =>
           new Date(log.details.date).getTime() >= startTimestamp &&
           new Date(log.details.date).getTime() <= endTimestamp
       );
-  
+
       setFilteredSessionLogs(logsFilteredForDate);
     }
   }, [chosenDate]);
-  
 
-const dropdownTimeframeArray = ["All", "Week", "Month", "Quarter", "Year"]
-const dataRepresentationArray = ["--Select--","Single Time Frame", "Custom Chart Data", "Personal Records"]
+  const dropdownTimeframeArray = ["All", "Week", "Month", "Quarter", "Year"];
+  const dataRepresentationArray = [
+    "--Select--",
+    "Single Time Frame",
+    "Custom Chart Data",
+    "Personal Records",
+  ];
   return (
     <div>
-    
-    <h3>Data Display Filters</h3>
-<div style={{marginBottom: "10vh"}}>
-<select onChange={(e) => setChosenDataRepresentation(e.target.value)}>
-{dataRepresentationArray.map((item) => (
-  <option key={`key: ${item}`} value={item} >{item}</option>
-))}
-</select>
-</div>
+      <h3>Data Display Filters</h3>
+      <div style={{ marginBottom: "10vh" }}>
+        <select onChange={(e) => setChosenDataRepresentation(e.target.value)}>
+          {dataRepresentationArray.map((item) => (
+            <option key={`key: ${item}`} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      </div>
 
-{chosenDataRepresentation === "Single Time Frame" ? 
-<div className="dataBySingleTimeFrame">
-    <select onChange={(e) => setChosenFilter(e.target.value)}>
-    {dropdownTimeframeArray.map((timeframe) => (
-      <option key={`key:${timeframe}`}value={timeframe}>{timeframe}</option>
-      ))}
-      </select>
-      
-      {renderDatePicker()}
-      
-      {filteredSessionLogs.length === 0 ? 
-        <p>No Workout Data to display for this time period</p> :
-        <ExerciseMetricTotalsByChosenTimeFrame
-        arrayOfExerciseObjects={arrayOfExerciseObjects}
-        />
-      }
-      </div> 
- : chosenDataRepresentation === "Custom Chart Data" ? 
- <DataVisualisation
- sortedSessionLogs={sortedSessionLogs}
- />
- : chosenDataRepresentation === "Personal Records" ? 
- <PersonalRecords sortedSessionLogs={sortedSessionLogs} />
-: "Choose a option above to display your analytical data"
-}
+      {chosenDataRepresentation === "Single Time Frame" ? (
+        <div className="dataBySingleTimeFrame">
+          <select onChange={(e) => setChosenFilter(e.target.value)}>
+            {dropdownTimeframeArray.map((timeframe) => (
+              <option key={`key:${timeframe}`} value={timeframe}>
+                {timeframe}
+              </option>
+            ))}
+          </select>
+
+          {renderDatePicker()}
+
+          {filteredSessionLogs.length === 0 ? (
+            <p>No Workout Data to display for this time period</p>
+          ) : (
+            <ExerciseMetricTotalsByChosenTimeFrame
+              arrayOfExerciseObjects={arrayOfExerciseObjects}
+            />
+          )}
+        </div>
+      ) : chosenDataRepresentation === "Custom Chart Data" ? (
+        <DataVisualisation sortedSessionLogs={sortedSessionLogs} />
+      ) : chosenDataRepresentation === "Personal Records" ? (
+        <PersonalRecords sortedSessionLogs={sortedSessionLogs} />
+      ) : (
+        "Choose a option above to display your analytical data"
+      )}
     </div>
   );
 };
