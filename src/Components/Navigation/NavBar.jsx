@@ -5,6 +5,8 @@ import NavBarMenu from "./NavBarMenu";
 import "../../CSS/NavBar.css";
 import BackButton from "./BackButton";
 import { Link } from "react-router-dom";
+import { slide as Menu } from 'react-burger-menu';
+
 
 const NavBar = ({ setShowMenu, showMenu }) => {
   // const [showMenu, setShowMenu] = useState(false)
