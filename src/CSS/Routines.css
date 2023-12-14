@@ -16,12 +16,12 @@
     display: none;
   }
 
-.backButton {
+/* .backButton {
     height: 40px;
     width: auto;
     padding-top: 3px;
     padding-left: 3px;
-}
+} */
 
 .routineViewOptions {
     grid-row: 2;

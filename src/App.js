@@ -25,7 +25,7 @@ function App() {
   // used for toggling certain useEffects and the navBar
   const [loggedIn, setLoggedIn] = useState(false);
   // for navbar
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   // conditionally renders certain fields in create routine
   const [custom, setCustom] = useState(false);
   const [weekly, setWeekly] = useState(false);
@@ -53,11 +53,11 @@ function App() {
     }
   }, [loggedIn]);
 
-  const externalNavToggle = () => {
-    if (showMenu) {
-      setShowMenu(false);
-    }
-  };
+  // const externalNavToggle = () => {
+  //   if (showMenu) {
+  //     setShowMenu(false);
+  //   }
+  // };
   // console.log("showMenu", showMenu)
 
   useEffect(() => {
@@ -86,12 +86,13 @@ function App() {
 
   return (
     <div className="App">
-      <div className="App-inner" onClick={externalNavToggle}>
+  {/**onClick={externalNavToggle} */}
+      <div className="App-inner" >
         {loggedIn ? (
           <NavBar
-            className="navbar"
-            setShowMenu={setShowMenu}
-            showMenu={showMenu}
+            // className="navbar"
+            // setShowMenu={setShowMenu}
+            // showMenu={showMenu}
           />
         ) : null}
 

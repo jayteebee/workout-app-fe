@@ -9,7 +9,7 @@ const BackButton = () => {
         navigate(-1)
     }
   return (
-    <div>
+    <div className='back button div'>
     
     <button 
     className="button"

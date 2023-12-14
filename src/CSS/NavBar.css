@@ -1,4 +1,4 @@
-.hamburgerMenu {
+/* .hamburgerMenu {
     position: absolute;
     top: 2%;
     right: 5%;
@@ -15,7 +15,6 @@
 
 .hamburgerMenu h2 {
     color: #66fcf1;
-  /* font-family: "League Gothic", sans-serif; */
   font-size: 1.75rem ;
 
 }
@@ -38,10 +37,81 @@ width: 20vw;
 
   }
 
-/* .navbar {
+ .navbar {
     grid-column: 3;
     display: flex;
     justify-content: end;
     align-items: start;
     margin-right: 1rem;
-} */
+}  */
+
+
+/* ABOVE IS OG STYLING */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  right: 20px;
+  top: 20px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #5766B2; 
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #7084E6; 
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #B9C1EA;
+}
+
+/* Sidebar wrapper styles */
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #323B66; 
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #323B66; 
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #B9C1EA; 
+  padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+}
+
+.bm-item:hover {
+  color: white;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(51, 51, 102, 0.3); 
+}
