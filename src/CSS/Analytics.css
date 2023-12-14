@@ -20,17 +20,12 @@
     gap: 20px;
   }
   
-  .bar-chart {
+  .bar-chart, .pie-chart {
     flex: 1;
     /* You can define the background color and dimensions in the specific chart class if preferred */
     min-height: 50vh; /* adjust as needed */
   }
   
-  .pie-chart {
-    min-height: 25vh; /* adjust as needed */
-
-  }
-
   /* If you want to make it responsive for smaller screens */
   @media (max-width: 768px) {
     .chart-container {

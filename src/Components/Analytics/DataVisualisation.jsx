@@ -434,11 +434,55 @@ return generatedHexString
           data: dataForWorkoutOrExerciseBarChart.map(
             (segment) => segment.totalMetric
           ),
-          backgroundColor: dataForWorkoutOrExerciseBarChart.map(() => randomHexGenerator())
+          backgroundColor: dataForWorkoutOrExerciseBarChart.map(() => randomHexGenerator()),
+          borderColor: "#FFFFFF",
+          borderWidth: 3,
+          hoverBorderColor: dataForWorkoutOrExerciseBarChart.map(() => randomHexGenerator()),
+          hoverBackgroundColor: randomHexGenerator(),
+          color: "#"
         },
       ],
     };
   //   console.log("data", data);
+
+  const options = {
+    scales: {
+      x: {
+        grid: {
+          color: "rgb(192,192,192)", 
+          borderColor: '#FFFFFF', 
+        },
+        ticks: {
+          color: '#FFFFFF', 
+        },
+        title: {
+          display: true,
+          color: '#FFFFFF' 
+        }
+      },
+      y: {
+        grid: {
+          color: '#FFFFFF', 
+          borderColor: '#FFFFFF', 
+        },
+        ticks: {
+          color: '#FFFFFF', 
+        },
+        title: {
+          display: true,
+          color: '#FFFFFF' 
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: '#FFFFFF' 
+        }
+      }
+    }
+  };
+  
 
   let arrForPieChartDatasetData = [];
 
@@ -480,9 +524,10 @@ return generatedHexString
     
         <div className="chart-container">
           {workoutOrExerciseBarChartData && (
-            <div className="bar-chart" style={{ backgroundColor: "#b9c1ea", color: "#FFF" }}>
+            <div className="bar-chart" >
               <Bar 
                 data={workoutOrExerciseBarChartData}
+                options={options}
               />
             </div>
           )}
