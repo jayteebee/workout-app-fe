@@ -49,6 +49,7 @@ const HomeScreen = ({ loggedIn }) => {
       return {
         title: `Start ${data.workout_name}`,
         start: formattedDate,
+        // color: '#5766b2',
         id: data.id,
         routineWorkoutId: data.routine_workout_id,
       };
