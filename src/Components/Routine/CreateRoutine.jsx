@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { parseJwt } from "../../API/Authentication/parseJwt";
-import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import { MDBInput, MDBBtn, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from "mdb-react-ui-kit";
 import { createRoutine } from "../../API/Routine/Routine";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -54,6 +54,8 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
     });
   };
 
+  const frequencyDropdownOptions = [1,2,3,4,5,6,7]
+
   return (
     <div>
     <h2>Create Routine</h2>
@@ -67,16 +69,18 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
           onChange={handleChange}
           contrast
         />
-        <div className={weekly ? "hidden" : null}>
+        <div className={weekly ? "hidden" : null} style={{marginBottom: "10vh"}}>
+        
         <MDBInput
-          className="mb-4"
-          type="text"
-          label="Frequency"
-          value={formInput.frequency}
-          name="frequency"
-          onChange={handleChange}
-          contrast
+        className="mb-4"
+        type="text"
+        label="Frequency: Every 1,2,3... Days"
+        value={formInput.frequency}
+        name="frequency"
+        onChange={handleChange}
+        contrast
         />
+
         </div>
         <MDBBtn type="submit" className="mb-4" block>
           Create Routine
@@ -89,3 +93,18 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
 };
 
 export default CreateRoutine;
+
+
+
+// <select
+// // onChange={handleChange}
+// >
+//         {frequencyDropdownOptions.map((freq) => (
+//           <option
+//            value={formInput.frequency}
+//            name="frequency"
+// onChange={handleChange}
+
+//            >{freq}</option>
+//         ))}
+//  </select>
