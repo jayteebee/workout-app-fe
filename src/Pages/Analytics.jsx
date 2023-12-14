@@ -29,7 +29,7 @@ const Analytics = () => {
 
   const [chosenDataRepresentation, setChosenDataRepresentation] =
     useState("Custom Chart Data");
-  console.log("chosenDataRepresentation", chosenDataRepresentation);
+  // console.log("chosenDataRepresentation", chosenDataRepresentation);
   // console.log('filteredSessionLogs',filteredSessionLogs)
   // register the en-GB locale for the date picker (prevents console error)
   useEffect(() => {

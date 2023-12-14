@@ -463,8 +463,10 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
       />
 
       {workoutOrExerciseBarChartData && (
-        <div style={{ width: "75vw", height: "75vh" }}>
-          <Bar data={workoutOrExerciseBarChartData} />
+        <div style={{ width: "75vw", height: "75vh", backgroundColor: "white" }}>
+          <Bar 
+          data={workoutOrExerciseBarChartData}
+          />
         </div>
       )}
       {pieChartMuscleGroupData && (
