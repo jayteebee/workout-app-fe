@@ -16,14 +16,15 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 75%;
+    width: 100%;
     gap: 20px;
   }
   
   .bar-chart, .pie-chart {
     flex: 1;
     /* You can define the background color and dimensions in the specific chart class if preferred */
-    min-height: 50vh; /* adjust as needed */
+    max-height: 50vh; /* adjust as needed */
+    max-width: 75vw;
   }
   
   /* If you want to make it responsive for smaller screens */

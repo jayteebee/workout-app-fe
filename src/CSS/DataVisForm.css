@@ -2,7 +2,7 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  max-width: 600px;
+  min-width: 40vw;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #323B66; /* Darker shade for the border */
