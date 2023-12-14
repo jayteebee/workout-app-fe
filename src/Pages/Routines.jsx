@@ -66,7 +66,7 @@ console.log('allRoutines', allRoutines)
         className={createNewRoutine ? "createNewRoutineOptionChosen" : "hidden"}
       >
         <p className={weekly || custom ? "hidden" : "routineQuestion"}>
-          Will you be working out in a custom or weekly frequency?
+        Do you prefer a fixed weekly schedule (e.g., Monday, Wednesday, Friday) <br /> or a flexible routine (e.g., every 4 days) for your workouts?
         </p>
         <MDBBtn
           onClick={() => {
