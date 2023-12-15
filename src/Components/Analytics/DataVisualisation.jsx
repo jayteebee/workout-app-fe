@@ -418,7 +418,6 @@ const randomHexGenerator = () => {
   }
 const generatedHexString = generatedHex.join("")
 return generatedHexString
-
 }
 
   const workoutOrExerciseBarChartData = dataForWorkoutOrExerciseBarChart &&
