@@ -33,7 +33,7 @@ const Workout = ({
   // console.log('workout', workout)
   const [workoutToggle, setWorkoutToggle] = useState(false);
   const [routineID, setRoutineID] = useState(Number);
-  console.log('routineID state', routineID)
+  // console.log('routineID state', routineID)
   const [workoutCreated, setWorkoutCreated] = useState(false);
   const [toggleCreateWorkout, setToggleCreateWorkout] = useState(false);
 
@@ -79,7 +79,7 @@ const Workout = ({
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
     const userID = decodedToken.sub;
-    console.log('userID', userID, "routine id", routineID, "frequency", routineFrequencyExists)
+    // console.log('userID', userID, "routine id", routineID, "frequency", routineFrequencyExists)
     setCreateWorkoutDayData((prevState) => ({
       ...prevState,
       user_id: userID,
@@ -174,7 +174,7 @@ const Workout = ({
     // console.log('createWorkoutDayData in freq', createWorkoutDayData)
     await frequency(createWorkoutDayData)
       .then((response) => {
-        console.log("frequency Response: ", response);
+        // console.log("frequency Response: ", response);
       })
       .catch((err) => {
         console.log("customFrequencyWorkoutDaysAPICall Failed", err);

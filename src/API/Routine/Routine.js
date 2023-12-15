@@ -42,7 +42,7 @@ export const createRoutine = async (routineData) => {
 
 // ADD WORKOUT TO ROUTINE - WORKING!
 export const addWorkoutToRoutine = async (routineID, workoutData) => {
-    console.log("Workout Data: ",workoutData)
+    // console.log("Workout Data: ",workoutData)
     const r = await axiosInstanceWithToken.put(`/routines/${routineID}/workouts`, workoutData);
     return r.data;
 }
