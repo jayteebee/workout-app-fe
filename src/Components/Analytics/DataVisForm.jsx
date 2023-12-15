@@ -148,12 +148,13 @@ setExerciseOrWorkout(prevState => ({
 
         <div >
           <h3> Workout / Exercise To Measure</h3>
+<div style={{display: "flex", justifyContent: "space-evenly"}}>
+             <div> <input type="checkbox" checked={exerciseOrWorkout.workout} name="workout" onChange={(e) =>handleCheckChange(e)} />Workout</div>
 
-              <input type="checkbox" checked={exerciseOrWorkout.workout} name="workout" onChange={(e) =>handleCheckChange(e)} />Workout
-
-              <input type="checkbox" checked={exerciseOrWorkout.exercise} name="exercise" onChange={(e) =>handleCheckChange(e)} />Exercise
-
+              <div><input type="checkbox" checked={exerciseOrWorkout.exercise} name="exercise" onChange={(e) =>handleCheckChange(e)} />Exercise</div>
+              </div>
           <select
+          className={exerciseOrWorkout.workout ? "" : "hidden"}
             onChange={(e) => {
               setDataVisForm((prevForm) => ({
                 ...prevForm,
@@ -172,6 +173,8 @@ setExerciseOrWorkout(prevState => ({
           </select>
 
           <select
+          className={exerciseOrWorkout.exercise ? "" : "hidden"}
+
             onChange={(e) => {
               setDataVisForm((prevForm) => ({
                 ...prevForm,
