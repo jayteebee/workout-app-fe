@@ -126,7 +126,7 @@ const Workout = ({
     const newWorkoutDays = dayOfWeek
       .filter((day) => day[daysOfWeekArray[day.value]]) // check if the boolean is true
       .map((day) => day.value); // create array with true values
-    console.log("newWorkoutDays: ", newWorkoutDays);
+    // console.log("newWorkoutDays: ", newWorkoutDays);
 
     setCreateWorkoutDayData((prevData) => ({
       ...prevData,
@@ -154,7 +154,7 @@ const Workout = ({
 
   useEffect(() => {
     // debugger;
-    console.log("createWorkoutDayData in useEffect", createWorkoutDayData);
+    // console.log("createWorkoutDayData in useEffect", createWorkoutDayData);
     if (createWorkoutDayData.user_id) {
       createWorkoutDay(createWorkoutDayData)
         .then((workoutDayData) => {
@@ -171,7 +171,7 @@ const Workout = ({
 
   const customFrequencyWorkoutDaysAPICall = async () => {
     // debugger;
-    console.log('createWorkoutDayData in freq', createWorkoutDayData)
+    // console.log('createWorkoutDayData in freq', createWorkoutDayData)
     await frequency(createWorkoutDayData)
       .then((response) => {
         console.log("frequency Response: ", response);
@@ -248,7 +248,7 @@ if (rFreq) {
       );
       updatedDaysOfWeek.push(filteredWorkoutDays[0].days_of_week);
     }
-console.log('routineToChangeTo', routineToChangeTo)
+// console.log('routineToChangeTo', routineToChangeTo)
     setCreateWorkoutDayData((prevState) => ({
       ...prevState,
       routine_id: routineToChangeTo,
@@ -282,7 +282,7 @@ console.log('routineToChangeTo', routineToChangeTo)
   const routineChangeHandler = async (activeRoutineValue, rFreq) => {
 
     // debugger;
-    console.log('activeRoutineValue', activeRoutineValue, "rFreq", rFreq)
+    // console.log('activeRoutineValue', activeRoutineValue, "rFreq", rFreq)
     try {
       await deleteWorkoutSchedules();
       regenerateWorkoutDaysForRoutineChange(activeRoutineValue, rFreq);
@@ -294,17 +294,17 @@ console.log('routineToChangeTo', routineToChangeTo)
 
   // manages the active routine feature, calls routine change handler at the bottom
   useEffect(() => {
-    console.log('routineChange', routineChange)
+    // console.log('routineChange', routineChange)
     // debugger;
     if (routineChange) {
-    console.log('activeRoutine', activeRoutine)
+    // console.log('activeRoutine', activeRoutine)
     if (activeRoutine) {
           setCreateWorkoutDayData((prevState) => ({
       ...prevState,
       routine_id: selectedRoutineID,
     }));
     }
-console.log('routineFrequencyExists', routineFrequencyExists)
+// console.log('routineFrequencyExists', routineFrequencyExists)
     if (routineFrequencyExists) {
       setCreateWorkoutDayData((prevState) => ({
         ...prevState,
