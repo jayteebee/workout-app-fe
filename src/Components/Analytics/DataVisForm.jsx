@@ -33,13 +33,6 @@ const DataVisForm = ({
   // array for the drop down enabling the user to change the time segments they can see on the chart
   const dataViewFrequency = ["Workout", "Week", "Month", "Quarter", "Year"];
 
-  // const exerciseNamesFromWorkoutLogsArray =
-  //   sortedSessionLogs &&
-  //   sortedSessionLogs.length > 0 &&
-  //   sortedSessionLogs.flatMap((log) => {
-  //     const exerciseSession = log.details.exercise_sessions;
-  //     return exerciseSession.map((session) => session.exercise_name);
-  //   });
 
   const exerciseNamesFromSegmentedLogs =
     sessionLogsSegmentedByFrequency &&
