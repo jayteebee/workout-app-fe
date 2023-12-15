@@ -25,7 +25,7 @@ const Routines = ({
   const [allRoutines, setAllRoutines] = useState([]);
   // console.log("allRoutines", allRoutines);
 const [checkboxToggle, setCheckboxToggle] = useState(false)
-console.log('checkboxToggle',checkboxToggle)
+// console.log('checkboxToggle',checkboxToggle)
   const toggleCreateRoutine = () => {
     setCreateRoutineToggle((prevState) => !prevState);
   };
