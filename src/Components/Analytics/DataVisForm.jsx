@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
 import { MDBBtn } from "mdb-react-ui-kit";
-import "../../CSS/DataVisForm.css"
+import "../../CSS/DataVisForm.css";
 
 const DataVisForm = ({
   sortedSessionLogs,
   setDataVisForm,
   sessionLogsSegmentedByFrequency,
-  setFormSubmitted
+  setFormSubmitted,
 }) => {
   const [fromDate, setFromDate] = useState(new Date());
   //   console.log("fromDate", fromDate);
@@ -21,7 +21,7 @@ const DataVisForm = ({
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    setFormSubmitted(formSubmitted => !formSubmitted)
+    setFormSubmitted((formSubmitted) => !formSubmitted);
   };
 
   // array for the drop down enabling the user to change the time segments they can see on the chart
@@ -85,25 +85,25 @@ const DataVisForm = ({
     "Total Time Under Tension",
   ];
 
-const [exerciseOrWorkout, setExerciseOrWorkout] = useState({
-  exercise: false,
-  workout: false
-})
-console.log('exerciseOrWorkout',exerciseOrWorkout)
+  const [exerciseOrWorkout, setExerciseOrWorkout] = useState({
+    exercise: false,
+    workout: false,
+  });
+  console.log("exerciseOrWorkout", exerciseOrWorkout);
 
-const handleCheckChange = (e) => {
-const name = e.target.name
-setExerciseOrWorkout(prevState => ({
-  ...prevState,
-  [name]: !prevState[name]
-}))
-}
+  const handleCheckChange = (e) => {
+    const name = e.target.name;
+    setExerciseOrWorkout((prevState) => ({
+      ...prevState,
+      [name]: !prevState[name],
+    }));
+  };
 
   return (
     <div className="form-container">
       <form onSubmit={handleFormSubmit}>
-      <h3>Start / End Date</h3>
-      <div className="datePicker">
+        <h3>Start / End Date</h3>
+        <div className="datePicker">
           <DatePicker
             selected={fromDate}
             onChange={(date) => {
@@ -127,10 +127,9 @@ setExerciseOrWorkout(prevState => ({
           />
         </div>
 
-        <div >
+        <div>
           <h3>Frequency</h3>
           <select
-
             onChange={(e) => {
               setDataVisForm((prevForm) => ({
                 ...prevForm,
@@ -146,15 +145,32 @@ setExerciseOrWorkout(prevState => ({
           </select>
         </div>
 
-        <div >
+        <div>
           <h3> Workout / Exercise To Measure</h3>
-<div style={{display: "flex", justifyContent: "space-evenly"}}>
-             <div> <input type="checkbox" checked={exerciseOrWorkout.workout} name="workout" onChange={(e) =>handleCheckChange(e)} />Workout</div>
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <div>
+              {" "}
+              <input
+                type="checkbox"
+                checked={exerciseOrWorkout.workout}
+                name="workout"
+                onChange={(e) => handleCheckChange(e)}
+              />
+              Workout
+            </div>
 
-              <div><input type="checkbox" checked={exerciseOrWorkout.exercise} name="exercise" onChange={(e) =>handleCheckChange(e)} />Exercise</div>
-              </div>
+            <div>
+              <input
+                type="checkbox"
+                checked={exerciseOrWorkout.exercise}
+                name="exercise"
+                onChange={(e) => handleCheckChange(e)}
+              />
+              Exercise
+            </div>
+          </div>
           <select
-          className={exerciseOrWorkout.workout ? "" : "hidden"}
+            className={exerciseOrWorkout.workout ? "" : "hidden"}
             onChange={(e) => {
               setDataVisForm((prevForm) => ({
                 ...prevForm,
@@ -173,8 +189,7 @@ setExerciseOrWorkout(prevState => ({
           </select>
 
           <select
-          className={exerciseOrWorkout.exercise ? "" : "hidden"}
-
+            className={exerciseOrWorkout.exercise ? "" : "hidden"}
             onChange={(e) => {
               setDataVisForm((prevForm) => ({
                 ...prevForm,
@@ -193,7 +208,7 @@ setExerciseOrWorkout(prevState => ({
           </select>
         </div>
 
-        <div >
+        <div>
           <h3>Metric To Measure</h3>
           <select
             onChange={(e) => {
