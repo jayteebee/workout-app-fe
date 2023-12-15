@@ -71,6 +71,7 @@ console.log('checkboxToggle',checkboxToggle)
           Friday) <br /> or a flexible routine (e.g., every 4 days) for your
           workouts?
         </p>
+        <div style={{display: "flex", justifyContent: "space-around"}}>
         <MDBBtn
           onClick={() => {
             setWeekly(false);
@@ -89,6 +90,7 @@ console.log('checkboxToggle',checkboxToggle)
         >
           Weekly
         </MDBBtn>
+        </div>
       </div>
 
       <div className="routineViewOptions">
