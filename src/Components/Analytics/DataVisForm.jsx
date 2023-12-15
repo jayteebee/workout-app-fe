@@ -17,7 +17,10 @@ const DataVisForm = ({
   //   console.log("fromDate", fromDate);
   const [untilDate, setUntilDate] = useState(new Date());
   //   console.log("untilDate", untilDate);
-
+  const [exerciseOrWorkout, setExerciseOrWorkout] = useState({
+    exercise: false,
+    workout: false,
+  });
   useEffect(() => {
     registerLocale("en-GB", enGB);
   }, []);
@@ -87,11 +90,6 @@ const DataVisForm = ({
     "Total Sets",
     "Total Time Under Tension",
   ];
-
-  const [exerciseOrWorkout, setExerciseOrWorkout] = useState({
-    exercise: false,
-    workout: false,
-  });
 
 
   const handleCheckChange = (e) => {
