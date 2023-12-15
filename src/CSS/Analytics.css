@@ -21,8 +21,8 @@
   }
   
   .bar-chart, .pie-chart {
-    max-height: 50vh; 
-    max-width: 75vw;
+    height: 50vh; 
+    width: 50vw;
   }
   
   /* If you want to make it responsive for smaller screens */

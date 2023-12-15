@@ -8,6 +8,7 @@ const DataVisForm = ({
   sortedSessionLogs,
   setDataVisForm,
   sessionLogsSegmentedByFrequency,
+  setFormSubmitted
 }) => {
   const [fromDate, setFromDate] = useState(new Date());
   //   console.log("fromDate", fromDate);
@@ -20,7 +21,7 @@ const DataVisForm = ({
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("submitted");
+    setFormSubmitted(formSubmitted => !formSubmitted)
   };
 
   // array for the drop down enabling the user to change the time segments they can see on the chart
@@ -84,6 +85,20 @@ const DataVisForm = ({
     "Total Time Under Tension",
   ];
 
+const [exerciseOrWorkout, setExerciseOrWorkout] = useState({
+  exercise: false,
+  workout: false
+})
+console.log('exerciseOrWorkout',exerciseOrWorkout)
+
+const handleCheckChange = (e) => {
+const name = e.target.name
+setExerciseOrWorkout(prevState => ({
+  ...prevState,
+  [name]: !prevState[name]
+}))
+}
+
   return (
     <div className="form-container">
       <form onSubmit={handleFormSubmit}>
@@ -133,6 +148,10 @@ const DataVisForm = ({
 
         <div >
           <h3> Workout / Exercise To Measure</h3>
+
+              <input type="checkbox" checked={exerciseOrWorkout.workout} name="workout" onChange={(e) =>handleCheckChange(e)} />Workout
+
+              <input type="checkbox" checked={exerciseOrWorkout.exercise} name="exercise" onChange={(e) =>handleCheckChange(e)} />Exercise
 
           <select
             onChange={(e) => {

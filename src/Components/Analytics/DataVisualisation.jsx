@@ -50,6 +50,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   const [pieChartMuscleGroupData, setPieChartMuscleGroupData] = useState();
   //   console.log("pieChartMuscleGroupData", pieChartMuscleGroupData);
 
+  const [formSubmitted, setFormSubmitted] = useState(false)
   useEffect(() => {
     registerLocale("en-GB", enGB);
     getAllExercises()
@@ -208,7 +209,8 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     if (
       segmentedLogsFilteredByType &&
       segmentedLogsFilteredByType.length > 0 &&
-      dataVisForm.metric
+      dataVisForm.metric &&
+      formSubmitted
     ) {
       const metric = dataVisForm.metric;
       const totalMetricPerSegment = [];
@@ -367,7 +369,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
     //   } else if (dataVisForm.exerciseToMeasure) {
 
     //   }
-  }, [segmentedLogsFilteredByType, dataVisForm]);
+  }, [segmentedLogsFilteredByType, dataVisForm, formSubmitted]);
 
   //   console.log("dataForWorkoutOrExerciseBarChart", dataForWorkoutOrExerciseBarChart);
 
@@ -519,6 +521,7 @@ return generatedHexString
           sortedSessionLogs={sortedSessionLogs}
           setDataVisForm={setDataVisForm}
           sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
+          setFormSubmitted={setFormSubmitted}
         />
     
         <div className="chart-container">
