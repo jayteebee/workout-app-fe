@@ -9,6 +9,9 @@ const DataVisForm = ({
   setDataVisForm,
   sessionLogsSegmentedByFrequency,
   setFormSubmitted,
+  setDataForMuscleGroupPieChart,
+  setPieChartMuscleGroupData,
+  setDataForWorkoutOrExerciseBarChart
 }) => {
   const [fromDate, setFromDate] = useState(new Date());
   //   console.log("fromDate", fromDate);
@@ -89,7 +92,7 @@ const DataVisForm = ({
     exercise: false,
     workout: false,
   });
-  console.log("exerciseOrWorkout", exerciseOrWorkout);
+
 
   const handleCheckChange = (e) => {
     const name = e.target.name;
@@ -98,6 +101,19 @@ const DataVisForm = ({
       [name]: !prevState[name],
     }));
   };
+
+  const resetForm = () => {
+    setDataVisForm({
+      startDate: "",
+      endDate: "",
+      frequency: "",
+      workoutToMeasure: "",
+      exerciseToMeasure: "",
+      metric: "",
+    })
+    setDataForMuscleGroupPieChart()
+    setDataForWorkoutOrExerciseBarChart()
+  }
 
   return (
     <div className="form-container">
@@ -228,6 +244,7 @@ const DataVisForm = ({
         </div>
 
         <MDBBtn type="submit">Submit!</MDBBtn>
+        <MDBBtn onClick={() => resetForm()}>Reset Form</MDBBtn>
       </form>
     </div>
   );

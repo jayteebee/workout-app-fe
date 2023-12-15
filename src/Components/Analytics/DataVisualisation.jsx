@@ -522,6 +522,9 @@ return generatedHexString
           setDataVisForm={setDataVisForm}
           sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
           setFormSubmitted={setFormSubmitted}
+          setDataForMuscleGroupPieChart={setDataForMuscleGroupPieChart}
+          setPieChartMuscleGroupData={setPieChartMuscleGroupData}
+          setDataForWorkoutOrExerciseBarChart={setDataForWorkoutOrExerciseBarChart}
         />
     
         <div className="chart-container">
