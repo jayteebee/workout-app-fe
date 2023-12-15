@@ -21,9 +21,7 @@
   }
   
   .bar-chart, .pie-chart {
-    flex: 1;
-    /* You can define the background color and dimensions in the specific chart class if preferred */
-    max-height: 50vh; /* adjust as needed */
+    max-height: 50vh; 
     max-width: 75vw;
   }
   
