@@ -28,6 +28,7 @@ const ExerciseCreation = () => {
   const [parameterReset, setParameterReset] = useState(false)
 
   const addExercise = async () => {
+    console.log('selectedWorkout',selectedWorkout, 'exerciseParameters',exerciseParameters)
     await addExerciseToWorkout(selectedWorkout, exerciseParameters);
     setSearchedExerciseName(null);
     setSearchedMuscleGroup(null);
