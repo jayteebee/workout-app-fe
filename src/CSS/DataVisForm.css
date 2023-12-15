@@ -61,8 +61,7 @@
 
 .datePicker {
   display: flex;
-  align-items: center;
-  gap: 10px; /* Add a gap between the date pickers */
+  justify-content: space-between;
 }
 
 /* Additional style to ensure the form elements align properly */

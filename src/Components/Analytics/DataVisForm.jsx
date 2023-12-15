@@ -243,8 +243,10 @@ const DataVisForm = ({
           </select>
         </div>
 
+        <div style={{display: "flex", justifyContent: "space-between"}}>
         <MDBBtn type="submit">Submit!</MDBBtn>
         <MDBBtn onClick={() => resetForm()}>Reset Form</MDBBtn>
+        </div>
       </form>
     </div>
   );
