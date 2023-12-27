@@ -23,7 +23,7 @@ const HomeScreen = ({ loggedIn }) => {
   // console.log("exercisesInWorkout", exercisesInWorkout);
 
   const [idOfRoutineWorkout, setIdOfRoutineWorkout] = useState(null)
-console.log('idOfRoutineWorkout',idOfRoutineWorkout)
+
   const navigate = useNavigate();
 
   const {exercisesInWorkout, setExercisesInWorkout} = useContext(WorkoutContext)
