@@ -69,9 +69,9 @@ const Workout = ({
   // this comes from FetchAllRoutines.jsx
   const routineFrequencyExists = location.state?.routineFrequencyExists;
   const selectedRoutineID = location.state?.selectedRoutineID
-//   console.log('routineFrequencyExists', routineFrequencyExists)
+  console.log('routineFrequencyExists', routineFrequencyExists)
 // console.log('routineFrequency', routineFrequency)
-// console.log('selectedRoutineID', selectedRoutineID)
+console.log('selectedRoutineID', selectedRoutineID)
 
 
   useEffect(() => {
