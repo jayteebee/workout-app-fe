@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getAllWorkoutSchedules } from "../API/WorkoutSchedule/WorkoutSchedule";
 import format from "date-fns/format";
 import FullCalendar from "@fullcalendar/react";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { getExercisesInWorkout } from "../API/Workout/Workout";
 import "../App.css";
 import { ToastContainer, toast } from "react-toastify";
+import { WorkoutContext } from "../Context/WorkoutContext";
 
 // manages the calender and events that users can click on to view their workouts
 const HomeScreen = ({ loggedIn }) => {
@@ -15,12 +16,16 @@ const HomeScreen = ({ loggedIn }) => {
   const [calendarEvents, setCalendarEvents] = useState(null);
   // console.log('calendarEvents',calendarEvents)
   const [sortedSchedule, setSortedSchedule] = useState([]);
-  const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
+
+  // lifted state to app
+  // const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
+
   // console.log("exercisesInWorkout", exercisesInWorkout);
   const [idOfRoutineWorkout, setIdOfRoutineWorkout] = useState(null)
 
   const navigate = useNavigate();
 
+  const {exercisesInWorkout, setExercisesInWorkout} = useContext(WorkoutContext)
   useEffect(() => {
     if (loggedIn) {
           getAllWorkoutSchedules()

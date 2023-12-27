@@ -17,6 +17,7 @@ import Profile from "./Pages/Profile";
 import WorkoutSession from "./Pages/WorkoutSession";
 import { getAllRoutines } from "./API/Routine/Routine";
 import { parseJwt } from "./API/Authentication/parseJwt";
+import { WorkoutContext } from "./Context/WorkoutContext";
 
 // brew services start redis - backend service
 // foreman start -p 4000
@@ -38,6 +39,8 @@ function App() {
   const [activeRoutine, setActiveRoutine] = useState();
   const [routineChange, setRoutineChange] = useState(false);
   // console.log('activeRoutine', activeRoutine, "routineChange", routineChange)
+
+  const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -100,7 +103,12 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route
               path="/"
-              element={<HomeScreen routineID={routineID} loggedIn={loggedIn} />}
+              element={
+              <WorkoutContext.Provider value={{exercisesInWorkout, setExercisesInWorkout}}>
+                <HomeScreen routineID={routineID} loggedIn={loggedIn} />
+                </WorkoutContext.Provider>
+              
+              }
             />
 
             <Route
@@ -144,8 +152,14 @@ function App() {
 
             <Route path="/Profile" element={<Profile loggedIn={loggedIn} />} />
 
-            <Route path="/Session" element={<WorkoutSession />} />
-          </Route>
+            <Route path="/Session" element={
+              
+              <WorkoutContext.Provider value={{exercisesInWorkout, setExercisesInWorkout}}>
+              <WorkoutSession />
+              </WorkoutContext.Provider>
+            } />
+
+            </Route>
 
           <Route
             path="/GettingStarted"

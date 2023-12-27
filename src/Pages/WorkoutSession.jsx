@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import StopWatch from "../Components/WorkoutSession/StopWatch";
 import greenRhombus from "../CSS/Icons/GreenRhombus.png";
@@ -16,6 +16,7 @@ import { createExerciseSession } from "../API/ExerciseSession/ExerciseSession";
 import { createSessionLogs } from "../API/SessionLogs/SessionLogs";
 import SetTimer from "../Components/WorkoutSession/SetTimer";
 import "../CSS/WorkoutSession.css";
+import { WorkoutContext } from "../Context/WorkoutContext";
 
 // takes a user through the workout set by set, logs final outcomes via exercise/workout_Sesssion to the logs component
 
@@ -63,9 +64,10 @@ const WorkoutSession = () => {
   }, [userID]);
 
   const location = useLocation();
-  const exercisesInWorkout = location.state?.exercisesInWorkout;
+  // const exercisesInWorkout = location.state?.exercisesInWorkout;
+  const {exercisesInWorkout, setExercisesInWorkout} = useContext(WorkoutContext)
   console.log('exercisesInWorkout',exercisesInWorkout)
-  
+
   // const workoutName = <h2>Workout: {exercisesInWorkout[0].workout_name}</h2>;
 
   // console.log("exercisesInWorkout", exercisesInWorkout);
