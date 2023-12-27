@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllRoutines } from "../../API/Routine/Routine";
@@ -11,6 +11,7 @@ import deleteIcon from "../../CSS/Icons/deleteIcon.png";
 import editIcon from "../../CSS/Icons/editIcon.png";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import Workout from "../../Pages/Workout";
+import { RoutineAndWorkoutDataContext } from "../../Context/RoutineAndWorkoutDataContext";
 
 // responsible for displaying the routines and their options such as edit/delete/add workouts
 
@@ -35,6 +36,8 @@ const FetchAllRoutines = ({
   const [filteredRoutines, setFilteredRoutines] = useState(null);
   // console.log("filteredRoutines", filteredRoutines)
   const [editingFrequencyRoutine, setEditingFrequencyRoutine] = useState(false);
+
+  const {setManagingRoutineAndWorkoutData} = useContext(RoutineAndWorkoutDataContext)
 
   useEffect(() => {
     const routineFrequency =
@@ -64,15 +67,23 @@ const FetchAllRoutines = ({
   const displayWorkouts = (routineID, routineFreq) => {
     // console.log('routineFreq', routineFreq, "routineID", routineID)
     setSelectedRoutineID(routineID);
+    setManagingRoutineAndWorkoutData({
+      selectedRoutineID: routineID,
+      routineFrequencyExists: routineFreq,
+      })
     if (routineFreq) {
-      navigate("/Workout", {
-        state: {
-          selectedRoutineID: routineID,
-          routineFrequencyExists: routineFreq,
-        },
-      });
+      navigate("/Workout"
+      // , {
+      //   state: {
+      //     selectedRoutineID: routineID,
+      //     routineFrequencyExists: routineFreq,
+      //   },
+      // }
+      );
     } else {
-      navigate("/Workout", { state: { selectedRoutineID: routineID } });
+      navigate("/Workout"
+      // , { state: { selectedRoutineID: routineID } }
+      );
     }
   };
 

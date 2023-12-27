@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getWorkoutsInRoutine } from "../../API/Routine/Routine";
 import EditWorkout from "./EditWorkout";
@@ -8,6 +8,7 @@ import deleteIcon from "../../CSS/Icons/deleteIcon.png";
 import editIcon from "../../CSS/Icons/editIcon.png";
 import { MDBBtn } from "mdb-react-ui-kit";
 import { parseJwt } from "../../API/Authentication/parseJwt";
+import { RoutineAndWorkoutDataContext } from "../../Context/RoutineAndWorkoutDataContext";
 
 const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout }) => {
   // const [workout, setWorkout] = useState([]);
@@ -31,8 +32,13 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout })
   }, []);
 
   const location = useLocation();
-  const selectedRoutineID = location.state?.selectedRoutineID;
+  // const selectedRoutineID = location.state?.selectedRoutineID;
   const navigate = useNavigate();
+  const {managingRoutineAndWorkoutData} = useContext(RoutineAndWorkoutDataContext)
+
+
+  const selectedRoutineID = managingRoutineAndWorkoutData.selectedRoutineID
+
 
   useEffect(() => {
     setRoutineID(selectedRoutineID);

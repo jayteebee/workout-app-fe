@@ -18,6 +18,7 @@ import WorkoutSession from "./Pages/WorkoutSession";
 import { getAllRoutines } from "./API/Routine/Routine";
 import { parseJwt } from "./API/Authentication/parseJwt";
 import { WorkoutContext } from "./Context/WorkoutContext";
+import { RoutineAndWorkoutDataContext } from "./Context/RoutineAndWorkoutDataContext";
 
 // brew services start redis - backend service
 // foreman start -p 4000
@@ -41,6 +42,10 @@ function App() {
   // console.log('activeRoutine', activeRoutine, "routineChange", routineChange)
 
   const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
+  const [managingRoutineAndWorkoutData, setManagingRoutineAndWorkoutData] = useState({
+    selectedRoutineID: "",
+    routineFrequencyExists: ""
+  })
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -112,8 +117,10 @@ function App() {
             />
 
             <Route
-              path="/Routines"
-              element={
+            path="/Routines"
+            element={
+              
+              <RoutineAndWorkoutDataContext.Provider value={{setManagingRoutineAndWorkoutData , managingRoutineAndWorkoutData}}>
                 <Routines
                   setCustom={setCustom}
                   custom={custom}
@@ -124,12 +131,15 @@ function App() {
                   activeRoutine={activeRoutine}
                   setRoutineChange={setRoutineChange}
                 />
+              </RoutineAndWorkoutDataContext.Provider>
+
               }
             />
 
             <Route
               path="/Workout"
               element={
+            <RoutineAndWorkoutDataContext.Provider value={{setManagingRoutineAndWorkoutData , managingRoutineAndWorkoutData}}>
                 <Workout
                   weekly={weekly}
                   custom={custom}
@@ -137,9 +147,9 @@ function App() {
                   activeRoutine={activeRoutine}
                   routineChange={routineChange}
                 />
+                </RoutineAndWorkoutDataContext.Provider>
               }
             />
-
             <Route path="/CreateExercise" element={<ExerciseCreation />} />
 
             <Route path="/Knowledge" element={<Knowledge />} />

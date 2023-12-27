@@ -1,5 +1,5 @@
 import { MDBBtn } from "mdb-react-ui-kit";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { parseJwt } from "../API/Authentication/parseJwt";
 import {
   createWorkoutDay,
@@ -18,6 +18,7 @@ import {
   deleteWorkoutScheduleByID,
   getAllWorkoutSchedules,
 } from "../API/WorkoutSchedule/WorkoutSchedule";
+import { RoutineAndWorkoutDataContext } from "../Context/RoutineAndWorkoutDataContext";
 
 // this component manages creating the workout day data that is used to generate workout schedules
 
@@ -65,10 +66,15 @@ const Workout = ({
   // console.log('logOfRoutineDaysOfWeek', logOfRoutineDaysOfWeek)
   const [workoutDays, setWorkoutDays] = useState([]);
 
+  const {managingRoutineAndWorkoutData} = useContext(RoutineAndWorkoutDataContext)
+  const routineFrequencyExists = managingRoutineAndWorkoutData.routineFrequencyExists
+
+  const selectedRoutineID = managingRoutineAndWorkoutData.selectedRoutineID
+
   const location = useLocation();
   // this comes from FetchAllRoutines.jsx
-  const routineFrequencyExists = location.state?.routineFrequencyExists;
-  const selectedRoutineID = location.state?.selectedRoutineID
+  // const routineFrequencyExists = location.state?.routineFrequencyExists;
+  // const selectedRoutineID = location.state?.selectedRoutineID
   console.log('routineFrequencyExists', routineFrequencyExists)
 // console.log('routineFrequency', routineFrequency)
 console.log('selectedRoutineID', selectedRoutineID)

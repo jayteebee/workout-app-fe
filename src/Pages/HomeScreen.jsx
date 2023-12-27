@@ -23,7 +23,7 @@ const HomeScreen = ({ loggedIn }) => {
   // console.log("exercisesInWorkout", exercisesInWorkout);
 
   const [idOfRoutineWorkout, setIdOfRoutineWorkout] = useState(null)
-
+console.log('idOfRoutineWorkout',idOfRoutineWorkout)
   const navigate = useNavigate();
 
   const {exercisesInWorkout, setExercisesInWorkout} = useContext(WorkoutContext)
@@ -67,21 +67,22 @@ const HomeScreen = ({ loggedIn }) => {
 
 
   const startWorkout = (rwID) => {
+if (rwID) {
+  const currentDate = new Date();
+  const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
 
-    const currentDate = new Date();
-    const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
-
-    const hasEventOnCurrentDay = calendarEvents.some(
-      (event) => event.start === formattedCurrentDate
-    );
-    if (hasEventOnCurrentDay) {
-      navigate("/Session", {
-        state: { exercisesInWorkout: exercisesInWorkout, rwID: rwID },
-      });
-      console.log("success");
-    } else {
-      console.log("Failure");
-    }
+  const hasEventOnCurrentDay = calendarEvents.some(
+    (event) => event.start === formattedCurrentDate
+  );
+  if (hasEventOnCurrentDay) {
+    navigate("/Session", {
+      state: { exercisesInWorkout: exercisesInWorkout, rwID: rwID },
+    });
+    console.log("success");
+  } else {
+    console.log("Failure");
+  }
+}
   };
 
   const handleEventClick = async (eventClickInfo) => {
@@ -100,6 +101,7 @@ if (exercisesInWorkout.length === 0) {
     const routineWorkoutId =
       eventClickInfo.event.extendedProps.routineWorkoutId;
     // console.log("routineWorkoutId", routineWorkoutId);
+
     setIdOfRoutineWorkout(routineWorkoutId)
 
     await getExercisesInWorkout(routineWorkoutId)
