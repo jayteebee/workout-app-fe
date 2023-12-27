@@ -83,7 +83,7 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
 
 
   return (
-    <div >
+    <div className="setsRepsWeightContainer">
       {searchedExerciseName || searchedMuscleGroup ? (
         <div className="setsRepsWeightComponent">
 
@@ -95,12 +95,12 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
-                width: "7vw",
+                width: "20vw",
               }),
               menu: (baseStyles) => ({
                 ...baseStyles,
                 backgroundColor: "rgba(11, 12, 16, 0.3)",
-                width: "7vw"
+                width: "20vw"
               }),
               option: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
@@ -118,12 +118,12 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
-                width: "7vw",
+                width: "20vw",
               }),
               menu: (baseStyles) => ({
                 ...baseStyles,
                 backgroundColor: "rgba(11, 12, 16, 0.3)",
-                width: "7vw"
+                width: "20vw"
               }),
               option: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
@@ -141,12 +141,12 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
-                width: "7vw",
+                width: "20vw",
               }),
               menu: (baseStyles) => ({
                 ...baseStyles,
                 backgroundColor: "rgba(11, 12, 16, 0.3)",
-                width: "7vw"
+                width: "20vw"
               }),
               option: (baseStyles, { isFocused }) => ({
                 ...baseStyles,
@@ -164,12 +164,12 @@ const SetsRepsWeight = ({ searchedExerciseName, searchedMuscleGroup, setExercise
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
-                width: "7vw",
+                width: "20vw",
               }),
               menu: (baseStyles) => ({
                 ...baseStyles,
                 backgroundColor: "rgba(11, 12, 16, 0.3)",
-                width: "7vw"
+                width: "20vw"
               }),
               option: (baseStyles, { isFocused }) => ({
                 ...baseStyles,

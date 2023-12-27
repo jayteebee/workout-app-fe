@@ -29,6 +29,15 @@
     .search {
       grid-column: 1 / span4;
     }
+    .subHeader.exerciseCreation {
+      display: flex;
+      justify-self: center;
+      font-size: 2.5rem;
+    }
+.pageHeader.exerciseCreation {
+  display: flex;
+  font-size: 3rem;
+}
 }
 
 .setsRepsWeightRender {
@@ -37,6 +46,19 @@
     justify-self: center;
     padding-top: 25px;
     gap: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+.setsRepsWeightContainer {
+  width: 80vw;
+  display: flex;
+}
+.setsRepsWeightComponent {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+}
+
 }
 
 .setsRepsWeightComponent {
