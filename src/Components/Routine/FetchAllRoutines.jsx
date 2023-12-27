@@ -120,7 +120,9 @@ const FetchAllRoutines = ({
           <div key={routine.id} className="routineButtons">
             {localStorage.setItem("routineID", routine.id)}
             <MDBBtn
-              onClick={() => {setRoutineChange(false); displayWorkouts(routine.id, routine.frequency)}}
+              onClick={() => {
+                setRoutineChange(false);
+                 displayWorkouts(routine.id, routine.frequency)}}
             >
               <strong>{routine.name}</strong>: View / Create Workouts
             </MDBBtn>
