@@ -51,7 +51,6 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   //   console.log("pieChartMuscleGroupData", pieChartMuscleGroupData);
 
   const [formSubmitted, setFormSubmitted] = useState(false)
-  console.log('formSubmitted',formSubmitted)
   useEffect(() => {
     registerLocale("en-GB", enGB);
     getAllExercises()
