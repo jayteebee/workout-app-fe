@@ -21,6 +21,7 @@ const HomeScreen = ({ loggedIn }) => {
   // const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
 
   // console.log("exercisesInWorkout", exercisesInWorkout);
+
   const [idOfRoutineWorkout, setIdOfRoutineWorkout] = useState(null)
 
   const navigate = useNavigate();

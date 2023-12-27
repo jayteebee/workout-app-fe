@@ -66,12 +66,13 @@ const WorkoutSession = () => {
   const location = useLocation();
   // const exercisesInWorkout = location.state?.exercisesInWorkout;
   const {exercisesInWorkout, setExercisesInWorkout} = useContext(WorkoutContext)
-  console.log('exercisesInWorkout',exercisesInWorkout)
+  // console.log('exercisesInWorkout',exercisesInWorkout)
 
   // const workoutName = <h2>Workout: {exercisesInWorkout[0].workout_name}</h2>;
 
   // console.log("exercisesInWorkout", exercisesInWorkout);
   const routineWorkoutID = location.state?.rwID;
+console.log('routineWorkoutID',routineWorkoutID)
 
   const [workoutSessionData, setWorkoutSessionData] = useState({
     user_id: null,
