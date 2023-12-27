@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { addExerciseToWorkout } from "../API/Workout/Workout";
 import Search from "../Components/Exercises/Search";
 import SetsRepsWeight from "../Components/Exercises/SetsRepsWeight";
-import "../CSS/ExerciseCreation.css";
+import "../CSS/ExerciseCreation.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

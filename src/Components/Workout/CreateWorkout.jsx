@@ -152,6 +152,7 @@ useEffect(() => {
   return (
     <div>
     <h2>Create Workout</h2>
+    <div className="inputFormContainer">
       <form onSubmit={handleSubmit} className="inputForm">
         <MDBInput
           className="mb-4"
@@ -204,6 +205,7 @@ useEffect(() => {
         </MDBBtn>
       </form>
 <ToastContainer />
+    </div>
     </div>
   );
 };

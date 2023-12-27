@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import DatePicker, { registerLocale } from "react-datepicker";
 import enGB from "date-fns/locale/en-GB";
 import { MDBBtn } from "mdb-react-ui-kit";
-import "../../CSS/DataVisForm.css";
+import "../../CSS/DataVisForm.scss";
 
 const DataVisForm = ({
   setDataVisForm,

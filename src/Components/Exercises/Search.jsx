@@ -161,12 +161,18 @@ const Search = ({
           styles={{
             control: (baseStyles) => ({
               ...baseStyles,
-              width: "20vw",
+              width: "40vw",
+              '@media (max-width: 600px)': { 
+                width: "90vw",
+              }
             }),
             menu: (baseStyles) => ({
               ...baseStyles,
               backgroundColor: "rgba(11, 12, 16, 0.3)",
-              width: "20vw",
+              width: "40vw",
+              '@media (max-width: 600px)': { 
+                width: "90vw",
+              }
             }),
             option: (baseStyles, { isFocused }) => ({
               ...baseStyles,
@@ -184,12 +190,19 @@ const Search = ({
           styles={{
             control: (baseStyles) => ({
               ...baseStyles,
-              width: "20vw",
+              width: "40vw",
+              justifyContent: "center",
+              '@media (max-width: 600px)': { 
+                width: "90vw",
+              }
             }),
             menu: (baseStyles) => ({
               ...baseStyles,
               backgroundColor: "rgba(11, 12, 16, 0.3)",
-              width: "20vw",
+              width: "40vw",
+              '@media (max-width: 600px)': { 
+                width: "90vw",
+              }
             }),
             option: (baseStyles, { isFocused }) => ({
               ...baseStyles,

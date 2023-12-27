@@ -21,8 +21,27 @@
     grid-column: 3 /span 2;
 }
 
+@media only screen and (max-width: 600px) {
+.workoutViewOptions {
+    grid-column: 2/span 4;
+    display: flex;
+    flex-direction: column;
+}
+}
+
 .inputForm {
     width: 20vw;
+}
+
+@media only screen and (max-width: 600px) {
+    .inputFormContainer {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .inputForm {
+        width: 80vw;
+    }
 }
 
 .inputFormEditWorkout {
@@ -38,6 +57,14 @@
     /* background-color:#001F3F;
     border-radius: 25px;
     color: #66fcf1;  */
+}
+
+@media only screen and (max-width: 600px) {
+    .createWorkout {
+        grid-column: 2/span 4;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .finaliseDaysButtons {

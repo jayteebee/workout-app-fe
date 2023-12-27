@@ -1,17 +1,8 @@
-.App {
+/* .App {
   text-align: center;
-  /* background-color:#0B0C10; */
   color: white;
-  /* padding: 10px */
   height: 110vh;
 }
-
-/* .grid-container {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr); 
-  gap: 10px; 
-} */
 
 .App-inner {
   background-color:#001F3F;
@@ -32,7 +23,6 @@
 }
 
 p, h3, h2 {
-  /* font-family: "Oswald", sans-serif; */
   font-family: 'Raleway', sans-serif;
   font-size: 1.5rem;
 }
@@ -101,14 +91,136 @@ h3 {
 }
 
 
+ */
 
-/* .exerciseInfo {
-    display: flex;
-  justify-content: center;
+ .App {
+  text-align: center;
+  color: white;
+  height: 110vh;
 }
 
+@media (max-width: 600px) {
+  .App {
+    height: 100vh;
+  }
+}
 
+.App-inner {
+  background-color:#001F3F;
+  height: 500vh;
+  color: #66fcf1;
+}
 
-.exerciseSessionBorder p {
+@media (max-width: 600px) {
+  .App-inner {
+    height: 100vh;
+  }
+}
 
-} */
+.pageHeader {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .pageHeader {
+    font-size: 2rem;
+  }
+}
+
+.subHeader {
+  font-family: "League Gothic", sans-serif;
+  font-size: 2.5rem;
+}
+
+@media (max-width: 600px) {
+  .subHeader {
+    font-size: 1.5rem;
+  }
+}
+
+p, h3, h2 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 600px) {
+  p, h3, h2 {
+    font-size: 1rem;
+  }
+}
+
+.scrollableDiv {
+  height: 75vh;
+  width: 100vw;
+  overflow-y: auto;
+} 
+
+@media (max-width: 600px) {
+  .scrollableDiv {
+    height: 100vh;
+  }
+}
+
+.fullScrollableDiv {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+} 
+
+@media (max-width: 600px) {
+  .fullScrollableDiv {
+    height: 100vh;
+  }
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  width: 100vw;
+  padding-top: 10vh;
+}
+
+@media (max-width: 600px) {
+  .calendar {
+  }
+}
+
+.utilityButton {
+  background-color: transparent;
+  border: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.password {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.passWordAuthMessage {
+  margin: 0;
+  padding: 0;
+  color: red;
+  font-size: 1em;
+  padding-bottom: 1em;
+}
+
+.red {
+  background-color: red;
+}
+
+.button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none; 
+}

@@ -110,7 +110,7 @@ const [checkboxToggle, setCheckboxToggle] = useState(false)
           View Existing Routines
         </MDBBtn>
 
-        <div className={viewExistingRoutines ? "" : "hidden"}>
+        <div className={viewExistingRoutines ? "editDeleteRoutinesShowing" : "hidden"}>
          <input type="checkbox"
          onClick={() => setCheckboxToggle(!checkboxToggle)}
          />Edit/Delete Routines?

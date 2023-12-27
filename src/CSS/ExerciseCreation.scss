@@ -25,6 +25,12 @@
 
 }
 
+@media only screen and (max-width: 600px) {
+    .search {
+      grid-column: 1 / span4;
+    }
+}
+
 .setsRepsWeightRender {
     grid-column: 2 / span 4;
     grid-row: 4 / span 3;
@@ -47,11 +53,20 @@ display: flex;
 }
 
 .searchBar {
+  display: flex;
+  justify-content: center;
 padding-top: 25px;
 }
 
-.css-b62m3t-container {
-    display: flex;
-justify-content: center;
-}
+// @media only screen and (max-width: 600px) {
+//   .searchBar {
+// width: 100vw;
+// background-color: aqua;
+//   }
+//   .css-b62m3t-container {
+//     width: 100vw;
+//   }
+
+// }
+
 
