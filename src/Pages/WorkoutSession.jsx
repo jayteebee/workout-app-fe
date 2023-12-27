@@ -64,6 +64,8 @@ const WorkoutSession = () => {
 
   const location = useLocation();
   const exercisesInWorkout = location.state?.exercisesInWorkout;
+  console.log('exercisesInWorkout',exercisesInWorkout)
+  
   // const workoutName = <h2>Workout: {exercisesInWorkout[0].workout_name}</h2>;
 
   // console.log("exercisesInWorkout", exercisesInWorkout);
