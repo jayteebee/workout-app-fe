@@ -38,3 +38,21 @@
     }
   }
   
+  /* For mobile devices with max-width 480px */
+@media (max-width: 480px) {
+  .customCharts {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 10px;
+  }
+
+  .chart-container {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .bar-chart, .pie-chart {
+      height: 40vh; 
+      width: 90vw;
+  }
+}
