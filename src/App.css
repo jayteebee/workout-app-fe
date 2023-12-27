@@ -106,8 +106,10 @@ h3 {
 }
 
 .App-inner {
-  background-color:#001F3F;
-  height: 500vh;
+  /* background-color:#001F3F; */
+  background: radial-gradient(circle at center, #00539b, #001F3F);
+
+  height: 200vh;
   color: #66fcf1;
 }
 
