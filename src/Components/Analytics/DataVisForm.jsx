@@ -5,13 +5,12 @@ import { MDBBtn } from "mdb-react-ui-kit";
 import "../../CSS/DataVisForm.css";
 
 const DataVisForm = ({
-  sortedSessionLogs,
   setDataVisForm,
   sessionLogsSegmentedByFrequency,
   setFormSubmitted,
-  setDataForMuscleGroupPieChart,
   setPieChartMuscleGroupData,
-  setDataForWorkoutOrExerciseBarChart
+  setDataForWorkoutOrExerciseBarChart,
+  dataVisForm
 }) => {
   const [fromDate, setFromDate] = useState(new Date());
   //   console.log("fromDate", fromDate);
@@ -31,7 +30,7 @@ const DataVisForm = ({
   };
 
   // array for the drop down enabling the user to change the time segments they can see on the chart
-  const dataViewFrequency = ["Workout", "Week", "Month", "Quarter", "Year"];
+  const dataViewFrequency = ["---Select---", "Week", "Month", "Quarter", "Year"];
 
 
   const exerciseNamesFromSegmentedLogs =
@@ -102,8 +101,14 @@ const DataVisForm = ({
       exerciseToMeasure: "",
       metric: "",
     })
-    setDataForMuscleGroupPieChart()
+    setPieChartMuscleGroupData()
     setDataForWorkoutOrExerciseBarChart()
+    setFromDate(new Date());
+    setUntilDate(new Date())
+    setExerciseOrWorkout({
+      exercise: false,
+      workout: false,
+    })
   }
 
   return (
@@ -137,6 +142,7 @@ const DataVisForm = ({
         <div>
           <h3>Frequency</h3>
           <select
+          value={dataVisForm.frequency} 
             onChange={(e) => {
               setDataVisForm((prevForm) => ({
                 ...prevForm,
@@ -154,11 +160,11 @@ const DataVisForm = ({
 
         <div>
           <h3> Workout / Exercise To Measure</h3>
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <div>
-              {" "}
+          <div style={{ display: "flex", justifyContent:"space-evenly" }}>
+            <div >
               <input
                 type="checkbox"
+                disabled={dataVisForm.workoutToMeasure || dataVisForm.exerciseToMeasure ? true : false}
                 checked={exerciseOrWorkout.workout}
                 name="workout"
                 onChange={(e) => handleCheckChange(e)}
@@ -169,14 +175,18 @@ const DataVisForm = ({
             <div>
               <input
                 type="checkbox"
+                disabled={dataVisForm.workoutToMeasure || dataVisForm.exerciseToMeasure ? true : false}
                 checked={exerciseOrWorkout.exercise}
                 name="exercise"
                 onChange={(e) => handleCheckChange(e)}
               />
               Exercise
             </div>
-          </div>
+            </div>
+            {dataVisForm.workoutToMeasure || dataVisForm.exerciseToMeasure ? <p style={{color: "red", fontSize: "1rem"}}>Reset form to alter</p> : ""}
+
           <select
+          value={dataVisForm.workoutToMeasure}
             className={exerciseOrWorkout.workout ? "" : "hidden"}
             onChange={(e) => {
               setDataVisForm((prevForm) => ({
@@ -196,6 +206,7 @@ const DataVisForm = ({
           </select>
 
           <select
+          value={dataVisForm.exerciseToMeasure}
             className={exerciseOrWorkout.exercise ? "" : "hidden"}
             onChange={(e) => {
               setDataVisForm((prevForm) => ({
@@ -218,6 +229,7 @@ const DataVisForm = ({
         <div>
           <h3>Metric To Measure</h3>
           <select
+          value={dataVisForm.metric}
             onChange={(e) => {
               setDataVisForm((prevForm) => ({
                 ...prevForm,

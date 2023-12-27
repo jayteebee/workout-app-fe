@@ -51,6 +51,7 @@ const DataVisualisation = ({ sortedSessionLogs }) => {
   //   console.log("pieChartMuscleGroupData", pieChartMuscleGroupData);
 
   const [formSubmitted, setFormSubmitted] = useState(false)
+  console.log('formSubmitted',formSubmitted)
   useEffect(() => {
     registerLocale("en-GB", enGB);
     getAllExercises()
@@ -518,11 +519,10 @@ return generatedHexString
       <div className="customCharts">
         <h2>Custom Chart Data</h2>
         <DataVisForm
-          sortedSessionLogs={sortedSessionLogs}
           setDataVisForm={setDataVisForm}
+          dataVisForm={dataVisForm}
           sessionLogsSegmentedByFrequency={sessionLogsSegmentedByFrequency}
           setFormSubmitted={setFormSubmitted}
-          setDataForMuscleGroupPieChart={setDataForMuscleGroupPieChart}
           setPieChartMuscleGroupData={setPieChartMuscleGroupData}
           setDataForWorkoutOrExerciseBarChart={setDataForWorkoutOrExerciseBarChart}
         />

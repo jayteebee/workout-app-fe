@@ -66,7 +66,7 @@ const WorkoutSession = () => {
   const exercisesInWorkout = location.state?.exercisesInWorkout;
   // const workoutName = <h2>Workout: {exercisesInWorkout[0].workout_name}</h2>;
 
-  console.log("exercisesInWorkout", exercisesInWorkout);
+  // console.log("exercisesInWorkout", exercisesInWorkout);
   const routineWorkoutID = location.state?.rwID;
 
   const [workoutSessionData, setWorkoutSessionData] = useState({
@@ -167,7 +167,7 @@ useEffect(() => {
   const handleWeightAndRepsSubmit = (e) => {
     e.preventDefault();
     createExerciseSession(exerciseSessionData)
-      .then((data) => console.log("Data:", data))
+      .then((data) => data)
       .catch((err) =>
         console.log("Error with createExerciseSession API Call:", err)
       );
@@ -227,7 +227,7 @@ useEffect(() => {
       createSessionLogs(workoutSession)
       .then((data) =>
         console.log("data", data),
-        console.log('SessionLogsCREATED')
+        // console.log('SessionLogsCREATED')
       );
     }
   }, [workoutComplete]);
