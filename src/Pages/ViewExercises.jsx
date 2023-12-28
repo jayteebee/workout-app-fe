@@ -25,8 +25,35 @@ const ViewExercises = () => {
   return (
     <div>
       <h3 className="pageHeader">Exercises</h3>
-      <div className="scrollableDivForViewExercises">
-        {exercises.map((exercises, index) => (
+      <div className="tableContainer">
+      <div className="tableWrapper">
+        <table className="customTable">
+        <thead>
+        <tr>
+          <th>Exercise</th>
+          <th>Set</th>
+          <th>Reps</th>
+          <th>Weight (kg)</th>
+          <th>Rest Timer (s)</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      {exercises.map((exercises, index) => {
+return (
+        <tr> 
+          <td>{exercises.exercise.name}</td>
+          <td>{exercises.sets}</td>
+          <td>{exercises.reps}</td>
+          <td>{exercises.weight}</td>
+          <td>{exercises.rest_timer}</td>
+        </tr>
+)
+      })}
+      </tbody>
+        </table>
+      </div>
+{  /*      {exercises.map((exercises, index) => (
           <div key={index} className="exerciseSession">
           <div> 
             <p>{exercises.exercise.name}</p>
@@ -35,7 +62,7 @@ const ViewExercises = () => {
             <p>Rest: {exercises.rest_timer} seconds</p>
             </div>
           </div>
-        ))}
+))} */}
       </div>
     <BackButton />
 
