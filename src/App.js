@@ -19,6 +19,7 @@ import { getAllRoutines } from "./API/Routine/Routine";
 import { parseJwt } from "./API/Authentication/parseJwt";
 import { WorkoutContext } from "./Context/WorkoutContext";
 import { RoutineAndWorkoutDataContext } from "./Context/RoutineAndWorkoutDataContext";
+import ConfirmAccount from "./Components/RegisterOrLogIn/ConfirmAccount";
 
 // brew services start redis - backend service
 // foreman start -p 4000
@@ -175,6 +176,8 @@ function App() {
             path="/GettingStarted"
             element={<RegisterOrLogIn setLoggedIn={setLoggedIn} />}
           />
+
+          <Route path="/GettingStarted/confirmation" element={<ConfirmAccount />} />
         </Routes>
       </div>
     </div>
