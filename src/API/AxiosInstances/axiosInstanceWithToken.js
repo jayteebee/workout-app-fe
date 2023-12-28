@@ -2,6 +2,7 @@ import axios from 'axios';
 import { logOut } from '../Authentication/Authentication';
 
 
+
 const axiosInstanceWithToken = axios.create({
     baseURL: process.env.NODE_ENV === 'production' 
                 ? 'https://workout-app-backend-a67feb525b8a.herokuapp.com' 
