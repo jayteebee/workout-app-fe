@@ -177,7 +177,7 @@ function App() {
             element={<RegisterOrLogIn setLoggedIn={setLoggedIn} />}
           />
 
-          <Route path="/GettingStarted/confirmation%3F" element={<ConfirmAccount />} />
+          <Route path="/GettingStarted/confirmation" element={<ConfirmAccount />} />
         </Routes>
       </div>
     </div>
