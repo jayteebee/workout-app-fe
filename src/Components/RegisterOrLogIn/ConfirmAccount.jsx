@@ -8,7 +8,7 @@ const ConfirmAccount = () => {
   useEffect(() => {
     const segmentedUrl = window.location.search
     const confirmationToken = segmentedUrl.split("=")[1]
-
+// console.log('confirmationToken',confirmationToken)
     if (confirmationToken) {
       axiosInstance.post('/confirm_account', { confirmation_token: confirmationToken })
         .then(response => {
