@@ -6,6 +6,13 @@ const ConfirmAccount = () => {
   const location = useLocation();
     const nav = useNavigate()
   useEffect(() => {
+    console.log(window.location.href); // Full URL
+    console.log(window.location.search); // Just the query string part
+    
+    const tokenTest = new URLSearchParams(window.location.search).get('confirmation_token');
+    console.log(tokenTest); // Should log the token or null
+    
+
     const queryParams = new URLSearchParams(location.search);
     console.log('queryParams',queryParams)
     const token = queryParams.get('confirmation_token');
