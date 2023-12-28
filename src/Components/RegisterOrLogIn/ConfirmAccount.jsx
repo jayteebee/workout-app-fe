@@ -8,9 +8,9 @@ const ConfirmAccount = () => {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const token = queryParams.get('confirmation_token');
-
+console.log('token',token)
     if (token) {
-      axios.post('/api/confirmation', { confirmation_token: token })
+      axios.post('/confirm_account', { confirmation_token: token })
         .then(response => {
             nav("/GettingStarted")
         })
