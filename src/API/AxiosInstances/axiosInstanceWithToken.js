@@ -23,6 +23,7 @@ axiosInstanceWithToken.interceptors.response.use(
       if (error.response && error.response.status === 401) {
         // Token expired or invalid
         await logOut(); // Perform logout action
+        localStorage.removeItem('token');
         window.location.href = '/GettingStarted'; // Redirect to login page
       }
       return Promise.reject(error);
