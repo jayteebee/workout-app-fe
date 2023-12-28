@@ -26,7 +26,7 @@ console.log('segmentedUrl',segmentedUrl)
     console.log('confirmationToken',confirmationToken)
 
     if (confirmationToken) {
-      axiosInstance.post('/confirm_account', { confirmation_token: confirmationToken })
+      axiosInstance.get('/confirm_account', { confirmation_token: confirmationToken })
         .then(response => {
             nav("/GettingStarted")
         })
