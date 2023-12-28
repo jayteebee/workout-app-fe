@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import axiosInstance from '../../API/AxiosInstances/axiosInstance';
 
 const ConfirmAccount = () => {
   const location = useLocation();
@@ -25,7 +26,7 @@ console.log('segmentedUrl',segmentedUrl)
     console.log('confirmationToken',confirmationToken)
 
     if (confirmationToken) {
-      axios.post('/confirm_account', { confirmation_token: confirmationToken })
+      axiosInstance.post('/confirm_account', { confirmation_token: confirmationToken })
         .then(response => {
             nav("/GettingStarted")
         })
