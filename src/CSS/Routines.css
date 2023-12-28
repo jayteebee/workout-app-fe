@@ -28,8 +28,11 @@
     grid-column: 3 /span 2;
    
 }
+.formContainer {
+    width: 20vw;
+}
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1222px) {
     .grid-container {
         display: flex;
         justify-content: center;
@@ -42,6 +45,18 @@
         display: flex;
         flex-direction: column;
     }
+
+    .formContainer {
+        width: 80vw;
+    }
+
+    .createRoutineFormContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100vw;
+    }
+
 
   }
 
@@ -85,7 +100,7 @@
     grid-column: 3 /span 2;
     display: flex;
     justify-content: center;
-
+    width: 80vw;
 }
 
 .fetchAllRoutines {
@@ -97,10 +112,6 @@
 
 .editRoutine {
     padding-top: 50px;
-}
-
-.formContainer {
-    width: 20vw;
 }
 
 .mdb-input .form-control {

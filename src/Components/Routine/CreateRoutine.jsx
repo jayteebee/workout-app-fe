@@ -57,7 +57,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
   const frequencyDropdownOptions = [1,2,3,4,5,6,7]
 
   return (
-    <div>
+    <div className="createRoutineFormContainer">
     <h2>Create Routine</h2>
       <form onSubmit={handleSubmit} className="formContainer">
         <MDBInput
