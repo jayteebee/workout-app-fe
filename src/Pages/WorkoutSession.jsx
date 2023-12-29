@@ -265,6 +265,7 @@ useEffect(() => {
             <button
               className="button"
               value={i}
+              title="Start Set"
               onClick={() =>
                 exerciseButton(
                   "red",
@@ -282,6 +283,7 @@ useEffect(() => {
           {buttonColor === "red" && id === exercise.id ? (
             <button
               className="button"
+              title="Finish Set"
               onClick={() =>
                 exerciseButton(
                   "purple",
@@ -299,6 +301,7 @@ useEffect(() => {
           {buttonColor === "purple" && id === exercise.id ? (
             <button
               className="button"
+              title="Resting"
               {...(count === 0 &&
                 exerciseButton(
                   "green",
