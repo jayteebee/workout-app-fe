@@ -47,17 +47,6 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
     }
   };
 
-  // const handleChange = (e) => {
-  //   const value = e.target.value;
-  //   if (/^\d*$/.test(value)) {
-  //   setFormInput({
-  //     ...formInput,
-  //     [e.target.name]: value,
-  //   });
-  // } else {
-  //   e.preventDefault()
-  // }
-  // };
 
   const handleChange = (e) => {
     const value = e.target.value;
