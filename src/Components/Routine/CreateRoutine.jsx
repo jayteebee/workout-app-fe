@@ -47,11 +47,30 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
     }
   };
 
+  // const handleChange = (e) => {
+  //   const value = e.target.value;
+  //   if (/^\d*$/.test(value)) {
+  //   setFormInput({
+  //     ...formInput,
+  //     [e.target.name]: value,
+  //   });
+  // } else {
+  //   e.preventDefault()
+  // }
+  // };
+
   const handleChange = (e) => {
-    setFormInput({
-      ...formInput,
-      [e.target.name]: e.target.value,
-    });
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) { // if the value given is a number, then proceed
+      setFormInput({
+        ...formInput,
+        [e.target.name]: value,
+      });
+      e.target.setCustomValidity(''); // clear any previous custom validation messages
+    } else {
+      e.target.setCustomValidity('Please enter only numbers.'); // set a custom validation message
+    }
+    e.target.reportValidity(); // display the custom validation message
   };
 
   const frequencyDropdownOptions = [1,2,3,4,5,6,7]
