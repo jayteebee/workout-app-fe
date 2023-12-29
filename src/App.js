@@ -21,7 +21,7 @@ import { WorkoutContext } from "./Context/WorkoutContext";
 import { RoutineAndWorkoutDataContext } from "./Context/RoutineAndWorkoutDataContext";
 import ConfirmAccount from "./Components/RegisterOrLogIn/ConfirmAccount";
 import BackButton from "./Components/Navigation/BackButton";
-import Joyride from 'react-joyride';
+
 
 // brew services start redis - backend service
 // foreman start -p 4000
@@ -64,13 +64,6 @@ function App() {
     }
   }, [loggedIn]);
 
-  // const externalNavToggle = () => {
-  //   if (showMenu) {
-  //     setShowMenu(false);
-  //   }
-  // };
-  // console.log("showMenu", showMenu)
-
   useEffect(() => {
     if (loggedIn) {
       getAllRoutines()
@@ -95,27 +88,33 @@ function App() {
     routineID && setRoutineID(routineID[0]);
   }, [filteredRoutines]);
 
+
   return (
     <div className="App">
   {/**onClick={externalNavToggle} */}
       <div className="App-inner" >
         {loggedIn ? (
+          <div>
           <NavBar
-            // className="navbar"
+            id="navbarID"
             // setShowMenu={setShowMenu}
             // showMenu={showMenu}
           />
-        ) : null}
-
-        <BackButton />
-        <Routes>
-          <Route element={<PrivateRoute />}>
-            <Route
-              path="/"
-              element={
-              <WorkoutContext.Provider value={{exercisesInWorkout, setExercisesInWorkout}}>
-                <HomeScreen routineID={routineID} loggedIn={loggedIn} />
-                </WorkoutContext.Provider>
+          </div>
+          ) : null}
+          
+          {loggedIn && 
+            <BackButton/>
+          }
+        
+          <Routes>
+        <Route element={<PrivateRoute />}>
+        <Route
+        path="/"
+        element={
+          <WorkoutContext.Provider value={{exercisesInWorkout, setExercisesInWorkout}}>
+          <HomeScreen routineID={routineID} loggedIn={loggedIn} />          
+          </WorkoutContext.Provider>
               
               }
             />

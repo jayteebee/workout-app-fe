@@ -117,18 +117,10 @@ if (exercisesInWorkout.length === 0) {
     }
   }, [exercisesInWorkout])
 
-  // const displayWorkoutData = exercisesInWorkout.map((exercise) => (
-  //   <div key={exercise.id}>
-  //     Workout Name: {exercise.workout_name}
-  //     Exercise: {exercise.exercise.name}
-  //     Sets: {exercise.sets}
-  //     Reps: {exercise.reps}
-  //   </div>
-  // ));
-  // console.log("displayWorkoutData", displayWorkoutData);
 
   return (
     <div>
+
 {/*    <h3>Welcome to My Workout App</h3>
   <h1 style={{textDecoration: "underline", color: "white"}}>--UNDER DEVELOPMENT--</h1> */}
     <div className="calendar-container" >

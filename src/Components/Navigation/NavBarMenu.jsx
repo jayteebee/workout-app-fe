@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../../CSS/NavBar.css";
 import { Link, useLocation } from "react-router-dom";
 import { slide as Menu } from 'react-burger-menu';
@@ -26,11 +26,13 @@ const location = useLocation()
       document.querySelector('.bm-menu-wrap').focus();
     }
   }, [menuOpen]);
+
+
   return (
-    <div>
+    <div >
     <Menu right isOpen={menuOpen} onStateChange={handleStateChange}>
     <Link className={`menu-item ${isCurrentPage('/') ? 'active' : ''}`} to="/" onClick={closeMenu}><h2>Home</h2></Link>
-    <Link className={`menu-item ${isCurrentPage('/Routines') ? 'active' : ''}`} to="/Routines" onClick={closeMenu}><h2>Routines</h2></Link>
+    <Link className={`menu-item ${isCurrentPage('/Routines') ? 'active' : ''}`} to="/Routines" onClick={closeMenu}><h2 id="routinesMenuOption">Routines</h2></Link>
     <Link className={`menu-item ${isCurrentPage('/Profile') ? 'active' : ''}`} to="/Profile" onClick={closeMenu}><h2>Profile</h2></Link>
    {/* <Link className={`menu-item ${isCurrentPage('/Knowledge') ? 'active' : ''}`} to="/Knowledge" onClick={closeMenu}><h2>Knowledge</h2></Link> */}
     <Link className={`menu-item ${isCurrentPage('/Analytics') ? 'active' : ''}`} to="/Analytics" onClick={closeMenu}><h2>Analytics</h2></Link>
