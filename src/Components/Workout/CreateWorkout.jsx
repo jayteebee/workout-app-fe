@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../../CSS/Workout.css";
 import { parseJwt } from "../../API/Authentication/parseJwt";
-import {
-  MDBInput,
-  MDBBtn,
-} from "mdb-react-ui-kit";
+import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
 import { addWorkoutToRoutine, getAllRoutines } from "../../API/Routine/Routine";
 import { ToastContainer, toast } from "react-toastify";
-
 
 const CreateWorkout = ({
   setWorkoutToggle,
@@ -20,7 +16,7 @@ const CreateWorkout = ({
   weekly,
   custom,
   logOfRoutineDaysOfWeek,
-  setLogOfRoutineDaysOfWeek
+  setLogOfRoutineDaysOfWeek,
 }) => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -42,24 +38,26 @@ const CreateWorkout = ({
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
   // console.log("** workoutDayINDEX", workoutDayIndex);
 
-const [allRoutines, setAllRoutines] = useState([])
-// console.log('allRoutines',allRoutines)
+  const [allRoutines, setAllRoutines] = useState([]);
+  // console.log('allRoutines',allRoutines)
 
-useEffect(() => {
-  getAllRoutines()
-  .then((data) => {
-    setAllRoutines(data);
-  })
-  .catch((err) => {
-    console.log("getAllRoutines API Call Failed", err);
-  });
-}, [])
+  useEffect(() => {
+    getAllRoutines()
+      .then((data) => {
+        setAllRoutines(data);
+      })
+      .catch((err) => {
+        console.log("getAllRoutines API Call Failed", err);
+      });
+  }, []);
 
-let currentRoutine;
-if (allRoutines && allRoutines.length > 0) {
-  currentRoutine = allRoutines.filter((routines) => routines.id === routineID)[0]
-  // console.log('currentRoutine',currentRoutine)
-}
+  let currentRoutine;
+  if (allRoutines && allRoutines.length > 0) {
+    currentRoutine = allRoutines.filter(
+      (routines) => routines.id === routineID
+    )[0];
+    // console.log('currentRoutine',currentRoutine)
+  }
 
   const daysOfWeekArray = [
     "sunday",
@@ -70,8 +68,8 @@ if (allRoutines && allRoutines.length > 0) {
     "friday",
     "saturday",
   ];
-const [updatedDays, setUpdatedDays] = useState([])
-// console.log('updatedDays state', updatedDays)
+  const [updatedDays, setUpdatedDays] = useState([]);
+  // console.log('updatedDays state', updatedDays)
   useEffect(() => {
     if (workoutDayIndex !== false) {
       toggleDaysOfWeekBoolean(workoutDayIndex);
@@ -92,12 +90,15 @@ const [updatedDays, setUpdatedDays] = useState([])
     });
 
     setDayOfWeek(updatedDaysOfWeek);
-    setUpdatedDays(updatedDaysOfWeek)
+    setUpdatedDays(updatedDaysOfWeek);
   };
 
-useEffect(() => {
-  setLogOfRoutineDaysOfWeek({routineID: routineID, daysOfWeek: updatedDays})
-}, [updatedDays])
+  useEffect(() => {
+    setLogOfRoutineDaysOfWeek({
+      routineID: routineID,
+      daysOfWeek: updatedDays,
+    });
+  }, [updatedDays]);
 
   // console.log("dayOfWeek ***", dayOfWeek);
 
@@ -135,7 +136,6 @@ useEffect(() => {
           theme: "dark",
         }
       );
-
     } catch (err) {
       console.error("Error:", err);
     } finally {
@@ -147,7 +147,7 @@ useEffect(() => {
   };
 
   // console.log("order", order);
-// console.log('routineID',routineID)
+  // console.log('routineID',routineID)
   useEffect(() => {
     if (createdWorkout.id) {
       // console.log("workoutDay", workoutDay);
@@ -170,64 +170,63 @@ useEffect(() => {
 
   return (
     <div>
-    <h2>Create Workout</h2>
-    <div className="inputFormContainer">
-      <form onSubmit={handleSubmit} className="inputForm">
-        <MDBInput
-          className="mb-4"
-          type="text"
-          label="Workout Name"
-          value={formInput.name}
-          name="name"
-          onChange={handleChange}
-          contrast
-        />
-
-        {/*<div className={weekly ? "hidden" : null}>*/}
-        <div className="hidden">
+      <h2>Create Workout</h2>
+      <div className="inputFormContainer">
+        <form onSubmit={handleSubmit} className="inputForm">
           <MDBInput
             className="mb-4"
             type="text"
-            label="Workout Order"
-            value={order}
-            name="order"
-            onChange={(e) => setOrder(e.target.value)}
+            label="Workout Name"
+            value={formInput.name}
+            name="name"
+            onChange={handleChange}
             contrast
           />
-        </div>
-    {currentRoutine && 
-    
-      <div className={currentRoutine.frequency ? "hidden" : null}>
-        <select
-          className="form-control contrast-dropdown"
-          value={workoutDay}
-          name="day"
-          onChange={(e) => setWorkoutDay(e.target.value)}
-        >
-          {daysOfWeekArray.map((day, i) => {
-            const newDay = day.charAt(0).toUpperCase() + day.slice(1);
-            return (
-              <option
-                key={i}
-                value={newDay}
-                className={
-                  workoutDay === newDay ? "select-selected-option" : ""
-                }
-              >
-                {newDay}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-    }
 
-        <MDBBtn type="submit" className="mb-4" block>
-          Create Workout
-        </MDBBtn>
-      </form>
-<ToastContainer />
-    </div>
+          {/*<div className={weekly ? "hidden" : null}>*/}
+          <div className="hidden">
+            <MDBInput
+              className="mb-4"
+              type="text"
+              label="Workout Order"
+              value={order}
+              name="order"
+              onChange={(e) => setOrder(e.target.value)}
+              contrast
+            />
+          </div>
+          {currentRoutine && (
+            <div className={currentRoutine.frequency ? "hidden" : null}>
+              <select
+                className="form-control contrast-dropdown"
+                value={workoutDay}
+                name="day"
+                onChange={(e) => setWorkoutDay(e.target.value)}
+              >
+                {daysOfWeekArray.map((day, i) => {
+                  const newDay = day.charAt(0).toUpperCase() + day.slice(1);
+                  return (
+                    <option
+                      key={i}
+                      value={newDay}
+                      className={
+                        workoutDay === newDay ? "select-selected-option" : ""
+                      }
+                    >
+                      {newDay}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          )}
+
+          <MDBBtn type="submit" className="mb-4" block>
+            Create Workout
+          </MDBBtn>
+        </form>
+        <ToastContainer />
+      </div>
     </div>
   );
 };
