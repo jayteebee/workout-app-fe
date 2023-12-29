@@ -4,9 +4,9 @@ import { getUserById, updateUser } from "../API/User/User";
 import { parseJwt } from "../API/Authentication/parseJwt";
 import LogOut from "../Components/LogOut/LogOut";
 import BackButton from "../Components/Navigation/BackButton";
-import "../CSS/Profile.css"
+import "../CSS/Profile.css";
 
-const Profile = ({loggedIn}) => {
+const Profile = ({ loggedIn }) => {
   const [formInput, setFormInput] = useState({
     name: "",
     height: "",
@@ -15,7 +15,7 @@ const Profile = ({loggedIn}) => {
   const [userID, setUserID] = useState(null);
   const [userDetails, setUserDetails] = useState([]);
   const [userToggle, setUserToggle] = useState(false);
-  const [editDetailsForm, setEditDetailsForm] = useState(false)
+  const [editDetailsForm, setEditDetailsForm] = useState(false);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -49,7 +49,7 @@ const Profile = ({loggedIn}) => {
         weight: "",
       });
       setUserToggle((prevState) => !prevState);
-      setEditDetailsForm(false)
+      setEditDetailsForm(false);
     }
   };
 
@@ -64,24 +64,29 @@ const Profile = ({loggedIn}) => {
   useEffect(() => {
     if (userID) {
       getUserById(userID)
-      .then((data) => setUserDetails(data))
-      .catch((err) => {
-        console.log("getUserById API Call Failed: ", err);
-      });
+        .then((data) => setUserDetails(data))
+        .catch((err) => {
+          console.log("getUserById API Call Failed: ", err);
+        });
     }
   }, [userToggle]);
 
-const editDetails = () => {
-  setEditDetailsForm(prevState => !prevState)
-}
+  const editDetails = () => {
+    setEditDetailsForm((prevState) => !prevState);
+  };
 
   return (
     <div className="grid-container">
-    <h3 className="pageHeader profile">Profile</h3>
+      <h3 className="pageHeader profile">Profile</h3>
 
-    <MDBBtn onClick={editDetails} className="editDetailsCondRenderButton" >Edit Details</MDBBtn>
+      <MDBBtn onClick={editDetails} className="editDetailsCondRenderButton">
+        Edit Details
+      </MDBBtn>
 
-      <form onSubmit={handleSubmit} className={editDetailsForm ? "formContainer profile" : "hidden"}>
+      <form
+        onSubmit={handleSubmit}
+        className={editDetailsForm ? "formContainer profile" : "hidden"}
+      >
         <MDBInput
           className="mb-4"
           type="text"
@@ -115,37 +120,34 @@ const editDetails = () => {
         </MDBBtn>
       </form>
 
-      <div className={editDetailsForm ? "hidden" :"userDetails" } >
-     
-      <div className="tableContainer">
-      <div className="tableWrapper">
-      <table className="customTable">
-    <thead>
-    <tr>
-      <th>Name:</th>
-      <th>Height:</th>
-      <th>Weight:</th>
-      <th>Email:</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-      <td>{userDetails.name}</td>
-      <td>{userDetails.height} cm</td>
-      <td>{userDetails.weight} lbs</td>
-      <td>{userDetails.email}</td>
-      </tr>
-      </tbody>
-      </table>
-      </div>
-      </div>
-
+      <div className={editDetailsForm ? "hidden" : "userDetails"}>
+        <div className="tableContainer">
+          <div className="tableWrapper">
+            <table className="customTable">
+              <thead>
+                <tr>
+                  <th>Name:</th>
+                  <th>Height:</th>
+                  <th>Weight:</th>
+                  <th>Email:</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{userDetails.name}</td>
+                  <td>{userDetails.height} cm</td>
+                  <td>{userDetails.weight} lbs</td>
+                  <td>{userDetails.email}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
       <div className="logOut">
         <LogOut />
       </div>
-
     </div>
   );
 };
