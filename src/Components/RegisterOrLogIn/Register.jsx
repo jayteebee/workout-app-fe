@@ -10,6 +10,7 @@ const Register = ({ setShowRegister }) => {
     e.preventDefault();
     try {
       await createUser(formInput);
+      alert("Check Email For Confirmation!")
     } catch (err) {
       console.error("Error Creating User: ", err);
     } finally {
