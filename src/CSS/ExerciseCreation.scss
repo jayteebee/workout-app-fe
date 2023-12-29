@@ -48,6 +48,29 @@
     gap: 20px;
 }
 
+.buildingExerciseContainer {
+  grid-column: 2 / span 4;
+  grid-row: 5 / span 3;
+  display: flex;
+  justify-self: center;
+flex-direction: column;
+}
+
+.buildingExerciseNames {
+  margin-top: 20px;
+text-decoration: #66fcf1 underline 1px;
+}
+
+.buildingExercise{
+  gap: 20px;
+  // padding-top: 20px;
+  border-bottom: 1px solid #66fcf1;
+  height: fit-content;
+  display: flex;
+justify-content: center;
+
+}
+
 @media only screen and (max-width: 600px) {
 .setsRepsWeightContainer {
   width: 80vw;
@@ -67,7 +90,8 @@ display: flex;
 
 .addExerciseButton {
     grid-column: 3 / span 2;
-    grid-row: 6 / span 2;
+    grid-row: 7 / span 2;
+    margin-bottom: 20px;
 }
 
 .exerciseFilters {

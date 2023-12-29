@@ -16,6 +16,8 @@ const ExerciseCreation = () => {
 
   const [searchedExerciseName, setSearchedExerciseName] = useState(null);
   const [searchedMuscleGroup, setSearchedMuscleGroup] = useState(null);
+  console.log('searchedExerciseName',searchedExerciseName)
+  console.log('searchedMuscleGroup',searchedMuscleGroup)
   const [exerciseID, setExerciseID] = useState(null);
   const [exerciseParameters, setExerciseParameters] = useState({
     exercise_id: null,
@@ -78,6 +80,21 @@ const ExerciseCreation = () => {
       />
       </div>
 
+      { searchedExerciseName || searchedMuscleGroup ? 
+      <div className="buildingExerciseContainer">
+      <div className="buildingExerciseNames">
+      {searchedExerciseName && searchedExerciseName.label && <p>{searchedExerciseName.label}</p>}
+      {searchedMuscleGroup && searchedMuscleGroup.label && <p>{searchedMuscleGroup.label}</p>}
+      </div>
+      <div className="buildingExercise">
+        {exerciseParameters.sets !== 0 && <p>Sets: {exerciseParameters.sets}</p>}
+        {exerciseParameters.reps !== 0 && <p>Reps: {exerciseParameters.reps}</p>}
+        {exerciseParameters.weight !== 0 && <p>Weight: {exerciseParameters.weight}kg</p>}
+        {exerciseParameters.rest !== 0 && <p>Rest: {exerciseParameters.rest} sec</p>}
+
+      </div>
+      </div>
+  : null}
       <div className={addExerciseButton ? "addExerciseButton" : "hidden"}>
       <MDBBtn onClick={addExercise}>Add Exercise To Workout</MDBBtn>
       </div>
