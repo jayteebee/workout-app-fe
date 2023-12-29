@@ -21,6 +21,7 @@ import { WorkoutContext } from "./Context/WorkoutContext";
 import { RoutineAndWorkoutDataContext } from "./Context/RoutineAndWorkoutDataContext";
 import ConfirmAccount from "./Components/RegisterOrLogIn/ConfirmAccount";
 import BackButton from "./Components/Navigation/BackButton";
+import Joyride from 'react-joyride';
 
 // brew services start redis - backend service
 // foreman start -p 4000
