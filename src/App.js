@@ -21,6 +21,8 @@ import { WorkoutContext } from "./Context/WorkoutContext";
 import { RoutineAndWorkoutDataContext } from "./Context/RoutineAndWorkoutDataContext";
 import ConfirmAccount from "./Components/RegisterOrLogIn/ConfirmAccount";
 import BackButton from "./Components/Navigation/BackButton";
+import 'intro.js/introjs.css';
+
 
 
 // brew services start redis - backend service
@@ -49,6 +51,32 @@ function App() {
     selectedRoutineID: "",
     routineFrequencyExists: ""
   })
+
+const [steps, setSteps] = useState([
+  {
+    element: '#react-burger-menu-btn',
+    intro: 'Click here to open the Navigation Bar and view Routines, Logs, and Analytics!',
+    position: 'right',
+    disableInteraction: false
+  },
+  {
+    element: '#routinesMenuOption',
+    intro: "Now you're in the menu! Click Routines to create Routines, Workouts, and Exercises.",
+    position: 'left'
+  },
+  {
+    element: '#routineOptions',
+    intro: "Decide which format you'll schedule your Routine. Flexible or Fixed?",
+    position: 'bottom'
+  }
+])
+
+const [stepsEnabled, setStepsEnabled] = useState(true);
+const [initialStep, setInitialStep] = useState(0)
+
+const onExit = () => {
+  setStepsEnabled(false);
+};
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -97,6 +125,12 @@ function App() {
           <div>
           <NavBar
             id="navbarID"
+            steps={steps}
+            stepsEnabled={stepsEnabled}
+            initialStep={initialStep}
+            onExit={onExit}
+            setInitialStep={setInitialStep}
+            setStepsEnabled={setStepsEnabled}
             // setShowMenu={setShowMenu}
             // showMenu={showMenu}
           />
@@ -133,6 +167,12 @@ function App() {
                   setActiveRoutine={setActiveRoutine}
                   activeRoutine={activeRoutine}
                   setRoutineChange={setRoutineChange}
+                  steps={steps}
+                  stepsEnabled={stepsEnabled}
+                  initialStep={initialStep}
+                  onExit={onExit}
+                  setInitialStep={setInitialStep}
+                  setStepsEnabled={setStepsEnabled}
                 />
               </RoutineAndWorkoutDataContext.Provider>
 

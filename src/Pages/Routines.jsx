@@ -6,6 +6,7 @@ import FetchWorkoutsInRoutine from "../Components/Routine/FetchWorkoutsInRoutine
 import CreateRoutine from "../Components/Routine/CreateRoutine";
 import { MDBBtn } from "mdb-react-ui-kit";
 import BackButton from "../Components/Navigation/BackButton";
+import { Steps } from "intro.js-react";
 
 // acts as a parent component for all the elements required for creating a routine
 
@@ -18,13 +19,19 @@ const Routines = ({
   setActiveRoutine,
   activeRoutine,
   setRoutineChange,
+  steps,
+  stepsEnabled,
+  initialStep,
+  onExit,
+  setInitialStep,
+  setStepsEnabled,
 }) => {
   const [routineToggle, setRoutineToggle] = useState(false);
   const [createRoutineToggle, setCreateRoutineToggle] = useState(false);
   const [viewExistingRoutines, setViewExistingRoutines] = useState(false);
   const [createNewRoutine, setCreateNewRoutine] = useState(false);
   const [allRoutines, setAllRoutines] = useState([]);
-  console.log("allRoutines", allRoutines);
+  // console.log("allRoutines", allRoutines);
 const [checkboxToggle, setCheckboxToggle] = useState(false)
 // console.log('checkboxToggle',checkboxToggle)
   const toggleCreateRoutine = () => {
@@ -32,7 +39,7 @@ const [checkboxToggle, setCheckboxToggle] = useState(false)
   };
   // console.log("createRoutineToggle", createRoutineToggle)
   // console.log("custom, weekly", custom, weekly)
-
+console.log('steps',steps, "stepsEnabled", stepsEnabled, "initialStep", initialStep, onExit)
   useEffect(() => {
     setCustom(false);
     setWeekly(false);
@@ -72,7 +79,7 @@ const [checkboxToggle, setCheckboxToggle] = useState(false)
           Friday) <br /> or a flexible routine (e.g: every 4th day) for your
           workouts?
         </p>
-        <div style={{display: "flex", justifyContent: "space-around"}}>
+        <div id="routineOptions" style={{display: "flex", justifyContent: "space-around"}}>
         <MDBBtn
           onClick={() => {
             setWeekly(false);
@@ -186,6 +193,13 @@ const [checkboxToggle, setCheckboxToggle] = useState(false)
           setCreateRoutineToggle={setCreateRoutineToggle}
         />
       </div>
+
+      <Steps
+      enabled={stepsEnabled}
+      steps={steps}
+      initialStep={initialStep}
+      onExit={onExit}
+    />
     </div>
   );
 };

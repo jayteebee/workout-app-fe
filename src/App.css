@@ -238,3 +238,7 @@ p, h3, h2 {
   cursor: pointer;
   outline: none; 
 }
+
+.introjs-helperLayer {
+  z-index: 1 !important;
+}
