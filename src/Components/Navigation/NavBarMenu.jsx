@@ -32,7 +32,7 @@ const location = useLocation()
     <Link className={`menu-item ${isCurrentPage('/') ? 'active' : ''}`} to="/" onClick={closeMenu}><h2>Home</h2></Link>
     <Link className={`menu-item ${isCurrentPage('/Routines') ? 'active' : ''}`} to="/Routines" onClick={closeMenu}><h2>Routines</h2></Link>
     <Link className={`menu-item ${isCurrentPage('/Profile') ? 'active' : ''}`} to="/Profile" onClick={closeMenu}><h2>Profile</h2></Link>
-    <Link className={`menu-item ${isCurrentPage('/Knowledge') ? 'active' : ''}`} to="/Knowledge" onClick={closeMenu}><h2>Knowledge</h2></Link>
+   {/* <Link className={`menu-item ${isCurrentPage('/Knowledge') ? 'active' : ''}`} to="/Knowledge" onClick={closeMenu}><h2>Knowledge</h2></Link> */}
     <Link className={`menu-item ${isCurrentPage('/Analytics') ? 'active' : ''}`} to="/Analytics" onClick={closeMenu}><h2>Analytics</h2></Link>
     <Link className={`menu-item ${isCurrentPage('/Logs') ? 'active' : ''}`} to="/Logs" onClick={closeMenu}><h2>Logs</h2></Link>
     </Menu>
