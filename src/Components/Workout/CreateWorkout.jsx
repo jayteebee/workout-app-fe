@@ -43,7 +43,7 @@ const CreateWorkout = ({
   // console.log("** workoutDayINDEX", workoutDayIndex);
 
 const [allRoutines, setAllRoutines] = useState([])
-console.log('allRoutines',allRoutines)
+// console.log('allRoutines',allRoutines)
 
 useEffect(() => {
   getAllRoutines()
@@ -58,7 +58,7 @@ useEffect(() => {
 let currentRoutine;
 if (allRoutines && allRoutines.length > 0) {
   currentRoutine = allRoutines.filter((routines) => routines.id === routineID)[0]
-  console.log('currentRoutine',currentRoutine)
+  // console.log('currentRoutine',currentRoutine)
 }
 
   const daysOfWeekArray = [
@@ -123,10 +123,10 @@ useEffect(() => {
       }
 
       toast.success(
-        "Workout Created!",
+        "Workout Created! Don't forget to click on Create Workout Schedule below when you've created all your workouts.",
         {
           position: "bottom-center",
-          autoClose: 3000,
+          autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -147,7 +147,7 @@ useEffect(() => {
   };
 
   // console.log("order", order);
-console.log('routineID',routineID)
+// console.log('routineID',routineID)
   useEffect(() => {
     if (createdWorkout.id) {
       // console.log("workoutDay", workoutDay);
