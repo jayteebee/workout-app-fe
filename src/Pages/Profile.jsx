@@ -117,19 +117,28 @@ const editDetails = () => {
 
       <div className={editDetailsForm ? "hidden" :"userDetails" } >
      
-      <div className="metrics">
-      <p>Name:</p>
-      <p>Height:</p>
-      <p>Weight:</p>
-      <p>Email:</p>
+      <div className="tableContainer">
+      <div className="tableWrapper">
+      <table className="customTable">
+    <thead>
+    <tr>
+      <th>Name:</th>
+      <th>Height:</th>
+      <th>Weight:</th>
+      <th>Email:</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>{userDetails.name}</td>
+      <td>{userDetails.height} cm</td>
+      <td>{userDetails.weight} lbs</td>
+      <td>{userDetails.email}</td>
+      </tr>
+      </tbody>
+      </table>
       </div>
-
-      <div className="metrics">
-        <p>{userDetails.name}</p>
-        <p>{userDetails.height} cm</p>
-        <p>{userDetails.weight} lbs</p>
-        <p>{userDetails.email}</p>
-        </div>
+      </div>
 
       </div>
 
