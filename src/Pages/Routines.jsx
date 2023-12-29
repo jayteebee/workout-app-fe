@@ -68,7 +68,7 @@ const [checkboxToggle, setCheckboxToggle] = useState(false)
       >
         <p className={weekly || custom ? "hidden" : "routineQuestion"}>
           Do you prefer a fixed weekly schedule (e.g., Monday, Wednesday,
-          Friday) <br /> or a flexible routine (e.g., every 4 days) for your
+          Friday) <br /> or a flexible routine (e.g: every 4th day) for your
           workouts?
         </p>
         <div style={{display: "flex", justifyContent: "space-around"}}>
@@ -79,7 +79,7 @@ const [checkboxToggle, setCheckboxToggle] = useState(false)
           }}
           className={weekly || custom ? "hidden" : "routineCustomButton"}
         >
-          Custom
+          Flexible
         </MDBBtn>
         <MDBBtn
           onClick={() => {
@@ -88,7 +88,7 @@ const [checkboxToggle, setCheckboxToggle] = useState(false)
           }}
           className={weekly || custom ? "hidden" : "routineWeeklyButton"}
         >
-          Weekly
+          Fixed Weekly
         </MDBBtn>
         </div>
       </div>
@@ -110,11 +110,13 @@ const [checkboxToggle, setCheckboxToggle] = useState(false)
           View Existing Routines
         </MDBBtn>
 
-        <div className={viewExistingRoutines ? "editDeleteRoutinesShowing" : "hidden"}>
-         <input type="checkbox"
-         onClick={() => setCheckboxToggle(!checkboxToggle)}
-         />Edit/Delete Routines?
-          </div>
+        {allRoutines && allRoutines.length > 0 && 
+          <div style={{paddingTop: "10px"}} className={viewExistingRoutines ? "editDeleteRoutinesShowing" : "hidden"}>
+           <input type="checkbox"
+           onClick={() => setCheckboxToggle(!checkboxToggle)}
+           />Edit/Delete Routines?
+            </div>
+        }
 
       </div>
 

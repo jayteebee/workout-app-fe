@@ -79,6 +79,7 @@ const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle
         name="frequency"
         onChange={handleChange}
         contrast
+        pattern="\d*"
         />
 
         </div>
