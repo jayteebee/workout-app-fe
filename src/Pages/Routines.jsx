@@ -5,6 +5,7 @@ import FetchRoutineByID from "../Components/Routine/FetchRoutineByID";
 import FetchWorkoutsInRoutine from "../Components/Routine/FetchWorkoutsInRoutine";
 import CreateRoutine from "../Components/Routine/CreateRoutine";
 import { MDBBtn } from "mdb-react-ui-kit";
+import BackButton from "../Components/Navigation/BackButton";
 
 // acts as a parent component for all the elements required for creating a routine
 

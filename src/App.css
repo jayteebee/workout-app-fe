@@ -219,6 +219,18 @@ p, h3, h2 {
   background-color: red;
 }
 
+
+.backButtonDiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  
+}
+.backButton {
+  height: 40px;
+  width: auto;
+
+}
 .button {
   background: none;
   border: none;

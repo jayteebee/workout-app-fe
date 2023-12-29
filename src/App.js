@@ -20,6 +20,7 @@ import { parseJwt } from "./API/Authentication/parseJwt";
 import { WorkoutContext } from "./Context/WorkoutContext";
 import { RoutineAndWorkoutDataContext } from "./Context/RoutineAndWorkoutDataContext";
 import ConfirmAccount from "./Components/RegisterOrLogIn/ConfirmAccount";
+import BackButton from "./Components/Navigation/BackButton";
 
 // brew services start redis - backend service
 // foreman start -p 4000
@@ -105,6 +106,7 @@ function App() {
           />
         ) : null}
 
+        <BackButton />
         <Routes>
           <Route element={<PrivateRoute />}>
             <Route

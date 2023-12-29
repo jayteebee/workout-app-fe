@@ -1,15 +1,16 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import backButton from "../../CSS/Icons/backButton.png"
+import "../../App.css"
 
 const BackButton = () => {
-    const navigate = useNavigate()
+    let navigate = useNavigate()
 
     const goBack = () => {
         navigate(-1)
     }
   return (
-    <div className='back button div'>
+    <div className='backButtonDiv'>
     
     <button 
     className="button"
