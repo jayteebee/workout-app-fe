@@ -23,7 +23,7 @@ const Routines = ({
   const [viewExistingRoutines, setViewExistingRoutines] = useState(false);
   const [createNewRoutine, setCreateNewRoutine] = useState(false);
   const [allRoutines, setAllRoutines] = useState([]);
-  // console.log("allRoutines", allRoutines);
+  console.log("allRoutines", allRoutines);
 const [checkboxToggle, setCheckboxToggle] = useState(false)
 // console.log('checkboxToggle',checkboxToggle)
   const toggleCreateRoutine = () => {

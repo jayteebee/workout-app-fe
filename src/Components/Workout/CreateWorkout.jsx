@@ -6,7 +6,7 @@ import {
   MDBBtn,
 } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
-import { addWorkoutToRoutine } from "../../API/Routine/Routine";
+import { addWorkoutToRoutine, getAllRoutines } from "../../API/Routine/Routine";
 import { ToastContainer, toast } from "react-toastify";
 
 
@@ -41,6 +41,25 @@ const CreateWorkout = ({
   const [workoutDay, setWorkoutDay] = useState("");
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
   // console.log("** workoutDayINDEX", workoutDayIndex);
+
+const [allRoutines, setAllRoutines] = useState([])
+console.log('allRoutines',allRoutines)
+
+useEffect(() => {
+  getAllRoutines()
+  .then((data) => {
+    setAllRoutines(data);
+  })
+  .catch((err) => {
+    console.log("getAllRoutines API Call Failed", err);
+  });
+}, [])
+
+let currentRoutine;
+if (allRoutines && allRoutines.length > 0) {
+  currentRoutine = allRoutines.filter((routines) => routines.id === routineID)[0]
+  console.log('currentRoutine',currentRoutine)
+}
 
   const daysOfWeekArray = [
     "sunday",
@@ -128,7 +147,7 @@ useEffect(() => {
   };
 
   // console.log("order", order);
-
+console.log('routineID',routineID)
   useEffect(() => {
     if (createdWorkout.id) {
       // console.log("workoutDay", workoutDay);
@@ -176,29 +195,32 @@ useEffect(() => {
             contrast
           />
         </div>
-        <div className={custom ? "hidden" : null}>
-          <select
-            className="form-control contrast-dropdown"
-            value={workoutDay}
-            name="day"
-            onChange={(e) => setWorkoutDay(e.target.value)}
-          >
-            {daysOfWeekArray.map((day, i) => {
-              const newDay = day.charAt(0).toUpperCase() + day.slice(1);
-              return (
-                <option
-                  key={i}
-                  value={newDay}
-                  className={
-                    workoutDay === newDay ? "select-selected-option" : ""
-                  }
-                >
-                  {newDay}
-                </option>
-              );
-            })}
-          </select>
-        </div>
+    {currentRoutine && 
+    
+      <div className={currentRoutine.frequency ? "hidden" : null}>
+        <select
+          className="form-control contrast-dropdown"
+          value={workoutDay}
+          name="day"
+          onChange={(e) => setWorkoutDay(e.target.value)}
+        >
+          {daysOfWeekArray.map((day, i) => {
+            const newDay = day.charAt(0).toUpperCase() + day.slice(1);
+            return (
+              <option
+                key={i}
+                value={newDay}
+                className={
+                  workoutDay === newDay ? "select-selected-option" : ""
+                }
+              >
+                {newDay}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+    }
 
         <MDBBtn type="submit" className="mb-4" block>
           Create Workout
