@@ -12,34 +12,27 @@ import { WorkoutContext } from "../Context/WorkoutContext";
 // manages the calender and events that users can click on to view their workouts
 const HomeScreen = ({ loggedIn }) => {
   const [workoutSchedule, setWorkoutSchedule] = useState([]);
-  // console.log('workoutSchedule in home screen', workoutSchedule)
+  // console.log("workoutSchedule", workoutSchedule);
   const [calendarEvents, setCalendarEvents] = useState(null);
   // console.log('calendarEvents',calendarEvents)
   const [sortedSchedule, setSortedSchedule] = useState([]);
-
-  // lifted state to app
-  // const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
-
-  // console.log("exercisesInWorkout", exercisesInWorkout);
-
-  const [idOfRoutineWorkout, setIdOfRoutineWorkout] = useState(null)
+  const [idOfRoutineWorkout, setIdOfRoutineWorkout] = useState(null);
 
   const navigate = useNavigate();
 
-  const {exercisesInWorkout, setExercisesInWorkout} = useContext(WorkoutContext)
+  const { exercisesInWorkout, setExercisesInWorkout } =
+    useContext(WorkoutContext);
   useEffect(() => {
     if (loggedIn) {
-          getAllWorkoutSchedules()
-      .then((data) => {
-        setWorkoutSchedule(data);
-      })
-      .catch((err) => {
-        console.log("getAllWorkoutSchedules API Call Failed", err);
-      });
+      getAllWorkoutSchedules()
+        .then((data) => {
+          setWorkoutSchedule(data);
+        })
+        .catch((err) => {
+          console.log("getAllWorkoutSchedules API Call Failed", err);
+        });
     }
   }, [loggedIn]);
-
-  // console.log("workoutSchedule", workoutSchedule);
 
   useEffect(() => {
     const sortSchedule = workoutSchedule.slice().sort((a, b) => a.id - b.id);
@@ -65,44 +58,42 @@ const HomeScreen = ({ loggedIn }) => {
 
   // console.log("CALENDAR EVENTS: ", calendarEvents);
 
-
   const startWorkout = (rwID) => {
-if (rwID) {
-  const currentDate = new Date();
-  const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
+    if (rwID) {
+      const currentDate = new Date();
+      const formattedCurrentDate = format(currentDate, "yyyy-MM-dd");
 
-  const hasEventOnCurrentDay = calendarEvents.some(
-    (event) => event.start === formattedCurrentDate
-  );
-  if (hasEventOnCurrentDay) {
-    navigate("/Session", {
-      state: { exercisesInWorkout: exercisesInWorkout, rwID: rwID },
-    });
-    console.log("success");
-  } else {
-    console.log("Failure");
-  }
-}
+      const hasEventOnCurrentDay = calendarEvents.some(
+        (event) => event.start === formattedCurrentDate
+      );
+      if (hasEventOnCurrentDay) {
+        navigate("/Session", {
+          state: { exercisesInWorkout: exercisesInWorkout, rwID: rwID },
+        });
+        console.log("success");
+      } else {
+        console.log("Failure");
+      }
+    }
   };
 
   const handleEventClick = async (eventClickInfo) => {
-if (exercisesInWorkout.length === 0) {
-  toast.info("Add exercises to workout before beginning your session.", {
-    position: "bottom-center",
-    autoClose: 3000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-  });
-}
+    if (exercisesInWorkout.length === 0) {
+      toast.info("Add exercises to workout before beginning your session.", {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
     const routineWorkoutId =
       eventClickInfo.event.extendedProps.routineWorkoutId;
-    // console.log("routineWorkoutId", routineWorkoutId);
 
-    setIdOfRoutineWorkout(routineWorkoutId)
+    setIdOfRoutineWorkout(routineWorkoutId);
 
     await getExercisesInWorkout(routineWorkoutId)
       .then((data) => setExercisesInWorkout(data))
@@ -113,29 +104,25 @@ if (exercisesInWorkout.length === 0) {
 
   useEffect(() => {
     if (exercisesInWorkout.length > 0) {
-      startWorkout(idOfRoutineWorkout)
+      startWorkout(idOfRoutineWorkout);
     }
-  }, [exercisesInWorkout])
-
+  }, [exercisesInWorkout]);
 
   return (
     <div>
-
-{/*    <h3>Welcome to My Workout App</h3>
+      {/*    <h3>Welcome to My Workout App</h3>
   <h1 style={{textDecoration: "underline", color: "white"}}>--UNDER DEVELOPMENT--</h1> */}
-    <div className="calendar-container" >
-      <div className="calendar">
-        <FullCalendar
-          plugins={[dayGridPlugin]}
-          initialView="dayGridMonth"
-          events={calendarEvents}
-          eventClick={handleEventClick}
-          height="80vh"
-        />
-
+      <div className="calendar-container">
+        <div className="calendar">
+          <FullCalendar
+            plugins={[dayGridPlugin]}
+            initialView="dayGridMonth"
+            events={calendarEvents}
+            eventClick={handleEventClick}
+            height="80vh"
+          />
+        </div>
       </div>
-</div>
-      {/*<MDBBtn onClick={startWorkout}>Start Workout</MDBBtn>*/}
 
       <ToastContainer />
     </div>
