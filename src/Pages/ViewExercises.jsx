@@ -41,7 +41,7 @@ const ViewExercises = () => {
       <tbody>
       {exercises.map((exercises, index) => {
 return (
-        <tr> 
+        <tr key={index}> 
           <td>{exercises.exercise.name}</td>
           <td>{exercises.sets}</td>
           <td>{exercises.reps}</td>
