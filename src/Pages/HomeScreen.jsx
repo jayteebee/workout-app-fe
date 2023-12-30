@@ -107,6 +107,7 @@ const HomeScreen = ({ loggedIn }) => {
       if (initialStep === 13) {
         setTimeout(() => {
           setInitialStep(14)
+          localStorage.setItem('tutorialComplete', 'true');
           setStepsEnabled(true)
         }, 1000)
       }

@@ -150,7 +150,7 @@ function App() {
   let prevButton = document.querySelector('.introjs-prevbutton');
 
   
-  const [stepsEnabled, setStepsEnabled] = useState(true);
+  const [stepsEnabled, setStepsEnabled] = useState(false);
   const [initialStep, setInitialStep] = useState(0);
 console.log('initialStep',initialStep)
 const onExit = () => {
@@ -188,6 +188,16 @@ const onExit = () => {
       prevButton.classList.add('hide-button');
     }
   }
+
+  const tutorialShown = localStorage.getItem('tutorialShown');
+useEffect(() => {
+if (!tutorialShown) {
+  setStepsEnabled(true);
+  localStorage.setItem('tutorialShown', 'true');
+} else {
+  setStepsEnabled(false);
+}
+}, [])
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
