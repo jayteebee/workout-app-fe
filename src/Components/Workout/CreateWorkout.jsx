@@ -155,7 +155,7 @@ const CreateWorkout = ({
   };
 
   return (
-    <div>
+    <div id="createWorkoutFormForTutorial">
       <h2>Create Workout</h2>
       <div className="inputFormContainer">
         <form onSubmit={handleSubmit} className="inputForm">

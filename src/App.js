@@ -88,6 +88,12 @@ function App() {
         "Tap here to view and create your workouts! If you have multiple routines, select your current routine by clicking 'Make Active Routine' ",
       position: "bottom",
     },
+    {
+      element: "#createWorkoutFormForTutorial",
+      intro:
+        "Create your Routine, then click 'Create Workout'.",
+      position: "bottom",
+    },
   ]);
 
   const [stepsEnabled, setStepsEnabled] = useState(true);
