@@ -123,6 +123,7 @@ const FetchAllRoutines = ({
                 setRoutineChange(false);
                 displayWorkouts(routine.id, routine.frequency);
                 setTimeout(() => {
+                  onExit()
                   setInitialStep(6)
                   setStepsEnabled(true)
                 }, 1000)

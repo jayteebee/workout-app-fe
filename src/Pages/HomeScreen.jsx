@@ -74,9 +74,9 @@ const HomeScreen = ({ loggedIn }) => {
         navigate("/Session", {
           state: { exercisesInWorkout: exercisesInWorkout, rwID: rwID },
         });
-        console.log("success");
+        // console.log("success");
       } else {
-        console.log("Failure");
+        // console.log("Failure");
       }
     }
   };

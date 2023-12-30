@@ -176,6 +176,7 @@ const Workout = ({
       setCreateNewWorkout(false);
       setViewExistingWorkouts(true);
       setTimeout(() => {
+        onExit()
         setInitialStep(9)
         setStepsEnabled(true)
       }, 1000)
