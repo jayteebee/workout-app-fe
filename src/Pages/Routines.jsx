@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../CSS/Routines.css";
 import FetchAllRoutines from "../Components/Routine/FetchAllRoutines";
 import FetchRoutineByID from "../Components/Routine/FetchRoutineByID";
@@ -39,7 +39,7 @@ const [checkboxToggle, setCheckboxToggle] = useState(false)
   };
   // console.log("createRoutineToggle", createRoutineToggle)
   // console.log("custom, weekly", custom, weekly)
-console.log('steps',steps, "stepsEnabled", stepsEnabled, "initialStep", initialStep, onExit)
+
   useEffect(() => {
     setCustom(false);
     setWeekly(false);
@@ -47,8 +47,10 @@ console.log('steps',steps, "stepsEnabled", stepsEnabled, "initialStep", initialS
 
   const handleRoutineViewOptions = (e) => {
     setCreateRoutineToggle(false);
+    console.log('yes',)
 
     let name = e.target.name;
+    
     if (name === "createNewRoutine") {
       setViewExistingRoutines(false);
       setCreateNewRoutine(true);
@@ -58,6 +60,8 @@ console.log('steps',steps, "stepsEnabled", stepsEnabled, "initialStep", initialS
     if (name === "viewExistingRoutines") {
       setCreateNewRoutine(false);
       setViewExistingRoutines(true);
+      setStepsEnabled(true)
+      setInitialStep(5)
     }
   };
 
@@ -66,6 +70,33 @@ console.log('steps',steps, "stepsEnabled", stepsEnabled, "initialStep", initialS
       setCreateNewRoutine(true);
     }
   }, []);
+
+
+
+const routineConfigFrequencyButtons = (e) => {
+const name = e.target.name
+if (name === "flexible") {
+  setWeekly(false);
+  setCustom(true);
+  // setTimeout(() => {
+  //   setInitialStep(3);
+  //   setStepsEnabled(true);
+  // }, 5000)
+
+} else {
+  setCustom(false);
+  setWeekly(true);
+  // setInitialStep(3); 
+  // setStepsEnabled(true);
+}
+}
+
+useEffect(() => {
+if (weekly || custom) {
+  setInitialStep(3); 
+  setStepsEnabled(true);
+}
+}, [weekly, custom])
 
   return (
     <div className="grid-container">
@@ -81,19 +112,16 @@ console.log('steps',steps, "stepsEnabled", stepsEnabled, "initialStep", initialS
         </p>
         <div id="routineOptions" style={{display: "flex", justifyContent: "space-around"}}>
         <MDBBtn
-          onClick={() => {
-            setWeekly(false);
-            setCustom(true);
-          }}
+            name="flexible"
+onClick={(e) => routineConfigFrequencyButtons(e)}
           className={weekly || custom ? "hidden" : "routineCustomButton"}
         >
           Flexible
         </MDBBtn>
         <MDBBtn
-          onClick={() => {
-            setCustom(false);
-            setWeekly(true);
-          }}
+        name="weekly"
+        onClick={(e) => routineConfigFrequencyButtons(e)}
+
           className={weekly || custom ? "hidden" : "routineWeeklyButton"}
         >
           Fixed Weekly
@@ -111,6 +139,7 @@ console.log('steps',steps, "stepsEnabled", stepsEnabled, "initialStep", initialS
         </MDBBtn>
 
         <MDBBtn
+        id="viewExistingRoutinesTutorialButton"
           color={viewExistingRoutines ? "info" : ""}
           name="viewExistingRoutines"
           onClick={handleRoutineViewOptions}
@@ -151,6 +180,11 @@ console.log('steps',steps, "stepsEnabled", stepsEnabled, "initialStep", initialS
             activeRoutine={activeRoutine}
             setRoutineChange={setRoutineChange}
             checkboxToggle={checkboxToggle}
+            enabled={stepsEnabled}
+            steps={steps}
+            initialStep={initialStep}
+            setInitialStep={setInitialStep}
+            onExit={onExit}
           />
         </div>
       </div>
@@ -191,8 +225,14 @@ console.log('steps',steps, "stepsEnabled", stepsEnabled, "initialStep", initialS
           routineToggle={routineToggle}
           setRoutineToggle={setRoutineToggle}
           setCreateRoutineToggle={setCreateRoutineToggle}
+          enabled={stepsEnabled}
+          steps={steps}
+          initialStep={initialStep}
+          setInitialStep={setInitialStep}
+          onExit={onExit}
         />
       </div>
+
 
       <Steps
       enabled={stepsEnabled}
@@ -205,3 +245,14 @@ console.log('steps',steps, "stepsEnabled", stepsEnabled, "initialStep", initialS
 };
 
 export default Routines;
+
+
+
+
+          // onClick={() => {
+            // setWeekly(false);
+            // setCustom(true);
+            // setInitialStep(3);
+            // setStepsEnabled(true);
+          // }} 
+        

@@ -68,6 +68,21 @@ const [steps, setSteps] = useState([
     element: '#routineOptions',
     intro: "Decide which format you'll schedule your Routine. Flexible or Fixed?",
     position: 'bottom'
+  },
+  {
+    element: '#createRoutineTutorial',
+    intro: "Configure your Routine, then click 'Create Routine'.",
+    position: 'bottom'
+  },
+  {
+    element: '#viewExistingRoutinesTutorialButton',
+    intro: "View Your Routines!",
+    position: 'bottom'
+  },
+  {
+    element: '#routineButtonsTutorial',
+    intro: "Tap here to view and create your workouts! If you have multiple routines, select your current routine by clicking 'Make Active Routine' ",
+    position: 'bottom'
   }
 ])
 

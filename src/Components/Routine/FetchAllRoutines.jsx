@@ -12,6 +12,7 @@ import editIcon from "../../CSS/Icons/editIcon.png";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import Workout from "../../Pages/Workout";
 import { RoutineAndWorkoutDataContext } from "../../Context/RoutineAndWorkoutDataContext";
+import { Steps } from "intro.js-react";
 
 // responsible for displaying the routines and their options such as edit/delete/add workouts
 
@@ -24,7 +25,13 @@ const FetchAllRoutines = ({
   activeRoutine,
   setActiveRoutine,
   setRoutineChange,
-  checkboxToggle
+  checkboxToggle,
+  steps,
+  stepsEnabled,
+  initialStep,
+  onExit,
+  setInitialStep,
+  setStepsEnabled,
 }) => {
   // const [allRoutines, setAllRoutines] = useState([]);
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
@@ -128,7 +135,7 @@ const FetchAllRoutines = ({
     <div className="routineContainer">
       {filteredRoutines &&
         filteredRoutines.map((routine) => (
-          <div key={routine.id} className="routineButtons">
+          <div key={routine.id} className="routineButtons" id="routineButtonsTutorial">
             {localStorage.setItem("routineID", routine.id)}
             <MDBBtn
               onClick={() => {
@@ -186,6 +193,13 @@ const FetchAllRoutines = ({
           setDeleteToggle={setDeleteToggle}
         />
       )}
+
+      <Steps
+      enabled={stepsEnabled}
+      steps={steps}
+      initialStep={initialStep}
+      onExit={onExit}
+    />
     </div>
   );
 };
