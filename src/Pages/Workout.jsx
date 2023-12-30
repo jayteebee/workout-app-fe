@@ -215,7 +215,8 @@ const Workout = ({
 
   useEffect(() => {
     if (workout.length === 0) {
-      setViewExistingWorkouts(true);
+      setCreateNewWorkout(true);
+      setViewExistingWorkouts(false);
     }
   }, []);
 
