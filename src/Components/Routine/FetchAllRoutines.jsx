@@ -122,7 +122,10 @@ const FetchAllRoutines = ({
               onClick={() => {
                 setRoutineChange(false);
                 displayWorkouts(routine.id, routine.frequency);
-                // add next step functions here
+                setTimeout(() => {
+                  setInitialStep(6)
+                  setStepsEnabled(true)
+                }, 1000)
               }}
             >
               <strong>{routine.name}</strong>: View / Create Workouts
