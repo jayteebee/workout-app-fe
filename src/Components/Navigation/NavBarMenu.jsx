@@ -17,8 +17,9 @@ const location = useLocation()
     if (state.isOpen && initialStep === 0) {
 
       setTimeout(() => {
+        setStepsEnabled(false); 
         setInitialStep(1); 
-        // setStepsEnabled(true); 
+        setStepsEnabled(true); 
       }, 600)
 
     }
@@ -28,8 +29,9 @@ const location = useLocation()
     setMenuOpen(false);
     if (initialStep === 1) {
       setTimeout(() => {
+        setStepsEnabled(false); 
         setInitialStep(2); 
-        // setStepsEnabled(true); 
+        setStepsEnabled(true); 
       }, 200)
     } else if (initialStep === 12) {
       setTimeout(() => {

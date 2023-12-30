@@ -50,8 +50,9 @@ const ExerciseCreation = () => {
     });
     if (initialStep === 11) {
       setTimeout(() => {
+        setStepsEnabled(false); 
         setInitialStep(12)
-        // setStepsEnabled(true)
+        setStepsEnabled(true)
       }, 1000)
     }
   };
@@ -70,8 +71,9 @@ if (exerciseParameters.exercise_id &&
      exerciseParameters.sets &&
       exerciseParameters.weight &&
       initialStep === 10) {
-setInitialStep(11)
-setStepsEnabled(true)
+        setStepsEnabled(false); 
+        setInitialStep(11)
+        setStepsEnabled(true)
 }
 }, [exerciseParameters])
 

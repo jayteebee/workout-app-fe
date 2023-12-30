@@ -177,9 +177,9 @@ const Workout = ({
       setViewExistingWorkouts(true);
       if (initialStep === 8) {
         setTimeout(() => {
-          onExit()
+          setStepsEnabled(false); 
           setInitialStep(9)
-          // setStepsEnabled(true)
+          setStepsEnabled(true)
         }, 1000)
       }
     }
@@ -364,8 +364,9 @@ const Workout = ({
       onClick={() => {
         if (initialStep === 7) {
           setTimeout(() => {
+            setStepsEnabled(false); 
             setInitialStep(8)
-            // setStepsEnabled(true)
+            setStepsEnabled(true)
           }, 1000)
         }
       }}

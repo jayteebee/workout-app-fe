@@ -136,8 +136,9 @@ const CreateWorkout = ({
       setWorkoutToggle((prevState) => !prevState);
       if (initialStep === 6) {
         setTimeout(() => {
+          setStepsEnabled(false); 
           setInitialStep(7)
-          // setStepsEnabled(true)
+          setStepsEnabled(true)
         }, 1000)
       }
     }

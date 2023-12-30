@@ -60,8 +60,9 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout })
     });
     if (initialStep === 9) {
       setTimeout(() => {
+        setStepsEnabled(false); 
         setInitialStep(10)
-        // setStepsEnabled(true)
+        setStepsEnabled(true)
       }, 1000)
     }
   };

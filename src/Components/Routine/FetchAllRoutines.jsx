@@ -124,9 +124,9 @@ const FetchAllRoutines = ({
                 displayWorkouts(routine.id, routine.frequency);
                 if (initialStep === 5) {
                   setTimeout(() => {
-                    onExit()
+                    setStepsEnabled(false); 
                     setInitialStep(6)
-                    // setStepsEnabled(true)
+                    setStepsEnabled(true)
                   }, 1000)
                 }
               }}

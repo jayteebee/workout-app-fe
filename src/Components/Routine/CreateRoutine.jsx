@@ -51,6 +51,7 @@ const {  steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabl
     });
   }
   if (initialStep === 3) {
+    setStepsEnabled(false); 
     setInitialStep(4); 
     setStepsEnabled(true)
   }
