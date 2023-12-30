@@ -190,6 +190,8 @@ const onExit = () => {
   }
 
   const tutorialShown = localStorage.getItem('tutorialShown');
+  const tutorialComplete = localStorage.getItem('tutorialComplete');
+
 useEffect(() => {
 if (!tutorialShown) {
   setStepsEnabled(true);
