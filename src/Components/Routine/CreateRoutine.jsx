@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import { MDBInput, MDBBtn, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from "mdb-react-ui-kit";
 import { createRoutine } from "../../API/Routine/Routine";
 import { ToastContainer, toast } from "react-toastify";
 import { Steps } from "intro.js-react";
+import { IntroJsContext } from "../../Context/IntroJsContext";
 
 
-const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle, custom, weekly,
-  steps,
-  stepsEnabled,
-  initialStep,
-  onExit,
-  setInitialStep,
-  setStepsEnabled,
-}) => {
+const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle, custom, weekly,}) => {
 
-console.log("initialStep", initialStep)
+const {  steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
 
   const [formInput, setFormInput] = useState({
     name: "",

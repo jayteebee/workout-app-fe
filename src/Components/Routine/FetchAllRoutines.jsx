@@ -13,6 +13,7 @@ import { parseJwt } from "../../API/Authentication/parseJwt";
 import Workout from "../../Pages/Workout";
 import { RoutineAndWorkoutDataContext } from "../../Context/RoutineAndWorkoutDataContext";
 import { Steps } from "intro.js-react";
+import { IntroJsContext } from "../../Context/IntroJsContext";
 
 // responsible for displaying the routines and their options such as edit/delete/add workouts
 
@@ -25,15 +26,8 @@ const FetchAllRoutines = ({
   activeRoutine,
   setActiveRoutine,
   setRoutineChange,
-  checkboxToggle,
-  steps,
-  stepsEnabled,
-  initialStep,
-  onExit,
-  setInitialStep,
-  setStepsEnabled,
+  checkboxToggle
 }) => {
-  // const [allRoutines, setAllRoutines] = useState([]);
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
   const [routineToEdit, setRoutineToEdit] = useState(null);
   const [editToggle, setEditToggle] = useState(false);
@@ -41,10 +35,11 @@ const FetchAllRoutines = ({
   const [deleteToggle, setDeleteToggle] = useState(null);
   const [userID, setUserID] = useState(null);
   const [filteredRoutines, setFilteredRoutines] = useState(null);
-  // console.log("filteredRoutines", filteredRoutines)
   const [editingFrequencyRoutine, setEditingFrequencyRoutine] = useState(false);
 
   const {setManagingRoutineAndWorkoutData} = useContext(RoutineAndWorkoutDataContext)
+const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
+
 
   useEffect(() => {
     const routineFrequency =
@@ -72,24 +67,16 @@ const FetchAllRoutines = ({
   }, [routineToggle, editToggle, deleteToggle]);
 
   const displayWorkouts = (routineID, routineFreq) => {
-    // console.log('routineFreq', routineFreq, "routineID", routineID)
+
     setSelectedRoutineID(routineID);
     setManagingRoutineAndWorkoutData({
       selectedRoutineID: routineID,
       routineFrequencyExists: routineFreq,
       })
     if (routineFreq) {
-      navigate("/Workout"
-      // , {
-      //   state: {
-      //     selectedRoutineID: routineID,
-      //     routineFrequencyExists: routineFreq,
-      //   },
-      // }
-      );
+      navigate("/Workout");
     } else {
       navigate("/Workout"
-      // , { state: { selectedRoutineID: routineID } }
       );
     }
   };
@@ -104,11 +91,9 @@ const FetchAllRoutines = ({
   };
 
   useEffect(() => {
-    // console.log("USER ID IN FUNCTION", userID);
     const routinesFilteredForID = allRoutines.filter(
       (r) => r.user_id == userID
     );
-    // console.log("routinesFilteredForID", routinesFilteredForID);
     setFilteredRoutines(routinesFilteredForID);
   }, [allRoutines]);
 
@@ -118,14 +103,8 @@ const FetchAllRoutines = ({
     }
   }, [createNewRoutine]);
 
-  // useEffect(() => {
-  //   if (activeRoutine) {
-  //     setRoutineChange(true)
-  //   }
-  // }, [activeRoutine])
 
   const initiateRoutineChange = async (routineID, routineFrequency) => {
-    // console.log("routineFrequency", routineFrequency, "routineID", routineID);
     await setActiveRoutine(routineID);
     await setRoutineChange(true);
     displayWorkouts(routineID, routineFrequency);

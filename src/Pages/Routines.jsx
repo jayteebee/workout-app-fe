@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "../CSS/Routines.css";
 import FetchAllRoutines from "../Components/Routine/FetchAllRoutines";
 import FetchRoutineByID from "../Components/Routine/FetchRoutineByID";
@@ -7,6 +7,7 @@ import CreateRoutine from "../Components/Routine/CreateRoutine";
 import { MDBBtn } from "mdb-react-ui-kit";
 import BackButton from "../Components/Navigation/BackButton";
 import { Steps } from "intro.js-react";
+import { IntroJsContext } from "../Context/IntroJsContext";
 
 // acts as a parent component for all the elements required for creating a routine
 
@@ -19,26 +20,20 @@ const Routines = ({
   setActiveRoutine,
   activeRoutine,
   setRoutineChange,
-  steps,
-  stepsEnabled,
-  initialStep,
-  onExit,
-  setInitialStep,
-  setStepsEnabled,
 }) => {
   const [routineToggle, setRoutineToggle] = useState(false);
   const [createRoutineToggle, setCreateRoutineToggle] = useState(false);
   const [viewExistingRoutines, setViewExistingRoutines] = useState(false);
   const [createNewRoutine, setCreateNewRoutine] = useState(false);
   const [allRoutines, setAllRoutines] = useState([]);
-  // console.log("allRoutines", allRoutines);
 const [checkboxToggle, setCheckboxToggle] = useState(false)
-// console.log('checkboxToggle',checkboxToggle)
+
+const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
+
   const toggleCreateRoutine = () => {
     setCreateRoutineToggle((prevState) => !prevState);
   };
-  // console.log("createRoutineToggle", createRoutineToggle)
-  // console.log("custom, weekly", custom, weekly)
+
 
   useEffect(() => {
     setCustom(false);
@@ -225,14 +220,8 @@ onClick={(e) => routineConfigFrequencyButtons(e)}
           routineToggle={routineToggle}
           setRoutineToggle={setRoutineToggle}
           setCreateRoutineToggle={setCreateRoutineToggle}
-          enabled={stepsEnabled}
-          steps={steps}
-          initialStep={initialStep}
-          setInitialStep={setInitialStep}
-          onExit={onExit}
         />
       </div>
-
 
       <Steps
       enabled={stepsEnabled}

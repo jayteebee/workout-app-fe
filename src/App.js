@@ -174,6 +174,16 @@ function App() {
             <Route
               path="/Routines"
               element={
+                <IntroJsContext.Provider
+                value={{
+                  steps,
+                  stepsEnabled,
+                  initialStep,
+                  onExit,
+                  setInitialStep,
+                  setStepsEnabled,
+                }}
+              >
                 <RoutineAndWorkoutDataContext.Provider
                   value={{
                     setManagingRoutineAndWorkoutData,
@@ -189,14 +199,9 @@ function App() {
                     setActiveRoutine={setActiveRoutine}
                     activeRoutine={activeRoutine}
                     setRoutineChange={setRoutineChange}
-                    steps={steps}
-                    stepsEnabled={stepsEnabled}
-                    initialStep={initialStep}
-                    onExit={onExit}
-                    setInitialStep={setInitialStep}
-                    setStepsEnabled={setStepsEnabled}
                   />
                 </RoutineAndWorkoutDataContext.Provider>
+                </IntroJsContext.Provider>
               }
             />
 
