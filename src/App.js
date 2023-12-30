@@ -138,8 +138,15 @@ function App() {
         "On the day of your workout, click 'Start *Workout Name*' to track your in gym performance.",
       position: "left",
     },
+    {
+      element: "#exerciseSessionContainerForTutorial",
+          intro:
+            "This is where you will track each set of your workout. Tapping the green button will start the set, tapping the red button will end the set, and whilst the button is purple, you should be resting.",
+          position: "left",
+        },
   ]);
 
+  
 
   const [stepsEnabled, setStepsEnabled] = useState(true);
   const [initialStep, setInitialStep] = useState(0);
@@ -329,11 +336,23 @@ console.log('initialStep',initialStep)
             <Route
               path="/Session"
               element={
+                <IntroJsContext.Provider
+                value={{
+                  steps,
+                  stepsEnabled,
+                  initialStep,
+                  onExit,
+                  setInitialStep,
+                  setStepsEnabled,
+                }}
+              >
                 <WorkoutContext.Provider
                   value={{ exercisesInWorkout, setExercisesInWorkout }}
                 >
                   <WorkoutSession />
                 </WorkoutContext.Provider>
+                </IntroJsContext.Provider>
+
               }
             />
           </Route>

@@ -104,6 +104,12 @@ const HomeScreen = ({ loggedIn }) => {
       .catch((error) => {
         console.log("Error with getExercisesInWorkout API Call: ", error);
       });
+      if (initialStep === 13) {
+        setTimeout(() => {
+          setInitialStep(14)
+          setStepsEnabled(true)
+        }, 1000)
+      }
   };
 
   useEffect(() => {

@@ -17,6 +17,8 @@ import { createSessionLogs } from "../API/SessionLogs/SessionLogs";
 import SetTimer from "../Components/WorkoutSession/SetTimer";
 import "../CSS/WorkoutSession.css";
 import { WorkoutContext } from "../Context/WorkoutContext";
+import { IntroJsContext } from "../Context/IntroJsContext";
+import { Steps } from "intro.js-react";
 
 // takes a user through the workout set by set, logs final outcomes via exercise/workout_Sesssion to the logs component
 
@@ -49,6 +51,9 @@ const WorkoutSession = () => {
   const [setTimer, setSetTimer] = useState(false);
   const [setTimerCount, setSetTimerCount] = useState(0);
 
+  const { steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
+
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     const decodedToken = parseJwt(token);
@@ -72,7 +77,6 @@ const WorkoutSession = () => {
 
   // console.log("exercisesInWorkout", exercisesInWorkout);
   const routineWorkoutID = location.state?.rwID;
-console.log('routineWorkoutID',routineWorkoutID)
 
   const [workoutSessionData, setWorkoutSessionData] = useState({
     user_id: null,
@@ -111,7 +115,7 @@ useEffect(() => {
       createWorkoutSession(workoutSessionData)
         .then((data) => {
           setWorkoutSession(data);
-          console.log("response:", data);
+          // console.log("response:", data);
         })
         .catch((err) =>
           console.log("createWorkoutSession API Call Failed:", err)
@@ -237,8 +241,14 @@ useEffect(() => {
     }
   }, [workoutComplete]);
 
+// useEffect(() => {
+//   if (initialStep === 13) {
+
+//   }
+// }, [])
+
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
-    <div key={exercise.id} className="exerciseSessionContainer">
+    <div key={exercise.id} className="exerciseSessionContainer" id="exerciseSessionContainerForTutorial">
       
         <div style={{ width: "5%" }} className="exerciseOrder">
           <p>{i + 1} .</p>
@@ -394,6 +404,13 @@ useEffect(() => {
       <div className="displayWorkoutData">{displayWorkoutData}</div>
 
       <ToastContainer />
+
+      <Steps
+      enabled={stepsEnabled}
+      steps={steps}
+      initialStep={initialStep}
+      onExit={onExit}
+    />
     </div>
   );
 };
