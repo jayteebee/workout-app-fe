@@ -241,11 +241,6 @@ useEffect(() => {
     }
   }, [workoutComplete]);
 
-// useEffect(() => {
-//   if (initialStep === 13) {
-
-//   }
-// }, [])
 
   const displayWorkoutData = exercisesInWorkout.map((exercise, i) => (
     <div key={exercise.id} className="exerciseSessionContainer" id="exerciseSessionContainerForTutorial">
@@ -253,8 +248,6 @@ useEffect(() => {
         <div style={{ width: "5%" }} className="exerciseOrder">
           <p>{i + 1} .</p>
         </div>
-
-       {/* <div className="individualExerciseInfo"> */}
 
         <div
           className={
@@ -367,7 +360,6 @@ useEffect(() => {
               </div>
             )}
             </div>
-      {/*</div>*/}
     </div>
   ));
 
