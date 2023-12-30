@@ -79,6 +79,12 @@ const {  steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabl
 
   const frequencyDropdownOptions = [1,2,3,4,5,6,7]
 
+// useEffect(() => {
+//   if (initialStep === 2) {
+//     setInitialStep(3)
+//   }
+// }, [])
+
   return (
     <div className="createRoutineFormContainer" id="createRoutineTutorial">
     <h2>Create Routine</h2>

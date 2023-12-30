@@ -101,5 +101,6 @@
     grid-column: 3 /span 2;
 }
   
-  
-  
+#viewExistingWorkoutsForTutorial {
+    z-index: 0 !important;
+}

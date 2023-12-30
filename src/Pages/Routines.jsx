@@ -40,7 +40,6 @@ const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled
 
   const handleRoutineViewOptions = (e) => {
     setCreateRoutineToggle(false);
-    console.log('yes',)
 
     let name = e.target.name;
     
@@ -65,6 +64,7 @@ const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled
   }, []);
 
 const routineConfigFrequencyButtons = (e) => {
+
 const name = e.target.name
 if (name === "flexible") {
   setWeekly(false);
@@ -77,8 +77,10 @@ if (name === "flexible") {
 
 useEffect(() => {
 if (weekly || custom) {
-  setInitialStep(3); 
-  setStepsEnabled(true);
+  setTimeout(() => {
+    setInitialStep(3); 
+    setStepsEnabled(true);
+  }, 1000)
 }
 }, [weekly, custom])
 
@@ -94,11 +96,14 @@ if (weekly || custom) {
           Friday) <br /> or a flexible routine (e.g: every 4th day) for your
           workouts?
         </p>
-        <div id="routineOptions" style={{display: "flex", justifyContent: "space-around"}}>
+        <div 
+        id="routineOptions" 
+        style={{display: "flex", justifyContent: "space-around"}}
+        >
         <MDBBtn
             name="flexible"
-onClick={(e) => routineConfigFrequencyButtons(e)}
-          className={weekly || custom ? "hidden" : "routineCustomButton"}
+            onClick={(e) => routineConfigFrequencyButtons(e)}
+            className={weekly || custom ? "hidden" : "routineCustomButton"}
         >
           Flexible
         </MDBBtn>

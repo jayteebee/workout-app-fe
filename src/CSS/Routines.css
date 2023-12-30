@@ -138,3 +138,6 @@
     grid-column:3 /span 2;
 }
 
+#routineOptions, #viewExistingRoutinesTutorialButton {
+    z-index: 0 !important
+}
