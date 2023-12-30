@@ -29,17 +29,12 @@ const CreateWorkout = ({
     user_id: "",
     name: "",
   });
-  // console.log(formInput);
 
   const [createdWorkout, setCreatedWorkout] = useState([]);
   const [order, setOrder] = useState(0);
-  // console.log("order", order)
   const [workoutDay, setWorkoutDay] = useState("");
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
-  // console.log("** workoutDayINDEX", workoutDayIndex);
-
   const [allRoutines, setAllRoutines] = useState([]);
-  // console.log('allRoutines',allRoutines)
 
   useEffect(() => {
     getAllRoutines()
@@ -56,7 +51,6 @@ const CreateWorkout = ({
     currentRoutine = allRoutines.filter(
       (routines) => routines.id === routineID
     )[0];
-    // console.log('currentRoutine',currentRoutine)
   }
 
   const daysOfWeekArray = [
@@ -69,7 +63,7 @@ const CreateWorkout = ({
     "saturday",
   ];
   const [updatedDays, setUpdatedDays] = useState([]);
-  // console.log('updatedDays state', updatedDays)
+
   useEffect(() => {
     if (workoutDayIndex !== false) {
       toggleDaysOfWeekBoolean(workoutDayIndex);
@@ -77,8 +71,6 @@ const CreateWorkout = ({
   }, [workoutDayIndex]);
 
   const toggleDaysOfWeekBoolean = (workoutIndex) => {
-    // console.log("clickedIndex INSIDE:", workoutIndex);
-
     const updatedDaysOfWeek = dayOfWeek.map((day) => {
       if (day.value === workoutIndex) {
         return {
@@ -99,8 +91,6 @@ const CreateWorkout = ({
       daysOfWeek: updatedDays,
     });
   }, [updatedDays]);
-
-  // console.log("dayOfWeek ***", dayOfWeek);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -141,16 +131,12 @@ const CreateWorkout = ({
     } finally {
       setFormInput({ user_id: "", name: "" });
       setOrder((prevOrder) => (prevOrder += 1));
-      // setWorkoutDay("");
       setWorkoutToggle((prevState) => !prevState);
     }
   };
 
-  // console.log("order", order);
-  // console.log('routineID',routineID)
   useEffect(() => {
     if (createdWorkout.id) {
-      // console.log("workoutDay", workoutDay);
       addWorkoutToRoutine(routineID, {
         workout_id: createdWorkout.id,
         order: order,
@@ -183,7 +169,6 @@ const CreateWorkout = ({
             contrast
           />
 
-          {/*<div className={weekly ? "hidden" : null}>*/}
           <div className="hidden">
             <MDBInput
               className="mb-4"
