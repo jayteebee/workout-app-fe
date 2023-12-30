@@ -40,14 +40,7 @@ const FetchAllRoutines = ({
   const { setManagingRoutineAndWorkoutData } = useContext(
     RoutineAndWorkoutDataContext
   );
-  const {
-    steps,
-    stepsEnabled,
-    initialStep,
-    onExit,
-    setInitialStep,
-    setStepsEnabled,
-  } = useContext(IntroJsContext);
+  const {steps,stepsEnabled,initialStep,onExit,setInitialStep,setStepsEnabled} = useContext(IntroJsContext);
 
   useEffect(() => {
     const routineFrequency =

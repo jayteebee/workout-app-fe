@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../../CSS/Workout.css";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { createWorkout } from "../../API/Workout/Workout";
 import { addWorkoutToRoutine, getAllRoutines } from "../../API/Routine/Routine";
 import { ToastContainer, toast } from "react-toastify";
+import { IntroJsContext } from "../../Context/IntroJsContext";
+import { Steps } from "intro.js-react";
 
 const CreateWorkout = ({
   setWorkoutToggle,
@@ -13,9 +15,6 @@ const CreateWorkout = ({
   setWorkoutCreated,
   dayOfWeek,
   setDayOfWeek,
-  weekly,
-  custom,
-  logOfRoutineDaysOfWeek,
   setLogOfRoutineDaysOfWeek,
 }) => {
   useEffect(() => {
@@ -35,6 +34,9 @@ const CreateWorkout = ({
   const [workoutDay, setWorkoutDay] = useState("");
   const [workoutDayIndex, setWorkoutDayIndex] = useState(false);
   const [allRoutines, setAllRoutines] = useState([]);
+
+  const {  steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
+
 
   useEffect(() => {
     getAllRoutines()
@@ -212,6 +214,14 @@ const CreateWorkout = ({
         </form>
         <ToastContainer />
       </div>
+
+      <Steps
+      enabled={stepsEnabled}
+      steps={steps}
+      initialStep={initialStep}
+      onExit={onExit}
+    />
+
     </div>
   );
 };

@@ -175,11 +175,6 @@ onClick={(e) => routineConfigFrequencyButtons(e)}
             activeRoutine={activeRoutine}
             setRoutineChange={setRoutineChange}
             checkboxToggle={checkboxToggle}
-            enabled={stepsEnabled}
-            steps={steps}
-            initialStep={initialStep}
-            setInitialStep={setInitialStep}
-            onExit={onExit}
           />
         </div>
       </div>
