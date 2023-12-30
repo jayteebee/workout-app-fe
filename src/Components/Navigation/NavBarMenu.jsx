@@ -6,14 +6,14 @@ import { IntroJsContext } from "../../Context/IntroJsContext";
 
 const NavBarMenu = () => {
 
-  const {setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
+  const {setInitialStep, setStepsEnabled, initialStep} = useContext(IntroJsContext)
 
   const [menuOpen, setMenuOpen] = useState(false);
 const location = useLocation()
 
   const handleStateChange = (state) => {
     setMenuOpen(state.isOpen);
-    if (state.isOpen) {
+    if (state.isOpen && initialStep === 0) {
 
       setTimeout(() => {
         setInitialStep(1); // Move to the second step
@@ -23,12 +23,14 @@ const location = useLocation()
     }
   };
 
-  const closeMenu = (nameOfMenuOption) => {
+  const closeMenu = () => {
     setMenuOpen(false);
-    setTimeout(() => {
-      setInitialStep(2); 
-      setStepsEnabled(true); 
-    }, 200)
+    if (initialStep === 1) {
+      setTimeout(() => {
+        setInitialStep(2); 
+        setStepsEnabled(true); 
+      }, 200)
+    }
   };
 
   const isCurrentPage = (path) => {
