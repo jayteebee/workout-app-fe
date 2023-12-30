@@ -16,8 +16,8 @@ const location = useLocation()
     if (state.isOpen && initialStep === 0) {
 
       setTimeout(() => {
-        setInitialStep(1); // Move to the second step
-        setStepsEnabled(true); // Ensure the steps are enabled
+        setInitialStep(1); 
+        setStepsEnabled(true); 
       }, 600)
 
     }
