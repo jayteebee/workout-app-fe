@@ -75,7 +75,7 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout })
 
   return (
     <div>
-      <h3 >Routine: {workout.length > 0 && workout[0].routine.name}</h3>
+      <h3 > {workout.length > 0 && "Routine:" + workout[0].routine.name}</h3>
       {workout.length > 0 &&
         workout.map((workout) => (
           <div key={workout.id}>
