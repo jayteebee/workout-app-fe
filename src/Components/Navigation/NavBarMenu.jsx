@@ -71,7 +71,7 @@ const restartTutorial = () => {
    {/* <Link className={`menu-item ${isCurrentPage('/Knowledge') ? 'active' : ''}`} to="/Knowledge" onClick={closeMenu}><h2>Knowledge</h2></Link> */}
     <Link className={`menu-item ${isCurrentPage('/Analytics') ? 'active' : ''}`} to="/Analytics" onClick={closeMenu}><h2>Analytics</h2></Link>
     <Link className={`menu-item ${isCurrentPage('/Logs') ? 'active' : ''}`} to="/Logs" onClick={closeMenu}><h2>Logs</h2></Link>
-    <Link className={`menu-item`} onClick={restartTutorial}><h2>Restart Tutorial</h2></Link>
+    <Link style={{position: "fixed", bottom: "0", margin: "10px" }} className={`menu-item`} onClick={restartTutorial}><h2>Restart Tutorial</h2></Link>
 
     </Menu>
 
