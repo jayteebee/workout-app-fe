@@ -123,7 +123,7 @@ function App() {
     {
       element: "#addExerciseButton",
       intro:
-        "When you've made your exercise, click here to add it to the workout. When you're done, head back to the homepage via the nav bar.",
+        "When you've made your exercise, click here to add it to the workout. When you've added all your exercises, head back to the homepage via the nav bar.",
       position: "left",
     },
     {
@@ -152,7 +152,7 @@ function App() {
   
   const [stepsEnabled, setStepsEnabled] = useState(false);
   const [initialStep, setInitialStep] = useState(0);
-console.log('initialStep',initialStep)
+// console.log('initialStep',initialStep)
 const onExit = () => {
   setStepsEnabled(false);
   let helperLayer = document.querySelector('.introjs-helperLayer');
@@ -191,15 +191,48 @@ const onExit = () => {
 
   const tutorialShown = localStorage.getItem('tutorialShown');
   const tutorialComplete = localStorage.getItem('tutorialComplete');
+  const restartingTutorial = localStorage.getItem('restartingTutorial');
+
+  useEffect(() => {
+    if (restartingTutorial) {
+      console.log('restarting tut',)
+      setStepsEnabled(true)
+      localStorage.removeItem("restartingTutorial")
+    }
+
+    if (!tutorialShown) {
+      setStepsEnabled(true);
+      localStorage.setItem('tutorialShown', 'true');
+    }
+if (tutorialComplete) {
+  setStepsEnabled(false)
+}
+    }, [tutorialComplete, tutorialShown, restartingTutorial, stepsEnabled])
+// useEffect(() => {
+
+// if (!tutorialShown || restartingTutorial) {
+//   setStepsEnabled(true);
+//   localStorage.setItem('tutorialShown', 'true');
+// } 
+// if (restartingTutorial) {
+//   localStorage.removeItem("restartingTutorial");
+//   localStorage.setItem("tutorialComplete", "false");
+// }
+// if (tutorialComplete) {
+//   setStepsEnabled(false);
+//   // localStorage.removeItem("restartingTutorial")
+// }
+// }, [])
 
 useEffect(() => {
-if (!tutorialShown) {
-  setStepsEnabled(true);
-  localStorage.setItem('tutorialShown', 'true');
-} else if (tutorialComplete) {
-  setStepsEnabled(false);
-}
-}, [])
+  const shouldRestartTutorial = localStorage.getItem('restartingTutorial');
+  if (shouldRestartTutorial) {
+    // Start the tutorial
+    setStepsEnabled(true);
+    // Reset the flag
+    localStorage.removeItem('restartingTutorial');
+  }
+}, []);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
