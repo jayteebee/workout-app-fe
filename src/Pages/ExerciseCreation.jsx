@@ -60,7 +60,7 @@ const ExerciseCreation = () => {
       <h2 className="pageHeader exerciseCreation">Exercise Creation</h2>
       <h4 className="subHeader exerciseCreation">Workout: {selectedWorkoutName}</h4>
 
-      <div className="search">
+      <div id="searchForTutorial" className="search">
         <Search
           setSearchedExerciseName={setSearchedExerciseName}
           searchedExerciseName={searchedExerciseName}

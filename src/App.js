@@ -112,7 +112,14 @@ function App() {
         "View or add exercises in each workout. Click Add Exercises now to continue tutorial!",
       position: "bottom",
     },
+    {
+      element: "#searchForTutorial",
+      intro:
+        "Filter exercises by using the buttons above, search for exercises in the search bar and then add the sets, reps, weight and rest!",
+      position: "bottom",
+    },
   ]);
+
 
   const [stepsEnabled, setStepsEnabled] = useState(true);
   const [initialStep, setInitialStep] = useState(0);
