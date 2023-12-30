@@ -196,7 +196,7 @@ useEffect(() => {
 if (!tutorialShown) {
   setStepsEnabled(true);
   localStorage.setItem('tutorialShown', 'true');
-} else {
+} else if (tutorialComplete) {
   setStepsEnabled(false);
 }
 }, [])
