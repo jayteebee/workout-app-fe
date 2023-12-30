@@ -153,6 +153,10 @@ function App() {
 console.log('initialStep',initialStep)
   const onExit = () => {
     setStepsEnabled(false);
+    let helperLayer = document.querySelector('.introjs-helperLayer');
+    if (helperLayer) {
+      helperLayer.remove();
+    }
   };
 
   useEffect(() => {
