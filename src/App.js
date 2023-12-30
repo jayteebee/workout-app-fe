@@ -208,21 +208,7 @@ if (tutorialComplete) {
   setStepsEnabled(false)
 }
     }, [tutorialComplete, tutorialShown, restartingTutorial, stepsEnabled])
-// useEffect(() => {
 
-// if (!tutorialShown || restartingTutorial) {
-//   setStepsEnabled(true);
-//   localStorage.setItem('tutorialShown', 'true');
-// } 
-// if (restartingTutorial) {
-//   localStorage.removeItem("restartingTutorial");
-//   localStorage.setItem("tutorialComplete", "false");
-// }
-// if (tutorialComplete) {
-//   setStepsEnabled(false);
-//   // localStorage.removeItem("restartingTutorial")
-// }
-// }, [])
 
 useEffect(() => {
   const shouldRestartTutorial = localStorage.getItem('restartingTutorial');
@@ -277,7 +263,7 @@ useEffect(() => {
       {/**onClick={externalNavToggle} */}
       <div className="App-inner">
         {loggedIn ? (
-          <div>
+          <div >
             <IntroJsContext.Provider
               value={{
                 steps,

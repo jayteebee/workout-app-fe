@@ -62,6 +62,14 @@ const restartTutorial = () => {
   window.location.href = '/'
 }
 
+const endTutorial = () => {
+  setMenuOpen(false);
+  setStepsEnabled(false)
+  // localStorage.addItem("tutorialShown", "true")
+  localStorage.setItem("tutorialComplete", "true")
+  window.location.href = '/'
+}
+
   return (
     <div>
     <Menu right isOpen={menuOpen} onStateChange={handleStateChange}>
@@ -72,6 +80,7 @@ const restartTutorial = () => {
     <Link className={`menu-item ${isCurrentPage('/Analytics') ? 'active' : ''}`} to="/Analytics" onClick={closeMenu}><h2>Analytics</h2></Link>
     <Link className={`menu-item ${isCurrentPage('/Logs') ? 'active' : ''}`} to="/Logs" onClick={closeMenu}><h2>Logs</h2></Link>
     <Link style={{position: "fixed", bottom: "0", margin: "10px" }} className={`menu-item`} onClick={restartTutorial}><h2>Restart Tutorial</h2></Link>
+    <Link style={{position: "fixed", bottom: "0", margin: "45px" }} className={`menu-item`} onClick={endTutorial}><h2>End Tutorial</h2></Link>
 
     </Menu>
 

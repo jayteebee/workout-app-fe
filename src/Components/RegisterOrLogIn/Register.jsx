@@ -52,10 +52,11 @@ const Register = ({ setShowRegister }) => {
           name="password"
           onChange={handlechange}
           contrast
+          minLength="6"
         />
-        <p className="passWordAuthMessage">
+{/*        <p className="passWordAuthMessage">
           Password must be longer than 6 characters.
-        </p>
+  </p> */}
 
         <MDBBtn type="submit" className="mb-4" block>
           Sign Up!
