@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../CSS/Routines.css";
 import FetchAllRoutines from "../Components/Routine/FetchAllRoutines";
-import FetchRoutineByID from "../Components/Routine/FetchRoutineByID";
 import FetchWorkoutsInRoutine from "../Components/Routine/FetchWorkoutsInRoutine";
 import CreateRoutine from "../Components/Routine/CreateRoutine";
 import { MDBBtn } from "mdb-react-ui-kit";
-import BackButton from "../Components/Navigation/BackButton";
 import { Steps } from "intro.js-react";
 import { IntroJsContext } from "../Context/IntroJsContext";
 
@@ -66,23 +64,14 @@ const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled
     }
   }, []);
 
-
-
 const routineConfigFrequencyButtons = (e) => {
 const name = e.target.name
 if (name === "flexible") {
   setWeekly(false);
   setCustom(true);
-  // setTimeout(() => {
-  //   setInitialStep(3);
-  //   setStepsEnabled(true);
-  // }, 5000)
-
 } else {
   setCustom(false);
   setWeekly(true);
-  // setInitialStep(3); 
-  // setStepsEnabled(true);
 }
 }
 
@@ -180,9 +169,6 @@ onClick={(e) => routineConfigFrequencyButtons(e)}
       </div>
       <div></div>
 
-      {/*<div className="fetchRoutineByID">
-        <FetchRoutineByID />
-        </div>*/}
       <div className="fetchWorkoutsInRoutine">
         <FetchWorkoutsInRoutine />
       </div>
@@ -196,14 +182,8 @@ onClick={(e) => routineConfigFrequencyButtons(e)}
             : "hidden createRoutineToggleButton"
         }
       >
-        {/* <MDBBtn
-          onClick={toggleCreateRoutine}
-        >
-          {createRoutineToggle ? "Hide Create Routine" : "Create Routine"}
-       </MDBBtn>*/}
       </div>
 
-      {/*  {createRoutineToggle && ( */}
       <div
         className={
           createNewRoutine && (custom || weekly) ? "createRoutine" : "hidden"
@@ -229,14 +209,3 @@ onClick={(e) => routineConfigFrequencyButtons(e)}
 };
 
 export default Routines;
-
-
-
-
-          // onClick={() => {
-            // setWeekly(false);
-            // setCustom(true);
-            // setInitialStep(3);
-            // setStepsEnabled(true);
-          // }} 
-        
