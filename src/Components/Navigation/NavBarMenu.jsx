@@ -18,7 +18,7 @@ const location = useLocation()
 
       setTimeout(() => {
         setInitialStep(1); 
-        setStepsEnabled(true); 
+        // setStepsEnabled(true); 
       }, 600)
 
     }
@@ -29,12 +29,12 @@ const location = useLocation()
     if (initialStep === 1) {
       setTimeout(() => {
         setInitialStep(2); 
-        setStepsEnabled(true); 
+        // setStepsEnabled(true); 
       }, 200)
     } else if (initialStep === 12) {
       setTimeout(() => {
         setInitialStep(13); 
-        setStepsEnabled(true); 
+        // setStepsEnabled(true); 
       }, 200)
     }
   };

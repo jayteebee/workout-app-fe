@@ -126,7 +126,7 @@ const FetchAllRoutines = ({
                   setTimeout(() => {
                     onExit()
                     setInitialStep(6)
-                    setStepsEnabled(true)
+                    // setStepsEnabled(true)
                   }, 1000)
                 }
               }}

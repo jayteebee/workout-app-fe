@@ -179,7 +179,7 @@ const Workout = ({
         setTimeout(() => {
           onExit()
           setInitialStep(9)
-          setStepsEnabled(true)
+          // setStepsEnabled(true)
         }, 1000)
       }
     }
@@ -365,7 +365,7 @@ const Workout = ({
         if (initialStep === 7) {
           setTimeout(() => {
             setInitialStep(8)
-            setStepsEnabled(true)
+            // setStepsEnabled(true)
           }, 1000)
         }
       }}

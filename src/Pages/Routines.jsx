@@ -53,7 +53,7 @@ const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled
       setCreateNewRoutine(false);
       setViewExistingRoutines(true);
       if (initialStep === 4) {
-        setStepsEnabled(true)
+        // setStepsEnabled(true)
         setInitialStep(5)
       }
     }

@@ -107,7 +107,7 @@ const HomeScreen = ({ loggedIn }) => {
       if (initialStep === 13) {
         setTimeout(() => {
           setInitialStep(14)
-          setStepsEnabled(true)
+          // setStepsEnabled(true)
         }, 1000)
       }
   };

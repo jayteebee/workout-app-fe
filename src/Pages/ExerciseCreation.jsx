@@ -51,7 +51,7 @@ const ExerciseCreation = () => {
     if (initialStep === 11) {
       setTimeout(() => {
         setInitialStep(12)
-        setStepsEnabled(true)
+        // setStepsEnabled(true)
       }, 1000)
     }
   };

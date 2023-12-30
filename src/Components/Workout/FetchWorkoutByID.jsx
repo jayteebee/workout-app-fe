@@ -61,7 +61,7 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout })
     if (initialStep === 9) {
       setTimeout(() => {
         setInitialStep(10)
-        setStepsEnabled(true)
+        // setStepsEnabled(true)
       }, 1000)
     }
   };

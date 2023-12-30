@@ -137,7 +137,7 @@ const CreateWorkout = ({
       if (initialStep === 6) {
         setTimeout(() => {
           setInitialStep(7)
-          setStepsEnabled(true)
+          // setStepsEnabled(true)
         }, 1000)
       }
     }
