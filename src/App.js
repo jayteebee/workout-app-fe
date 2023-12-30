@@ -21,10 +21,8 @@ import { WorkoutContext } from "./Context/WorkoutContext";
 import { RoutineAndWorkoutDataContext } from "./Context/RoutineAndWorkoutDataContext";
 import ConfirmAccount from "./Components/RegisterOrLogIn/ConfirmAccount";
 import BackButton from "./Components/Navigation/BackButton";
-import 'intro.js/introjs.css';
+import "intro.js/introjs.css";
 import { IntroJsContext } from "./Context/IntroJsContext";
-
-
 
 // brew services start redis - backend service
 // foreman start -p 4000
@@ -48,51 +46,56 @@ function App() {
   // console.log('activeRoutine', activeRoutine, "routineChange", routineChange)
 
   const [exercisesInWorkout, setExercisesInWorkout] = useState([]);
-  const [managingRoutineAndWorkoutData, setManagingRoutineAndWorkoutData] = useState({
-    selectedRoutineID: "",
-    routineFrequencyExists: ""
-  })
+  const [managingRoutineAndWorkoutData, setManagingRoutineAndWorkoutData] =
+    useState({
+      selectedRoutineID: "",
+      routineFrequencyExists: "",
+    });
 
-const [steps, setSteps] = useState([
-  {
-    element: '#react-burger-menu-btn',
-    intro: 'Click here to open the Navigation Bar and view Routines, Logs, and Analytics!',
-    position: 'right',
-    disableInteraction: false
-  },
-  {
-    element: '#routinesMenuOption',
-    intro: "Now you're in the menu! Click Routines to create Routines, Workouts, and Exercises.",
-    position: 'left'
-  },
-  {
-    element: '#routineOptions',
-    intro: "Decide which format you'll schedule your Routine. Flexible or Fixed?",
-    position: 'bottom'
-  },
-  {
-    element: '#createRoutineTutorial',
-    intro: "Configure your Routine, then click 'Create Routine'.",
-    position: 'bottom'
-  },
-  {
-    element: '#viewExistingRoutinesTutorialButton',
-    intro: "View Your Routines!",
-    position: 'bottom'
-  },
-  {
-    element: '#routineButtonsTutorial',
-    intro: "Tap here to view and create your workouts! If you have multiple routines, select your current routine by clicking 'Make Active Routine' ",
-    position: 'bottom'
-  }
-])
+  const [steps, setSteps] = useState([
+    {
+      element: "#react-burger-menu-btn",
+      intro:
+        "Click here to open the Navigation Bar and view Routines, Logs, and Analytics!",
+      position: "right",
+      disableInteraction: false,
+    },
+    {
+      element: "#routinesMenuOption",
+      intro:
+        "Now you're in the menu! Click Routines to create Routines, Workouts, and Exercises.",
+      position: "left",
+    },
+    {
+      element: "#routineOptions",
+      intro:
+        "Decide which format you'll schedule your Routine. Flexible or Fixed?",
+      position: "bottom",
+    },
+    {
+      element: "#createRoutineTutorial",
+      intro: "Configure your Routine, then click 'Create Routine'.",
+      position: "bottom",
+    },
+    {
+      element: "#viewExistingRoutinesTutorialButton",
+      intro: "View Your Routines!",
+      position: "bottom",
+    },
+    {
+      element: "#routineButtonsTutorial",
+      intro:
+        "Tap here to view and create your workouts! If you have multiple routines, select your current routine by clicking 'Make Active Routine' ",
+      position: "bottom",
+    },
+  ]);
 
-const [stepsEnabled, setStepsEnabled] = useState(true);
-const [initialStep, setInitialStep] = useState(0)
+  const [stepsEnabled, setStepsEnabled] = useState(true);
+  const [initialStep, setInitialStep] = useState(0);
 
-const onExit = () => {
-  setStepsEnabled(false);
-};
+  const onExit = () => {
+    setStepsEnabled(false);
+  };
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -132,83 +135,87 @@ const onExit = () => {
     routineID && setRoutineID(routineID[0]);
   }, [filteredRoutines]);
 
-
   return (
     <div className="App">
-  {/**onClick={externalNavToggle} */}
-      <div className="App-inner" >
+      {/**onClick={externalNavToggle} */}
+      <div className="App-inner">
         {loggedIn ? (
           <div>
-          <IntroJsContext.Provider
-          value={{
-            steps,
-            stepsEnabled,
-            initialStep,
-            onExit,
-            setInitialStep,
-            setStepsEnabled,
-          }}
-          >
-          <NavBar
-            id="navbarID"
-          />
-          </IntroJsContext.Provider>
+            <IntroJsContext.Provider
+              value={{
+                steps,
+                stepsEnabled,
+                initialStep,
+                onExit,
+                setInitialStep,
+                setStepsEnabled,
+              }}
+            >
+              <NavBar id="navbarID" />
+            </IntroJsContext.Provider>
           </div>
-          ) : null}
-          
-          {loggedIn && 
-            <BackButton/>
-          }
-        
-          <Routes>
-        <Route element={<PrivateRoute />}>
-        <Route
-        path="/"
-        element={
-          <WorkoutContext.Provider value={{exercisesInWorkout, setExercisesInWorkout}}>
-          <HomeScreen routineID={routineID} loggedIn={loggedIn} />          
-          </WorkoutContext.Provider>
-              
+        ) : null}
+
+        {loggedIn && <BackButton />}
+
+        <Routes>
+          <Route element={<PrivateRoute />}>
+            <Route
+              path="/"
+              element={
+                <WorkoutContext.Provider
+                  value={{ exercisesInWorkout, setExercisesInWorkout }}
+                >
+                  <HomeScreen routineID={routineID} loggedIn={loggedIn} />
+                </WorkoutContext.Provider>
               }
             />
 
             <Route
-            path="/Routines"
-            element={
-              
-              <RoutineAndWorkoutDataContext.Provider value={{setManagingRoutineAndWorkoutData , managingRoutineAndWorkoutData}}>
-                <Routines
-                  setCustom={setCustom}
-                  custom={custom}
-                  setWeekly={setWeekly}
-                  weekly={weekly}
-                  setRoutineFrequency={setRoutineFrequency}
-                  setActiveRoutine={setActiveRoutine}
-                  activeRoutine={activeRoutine}
-                  setRoutineChange={setRoutineChange}
-                  steps={steps}
-                  stepsEnabled={stepsEnabled}
-                  initialStep={initialStep}
-                  onExit={onExit}
-                  setInitialStep={setInitialStep}
-                  setStepsEnabled={setStepsEnabled}
-                />
-              </RoutineAndWorkoutDataContext.Provider>
-
+              path="/Routines"
+              element={
+                <RoutineAndWorkoutDataContext.Provider
+                  value={{
+                    setManagingRoutineAndWorkoutData,
+                    managingRoutineAndWorkoutData,
+                  }}
+                >
+                  <Routines
+                    setCustom={setCustom}
+                    custom={custom}
+                    setWeekly={setWeekly}
+                    weekly={weekly}
+                    setRoutineFrequency={setRoutineFrequency}
+                    setActiveRoutine={setActiveRoutine}
+                    activeRoutine={activeRoutine}
+                    setRoutineChange={setRoutineChange}
+                    steps={steps}
+                    stepsEnabled={stepsEnabled}
+                    initialStep={initialStep}
+                    onExit={onExit}
+                    setInitialStep={setInitialStep}
+                    setStepsEnabled={setStepsEnabled}
+                  />
+                </RoutineAndWorkoutDataContext.Provider>
               }
             />
 
             <Route
               path="/Workout"
               element={
-            <RoutineAndWorkoutDataContext.Provider value={{setManagingRoutineAndWorkoutData , managingRoutineAndWorkoutData}}>
-                <Workout
-                  weekly={weekly}
-                  custom={custom}
-                  routineFrequency={routineFrequency}
-                  activeRoutine={activeRoutine}
-                  routineChange={routineChange}
-                />
+                <RoutineAndWorkoutDataContext.Provider
+                  value={{
+                    setManagingRoutineAndWorkoutData,
+                    managingRoutineAndWorkoutData,
+                  }}
+                >
+                  <Workout
+                    weekly={weekly}
+                    custom={custom}
+                    routineFrequency={routineFrequency}
+                    activeRoutine={activeRoutine}
+                    routineChange={routineChange}
+                  />
                 </RoutineAndWorkoutDataContext.Provider>
               }
             />
@@ -224,21 +231,27 @@ const onExit = () => {
 
             <Route path="/Profile" element={<Profile loggedIn={loggedIn} />} />
 
-            <Route path="/Session" element={
-              
-              <WorkoutContext.Provider value={{exercisesInWorkout, setExercisesInWorkout}}>
-              <WorkoutSession />
-              </WorkoutContext.Provider>
-            } />
-
-            </Route>
+            <Route
+              path="/Session"
+              element={
+                <WorkoutContext.Provider
+                  value={{ exercisesInWorkout, setExercisesInWorkout }}
+                >
+                  <WorkoutSession />
+                </WorkoutContext.Provider>
+              }
+            />
+          </Route>
 
           <Route
             path="/GettingStarted"
             element={<RegisterOrLogIn setLoggedIn={setLoggedIn} />}
           />
 
-          <Route path="/GettingStarted/confirmation" element={<ConfirmAccount />} />
+          <Route
+            path="/GettingStarted/confirmation"
+            element={<ConfirmAccount />}
+          />
         </Routes>
       </div>
     </div>
