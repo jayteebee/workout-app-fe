@@ -11,13 +11,6 @@ const {steps, stepsEnabled, initialStep, onExit} = useContext(IntroJsContext)
   return (
     <div>
       <NavBarMenu />
-      
-      <Steps
-      enabled={stepsEnabled}
-      steps={steps}
-      initialStep={initialStep}
-      onExit={onExit}
-    />
     </div>
   );
 };

@@ -48,10 +48,12 @@ const ExerciseCreation = () => {
       progress: undefined,
       theme: "dark",
     });
-    setTimeout(() => {
-      setInitialStep(12)
-      setStepsEnabled(true)
-    }, 1000)
+    if (initialStep === 11) {
+      setTimeout(() => {
+        setInitialStep(12)
+        setStepsEnabled(true)
+      }, 1000)
+    }
   };
 
   useEffect(() => {
@@ -66,7 +68,8 @@ if (exerciseParameters.exercise_id &&
    exerciseParameters.reps &&
     exerciseParameters.rest &&
      exerciseParameters.sets &&
-      exerciseParameters.weight) {
+      exerciseParameters.weight &&
+      initialStep === 10) {
 setInitialStep(11)
 setStepsEnabled(true)
 }

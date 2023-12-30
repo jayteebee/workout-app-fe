@@ -52,8 +52,10 @@ const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled
     if (name === "viewExistingRoutines") {
       setCreateNewRoutine(false);
       setViewExistingRoutines(true);
-      setStepsEnabled(true)
-      setInitialStep(5)
+      if (initialStep === 4) {
+        setStepsEnabled(true)
+        setInitialStep(5)
+      }
     }
   };
 
@@ -77,10 +79,13 @@ if (name === "flexible") {
 
 useEffect(() => {
 if (weekly || custom) {
-  setTimeout(() => {
-    setInitialStep(3); 
-    setStepsEnabled(true);
-  }, 1000)
+  if (initialStep === 2) {
+    setTimeout(() => {
+      setInitialStep(3); 
+      setStepsEnabled(true);
+    }, 500)
+  }
+
 }
 }, [weekly, custom])
 

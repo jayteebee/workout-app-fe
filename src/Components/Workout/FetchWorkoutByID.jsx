@@ -58,10 +58,12 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout })
     navigate("/CreateExercise", {
       state: { selectedWorkout: workoutID, selectedWorkoutName: workoutName },
     });
-    setTimeout(() => {
-      setInitialStep(10)
-      setStepsEnabled(true)
-    }, 1000)
+    if (initialStep === 9) {
+      setTimeout(() => {
+        setInitialStep(10)
+        setStepsEnabled(true)
+      }, 1000)
+    }
   };
 
   const navToExercisePage = (workoutID) => {

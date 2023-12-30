@@ -3,10 +3,11 @@ import "../../CSS/NavBar.css";
 import { Link, useLocation } from "react-router-dom";
 import { slide as Menu } from 'react-burger-menu';
 import { IntroJsContext } from "../../Context/IntroJsContext";
+import { Steps } from "intro.js-react";
 
 const NavBarMenu = () => {
 
-  const {setInitialStep, setStepsEnabled, initialStep} = useContext(IntroJsContext)
+  const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
 
   const [menuOpen, setMenuOpen] = useState(false);
 const location = useLocation()
@@ -61,6 +62,13 @@ const location = useLocation()
     <Link className={`menu-item ${isCurrentPage('/Analytics') ? 'active' : ''}`} to="/Analytics" onClick={closeMenu}><h2>Analytics</h2></Link>
     <Link className={`menu-item ${isCurrentPage('/Logs') ? 'active' : ''}`} to="/Logs" onClick={closeMenu}><h2>Logs</h2></Link>
     </Menu>
+
+    <Steps
+    enabled={stepsEnabled}
+    steps={steps}
+    initialStep={initialStep}
+    onExit={onExit}
+  />
     </div>
   );
 };

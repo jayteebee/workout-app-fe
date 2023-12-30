@@ -175,11 +175,13 @@ const Workout = ({
     if (name === "viewExistingWorkouts") {
       setCreateNewWorkout(false);
       setViewExistingWorkouts(true);
-      setTimeout(() => {
-        onExit()
-        setInitialStep(9)
-        setStepsEnabled(true)
-      }, 1000)
+      if (initialStep === 8) {
+        setTimeout(() => {
+          onExit()
+          setInitialStep(9)
+          setStepsEnabled(true)
+        }, 1000)
+      }
     }
   };
 
@@ -360,10 +362,12 @@ const Workout = ({
 
       <div id="scheduleWorkoutsForTutorial" className={createNewWorkout ? "finaliseDaysButtons" : "hidden"}
       onClick={() => {
-        setTimeout(() => {
-          setInitialStep(8)
-          setStepsEnabled(true)
-        }, 1000)
+        if (initialStep === 7) {
+          setTimeout(() => {
+            setInitialStep(8)
+            setStepsEnabled(true)
+          }, 1000)
+        }
       }}
       >
         <div

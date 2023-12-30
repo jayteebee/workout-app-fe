@@ -134,10 +134,12 @@ const CreateWorkout = ({
       setFormInput({ user_id: "", name: "" });
       setOrder((prevOrder) => (prevOrder += 1));
       setWorkoutToggle((prevState) => !prevState);
-      setTimeout(() => {
-        setInitialStep(7)
-        setStepsEnabled(true)
-      }, 1000)
+      if (initialStep === 6) {
+        setTimeout(() => {
+          setInitialStep(7)
+          setStepsEnabled(true)
+        }, 1000)
+      }
     }
   };
 
