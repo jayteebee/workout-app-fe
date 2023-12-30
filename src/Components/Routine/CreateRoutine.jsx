@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { parseJwt } from "../../API/Authentication/parseJwt";
-import { MDBInput, MDBBtn, MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem } from "mdb-react-ui-kit";
+import { MDBInput, MDBBtn } from "mdb-react-ui-kit";
 import { createRoutine } from "../../API/Routine/Routine";
 import { ToastContainer, toast } from "react-toastify";
 import { Steps } from "intro.js-react";
