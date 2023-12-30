@@ -1,5 +1,5 @@
 import { MDBBtn } from "mdb-react-ui-kit";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { addExerciseToWorkout } from "../API/Workout/Workout";
 import Search from "../Components/Exercises/Search";
@@ -7,6 +7,7 @@ import SetsRepsWeight from "../Components/Exercises/SetsRepsWeight";
 import "../CSS/ExerciseCreation.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IntroJsContext } from "../Context/IntroJsContext";
 
 
 const ExerciseCreation = () => {
@@ -29,8 +30,10 @@ const ExerciseCreation = () => {
   const [addExerciseButton, setAddExerciseButton] = useState(false)
   const [parameterReset, setParameterReset] = useState(false)
 
+  const {  steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
+
+
   const addExercise = async () => {
-    // console.log('selectedWorkout',selectedWorkout, 'exerciseParameters',exerciseParameters)
     await addExerciseToWorkout(selectedWorkout, exerciseParameters);
     setSearchedExerciseName(null);
     setSearchedMuscleGroup(null);
