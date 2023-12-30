@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import NavBarMenu from "./NavBarMenu";
 import "../../CSS/NavBar.css";
 import { Steps } from 'intro.js-react';
+import { IntroJsContext } from "../../Context/IntroJsContext";
 
-const NavBar = ({steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled}) => {
+const NavBar = ({ setInitialStep, setStepsEnabled}) => {
 
+const {steps, stepsEnabled, initialStep, onExit} = useContext(IntroJsContext)
 
   return (
     <div>

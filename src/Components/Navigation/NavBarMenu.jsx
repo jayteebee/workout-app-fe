@@ -1,9 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "../../CSS/NavBar.css";
 import { Link, useLocation } from "react-router-dom";
 import { slide as Menu } from 'react-burger-menu';
+import { IntroJsContext } from "../../Context/IntroJsContext";
 
-const NavBarMenu = ({setInitialStep, setStepsEnabled}) => {
+const NavBarMenu = () => {
+
+  const {setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
+
   const [menuOpen, setMenuOpen] = useState(false);
 const location = useLocation()
 

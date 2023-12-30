@@ -22,6 +22,7 @@ import { RoutineAndWorkoutDataContext } from "./Context/RoutineAndWorkoutDataCon
 import ConfirmAccount from "./Components/RegisterOrLogIn/ConfirmAccount";
 import BackButton from "./Components/Navigation/BackButton";
 import 'intro.js/introjs.css';
+import { IntroJsContext } from "./Context/IntroJsContext";
 
 
 
@@ -138,17 +139,20 @@ const onExit = () => {
       <div className="App-inner" >
         {loggedIn ? (
           <div>
+          <IntroJsContext.Provider
+          value={{
+            steps,
+            stepsEnabled,
+            initialStep,
+            onExit,
+            setInitialStep,
+            setStepsEnabled,
+          }}
+          >
           <NavBar
             id="navbarID"
-            steps={steps}
-            stepsEnabled={stepsEnabled}
-            initialStep={initialStep}
-            onExit={onExit}
-            setInitialStep={setInitialStep}
-            setStepsEnabled={setStepsEnabled}
-            // setShowMenu={setShowMenu}
-            // showMenu={showMenu}
           />
+          </IntroJsContext.Provider>
           </div>
           ) : null}
           
