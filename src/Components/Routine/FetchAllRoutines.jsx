@@ -123,6 +123,10 @@ const FetchAllRoutines = ({
                 setRoutineChange(false);
                 displayWorkouts(routine.id, routine.frequency);
                 if (initialStep === 5) {
+                  let helperLayer = document.querySelector('.introjs-helperLayer');
+                  if (helperLayer) {
+                    helperLayer.remove();
+                  }
                   setTimeout(() => {
                     setStepsEnabled(false); 
                     setInitialStep(6)

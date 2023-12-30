@@ -36,7 +36,7 @@ const location = useLocation()
     } else if (initialStep === 12) {
       setTimeout(() => {
         setInitialStep(13); 
-        // setStepsEnabled(true); 
+        setStepsEnabled(true); 
       }, 200)
     }
   };

@@ -59,6 +59,10 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout })
       state: { selectedWorkout: workoutID, selectedWorkoutName: workoutName },
     });
     if (initialStep === 9) {
+      let helperLayer = document.querySelector('.introjs-helperLayer');
+      if (helperLayer) {
+        helperLayer.remove();
+      }
       setTimeout(() => {
         setStepsEnabled(false); 
         setInitialStep(10)
