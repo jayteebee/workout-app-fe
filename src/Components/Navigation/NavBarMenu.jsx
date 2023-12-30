@@ -14,7 +14,7 @@ const location = useLocation()
   const handleStateChange = (state) => {
     setMenuOpen(state.isOpen);
     if (state.isOpen) {
-      // Assuming the second step is about the opened menu
+
       setTimeout(() => {
         setInitialStep(1); // Move to the second step
         setStepsEnabled(true); // Ensure the steps are enabled

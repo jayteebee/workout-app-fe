@@ -4,16 +4,14 @@ import "../../CSS/NavBar.css";
 import { Steps } from 'intro.js-react';
 import { IntroJsContext } from "../../Context/IntroJsContext";
 
-const NavBar = ({ setInitialStep, setStepsEnabled}) => {
+const NavBar = () => {
 
 const {steps, stepsEnabled, initialStep, onExit} = useContext(IntroJsContext)
 
   return (
     <div>
-      <NavBarMenu
-      setInitialStep={setInitialStep}
-      setStepsEnabled={setStepsEnabled}
-      />
+      <NavBarMenu />
+      
       <Steps
       enabled={stepsEnabled}
       steps={steps}
