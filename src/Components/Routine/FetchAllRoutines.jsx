@@ -26,7 +26,7 @@ const FetchAllRoutines = ({
   activeRoutine,
   setActiveRoutine,
   setRoutineChange,
-  checkboxToggle
+  checkboxToggle,
 }) => {
   const [selectedRoutineID, setSelectedRoutineID] = useState(null);
   const [routineToEdit, setRoutineToEdit] = useState(null);
@@ -37,9 +37,17 @@ const FetchAllRoutines = ({
   const [filteredRoutines, setFilteredRoutines] = useState(null);
   const [editingFrequencyRoutine, setEditingFrequencyRoutine] = useState(false);
 
-  const {setManagingRoutineAndWorkoutData} = useContext(RoutineAndWorkoutDataContext)
-const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
-
+  const { setManagingRoutineAndWorkoutData } = useContext(
+    RoutineAndWorkoutDataContext
+  );
+  const {
+    steps,
+    stepsEnabled,
+    initialStep,
+    onExit,
+    setInitialStep,
+    setStepsEnabled,
+  } = useContext(IntroJsContext);
 
   useEffect(() => {
     const routineFrequency =
@@ -67,17 +75,15 @@ const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled
   }, [routineToggle, editToggle, deleteToggle]);
 
   const displayWorkouts = (routineID, routineFreq) => {
-
     setSelectedRoutineID(routineID);
     setManagingRoutineAndWorkoutData({
       selectedRoutineID: routineID,
       routineFrequencyExists: routineFreq,
-      })
+    });
     if (routineFreq) {
       navigate("/Workout");
     } else {
-      navigate("/Workout"
-      );
+      navigate("/Workout");
     }
   };
 
@@ -103,7 +109,6 @@ const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled
     }
   }, [createNewRoutine]);
 
-
   const initiateRoutineChange = async (routineID, routineFrequency) => {
     await setActiveRoutine(routineID);
     await setRoutineChange(true);
@@ -114,31 +119,35 @@ const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled
     <div className="routineContainer">
       {filteredRoutines &&
         filteredRoutines.map((routine) => (
-          <div key={routine.id} className="routineButtons" id="routineButtonsTutorial">
+          <div
+            key={routine.id}
+            className="routineButtons"
+            id="routineButtonsTutorial"
+          >
             {localStorage.setItem("routineID", routine.id)}
             <MDBBtn
               onClick={() => {
                 setRoutineChange(false);
-                 displayWorkouts(routine.id, routine.frequency)}}
+                displayWorkouts(routine.id, routine.frequency);
+              }}
             >
               <strong>{routine.name}</strong>: View / Create Workouts
             </MDBBtn>
-<div className={checkboxToggle ? "editAndDelete" : "hidden"}
->
-            <button
-              className="utilityButton"
-              onClick={() => editRoutineToggle(routine.id, routine.frequency)}
-            >
-              <img src={editIcon} alt="edit" className="editIcon" />
-            </button>
+            <div className={checkboxToggle ? "editAndDelete" : "hidden"}>
+              <button
+                className="utilityButton"
+                onClick={() => editRoutineToggle(routine.id, routine.frequency)}
+              >
+                <img src={editIcon} alt="edit" className="editIcon" />
+              </button>
 
-            <button
-              className="utilityButton"
-              onClick={() => setRoutineToDelete(routine.id)}
-            >
-              <img src={deleteIcon} alt="delete" className="deleteIcon" />
-            </button>
-</div>
+              <button
+                className="utilityButton"
+                onClick={() => setRoutineToDelete(routine.id)}
+              >
+                <img src={deleteIcon} alt="delete" className="deleteIcon" />
+              </button>
+            </div>
             <MDBBtn
               color="warning"
               onClick={() => {
@@ -148,7 +157,6 @@ const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled
             >
               Make Active Routine
             </MDBBtn>
-
           </div>
         ))}
       {selectedRoutineID && <FetchWorkoutsInRoutine rID={selectedRoutineID} />}
@@ -174,11 +182,11 @@ const {steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled
       )}
 
       <Steps
-      enabled={stepsEnabled}
-      steps={steps}
-      initialStep={initialStep}
-      onExit={onExit}
-    />
+        enabled={stepsEnabled}
+        steps={steps}
+        initialStep={initialStep}
+        onExit={onExit}
+      />
     </div>
   );
 };
