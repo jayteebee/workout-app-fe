@@ -116,7 +116,13 @@ function App() {
       element: "#searchForTutorial",
       intro:
         "Filter exercises by using the buttons above, search for exercises in the search bar and then add the sets, reps, weight and rest!",
-      position: "bottom",
+      position: "left",
+    },
+    {
+      element: "#addExerciseButton",
+      intro:
+        "When you've made your exercise, click here to add it to the workout. When you're done, head back to the homepage via the nav bar.",
+      position: "left",
     },
   ]);
 

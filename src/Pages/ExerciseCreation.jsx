@@ -8,6 +8,7 @@ import "../CSS/ExerciseCreation.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IntroJsContext } from "../Context/IntroJsContext";
+import { Steps } from "intro.js-react";
 
 
 const ExerciseCreation = () => {
@@ -98,11 +99,17 @@ const ExerciseCreation = () => {
       </div>
       </div>
   : null}
-      <div className={addExerciseButton ? "addExerciseButton" : "hidden"}>
+      <div className={addExerciseButton ? "addExerciseButton" : "hidden"} id={addExerciseButton && "addExerciseButton"}>
       <MDBBtn onClick={addExercise}>Add Exercise To Workout</MDBBtn>
       </div>
       <ToastContainer />
 
+      <Steps
+      enabled={stepsEnabled}
+      steps={steps}
+      initialStep={initialStep}
+      onExit={onExit}
+    />
     </div>
   );
 };
