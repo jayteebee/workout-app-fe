@@ -18,8 +18,6 @@ const ExerciseCreation = () => {
 
   const [searchedExerciseName, setSearchedExerciseName] = useState(null);
   const [searchedMuscleGroup, setSearchedMuscleGroup] = useState(null);
-  console.log('searchedExerciseName',searchedExerciseName)
-  console.log('searchedMuscleGroup',searchedMuscleGroup)
   const [exerciseID, setExerciseID] = useState(null);
   const [exerciseParameters, setExerciseParameters] = useState({
     exercise_id: null,
@@ -50,6 +48,10 @@ const ExerciseCreation = () => {
       progress: undefined,
       theme: "dark",
     });
+    setTimeout(() => {
+      setInitialStep(12)
+      setStepsEnabled(true)
+    }, 1000)
   };
 
   useEffect(() => {

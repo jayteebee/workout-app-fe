@@ -30,6 +30,11 @@ const location = useLocation()
         setInitialStep(2); 
         setStepsEnabled(true); 
       }, 200)
+    } else if (initialStep === 12) {
+      setTimeout(() => {
+        setInitialStep(13); 
+        setStepsEnabled(true); 
+      }, 200)
     }
   };
 

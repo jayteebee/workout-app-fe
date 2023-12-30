@@ -112,16 +112,30 @@ function App() {
         "View or add exercises in each workout. Click Add Exercises now to continue tutorial!",
       position: "bottom",
     },
+    // below is 10
     {
       element: "#searchForTutorial",
       intro:
         "Filter exercises by using the buttons above, search for exercises in the search bar and then add the sets, reps, weight and rest!",
       position: "left",
     },
+    // below is 11
     {
       element: "#addExerciseButton",
       intro:
         "When you've made your exercise, click here to add it to the workout. When you're done, head back to the homepage via the nav bar.",
+      position: "left",
+    },
+    {
+      element: "#react-burger-menu-btn",
+      intro:
+        "Navigate to the Home Screen",
+      position: "left",
+    },
+    {
+  element: "#calendarForIntro",
+      intro:
+        "On the day of your workout, click 'Start *Workout Name*' to track your in gym performance.",
       position: "left",
     },
   ]);
@@ -129,7 +143,7 @@ function App() {
 
   const [stepsEnabled, setStepsEnabled] = useState(true);
   const [initialStep, setInitialStep] = useState(0);
-
+console.log('initialStep',initialStep)
   const onExit = () => {
     setStepsEnabled(false);
   };
@@ -200,11 +214,22 @@ function App() {
             <Route
               path="/"
               element={
+                <IntroJsContext.Provider
+              value={{
+                steps,
+                stepsEnabled,
+                initialStep,
+                onExit,
+                setInitialStep,
+                setStepsEnabled,
+              }}
+            >
                 <WorkoutContext.Provider
                   value={{ exercisesInWorkout, setExercisesInWorkout }}
                 >
                   <HomeScreen routineID={routineID} loggedIn={loggedIn} />
                 </WorkoutContext.Provider>
+                </IntroJsContext.Provider>
               }
             />
 

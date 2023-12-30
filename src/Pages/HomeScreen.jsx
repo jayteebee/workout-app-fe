@@ -8,6 +8,8 @@ import { getExercisesInWorkout } from "../API/Workout/Workout";
 import "../App.css";
 import { ToastContainer, toast } from "react-toastify";
 import { WorkoutContext } from "../Context/WorkoutContext";
+import { IntroJsContext } from "../Context/IntroJsContext";
+import { Steps } from "intro.js-react";
 
 // manages the calender and events that users can click on to view their workouts
 const HomeScreen = ({ loggedIn }) => {
@@ -17,6 +19,9 @@ const HomeScreen = ({ loggedIn }) => {
   // console.log('calendarEvents',calendarEvents)
   const [sortedSchedule, setSortedSchedule] = useState([]);
   const [idOfRoutineWorkout, setIdOfRoutineWorkout] = useState(null);
+
+  const { steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
+
 
   const navigate = useNavigate();
 
@@ -112,7 +117,7 @@ const HomeScreen = ({ loggedIn }) => {
       {/*    <h3>Welcome to My Workout App</h3>
   <h1 style={{textDecoration: "underline", color: "white"}}>--UNDER DEVELOPMENT--</h1> */}
       <div className="calendar-container">
-        <div className="calendar">
+        <div className="calendar" id="calendarForIntro">
           <FullCalendar
             plugins={[dayGridPlugin]}
             initialView="dayGridMonth"
@@ -124,6 +129,15 @@ const HomeScreen = ({ loggedIn }) => {
       </div>
 
       <ToastContainer />
+
+        <Steps
+        enabled={stepsEnabled}
+        steps={steps}
+        initialStep={initialStep}
+        onExit={onExit}
+      />
+      
+
     </div>
   );
 };
