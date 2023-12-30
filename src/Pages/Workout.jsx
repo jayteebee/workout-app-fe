@@ -330,11 +330,6 @@ if (rFreq) {
     <div className="grid-container">
       <h3 className="pageHeader workout">Workout</h3>
 
-      {/*<div className='fetchAllWorkouts'>
-    <FetchAllWorkouts workoutToggle={workoutToggle}/>
-  </div>
-<button onClick={() => routineChangeHandler(activeRoutine)}>both test</button>   */}
-
       <div className="workoutViewOptions">
         <MDBBtn
           color={createNewWorkout ? "info" : ""}
