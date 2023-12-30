@@ -17,6 +17,8 @@ import {
   getAllWorkoutSchedules,
 } from "../API/WorkoutSchedule/WorkoutSchedule";
 import { RoutineAndWorkoutDataContext } from "../Context/RoutineAndWorkoutDataContext";
+import { IntroJsContext } from "../Context/IntroJsContext";
+import { Steps } from "intro.js-react";
 
 // this component manages creating the workout day data that is used to generate workout schedules
 
@@ -58,9 +60,9 @@ const Workout = ({
   const [logOfRoutineDaysOfWeek, setLogOfRoutineDaysOfWeek] = useState([]);
   const [workoutDays, setWorkoutDays] = useState([]);
 
-  const { managingRoutineAndWorkoutData } = useContext(
-    RoutineAndWorkoutDataContext
-  );
+  const { managingRoutineAndWorkoutData } = useContext(RoutineAndWorkoutDataContext);
+  const {  steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
+
   const routineFrequencyExists =
     managingRoutineAndWorkoutData.routineFrequencyExists;
 
@@ -173,6 +175,10 @@ const Workout = ({
     if (name === "viewExistingWorkouts") {
       setCreateNewWorkout(false);
       setViewExistingWorkouts(true);
+      setTimeout(() => {
+        setInitialStep(9)
+        setStepsEnabled(true)
+      }, 1000)
     }
   };
 
@@ -230,7 +236,6 @@ const Workout = ({
   };
 
   const deleteWorkoutSchedules = async () => {
-    // debugger;
     let arrOfWorkoutScheduleIds = [];
     if (workoutSchedules) {
       workoutSchedules.forEach((schedule) => {
@@ -306,6 +311,7 @@ const Workout = ({
         </MDBBtn>
 
         <MDBBtn
+        id="viewExistingWorkoutsForTutorial"
           color={viewExistingWorkouts ? "info" : ""}
           name="viewExistingWorkouts"
           onClick={handleWorkoutViewOptions}
@@ -351,7 +357,14 @@ const Workout = ({
         />
       </div>
 
-      <div className={createNewWorkout ? "finaliseDaysButtons" : "hidden"}>
+      <div id="scheduleWorkoutsForTutorial" className={createNewWorkout ? "finaliseDaysButtons" : "hidden"}
+      onClick={() => {
+        setTimeout(() => {
+          setInitialStep(8)
+          setStepsEnabled(true)
+        }, 1000)
+      }}
+      >
         <div
           className={
             routineFrequencyExists || workout.length < 1 ? "hidden" : null
@@ -373,6 +386,13 @@ const Workout = ({
         </div>
       </div>
       <ToastContainer />
+
+      <Steps
+      enabled={stepsEnabled}
+      steps={steps}
+      initialStep={initialStep}
+      onExit={onExit}
+    />
     </div>
   );
 };

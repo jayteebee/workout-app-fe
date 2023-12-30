@@ -91,7 +91,25 @@ function App() {
     {
       element: "#createWorkoutFormForTutorial",
       intro:
-        "Create your Routine, then click 'Create Workout'.",
+        "Configure your workout, then click 'Create Workout'. Do this as many times as needed!",
+      position: "bottom",
+    },
+    {
+      element: "#scheduleWorkoutsForTutorial",
+      intro:
+        "When you've created all your workouts, click here to add the schedule to your calendar on the home screen.",
+      position: "bottom",
+    },
+    {
+      element: "#viewExistingWorkoutsForTutorial",
+      intro:
+        "View the workouts you've just created and add exercises to them.",
+      position: "bottom",
+    },
+    {
+      element: "#viewAndCreateExercisesForTutorial",
+      intro:
+        "View or add exercises in each workout. Click Add Exercises now to continue tutorial!",
       position: "bottom",
     },
   ]);

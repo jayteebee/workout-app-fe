@@ -9,10 +9,10 @@ import editIcon from "../../CSS/Icons/editIcon.png";
 import { MDBBtn } from "mdb-react-ui-kit";
 import { parseJwt } from "../../API/Authentication/parseJwt";
 import { RoutineAndWorkoutDataContext } from "../../Context/RoutineAndWorkoutDataContext";
+import { IntroJsContext } from "../../Context/IntroJsContext";
 
 const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout }) => {
-  // const [workout, setWorkout] = useState([]);
-  // console.log("workout:", workout);
+
   const [workoutToEdit, setWorkoutToEdit] = useState(null);
   const [editToggle, setEditToggle] = useState(false);
   const [workoutToDelete, setWorkoutToDelete] = useState(null);
@@ -31,10 +31,9 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout })
     setUserID(userID);
   }, []);
 
-  const location = useLocation();
-  // const selectedRoutineID = location.state?.selectedRoutineID;
   const navigate = useNavigate();
   const {managingRoutineAndWorkoutData} = useContext(RoutineAndWorkoutDataContext)
+  const {  steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
 
 
   const selectedRoutineID = managingRoutineAndWorkoutData.selectedRoutineID
@@ -62,9 +61,12 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout })
   };
 
   const navToExercisePage = (workoutID) => {
-    console.log("WID:", workoutID);
     setViewExercisesInWorkout(workoutID);
     navigate("/ViewExercises", { state: { workoutId: workoutID } });
+    setTimeout(() => {
+      setInitialStep(10)
+      setStepsEnabled(true)
+    }, 1000)
   };
 
   const editWorkoutToggle = (workoutID) => {
@@ -74,11 +76,11 @@ const FetchWorkoutByID = ({ setRoutineID, workoutCreated, workout, setWorkout })
   };
 
   return (
-    <div>
+    <div >
       <h3 > {workout.length > 0 && "Routine:" + workout[0].routine.name}</h3>
       {workout.length > 0 &&
         workout.map((workout) => (
-          <div key={workout.id}>
+          <div key={workout.id} id="viewAndCreateExercisesForTutorial">
             <MDBBtn color="info" onClick={() => navToExercisePage(workout.id)}>
               View <strong>{workout.workout.name}</strong>'s Exercises
             </MDBBtn>
