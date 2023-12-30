@@ -269,7 +269,21 @@ function App() {
 
               }
             />
-            <Route path="/CreateExercise" element={<ExerciseCreation />} />
+            <Route path="/CreateExercise" element={
+              <IntroJsContext.Provider
+              value={{
+                steps,
+                stepsEnabled,
+                initialStep,
+                onExit,
+                setInitialStep,
+                setStepsEnabled,
+              }}
+            >
+              <ExerciseCreation />
+              </IntroJsContext.Provider>
+            
+            } />
 
             <Route path="/Knowledge" element={<Knowledge />} />
 
