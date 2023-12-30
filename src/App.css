@@ -242,3 +242,13 @@ p, h3, h2 {
 .introjs-helperLayer {
   z-index: 1 !important;
 }
+
+.introjs-nextbutton {
+  display: none !important;
+}
+.hide-button {
+  display: none !important;
+}
+.show-button {
+  display:block !important;
+}

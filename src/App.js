@@ -56,14 +56,14 @@ function App() {
     {
       element: "#react-burger-menu-btn",
       intro:
-        "Click here to open the Navigation Bar and view Routines, Logs, and Analytics!",
+        "Click here to open the Navigation Bar to view Routines, Logs, and Analytics!",
       position: "right",
       disableInteraction: false,
     },
     {
       element: "#routinesMenuOption",
       intro:
-        "Now you're in the menu! Click Routines to create Routines, Workouts, and Exercises.",
+        "Click Routines to create Routines, Workouts, and Exercises.",
       position: "left",
     },
     {
@@ -74,7 +74,7 @@ function App() {
     },
     {
       element: "#createRoutineTutorial",
-      intro: "Configure your Routine, then click 'Create Routine'.",
+      intro: "Fill out the Create Routine form, then click 'Create Routine'.",
       position: "bottom",
     },
     {
@@ -85,7 +85,7 @@ function App() {
     {
       element: "#routineButtonsTutorial",
       intro:
-        "Tap here to view and create your workouts! If you have multiple routines, select your current routine by clicking 'Make Active Routine' ",
+        "Tap here to view and create your workouts!",
       position: "bottom",
     },
     {
@@ -110,14 +110,14 @@ function App() {
       element: "#viewAndCreateExercisesForTutorial",
       intro:
         "View or add exercises in each workout. Click Add Exercises now to continue tutorial!",
-      position: "bottom",
+      position: "right",
     },
     // below is 10
     {
       element: "#searchForTutorial",
       intro:
         "Filter exercises by using the buttons above, search for exercises in the search bar and then add the sets, reps, weight and rest!",
-      position: "left",
+      position: "bottom",
     },
     // below is 11
     {
@@ -136,7 +136,7 @@ function App() {
   element: "#calendarForIntro",
       intro:
         "On the day of your workout, click 'Start *Workout Name*' to track your in gym performance.",
-      position: "left",
+      position: "top",
     },
     {
       element: "#exerciseSessionContainerForTutorial",
@@ -146,18 +146,48 @@ function App() {
         },
   ]);
 
-  
+  let nextButton = document.querySelector('.introjs-nextbutton');
+  let prevButton = document.querySelector('.introjs-prevbutton');
 
+  
   const [stepsEnabled, setStepsEnabled] = useState(true);
   const [initialStep, setInitialStep] = useState(0);
 console.log('initialStep',initialStep)
-  const onExit = () => {
-    setStepsEnabled(false);
-    let helperLayer = document.querySelector('.introjs-helperLayer');
-    if (helperLayer) {
-      helperLayer.remove();
+const onExit = () => {
+  setStepsEnabled(false);
+  let helperLayer = document.querySelector('.introjs-helperLayer');
+  if (helperLayer) {
+    helperLayer.remove();
     }
   };
+  
+  if (nextButton) {
+    if (initialStep && initialStep === 0) {
+      nextButton.classList.remove('hide-button')
+      nextButton.classList.add('show-button');
+    } else {
+      nextButton.classList.add('hide-button');
+    }
+    if (initialStep === 4) {
+      nextButton.classList.add('show-button');
+    }
+    if (initialStep === 7) {
+      nextButton.classList.add('show-button');
+    }
+    if (initialStep === 8) {
+      nextButton.classList.add('show-button');
+    }
+    if (initialStep === 10) {
+      prevButton.classList.remove('show-button')
+      prevButton.classList.add('hide-button');
+    }
+    if (initialStep === 12) {
+      nextButton.classList.add('show-button');
+    }
+    if (initialStep === 14) {
+      prevButton.classList.add('hide-button');
+    }
+  }
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
