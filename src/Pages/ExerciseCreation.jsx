@@ -59,6 +59,17 @@ const ExerciseCreation = () => {
     }));
   }, [exerciseID]);
 
+useEffect(() => {
+if (exerciseParameters.exercise_id &&
+   exerciseParameters.reps &&
+    exerciseParameters.rest &&
+     exerciseParameters.sets &&
+      exerciseParameters.weight) {
+setInitialStep(11)
+setStepsEnabled(true)
+}
+}, [exerciseParameters])
+
   return (
     <div className="grid-container">
       <h2 className="pageHeader exerciseCreation">Exercise Creation</h2>
