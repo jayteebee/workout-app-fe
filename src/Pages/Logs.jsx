@@ -207,7 +207,7 @@ const Logs = () => {
 // *** The return used when the exercise filter has been interacted with
   const workoutLogsFilteredByExercise =
     sessionLogsByChosenExercise &&
-    sessionLogsByChosenExercise.length > 0 &&
+    sessionLogsByChosenExercise.length > 0 ?
     sessionLogsByChosenExercise.map((log, index) => {
       const inputDate = new Date(`${log.details.date}`);
       const formattedDate = format(inputDate, "yyyy-MM-dd");
@@ -268,8 +268,11 @@ const Logs = () => {
             />
           )}
         </div>
-      );
-    });
+      )
+    })
+    :  
+      <div>No Workouts Completed That Include That Exercise..</div>
+    
 
 // *** The return used when the date filter has been interacted with
   const workoutLogsFilteredByDate =
