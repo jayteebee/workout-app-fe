@@ -1,9 +1,25 @@
 import React, { useState, useEffect } from "react";
+import { getAllExercises } from "../../API/Exercise/Exercise";
 
 const PersonalRecords = ({ sortedSessionLogs }) => {
 //   console.log("sortedSessionLogs", sortedSessionLogs);
   const [arrayOfExerciseObjects, setArrayOfExerciseObjects] = useState([]);
 //   console.log("arrayOfExerciseObjects", arrayOfExerciseObjects);
+const [allExercises, setAllExercises] = useState()
+
+
+useEffect(() => {
+  getAllExercises()
+  .then((data) => setAllExercises(data))
+  .catch((err) => console.log('error getting all exercises',err))
+}, [])
+
+const allExerciseNames = allExercises && allExercises.length > 0 &&
+allExercises.map((exercise) => exercise.name)
+// console.log('allExerciseNames',allExerciseNames)
+
+// *** cycles through the sortedSessionLogs, removes duplicate exercise ID's then adds the logs belonging to the exercise
+// *** to arrayOfExerciseObjects state
   useEffect(() => {
     let exerciseIds = new Set();
 
@@ -25,31 +41,34 @@ const PersonalRecords = ({ sortedSessionLogs }) => {
           (exercise) => exercise.exercise_id === id
         )
       );
-
+// console.log('matchingExercise',matchingExercise)
       if (matchingExercise) {
         const exercise = matchingExercise.details.exercise_sessions.find(
           (ex) => ex.exercise_id === id
         );
 
-        const newExerciseObject = {
-          exerciseName: exercise.exercise_name,
+const exerciseName = allExercises && allExercises.length > 0 && allExercises.filter((e) => e.id === exercise.exercise_id)[0].name
+   
+const newExerciseObject = {
+          exerciseName: exerciseName,
           exerciseId: exercise.exercise_id,
           oneRepMax: 0,
           highestVolumeSingleSet: 0,
           strongestTimeUnderTension: 0,
           estimatedOneRepMax: 0,
         };
-
+// console.log('newExerciseObject',newExerciseObject)
         newExerciseObjects.push(newExerciseObject);
       }
     });
 
     // Update the state after the loop finishes
     setArrayOfExerciseObjects((prevState) => [
-      ...prevState,
+      // ...prevState,
       ...newExerciseObjects,
     ]);
-  }, [sortedSessionLogs]);
+  }, [sortedSessionLogs, allExercises]);
+
 
   useEffect(() => {
     if (arrayOfExerciseObjects && arrayOfExerciseObjects.length > 0) {
@@ -122,7 +141,7 @@ const PersonalRecords = ({ sortedSessionLogs }) => {
                   );
                   setArrayOfExerciseObjects(updatedArrayOfExercises);
                 }
-              }
+              } else (<div>N/A</div>)
             }
           });
         });
