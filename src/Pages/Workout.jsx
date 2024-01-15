@@ -354,7 +354,6 @@ const Workout = ({
           setDayOfWeek={setDayOfWeek}
           dayOfWeek={dayOfWeek}
           weekly={weekly}
-          custom={custom}
           logOfRoutineDaysOfWeek={logOfRoutineDaysOfWeek}
           setLogOfRoutineDaysOfWeek={setLogOfRoutineDaysOfWeek}
         />
