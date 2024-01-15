@@ -185,17 +185,20 @@ if (weekly || custom) {
         <FetchWorkoutsInRoutine />
       </div>
 
-      <div
-        className={
-          viewExistingRoutines
-            ? "hidden createRoutineToggleButton"
-            : custom || weekly
-            ? "createRoutineToggleButton"
-            : "hidden createRoutineToggleButton"
-        }
-      >
-      </div>
-
+      {/** the below div doesn't seem to do anything - delete after full app inspection complete
+<div
+style={{backgroundColor: "red"}}
+  className={
+    viewExistingRoutines
+      ? "hidden createRoutineToggleButton"
+      : custom || weekly
+      ? "createRoutineToggleButton"
+      : "hidden createRoutineToggleButton"
+  }
+>
+hello
+</div>
+*/}
       <div
         className={
           createNewRoutine && (custom || weekly) ? "createRoutine" : "hidden"
