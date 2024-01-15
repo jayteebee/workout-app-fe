@@ -24,7 +24,6 @@ import { Steps } from "intro.js-react";
 
 const Workout = ({
   weekly,
-  custom,
   routineFrequency,
   activeRoutine,
   routineChange,

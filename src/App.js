@@ -362,7 +362,6 @@ useEffect(() => {
                 >
                   <Workout
                     weekly={weekly}
-                    custom={custom}
                     routineFrequency={routineFrequency}
                     activeRoutine={activeRoutine}
                     routineChange={routineChange}
