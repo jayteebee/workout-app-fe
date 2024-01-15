@@ -117,7 +117,7 @@ if (exerciseParameters.exercise_id &&
       </div>
       </div>
   : null}
-      <div className={addExerciseButton ? "addExerciseButton" : "hidden"} id={addExerciseButton && "addExerciseButton"}>
+      <div className={addExerciseButton ? "addExerciseButton" : "hidden"} id={addExerciseButton ? "addExerciseButton" : undefined}>
       <MDBBtn onClick={addExercise}>Add Exercise To Workout</MDBBtn>
       </div>
       <ToastContainer />

@@ -115,7 +115,7 @@ useEffect(() => {
       createWorkoutSession(workoutSessionData)
         .then((data) => {
           setWorkoutSession(data);
-          // console.log("response:", data);
+          console.log("response:", data);
         })
         .catch((err) =>
           console.log("createWorkoutSession API Call Failed:", err)
