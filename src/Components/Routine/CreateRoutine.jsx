@@ -7,7 +7,7 @@ import { Steps } from "intro.js-react";
 import { IntroJsContext } from "../../Context/IntroJsContext";
 
 
-const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle, custom, weekly,}) => {
+const CreateRoutine = ({ routineToggle, setRoutineToggle, setCreateRoutineToggle, weekly,}) => {
 
 const {  steps, stepsEnabled, initialStep, onExit, setInitialStep, setStepsEnabled} = useContext(IntroJsContext)
 
