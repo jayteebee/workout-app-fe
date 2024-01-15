@@ -205,7 +205,6 @@ hello
         }
       >
         <CreateRoutine
-          custom={custom}
           weekly={weekly}
           routineToggle={routineToggle}
           setRoutineToggle={setRoutineToggle}
