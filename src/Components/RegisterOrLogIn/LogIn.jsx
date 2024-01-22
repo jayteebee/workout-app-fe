@@ -42,6 +42,11 @@ const LogIn = ({ setShowRegister, setLoggedIn }) => {
 
   return (
     <div>
+    <div>
+    <h2 style={{textDecoration: "underline"}}>To log in, you may use the following info</h2>
+    <p>workoutapp@programmer.net</p>
+    <p>jbjbjb3</p>
+    </div>
       <form onSubmit={handleSubmit}>
         <MDBInput
           className="mb-4"
